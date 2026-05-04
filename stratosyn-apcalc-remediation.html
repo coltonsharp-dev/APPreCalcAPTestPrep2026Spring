@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratosyn | AP Pre-Calc — Closing the Gaps</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181b22;
+    --border: rgba(255,255,255,0.07);
+    --border-active: rgba(99,200,150,0.4);
+    --accent: #3effa0;
+    --accent2: #00c2ff;
+    --accent3: #ff7c5c;
+    --accent-dim: rgba(62,255,160,0.12);
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --muted2: #9ca3af;
+    --gold: #f5c842;
+    --rose: #ff5d8f;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(62,255,160,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(62,255,160,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* HEADER */
+  .header { position: sticky; top: 0; z-index: 100; background: rgba(10,12,16,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: var(--mono); font-size: 15px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
+  .logo span { color: var(--muted); }
+  .header-meta { display: flex; align-items: center; gap: 20px; font-size: 12px; color: var(--muted2); font-family: var(--mono); flex-wrap: wrap; }
+  .badge { background: var(--accent-dim); border: 1px solid rgba(62,255,160,0.25); color: var(--accent); padding: 3px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.08em; }
+  .badge-warn { background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.25); color: var(--gold); }
+  .badge-red { background: rgba(255,93,143,0.08); border: 1px solid rgba(255,93,143,0.25); color: var(--rose); }
+  .timer { font-family: var(--mono); font-size: 14px; color: var(--gold); min-width: 60px; }
+
+  /* MISSION BRIEF */
+  .mission-brief { position: relative; z-index: 1; max-width: 920px; margin: 48px auto 0; padding: 0 32px; }
+  .mission-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; color: var(--accent2); text-transform: uppercase; margin-bottom: 12px; }
+  .mission-title { font-size: 32px; font-weight: 600; line-height: 1.15; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .mission-title em { font-style: normal; color: var(--accent); }
+  .mission-sub { font-size: 14px; color: var(--muted2); line-height: 1.7; max-width: 680px; margin-bottom: 28px; }
+  .standards-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+  .std-chip { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; font-size: 11px; font-family: var(--mono); color: var(--muted2); }
+  .std-chip strong { color: var(--accent2); }
+  .std-chip.gap strong { color: var(--rose); }
+  .std-chip.gap { border-color: rgba(255,93,143,0.25); }
+  .std-chip.warn strong { color: var(--gold); }
+  .std-chip.warn { border-color: rgba(245,200,66,0.25); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 32px; }
+
+  /* SCENARIO BLOCK */
+  .scenario-block { position: relative; z-index: 1; max-width: 920px; margin: 40px auto; padding: 0 32px; }
+  .scenario-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; position: relative; overflow: hidden; }
+  .scenario-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent2), var(--accent), transparent); }
+  .scenario-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--accent2); text-transform: uppercase; margin-bottom: 14px; }
+  .scenario-text { font-size: 15px; line-height: 1.8; color: var(--text); }
+  .scenario-text strong { color: var(--accent); }
+  .snap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+  .snap-cell { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; }
+  .snap-num { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .snap-num.warn { color: var(--gold); }
+  .snap-num.bad { color: var(--rose); }
+  .snap-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; }
+  .snap-detail { font-size: 12px; color: var(--muted2); line-height: 1.5; }
+
+  /* WORST TABLE */
+  .worst-table { margin-top: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .worst-row { display: grid; grid-template-columns: 60px 1fr 90px 90px 110px; gap: 12px; padding: 12px 16px; align-items: center; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .worst-row:last-child { border-bottom: none; }
+  .worst-row.head { background: var(--surface2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
+  .worst-q { font-family: var(--mono); color: var(--accent); }
+  .worst-name { color: var(--text); }
+  .worst-skill { font-family: var(--mono); font-size: 11px; padding: 3px 8px; border-radius: 4px; background: rgba(0,194,255,0.1); color: var(--accent2); text-align: center; }
+  .worst-skill.t1 { background: rgba(255,93,143,0.12); color: var(--rose); }
+  .worst-skill.t2 { background: rgba(245,200,66,0.12); color: var(--gold); }
+  .worst-correct { font-family: var(--mono); color: var(--rose); text-align: center; font-weight: 700; }
+  .worst-correct.ok { color: var(--gold); }
+  .class-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface2); margin-top: 10px; }
+  .class-bar .seg-skip { background: var(--muted); }
+  .class-bar .seg-wrong { background: var(--accent3); }
+  .class-bar .seg-right { background: var(--accent); }
+
+  /* STEPS */
+  .steps-container { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 0 32px 80px; }
+  .steps-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 16px; }
+  .steps-title { font-size: 13px; font-family: var(--mono); letter-spacing: 0.1em; color: var(--muted2); text-transform: uppercase; }
+  .progress-track { display: flex; gap: 6px; align-items: center; }
+  .pip { width: 28px; height: 4px; border-radius: 2px; background: var(--surface2); border: 1px solid var(--border); transition: all 0.3s; }
+  .pip.done { background: var(--accent); border-color: var(--accent); }
+  .pip.active { background: rgba(62,255,160,0.4); border-color: var(--accent); }
+
+  /* STEP CARD */
+  .step-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; transition: border-color 0.3s; }
+  .step-card.active { border-color: var(--border-active); }
+  .step-card.locked { opacity: 0.4; pointer-events: none; }
+  .step-head { display: flex; align-items: center; gap: 16px; padding: 18px 24px; user-select: none; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; color: var(--muted2); flex-shrink: 0; transition: all 0.3s; }
+  .step-card.active .step-num { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+  .step-card.completed .step-num { border-color: var(--accent); background: var(--accent); color: var(--bg); font-size: 14px; }
+  .step-meta { flex: 1; }
+  .step-name { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+  .step-hint { font-size: 11px; color: var(--muted); font-family: var(--mono); display: flex; gap: 14px; flex-wrap: wrap; }
+  .step-hint b { color: var(--accent2); font-weight: 400; }
+  .step-hint b.warn { color: var(--accent3); }
+  .step-hint b.crit { color: var(--rose); }
+  .step-status { font-size: 11px; font-family: var(--mono); padding: 4px 10px; border-radius: 4px; }
+  .step-card.active .step-status { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(62,255,160,0.2); }
+  .step-card.completed .step-status { background: rgba(62,255,160,0.08); color: var(--accent); }
+  .step-body { padding: 0 24px 24px; display: none; }
+  .step-card.active .step-body { display: block; }
+  .step-instruction { font-size: 14px; line-height: 1.8; color: var(--muted2); margin-bottom: 20px; padding-top: 4px; }
+  .step-instruction strong { color: var(--text); }
+
+  /* PERF STRIP */
+  .perf-strip { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 12px 16px; background: rgba(255,93,143,0.05); border: 1px solid rgba(255,93,143,0.15); border-radius: var(--radius-sm); }
+  .perf-strip.t2 { background: rgba(245,200,66,0.05); border-color: rgba(245,200,66,0.2); }
+  .perf-strip.t3 { background: rgba(0,194,255,0.04); border-color: rgba(0,194,255,0.15); }
+  .perf-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--rose); color: var(--bg); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+  .perf-strip.t2 .perf-icon { background: var(--gold); }
+  .perf-strip.t3 .perf-icon { background: var(--accent2); }
+  .perf-text { font-size: 12px; font-family: var(--mono); color: var(--muted2); line-height: 1.5; flex: 1; }
+  .perf-text b { color: var(--rose); }
+  .perf-strip.t2 .perf-text b { color: var(--gold); }
+  .perf-strip.t3 .perf-text b { color: var(--accent2); }
+
+  /* Q CARD */
+  .q-card { background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--accent2); border-radius: var(--radius-sm); padding: 18px 22px; margin-bottom: 20px; font-size: 14px; line-height: 1.8; }
+  .q-card .q-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 8px; }
+  .q-stem { font-size: 14px; line-height: 1.9; color: var(--text); margin-bottom: 14px; }
+  .q-stem code { font-family: var(--mono); background: rgba(62,255,160,0.08); padding: 1px 6px; border-radius: 3px; color: var(--accent); font-size: 13px; }
+
+  /* DATA TABLE inside question */
+  .data-table { width: 100%; border-collapse: collapse; margin: 10px 0 14px; font-family: var(--mono); font-size: 12px; }
+  .data-table th { background: var(--surface2); padding: 8px 14px; text-align: center; border: 1px solid var(--border); color: var(--accent2); letter-spacing: 0.08em; }
+  .data-table td { padding: 7px 14px; text-align: center; border: 1px solid var(--border); color: var(--muted2); }
+  .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* SVG graph wrap */
+  .graph-wrap { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin: 14px 0; text-align: center; }
+  .graph-wrap svg { max-width: 100%; height: auto; }
+  .graph-caption { font-size: 10px; font-family: var(--mono); color: var(--muted); margin-top: 8px; letter-spacing: 0.1em; }
+
+  /* CHOICES */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-item { display: flex; align-items: flex-start; gap: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .choice-item:hover { border-color: rgba(62,255,160,0.3); background: var(--surface2); }
+  .choice-item.selected { border-color: var(--accent2); background: rgba(0,194,255,0.06); }
+  .choice-item.revealed.correct { border-color: var(--accent); background: rgba(62,255,160,0.08); }
+  .choice-item.revealed.incorrect { border-color: var(--accent3); background: rgba(255,124,92,0.06); }
+  .choice-item.disabled { cursor: default; pointer-events: none; }
+  .choice-letter { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 1px; font-family: var(--mono); font-size: 11px; display: flex; align-items: center; justify-content: center; color: var(--muted2); transition: all 0.2s; }
+  .choice-item.selected .choice-letter { border-color: var(--accent2); color: var(--accent2); }
+  .choice-item.revealed.correct .choice-letter { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+  .choice-item.revealed.incorrect .choice-letter { border-color: var(--accent3); color: var(--accent3); }
+  .choice-text { font-size: 13px; font-family: var(--mono); line-height: 1.6; color: var(--muted2); flex: 1; }
+  .choice-item.selected .choice-text { color: var(--text); }
+  .choice-item.revealed.correct .choice-text { color: var(--accent); }
+
+  /* WALKTHROUGH */
+  .walkthrough { margin-top: 18px; background: rgba(62,255,160,0.04); border: 1px solid rgba(62,255,160,0.2); border-radius: var(--radius-sm); padding: 18px 20px; display: none; }
+  .walkthrough.visible { display: block; }
+  .walk-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .walk-body { font-size: 13px; line-height: 1.8; color: var(--text); }
+  .walk-body p { margin-bottom: 10px; }
+  .walk-body p:last-child { margin-bottom: 0; }
+  .walk-body code { font-family: var(--mono); background: var(--bg); padding: 2px 6px; border-radius: 3px; color: var(--accent); font-size: 12px; }
+  .walk-trap { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,124,92,0.2); }
+  .walk-trap-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--accent3); text-transform: uppercase; margin-bottom: 8px; }
+  .walk-trap-body { font-size: 13px; line-height: 1.7; color: var(--muted2); }
+
+  /* DIAGNOSTIC */
+  .diag-block { margin-top: 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 20px; display: none; }
+  .diag-block.visible { display: block; }
+  .diag-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+  .diag-prompt { font-size: 13px; color: var(--text); margin-bottom: 14px; line-height: 1.6; }
+  .diag-options { display: flex; flex-direction: column; gap: 8px; }
+  .diag-option { display: flex; align-items: flex-start; gap: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; cursor: pointer; transition: all 0.2s; }
+  .diag-option:hover { border-color: rgba(245,200,66,0.4); }
+  .diag-option.selected { border-color: var(--gold); background: rgba(245,200,66,0.06); }
+  .diag-letter { font-family: var(--mono); font-size: 11px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .diag-option-text { font-size: 12px; color: var(--muted2); line-height: 1.6; }
+  .diag-option.selected .diag-option-text { color: var(--text); }
+
+  /* BUTTONS */
+  .btn-row { display: flex; gap: 10px; margin-top: 20px; align-items: center; flex-wrap: wrap; }
+  .btn { padding: 10px 22px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: 1px solid; font-family: var(--sans); letter-spacing: 0.02em; }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .btn-primary:hover { background: #5fffb4; }
+  .btn-primary:disabled { background: var(--surface2); color: var(--muted); border-color: var(--border); cursor: not-allowed; }
+  .gate-msg { font-size: 11px; font-family: var(--mono); color: var(--muted); }
+
+  /* RUBRIC */
+  .rubric-section { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 0 32px 40px; }
+  .rubric-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .rubric-title { font-size: 16px; font-weight: 500; }
+  .rubric-intro { font-size: 13px; color: var(--muted2); line-height: 1.7; margin: 16px 0 22px; max-width: 720px; }
+  .taxonomy-grid { display: grid; grid-template-columns: 210px 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .tax-cell { background: var(--surface); padding: 16px 18px; font-size: 12.5px; line-height: 1.7; }
+  .tax-cell.header { background: var(--surface2); font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; padding: 12px 18px; }
+  .tax-cell.label-cell { font-weight: 600; border-right: 2px solid var(--accent2); }
+  .tax-cell.label-cell.warn { border-right-color: var(--gold); }
+  .tax-cell.label-cell.bad  { border-right-color: var(--rose); }
+  .tax-skill-tag { display: inline-block; font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 3px; background: rgba(0,194,255,0.12); color: var(--accent2); margin-bottom: 6px; }
+  .tax-skill-tag.crit { background: rgba(255,93,143,0.12); color: var(--rose); }
+  .tax-skill-tag.proc { background: rgba(245,200,66,0.12); color: var(--gold); }
+  .tax-skill-tag.miss { background: rgba(255,124,92,0.1); color: var(--accent3); }
+  .tax-label-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .tax-cell .signature { font-family: var(--mono); font-size: 11.5px; color: var(--muted2); line-height: 1.7; background: var(--bg); border-radius: 4px; padding: 6px 10px; margin-top: 4px; }
+  .tax-cell .move { color: var(--accent); font-weight: 500; }
+
+  /* DATA LOG */
+  .rationale-block { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 0 32px 100px; }
+  .rationale-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; position: relative; }
+  .rationale-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent3), var(--gold), transparent); }
+  .rationale-body { font-size: 14px; line-height: 1.9; color: var(--muted2); }
+  .rationale-body strong { color: var(--text); }
+  .rationale-body em { color: var(--accent); font-style: normal; }
+
+  /* SECTION DIVIDER */
+  .section-divider { position: relative; z-index: 1; max-width: 920px; margin: 40px auto 24px; padding: 0 32px; display: flex; align-items: center; gap: 16px; }
+  .section-divider-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+  .section-divider-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* TIER DIVIDER */
+  .tier-divider { position: relative; z-index: 1; max-width: 920px; margin: 36px auto 22px; padding: 0 32px; }
+  .tier-card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--rose); border-radius: var(--radius-sm); padding: 14px 20px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .tier-card.t2 { border-left-color: var(--gold); }
+  .tier-card.t3 { border-left-color: var(--accent2); }
+  .tier-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--rose); text-transform: uppercase; flex-shrink: 0; }
+  .tier-card.t2 .tier-num { color: var(--gold); }
+  .tier-card.t3 .tier-num { color: var(--accent2); }
+  .tier-title { font-size: 14px; font-weight: 500; color: var(--text); flex-shrink: 0; }
+  .tier-meta { font-family: var(--mono); font-size: 11px; color: var(--muted); flex: 1; min-width: 240px; }
+
+  /* SCORE BAR */
+  .score-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,12,16,0.95); backdrop-filter: blur(12px); border-top: 1px solid var(--border); padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; z-index: 200; }
+  .score-left { display: flex; align-items: center; gap: 20px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  .score-num { font-size: 18px; font-weight: 600; color: var(--accent); }
+  .score-denom { color: var(--muted); font-size: 14px; }
+  .completion-msg { font-size: 12px; font-family: var(--mono); color: var(--muted); display: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .header { padding: 12px 18px; }
+    .mission-brief, .scenario-block, .steps-container, .rubric-section, .rationale-block, .section-divider, .tier-divider { padding-left: 18px; padding-right: 18px; }
+    .snap-grid { grid-template-columns: 1fr; }
+    .worst-row { grid-template-columns: 50px 1fr 70px; font-size: 11px; }
+    .worst-row .col-skill, .worst-row .col-bar { display: none; }
+    .taxonomy-grid { grid-template-columns: 1fr; }
+    .tax-cell.label-cell { border-right: none; border-bottom: 2px solid var(--accent2); }
+    .tax-cell.label-cell.warn { border-bottom-color: var(--gold); }
+    .tax-cell.label-cell.bad  { border-bottom-color: var(--rose); }
+    .mission-title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Strato<span>syn</span></div>
+  <div class="header-meta">
+    <span class="badge">AP PRE-CALCULUS</span>
+    <span class="badge badge-warn">CUMULATIVE GAP REMEDIATION</span>
+    <span class="badge badge-red">MAY 11 EXAM</span>
+    <span class="timer" id="timer">00:00</span>
+  </div>
+</header>
+
+<!-- MISSION BRIEF -->
+<div class="mission-brief">
+  <div class="mission-tag">// 4TH PERIOD · ALA ROOM 501 · CUMULATIVE ANALYSIS — EXAMS 1, 3 + UNIT 2 &amp; 4 PCK</div>
+  <h1 class="mission-title">Operation: <em>Closing the Gaps</em></h1>
+  <p class="mission-sub">
+    Four assessments. 116 questions analyzed. The data tells a precise story: your class owns the procedural core — sinusoidal
+    modeling, rational asymptotes, trig zeros — but collapses at specific inflection points.
+    This assignment puts <strong style="color:var(--text)">12 questions</strong> in front of you — one for each confirmed gap — ordered worst-first.
+    Answer each one, read the walkthrough, identify the trap, and <strong style="color:var(--text)">label your own gap</strong>. By the end, you will know
+    exactly which moves to drill before May 11th.
+  </p>
+  <div class="standards-row">
+    <div class="std-chip"><strong>STRONG</strong> Sinusoidal — Topic 3.6/3.7</div>
+    <div class="std-chip"><strong>STRONG</strong> Rational Functions — Topic 1.10/1.11</div>
+    <div class="std-chip gap"><strong>CRITICAL</strong> Function Models from Tables — 1.13</div>
+    <div class="std-chip gap"><strong>CRITICAL</strong> Polar Graph Identification — 3.14</div>
+    <div class="std-chip warn"><strong>HIGH</strong> Log Graph Intercepts — 2.13</div>
+    <div class="std-chip warn"><strong>HIGH</strong> Exp Characteristics — 2.4</div>
+    <div class="std-chip warn"><strong>HIGH</strong> Radian Measure — 3.2</div>
+    <div class="std-chip warn"><strong>HIGH</strong> Transformations from Tables — 1.12</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SNAPSHOT -->
+<div class="scenario-block">
+  <div class="scenario-card">
+    <div class="scenario-label">// CUMULATIVE DIAGNOSTIC SNAPSHOT — 4TH PERIOD</div>
+    <p class="scenario-text">
+      Across <strong>Practice Exams 1 &amp; 3 + Unit 2 &amp; 4 Progress Checks</strong>, the class shows a consistent pattern:
+      performance is <strong>strong on recall and procedure</strong> (averaging 85%+ on clean solve questions) but drops sharply on
+      <strong>representation translation, model construction, and contextual justification</strong>. Two questions were below 33% class accuracy.
+      Seven questions were below 50%. That is the mission.
+    </p>
+    <div class="snap-grid">
+      <div class="snap-cell">
+        <div class="snap-label">// WEAKEST QUESTION</div>
+        <div class="snap-num bad">22%</div>
+        <div class="snap-detail">Q12 Exam 3 — Function Model from Table (1.13 / 3.C) — only 2 of 9 students correct</div>
+      </div>
+      <div class="snap-cell">
+        <div class="snap-label">// HIGH-RISK TOPIC CLUSTER</div>
+        <div class="snap-num warn">44%</div>
+        <div class="snap-detail">Five questions tied at 44%: Log intercepts, Exp characteristics, Radian measure, Transformations, Residuals</div>
+      </div>
+      <div class="snap-cell">
+        <div class="snap-label">// EXAM 1 SCORE</div>
+        <div class="snap-num">85%</div>
+        <div class="snap-detail">40-question MCQ — class performed well, 8–9 correct per question across nearly all topics</div>
+      </div>
+    </div>
+
+    <div class="worst-table">
+      <div class="worst-row head">
+        <div>Source</div>
+        <div>Gap Topic</div>
+        <div class="col-skill">Skill</div>
+        <div>Class %</div>
+        <div class="col-bar">Distribution</div>
+      </div>
+      <div class="worst-row">
+        <div class="worst-q">E3 Q12</div>
+        <div class="worst-name">Function Model — Table of Values</div>
+        <div class="col-skill"><span class="worst-skill t1">3.C</span></div>
+        <div class="worst-correct">22%</div>
+        <div class="col-bar"><div class="class-bar"><div class="seg-skip" style="flex:1"></div><div class="seg-wrong" style="flex:7"></div><div class="seg-right" style="flex:2"></div></div></div>
+      </div>
+      <div class="worst-row">
+        <div class="worst-q">E3 Q28</div>
+        <div class="worst-name">Polar Function Graph — Identify Equation</div>
+        <div class="col-skill"><span class="worst-skill t1">2.B</span></div>
+        <div class="worst-correct">33%</div>
+        <div class="col-bar"><div class="class-bar"><div class="seg-skip" style="flex:1"></div><div class="seg-wrong" style="flex:6"></div><div class="seg-right" style="flex:3"></div></div></div>
+      </div>
+      <div class="worst-row">
+        <div class="worst-q">E3 Q4</div>
+        <div class="worst-name">Logarithmic Function Graph — Intercept</div>
+        <div class="col-skill"><span class="worst-skill t2">1.A</span></div>
+        <div class="worst-correct ok">44%</div>
+        <div class="col-bar"><div class="class-bar"><div class="seg-skip" style="flex:1"></div><div class="seg-wrong" style="flex:5"></div><div class="seg-right" style="flex:4"></div></div></div>
+      </div>
+      <div class="worst-row">
+        <div class="worst-q">E3 Q7</div>
+        <div class="worst-name">Exponential Function — Characteristics</div>
+        <div class="col-skill"><span class="worst-skill t2">3.A</span></div>
+        <div class="worst-correct ok">44%</div>
+        <div class="col-bar"><div class="class-bar"><div class="seg-skip" style="flex:1"></div><div class="seg-wrong" style="flex:5"></div><div class="seg-right" style="flex:4"></div></div></div>
+      </div>
+      <div class="worst-row">
+        <div class="worst-q">E3 Q16</div>
+        <div class="worst-name">Radian Measure — Arc Length</div>
+        <div class="col-skill"><span class="worst-skill t2">3.B</span></div>
+        <div class="worst-correct ok">44%</div>
+        <div class="col-bar"><div class="class-bar"><div class="seg-skip" style="flex:1"></div><div class="seg-wrong" style="flex:5"></div><div class="seg-right" style="flex:4"></div></div></div>
+      </div>
+      <div class="worst-row">
+        <div class="worst-q">E3 Q26</div>
+        <div class="worst-name">Function Transformations — Table of Values</div>
+        <div class="col-skill"><span class="worst-skill t2">1.C</span></div>
+        <div class="worst-correct ok">44%</div>
+        <div class="col-bar"><div class="class-bar"><div class="seg-skip" style="flex:1"></div><div class="seg-wrong" style="flex:5"></div><div class="seg-right" style="flex:4"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 1 — QUESTIONS                                           -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <span class="section-divider-label">// PART 1 — 12-QUESTION REMEDIATION · WORST-FIRST ORDER</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="steps-container">
+  <div class="steps-header">
+    <span class="steps-title">// PROGRESS</span>
+    <div class="progress-track">
+      <div class="pip active" id="pip-1"></div><div class="pip" id="pip-2"></div><div class="pip" id="pip-3"></div>
+      <div class="pip" id="pip-4"></div><div class="pip" id="pip-5"></div><div class="pip" id="pip-6"></div>
+      <div class="pip" id="pip-7"></div><div class="pip" id="pip-8"></div><div class="pip" id="pip-9"></div>
+      <div class="pip" id="pip-10"></div><div class="pip" id="pip-11"></div><div class="pip" id="pip-12"></div>
+    </div>
+  </div>
+
+  <!-- TIER 1 BANNER -->
+  <div class="tier-card" style="margin-bottom:20px">
+    <span class="tier-num">TIER 1 — CRITICAL</span>
+    <span class="tier-title">Below 35% Class Accuracy</span>
+    <span class="tier-meta">Q1–Q2 · Topics 1.13, 3.14 · Skills 3.C, 2.B · These are your deepest gaps</span>
+  </div>
+
+  <!-- ======================== Q1 ======================== -->
+  <div class="step-card active" id="step-1">
+    <div class="step-head">
+      <div class="step-num">01</div>
+      <div class="step-meta">
+        <div class="step-name">Function Model — Identifying Type from a Table</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>1.13 · Function Models</b></span>
+          <span>// SKILL: <b class="crit">3.C — Justify with Mathematical Evidence</b></span>
+          <span>// CLASS SCORE: <b class="crit">22% — 2 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">ACTIVE</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q12, only <b>2 of 9 students</b> answered correctly. The other 7 all fell into the same trap — reading growth without checking its type.</div>
+      </div>
+      <p class="step-instruction">The table below shows selected values of a function f. Based on the data, which function type best models f?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 1.13 · SKILL 3.C · CUMULATIVE GAP Q1</div>
+        <table class="data-table">
+          <tr><th>x</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+          <tr><td>f(x)</td><td>4</td><td>12</td><td>36</td><td>108</td><td>324</td></tr>
+        </table>
+        <div class="choices" id="q1-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(1,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">Linear — because f(x) is always increasing</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(1,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">Quadratic — because the outputs increase by larger and larger amounts</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(1,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">Exponential — because consecutive outputs have a constant ratio of 3</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(1,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">Logarithmic — because f(x) grows quickly at first then slows down</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-1">
+        <div class="walk-title">// WALKTHROUGH — WHY (C) IS CORRECT</div>
+        <div class="walk-body">
+          <p>To identify function type from a table, <strong>check three things in order</strong>:</p>
+          <p>① <strong>Common difference?</strong> 12−4=8, 36−12=24, 108−36=72. Not constant → not linear.<br>
+             ② <strong>Common second difference?</strong> 24−8=16, 72−24=48. Not constant → not quadratic.<br>
+             ③ <strong>Common ratio?</strong> 12÷4=3, 36÷12=3, 108÷36=3, 324÷108=3. <code>Constant ratio = 3</code> → Exponential.</p>
+          <p>The model is <code>f(x) = 4 · 3^x</code>. Verify: f(0) = 4·1 = 4 ✓, f(1) = 4·3 = 12 ✓.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THE TWO WRONG PICKS THE CLASS MADE</div>
+            <div class="walk-trap-body">
+              <strong>(A) Linear</strong> — Students saw "always increasing" and stopped there. Increasing ≠ linear. You must check differences.<br><br>
+              <strong>(B) Quadratic</strong> — "Grows faster and faster" sounds like a parabola, but that describes exponential too. The test is second differences, not intuition. Check the ratio first — it closes the case faster.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-1">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Pick the option that describes what happened in your reasoning. Honest label = useful data for your own review.</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(1,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Concept gap</strong> — I didn't know to check differences then ratios. I identified the pattern by feel, not by method.</div></div>
+          <div class="diag-option" onclick="pickDiag(1,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Misread the evidence</strong> — I saw "increasing outputs" and assumed linear or quadratic without testing the ratio.</div></div>
+          <div class="diag-option" onclick="pickDiag(1,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Execution slip</strong> — I knew the method but calculated a ratio wrong or checked the wrong column.</div></div>
+          <div class="diag-option" onclick="pickDiag(1,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I checked the ratio, confirmed it was constant at 3, and selected exponential immediately.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-1" onclick="revealAnswer(1)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-1" onclick="completeStep(1)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-1">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q2 ======================== -->
+  <div class="step-card locked" id="step-2">
+    <div class="step-head">
+      <div class="step-num">02</div>
+      <div class="step-meta">
+        <div class="step-name">Polar Function Graph — Identify the Equation</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>3.14 · Polar Graphs</b></span>
+          <span>// SKILL: <b class="crit">2.B — Analytical Connections</b></span>
+          <span>// CLASS SCORE: <b class="crit">33% — 3 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q28, only <b>3 of 9 students</b> identified the correct polar equation. The class confused rose curves with limaçons and didn't apply the petal-count rule.</div>
+      </div>
+      <p class="step-instruction">The polar graph shown below is a rose curve with <strong>4 petals</strong>, each extending to a maximum radius of 2. Which equation defines this curve?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 3.14 · SKILL 2.B · CUMULATIVE GAP Q2</div>
+        <div class="graph-wrap">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="150" cy="150" r="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="60" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+            <line x1="20" y1="150" x2="280" y2="150" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="150" y1="20" x2="150" y2="280" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <!-- 4-petal rose: r = 2sin(2θ) scaled. Petals along diagonals -->
+            <!-- Right petal (θ near π/4) -->
+            <path d="M150,150 C170,120 200,110 210,150 C200,190 170,180 150,150" fill="rgba(62,255,160,0.18)" stroke="#3effa0" stroke-width="1.8" fill-rule="evenodd"/>
+            <!-- Left petal (θ near 5π/4) -->
+            <path d="M150,150 C130,180 100,190 90,150 C100,110 130,120 150,150" fill="rgba(62,255,160,0.18)" stroke="#3effa0" stroke-width="1.8"/>
+            <!-- Top petal (θ near 3π/4) -->
+            <path d="M150,150 C120,130 110,100 150,90 C190,100 180,130 150,150" fill="rgba(62,255,160,0.18)" stroke="#3effa0" stroke-width="1.8"/>
+            <!-- Bottom petal (θ near 7π/4) -->
+            <path d="M150,150 C180,170 190,200 150,210 C110,200 120,170 150,150" fill="rgba(62,255,160,0.18)" stroke="#3effa0" stroke-width="1.8"/>
+            <!-- axis labels -->
+            <text x="265" y="155" font-family="Space Mono" font-size="10" fill="#6b7280">π</text>
+            <text x="18" y="155" font-family="Space Mono" font-size="10" fill="#6b7280">π</text>
+            <text x="145" y="16" font-family="Space Mono" font-size="10" fill="#6b7280">π/2</text>
+            <text x="140" y="272" font-family="Space Mono" font-size="10" fill="#6b7280">3π/2</text>
+            <text x="212" y="148" font-family="Space Mono" font-size="9" fill="#3effa0">r=2</text>
+          </svg>
+          <div class="graph-caption">// FIG 1. POLAR ROSE CURVE — 4 PETALS, MAX RADIUS = 2</div>
+        </div>
+        <div class="choices" id="q2-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(2,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">r = 2 + 2cos(θ) — a limaçon with inner loop</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(2,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">r = 2sin(2θ) — a rose curve with 4 petals along the diagonals</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(2,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">r = 2sin(4θ) — a rose curve with 8 petals</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(2,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">r = 2cos(θ) — a circle of radius 1 shifted right</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-2">
+        <div class="walk-title">// WALKTHROUGH — WHY (B) IS CORRECT</div>
+        <div class="walk-body">
+          <p>For a rose curve <code>r = a · sin(nθ)</code> or <code>r = a · cos(nθ)</code>:</p>
+          <p>• If n is <strong>even</strong> → <strong>2n petals</strong><br>
+             • If n is <strong>odd</strong> → <strong>n petals</strong><br>
+             • The coefficient a = <strong>maximum radius</strong></p>
+          <p>This graph has <strong>4 petals</strong> with max radius <strong>2</strong>. Using the rule: 4 petals = 2n → n = 2. So the equation is <code>r = 2sin(2θ)</code>. The petals fall along the diagonal axes (π/4, 3π/4, 5π/4, 7π/4) which is consistent with sin(2θ).</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — WHY THE CLASS PICKED (A) AND (C)</div>
+            <div class="walk-trap-body">
+              <strong>(A) Limaçon confusion</strong> — r = 2 + 2cos(θ) creates a heart-shaped limaçon, not a rose. The class selected this because they saw a "symmetrical" shape and guessed. Key rule: if the equation adds a constant to a trig function, it's a limaçon. If it only has a trig function, it's a rose or circle.<br><br>
+              <strong>(C) n=4 error</strong> — Students who knew the petal rule counted n=4 directly and wrote r=2sin(4θ). Remember: for even n, the number of petals is 2n — so you halve the petal count to find n.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-2">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Polar graphs are a representation problem. Pin down exactly which step broke down.</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(2,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Concept gap</strong> — I didn't know the petal-count rule (even n → 2n petals, odd n → n petals).</div></div>
+          <div class="diag-option" onclick="pickDiag(2,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Curve-type confusion</strong> — I confused rose curves with limaçons and couldn't tell which equation family applied.</div></div>
+          <div class="diag-option" onclick="pickDiag(2,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Applied rule backward</strong> — I knew the rule but forgot to divide the petal count by 2 for even n, so I picked n=4 instead of n=2.</div></div>
+          <div class="diag-option" onclick="pickDiag(2,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I applied the petal rule correctly, confirmed the max radius of 2, and selected (B).</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-2" onclick="revealAnswer(2)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-2" onclick="completeStep(2)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-2">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 2 BANNER -->
+  <div class="tier-card t2" style="margin:28px 0 20px">
+    <span class="tier-num">TIER 2 — HIGH RISK</span>
+    <span class="tier-title">44% Class Accuracy</span>
+    <span class="tier-meta">Q3–Q7 · Topics 2.13, 2.4, 3.2, 1.12, 2.6 · Five questions, five distinct gaps</span>
+  </div>
+
+  <!-- ======================== Q3 ======================== -->
+  <div class="step-card locked" id="step-3">
+    <div class="step-head">
+      <div class="step-num">03</div>
+      <div class="step-meta">
+        <div class="step-name">Logarithmic Function — Finding the x-Intercept</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>2.13 · Logarithmic Functions</b></span>
+          <span>// SKILL: <b class="warn">1.A — Identify &amp; Classify</b></span>
+          <span>// CLASS SCORE: <b class="warn">44% — 4 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t2">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q4, only <b>4 of 9 students</b> found the correct x-intercept. The most common wrong answer was x = 4 — the vertical asymptote, not the intercept.</div>
+      </div>
+      <p class="step-instruction">The function is defined by <strong>f(x) = log₂(x − 4) + 1</strong>. What is the x-intercept of the graph of f?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 2.13 · SKILL 1.A · CUMULATIVE GAP Q3</div>
+        <div class="q-stem">Find the x-intercept of <code>f(x) = log₂(x − 4) + 1</code>.</div>
+        <div class="choices" id="q3-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(3,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">x = 3 — because log₂(3) + 1 = 0</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(3,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">x = 4 — because x − 4 = 0 at the asymptote</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(3,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">x = 4.5 — because setting f(x) = 0 gives log₂(x−4) = −1, so x−4 = 2⁻¹ = 0.5</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(3,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">x = 6 — because 2¹ = 2, so x − 4 = 2, giving x = 6</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-3">
+        <div class="walk-title">// WALKTHROUGH — WHY (C) IS CORRECT</div>
+        <div class="walk-body">
+          <p>The x-intercept is where <code>f(x) = 0</code>. Set up the equation:</p>
+          <p><code>log₂(x − 4) + 1 = 0</code><br>
+             <code>log₂(x − 4) = −1</code> &nbsp;← subtract 1 from both sides<br>
+             <code>x − 4 = 2⁻¹ = 1/2</code> &nbsp;← convert log to exponential form<br>
+             <code>x = 4.5</code></p>
+          <p>The key step is rewriting <code>log₂(x−4) = −1</code> as <code>2⁻¹ = x−4</code>. <strong>Don't forget the vertical shift (+1) — it changes the exponent from 1 to −1.</strong></p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — WHY MOST OF THE CLASS PICKED x = 4</div>
+            <div class="walk-trap-body">
+              Picking x = 4 means you found the <strong>vertical asymptote</strong> (where the log is undefined) instead of the x-intercept. These are different! The asymptote is where the input of the log = 0. The x-intercept is where the entire output of f = 0. Always set f(x) = 0 and solve — never just set the argument to zero.
+              <br><br>
+              <strong>(D) x = 6</strong> — This happens when students ignore the +1 shift and solve log₂(x−4) = 0 instead of log₂(x−4) = −1. The +1 is critical to include before converting.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-3">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">This error falls into one of two buckets. Which one was yours?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(3,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Asymptote/intercept confusion</strong> — I set the argument (x−4) to zero and found the asymptote instead of the intercept.</div></div>
+          <div class="diag-option" onclick="pickDiag(3,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Dropped the vertical shift</strong> — I set log₂(x−4) = 0 instead of = −1, ignoring the +1 in the equation.</div></div>
+          <div class="diag-option" onclick="pickDiag(3,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Log-to-exponential error</strong> — I set up the equation correctly but converted the log incorrectly (e.g., thought 2⁻¹ = −2).</div></div>
+          <div class="diag-option" onclick="pickDiag(3,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I set f(x)=0, subtracted 1, converted log to exponential form, and got x = 4.5.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-3" onclick="revealAnswer(3)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-3" onclick="completeStep(3)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-3">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q4 ======================== -->
+  <div class="step-card locked" id="step-4">
+    <div class="step-head">
+      <div class="step-num">04</div>
+      <div class="step-meta">
+        <div class="step-name">Exponential Function — Characteristics</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>2.4 · Exponential Functions</b></span>
+          <span>// SKILL: <b class="warn">3.A — Apply in Context</b></span>
+          <span>// CLASS SCORE: <b class="warn">44% — 4 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t2">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q7, only <b>4 of 9 students</b> correctly identified all characteristics of the exponential function. Students confused the coefficient with the base.</div>
+      </div>
+      <p class="step-instruction">Which of the following correctly describes ALL characteristics of the function <strong>f(x) = 3 · (1/2)ˣ</strong>?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 2.4 · SKILL 3.A · CUMULATIVE GAP Q4</div>
+        <div class="choices" id="q4-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(4,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">y-intercept at (0, 1/2), decreasing, horizontal asymptote y = 0</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(4,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">y-intercept at (0, 3), increasing, horizontal asymptote y = 3</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(4,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">y-intercept at (0, 3), decreasing, horizontal asymptote y = 0</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(4,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">y-intercept at (0, 3), decreasing, horizontal asymptote y = 3</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-4">
+        <div class="walk-title">// WALKTHROUGH — WHY (C) IS CORRECT</div>
+        <div class="walk-body">
+          <p>For <code>f(x) = 3 · (1/2)ˣ</code>, evaluate each characteristic independently:</p>
+          <p><strong>y-intercept:</strong> Set x = 0. <code>f(0) = 3 · (1/2)⁰ = 3 · 1 = 3</code>. The y-intercept is (0, 3) — the coefficient, not the base.<br>
+             <strong>Increasing or decreasing?</strong> The base is 1/2 &lt; 1, so the function is <strong>exponential decay</strong> → decreasing.<br>
+             <strong>Horizontal asymptote:</strong> As x → ∞, (1/2)ˣ → 0, so f(x) → 0. Asymptote is <strong>y = 0</strong>.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THREE WRONG ANSWERS, THREE DISTINCT ERRORS</div>
+            <div class="walk-trap-body">
+              <strong>(A)</strong> — Used the base (1/2) as the y-intercept instead of the coefficient (3). Remember: f(0) = a·b⁰ = a·1 = a. The coefficient IS the y-intercept.<br><br>
+              <strong>(B)</strong> — Marked the function increasing. A base between 0 and 1 always gives decay/decreasing. If base &gt; 1 → increasing. If 0 &lt; base &lt; 1 → decreasing.<br><br>
+              <strong>(D)</strong> — Set the asymptote at y = 3 (the coefficient). The horizontal asymptote is always where the function approaches as x → ∞ — that is y = 0 for standard exponentials, not y = a.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-4">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Three traps, three different errors. Which one tripped you?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(4,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Coefficient/base confusion</strong> — I used the base (1/2) as the y-intercept instead of the coefficient (3).</div></div>
+          <div class="diag-option" onclick="pickDiag(4,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Growth/decay rule</strong> — I misidentified the function as increasing because the coefficient 3 is large.</div></div>
+          <div class="diag-option" onclick="pickDiag(4,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Asymptote error</strong> — I set the asymptote at y = 3 (the coefficient) instead of y = 0.</div></div>
+          <div class="diag-option" onclick="pickDiag(4,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I correctly identified y-int = 3, decreasing behavior, and asymptote at y = 0.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-4" onclick="revealAnswer(4)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-4" onclick="completeStep(4)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-4">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q5 ======================== -->
+  <div class="step-card locked" id="step-5">
+    <div class="step-head">
+      <div class="step-num">05</div>
+      <div class="step-meta">
+        <div class="step-name">Radian Measure — Arc Length Application</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>3.2 · Radian Measure</b></span>
+          <span>// SKILL: <b class="warn">3.B — Apply Definitions &amp; Properties</b></span>
+          <span>// CLASS SCORE: <b class="warn">44% — 4 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t2">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q16, only <b>4 of 9 students</b> computed the correct arc length. The class either forgot to include the radius or divided instead of multiplied.</div>
+      </div>
+      <p class="step-instruction">An angle of <strong>5π/6 radians</strong> is inscribed in a circle with radius <strong>4 units</strong>. What is the arc length intercepted by this angle?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 3.2 · SKILL 3.B · CUMULATIVE GAP Q5</div>
+        <div class="choices" id="q5-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(5,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">5π/24 — dividing the angle by the radius</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(5,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">5π/6 — reporting the angle itself, not the arc length</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(5,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">10π/3 — using s = rθ = 4 · (5π/6) = 20π/6</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(5,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">20π/3 — multiplying correctly but doubling the radius</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-5">
+        <div class="walk-title">// WALKTHROUGH — WHY (C) IS CORRECT</div>
+        <div class="walk-body">
+          <p>The arc length formula is <code>s = rθ</code>, where θ is in <strong>radians</strong> and r is the radius.</p>
+          <p><code>s = 4 · (5π/6) = 20π/6 = 10π/3</code></p>
+          <p>This is the definition of radian measure: <strong>1 radian = the angle that subtends an arc equal in length to the radius</strong>. So arc length = radius × angle in radians.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THE THREE WRONG MOVES</div>
+            <div class="walk-trap-body">
+              <strong>(A) Divided by r</strong> — Students wrote θ/r instead of rθ. This inverts the formula. Remember: s = rθ multiplies; it never divides.<br><br>
+              <strong>(B) Reported the angle</strong> — Students gave back 5π/6 with no calculation. The angle and the arc length are equal only when r = 1 (unit circle). Always multiply by the actual radius.<br><br>
+              <strong>(D) Doubled the radius</strong> — Students used r = 8 (maybe confused with diameter) or simplified 20π/6 incorrectly. Simplify carefully: 20π/6 = 10π/3, not 20π/3.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-5">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Arc length is one formula, but three things can go wrong. Which one?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(5,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Formula inversion</strong> — I divided θ by r instead of multiplying rθ.</div></div>
+          <div class="diag-option" onclick="pickDiag(5,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Forgot to include radius</strong> — I reported the angle (5π/6) as the arc length without multiplying by r = 4.</div></div>
+          <div class="diag-option" onclick="pickDiag(5,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Arithmetic error</strong> — I set up s = rθ correctly but simplified 20π/6 wrong.</div></div>
+          <div class="diag-option" onclick="pickDiag(5,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I applied s = rθ = 4(5π/6) = 10π/3 directly and correctly.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-5" onclick="revealAnswer(5)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-5" onclick="completeStep(5)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-5">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q6 ======================== -->
+  <div class="step-card locked" id="step-6">
+    <div class="step-head">
+      <div class="step-num">06</div>
+      <div class="step-meta">
+        <div class="step-name">Function Transformations — Using a Table</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>1.12 · Function Transformations</b></span>
+          <span>// SKILL: <b class="warn">1.C — Apply Function Concepts</b></span>
+          <span>// CLASS SCORE: <b class="warn">44% — 4 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t2">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q26, only <b>4 of 9 students</b> evaluated the transformed function correctly. The class applied the vertical shift but ignored the horizontal shift in the input.</div>
+      </div>
+      <p class="step-instruction">Selected values of f are shown in the table. Use this table to evaluate <strong>h(x) = f(x − 1) + 3</strong> at x = 3.</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 1.12 · SKILL 1.C · CUMULATIVE GAP Q6</div>
+        <table class="data-table">
+          <tr><th>x</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>f(x)</td><td>2</td><td>5</td><td>10</td><td>17</td><td>26</td></tr>
+        </table>
+        <div class="choices" id="q6-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(6,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">13 — using f(3) + 3 = 10 + 3, ignoring the horizontal shift</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(6,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">8 — computing f(3−1) + 3 = f(2) + 3 = 5 + 3</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(6,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">5 — finding f(2) but forgetting to add the vertical shift</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(6,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">20 — using f(3+1) + 3 = f(4) + 3, shifting in the wrong direction</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-6">
+        <div class="walk-title">// WALKTHROUGH — WHY (B) IS CORRECT</div>
+        <div class="walk-body">
+          <p>For <code>h(x) = f(x − 1) + 3</code>, evaluate at x = 3:</p>
+          <p>Step 1: <code>h(3) = f(3 − 1) + 3 = f(2) + 3</code> &nbsp;← apply the transformation to the INPUT first<br>
+             Step 2: From the table, <code>f(2) = 5</code><br>
+             Step 3: <code>h(3) = 5 + 3 = 8</code></p>
+          <p><strong>Order of operations for transformations:</strong> always substitute x into the full expression first, then look up the table value, then apply the outer operation.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THE MOST COMMON ERROR IN THE CLASS</div>
+            <div class="walk-trap-body">
+              <strong>(A) x = 13</strong> was the most common wrong answer. Students plugged x = 3 directly into the table (f(3) = 10) and added 3 — completely ignoring the (x−1) horizontal shift. The rule: <em>you never look up x directly. You always look up (x − h) where h is the horizontal shift.</em><br><br>
+              <strong>(D) x = 20</strong> — Students who knew to shift but confused direction: h(x) = f(x−1) shifts the graph RIGHT by 1, which means you look up one unit to the LEFT in the table — f(3−1) = f(2), not f(4).
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-6">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Transformation errors are predictable. Which one was yours?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(6,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Ignored horizontal shift</strong> — I looked up f(3) directly instead of f(3−1) = f(2).</div></div>
+          <div class="diag-option" onclick="pickDiag(6,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Wrong shift direction</strong> — I shifted right instead of left (or vice versa) and looked up f(4) instead of f(2).</div></div>
+          <div class="diag-option" onclick="pickDiag(6,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Forgot vertical shift</strong> — I found f(2) = 5 correctly but didn't add the +3.</div></div>
+          <div class="diag-option" onclick="pickDiag(6,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I evaluated f(3−1) = f(2) = 5, then added 3 to get h(3) = 8.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-6" onclick="revealAnswer(6)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-6" onclick="completeStep(6)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-6">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q7 ======================== -->
+  <div class="step-card locked" id="step-7">
+    <div class="step-head">
+      <div class="step-num">07</div>
+      <div class="step-meta">
+        <div class="step-name">Residual Plots — Model Validation</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>2.6 · Model Validation</b></span>
+          <span>// SKILL: <b class="warn">2.A — Construct &amp; Connect Representations</b></span>
+          <span>// CLASS SCORE: <b class="warn">44% — 4 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t2">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q27, only <b>4 of 9 students</b> correctly interpreted the residual plot. Students read a patterned residual plot as a good fit rather than evidence of the wrong model.</div>
+      </div>
+      <p class="step-instruction">A student fits a linear model to a data set and produces the residual plot shown below. What does this residual plot indicate about the linear model?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 2.6 · SKILL 2.A · CUMULATIVE GAP Q7</div>
+        <div class="graph-wrap">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <line x1="30" y1="100" x2="390" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="30" y1="20" x2="30" y2="180" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <text x="200" y="197" font-family="Space Mono" font-size="10" fill="#6b7280" text-anchor="middle">x (Predictor variable)</text>
+            <text x="12" y="104" font-family="Space Mono" font-size="10" fill="#6b7280" text-anchor="middle" transform="rotate(-90 12 104)">Residual</text>
+            <!-- U-shaped pattern residuals -->
+            <circle cx="60"  cy="155" r="4" fill="#ff7c5c"/><circle cx="90"  cy="135" r="4" fill="#ff7c5c"/>
+            <circle cx="120" cy="118" r="4" fill="#ff7c5c"/><circle cx="150" cy="106" r="4" fill="#ff7c5c"/>
+            <circle cx="180" cy="100" r="4" fill="#ff7c5c"/><circle cx="210" cy="100" r="4" fill="#ff7c5c"/>
+            <circle cx="240" cy="106" r="4" fill="#ff7c5c"/><circle cx="270" cy="118" r="4" fill="#ff7c5c"/>
+            <circle cx="300" cy="136" r="4" fill="#ff7c5c"/><circle cx="330" cy="158" r="4" fill="#ff7c5c"/>
+            <circle cx="360" cy="172" r="4" fill="#ff7c5c"/>
+            <text x="200" y="88" font-family="Space Mono" font-size="9" fill="#f5c842" text-anchor="middle">↑ U-SHAPED PATTERN</text>
+          </svg>
+          <div class="graph-caption">// FIG 2. RESIDUAL PLOT — LINEAR MODEL FIT TO DATA</div>
+        </div>
+        <div class="choices" id="q7-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(7,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">The linear model is a good fit because all residuals are small and close to zero</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(7,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">The data contains outliers that are distorting the regression line</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(7,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">A nonlinear model would provide a better fit — the U-shaped pattern shows systematic error in the linear model</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(7,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">The model is appropriate because the residuals follow a consistent pattern</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-7">
+        <div class="walk-title">// WALKTHROUGH — WHY (C) IS CORRECT</div>
+        <div class="walk-body">
+          <p>A good residual plot shows <strong>random scatter with no pattern</strong> around the zero line. When you see a pattern — especially a U-shape or curve — that means the linear model is <strong>systematically wrong</strong>.</p>
+          <p>The U-shape here tells you: the linear model <em>underestimates</em> at both extremes of x. That is the signature of curvature in the data. A quadratic or exponential model would likely fit better.</p>
+          <p><strong>Rule:</strong> Pattern in residuals = wrong model. No pattern = model is appropriate.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — WHY (D) IS THE MOST DANGEROUS WRONG ANSWER</div>
+            <div class="walk-trap-body">
+              Answer (D) says "consistent pattern" is a good thing. This is the exact backwards interpretation. A consistent pattern is <em>bad</em> — it means the model is missing something systematic. Random, patternless scatter is what you want. The word "consistent" sounds positive in English but signals a problem in statistics.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-7">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Residual plots test whether you know what "good" looks like.</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(7,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Interpretation reversed</strong> — I thought a consistent/patterned residual plot meant the model fit well.</div></div>
+          <div class="diag-option" onclick="pickDiag(7,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Focused on magnitude</strong> — I looked at how large the residuals were rather than whether they showed a pattern.</div></div>
+          <div class="diag-option" onclick="pickDiag(7,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Concept gap</strong> — I didn't know what a residual plot should look like for a good vs bad fit.</div></div>
+          <div class="diag-option" onclick="pickDiag(7,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I recognized the U-shape as a pattern, which signals the wrong model type, and chose (C).</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-7" onclick="revealAnswer(7)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-7" onclick="completeStep(7)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-7">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 3 BANNER -->
+  <div class="tier-card t3" style="margin:28px 0 20px">
+    <span class="tier-num">TIER 3 — MODERATE RISK</span>
+    <span class="tier-title">50–60% Class Accuracy</span>
+    <span class="tier-meta">Q8–Q12 · Topics 1.4, 2.10, 3.13, 4.1, 2.1 · Close calls — precision errors and partial understanding</span>
+  </div>
+
+  <!-- ======================== Q8 ======================== -->
+  <div class="step-card locked" id="step-8">
+    <div class="step-head">
+      <div class="step-num">08</div>
+      <div class="step-meta">
+        <div class="step-name">Polynomial Graph — Points of Inflection</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>1.4 · Polynomial Graphs</b></span>
+          <span>// SKILL: <b>2.A — Construct &amp; Connect</b></span>
+          <span>// CLASS SCORE: <b>56% — 5 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t3">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q2, <b>5 of 9 students</b> were correct. Students confused points of inflection with local extrema — they identified where the graph turned around rather than where concavity changed.</div>
+      </div>
+      <p class="step-instruction">The graph of a polynomial function f is shown. At which x-value does f have a <strong>point of inflection</strong>?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 1.4 · SKILL 2.A · CUMULATIVE GAP Q8</div>
+        <div class="graph-wrap">
+          <svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="120" x2="360" y2="120" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+            <line x1="190" y1="10" x2="190" y2="230" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+            <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+              <line x1="130" y1="10" x2="130" y2="230"/><line x1="70" y1="10" x2="70" y2="230"/>
+              <line x1="250" y1="10" x2="250" y2="230"/><line x1="310" y1="10" x2="310" y2="230"/>
+              <line x1="20" y1="60" x2="360" y2="60"/><line x1="20" y1="180" x2="360" y2="180"/>
+            </g>
+            <g font-family="Space Mono" font-size="9" fill="#4a5570" text-anchor="middle">
+              <text x="70" y="134">-2</text><text x="130" y="134">-1</text>
+              <text x="250" y="134">1</text><text x="310" y="134">2</text>
+            </g>
+            <!-- cubic-ish curve: concave up on left, inflection at x=0 (cx=190), concave down on right -->
+            <!-- left: concave up peak ~(-1.5, 1.5) then comes down to (-0.5, 0.2) inflection at (0,-0.5) then local min at (1,-1.5) then up -->
+            <path d="M 40,30 C 70,20 110,40 130,90 C 150,140 170,150 190,150 C 210,150 230,130 250,90 C 270,50 300,30 350,20"
+                  stroke="#00c2ff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- mark inflection point at x=0 -->
+            <circle cx="190" cy="150" r="5" fill="none" stroke="#3effa0" stroke-width="2"/>
+            <text x="190" y="170" font-family="Space Mono" font-size="9" fill="#3effa0" text-anchor="middle">x = 0</text>
+            <!-- label concavity regions -->
+            <text x="100" y="50" font-family="Space Mono" font-size="8" fill="rgba(255,124,92,0.7)" text-anchor="middle">concave up</text>
+            <text x="280" y="50" font-family="Space Mono" font-size="8" fill="rgba(255,124,92,0.7)" text-anchor="middle">concave down</text>
+          </svg>
+          <div class="graph-caption">// FIG 3. GRAPH OF POLYNOMIAL f — IDENTIFY THE INFLECTION POINT</div>
+        </div>
+        <div class="choices" id="q8-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(8,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">x = −2 — where f reaches its highest visible point (local maximum)</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(8,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">x = 0 — where the graph transitions from concave up to concave down</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(8,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">x = 1 — where f appears to have a local minimum</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(8,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">x = −1 — where f is steepest (maximum rate of change)</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-8">
+        <div class="walk-title">// WALKTHROUGH — WHY (B) IS CORRECT</div>
+        <div class="walk-body">
+          <p>A <strong>point of inflection</strong> is where the concavity of the graph <em>changes</em> — from concave up to concave down, or vice versa. It is <strong>not</strong> a maximum, minimum, or steepest point.</p>
+          <p>Looking at the graph: the left side curves <strong>upward</strong> (concave up — like a bowl). The right side curves <strong>downward</strong> (concave down — like a hill). The transition happens at <code>x = 0</code>. That is the point of inflection.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — CONFUSING INFLECTION WITH EXTREMA</div>
+            <div class="walk-trap-body">
+              Most wrong answers picked the local max or local min. Those are extrema — where the function turns around. A point of inflection is about <em>curvature change</em>, not direction change. A function can have a local max AND a point of inflection at the same x-value — but they mean different things and are identified by different conditions.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-8">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Inflection vs extrema is a definition problem. Which definition was fuzzy?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(8,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Conflated inflection with extrema</strong> — I picked the local max or min thinking that's where inflection occurs.</div></div>
+          <div class="diag-option" onclick="pickDiag(8,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Steepness confusion</strong> — I picked where the graph looked steepest, thinking that was the inflection point.</div></div>
+          <div class="diag-option" onclick="pickDiag(8,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Concept gap</strong> — I didn't know the definition of a point of inflection (change in concavity).</div></div>
+          <div class="diag-option" onclick="pickDiag(8,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I located where the graph switched from concave up to concave down and selected x = 0.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-8" onclick="revealAnswer(8)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-8" onclick="completeStep(8)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-8">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q9 ======================== -->
+  <div class="step-card locked" id="step-9">
+    <div class="step-head">
+      <div class="step-num">09</div>
+      <div class="step-meta">
+        <div class="step-name">Exponential &amp; Log — Finding the Inverse</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>2.10 · Inverses of Exp &amp; Log</b></span>
+          <span>// SKILL: <b>2.A — Construct &amp; Connect</b></span>
+          <span>// CLASS SCORE: <b>56% — 5 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t3">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q5, <b>5 of 9 students</b> correctly found the inverse. The most common error: dividing by 2 in the wrong step, producing 2ln(x) instead of ln(x)/2.</div>
+      </div>
+      <p class="step-instruction">The function f is defined by <strong>f(x) = e^(2x)</strong>. Which of the following expressions defines the inverse function f⁻¹(x)?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 2.10 · SKILL 2.A · CUMULATIVE GAP Q9</div>
+        <div class="choices" id="q9-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(9,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">f⁻¹(x) = 2ln(x) — multiplying by 2 instead of dividing</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(9,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">f⁻¹(x) = ln(x)/2 — solving e^(2y) = x for y</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(9,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">f⁻¹(x) = (1/2)eˣ — taking a reciprocal instead of a logarithm</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(9,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">f⁻¹(x) = ln(2x) — incorrectly moving the coefficient inside the log</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-9">
+        <div class="walk-title">// WALKTHROUGH — WHY (B) IS CORRECT</div>
+        <div class="walk-body">
+          <p>To find the inverse of <code>f(x) = e^(2x)</code>, swap x and y then solve for y:</p>
+          <p><code>x = e^(2y)</code><br>
+             <code>ln(x) = 2y</code> &nbsp;← take ln of both sides<br>
+             <code>y = ln(x)/2</code> &nbsp;← divide both sides by 2</p>
+          <p>So <code>f⁻¹(x) = ln(x) / 2</code>. You can verify: <code>f(f⁻¹(x)) = e^(2·ln(x)/2) = e^(ln x) = x</code> ✓</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THE COEFFICIENT HANDLING ERRORS</div>
+            <div class="walk-trap-body">
+              <strong>(A) 2ln(x)</strong> — Students applied ln correctly but multiplied by 2 instead of dividing. The 2 was the <em>coefficient of y</em>, so to isolate y you <strong>divide</strong> by 2, not multiply.<br><br>
+              <strong>(D) ln(2x)</strong> — Students moved the 2 inside the logarithm using a property that doesn't exist. The log power rule says <code>ln(xⁿ) = n·ln(x)</code> — it doesn't turn a coefficient of the argument into a multiplier.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-9">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Inverse errors are usually algebraic or conceptual. Which one?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(9,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Coefficient direction error</strong> — I knew to take ln but multiplied by 2 instead of dividing (got 2ln(x)).</div></div>
+          <div class="diag-option" onclick="pickDiag(9,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Log property misuse</strong> — I moved the 2 inside the log incorrectly and got ln(2x).</div></div>
+          <div class="diag-option" onclick="pickDiag(9,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Inverse method confusion</strong> — I didn't swap x and y or didn't know to apply ln to undo the exponential.</div></div>
+          <div class="diag-option" onclick="pickDiag(9,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I swapped x and y, took ln of both sides, divided by 2, and confirmed the result.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-9" onclick="revealAnswer(9)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-9" onclick="completeStep(9)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-9">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q10 ======================== -->
+  <div class="step-card locked" id="step-10">
+    <div class="step-head">
+      <div class="step-num">10</div>
+      <div class="step-meta">
+        <div class="step-name">Polar Coordinates — Convert to Rectangular</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>3.13 · Polar Coordinates</b></span>
+          <span>// SKILL: <b>1.B — Interpret Representations</b></span>
+          <span>// CLASS SCORE: <b>56% — 5 of 9 correct</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t3">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On Exam 3 Q11, <b>5 of 9 students</b> got the correct rectangular coordinates. The class swapped cos and sin — assigning cos to y and sin to x.</div>
+      </div>
+      <p class="step-instruction">A point has polar coordinates <strong>(3, 2π/3)</strong>. Which rectangular coordinate pair represents the same point?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 3.13 · SKILL 1.B · CUMULATIVE GAP Q10</div>
+        <div class="choices" id="q10-choices">
+          <label class="choice-item" data-correct="true" onclick="selectMC(10,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">(−3/2,  3√3/2) — x = 3cos(2π/3) = −3/2, y = 3sin(2π/3) = 3√3/2</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(10,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">(3√3/2, −3/2) — swapping the roles of cos and sin</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(10,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">(3/2,  3√3/2) — using the wrong reference angle (π/3 instead of 2π/3)</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(10,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">(−3√3/2, 3/2) — swapping both x and y values after the conversion</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-10">
+        <div class="walk-title">// WALKTHROUGH — WHY (A) IS CORRECT</div>
+        <div class="walk-body">
+          <p>The polar-to-rectangular conversion formulas are:</p>
+          <p><code>x = r · cos(θ)</code> &nbsp;and&nbsp; <code>y = r · sin(θ)</code></p>
+          <p>With r = 3 and θ = 2π/3 (which is in Quadrant II, 120°):</p>
+          <p><code>x = 3 · cos(2π/3) = 3 · (−1/2) = −3/2</code><br>
+             <code>y = 3 · sin(2π/3) = 3 · (√3/2) = 3√3/2</code></p>
+          <p>Both values are correct: x is negative (Quadrant II), y is positive (Quadrant II). ✓</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THE COS/SIN SWAP IS THE #1 ERROR</div>
+            <div class="walk-trap-body">
+              Answer (B) has the values switched: x gets the sin value and y gets the cos value. This is the most common error in polar conversion. Lock in the formula: <strong>x always gets cos, y always gets sin.</strong> Think "x comes before y alphabetically, c comes before s alphabetically: x = r·cos, y = r·sin."
+              <br><br>
+              Answer (C) used cos(π/3) = 1/2 instead of cos(2π/3) = −1/2. Remember: 2π/3 is in Quadrant II — cosine is <em>negative</em> there. Always sketch the angle first.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-10">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Polar conversion is two steps: formula + trig evaluation. Which broke?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(10,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Swapped cos and sin</strong> — I used x = r·sin(θ) and y = r·cos(θ) by mistake.</div></div>
+          <div class="diag-option" onclick="pickDiag(10,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Wrong reference angle</strong> — I used cos(π/3) = 1/2 instead of cos(2π/3) = −1/2, missing the sign in Quadrant II.</div></div>
+          <div class="diag-option" onclick="pickDiag(10,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Forgot the radius</strong> — I evaluated the trig functions correctly but forgot to multiply by r = 3.</div></div>
+          <div class="diag-option" onclick="pickDiag(10,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I applied x = rcos(θ) and y = rsin(θ) correctly and chose (A).</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-10" onclick="revealAnswer(10)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-10" onclick="completeStep(10)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-10">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q11 ======================== -->
+  <div class="step-card locked" id="step-11">
+    <div class="step-head">
+      <div class="step-num">11</div>
+      <div class="step-meta">
+        <div class="step-name">Parametric Functions — Finding Parameter Values</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>4.1 · Parametric Functions</b></span>
+          <span>// SKILL: <b>1.A — Identify &amp; Classify</b></span>
+          <span>// CLASS SCORE: <b>60% — from Unit 4 PCK</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t3">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On the Unit 4 Progress Check Q1, <b>6 of 10 students</b> found the correct parameter value. Students solved only one equation and didn't verify with the other.</div>
+      </div>
+      <p class="step-instruction">A particle moves along a path defined by <strong>x(t) = t² − 1</strong> and <strong>y(t) = 2t + 1</strong>. At what value of t is the particle at the point (3, 5)?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 4.1 · SKILL 1.A · CUMULATIVE GAP Q11 (UNIT 4 PCK)</div>
+        <div class="choices" id="q11-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(11,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">t = −2 — satisfies x(t) = 3 but not y(t) = 5</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(11,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">t = 2 — satisfies both x(2) = 3 and y(2) = 5</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(11,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">t = 1 — gives x(1) = 0 and y(1) = 3, neither matches</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(11,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">t = 4 — gives x(4) = 15 and y(4) = 9, neither matches</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-11">
+        <div class="walk-title">// WALKTHROUGH — WHY (B) IS CORRECT</div>
+        <div class="walk-body">
+          <p>To find the parameter value at a given point, <strong>solve both equations and verify both</strong>:</p>
+          <p><strong>From x(t):</strong> <code>t² − 1 = 3 → t² = 4 → t = 2 or t = −2</code><br>
+             <strong>Check t = 2 in y(t):</strong> <code>y(2) = 2(2) + 1 = 5 ✓</code><br>
+             <strong>Check t = −2 in y(t):</strong> <code>y(−2) = 2(−2) + 1 = −3 ✗</code></p>
+          <p>Only t = 2 satisfies both equations simultaneously. The answer is <code>t = 2</code>.</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — SOLVING ONE EQUATION AND STOPPING</div>
+            <div class="walk-trap-body">
+              Answer (A) t = −2 is a solution to x(t) = 3 — it correctly comes from the x-equation. But parametric problems require both x AND y to match. Never solve only one equation and stop. Always verify in the other one. This is the defining skill of parametric reasoning.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-11">
+        <div class="diag-title">// SELF-LABEL — WHAT WAS YOUR GAP?</div>
+        <div class="diag-prompt">Parametric traps are usually about which equations you checked.</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(11,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Checked only x</strong> — I solved t²−1=3, got t=±2, and picked t=−2 without verifying in y(t).</div></div>
+          <div class="diag-option" onclick="pickDiag(11,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Solved x incorrectly</strong> — I made an algebra error on t²−1=3 and got the wrong t values.</div></div>
+          <div class="diag-option" onclick="pickDiag(11,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Concept gap</strong> — I didn't know I needed to find t such that both x(t) and y(t) match the given point.</div></div>
+          <div class="diag-option" onclick="pickDiag(11,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I solved for t from x(t), got t = ±2, verified in y(t), eliminated t=−2, and chose t=2.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-11" onclick="revealAnswer(11)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-11" onclick="completeStep(11)" style="display:none">Lock In &amp; Advance →</button>
+        <span class="gate-msg" id="gate-11">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q12 ======================== -->
+  <div class="step-card locked" id="step-12">
+    <div class="step-head">
+      <div class="step-num">12</div>
+      <div class="step-meta">
+        <div class="step-name">Geometric Sequences — Building the nth-Term Formula</div>
+        <div class="step-hint">
+          <span>// TOPIC: <b>2.1–2.2 · Sequences &amp; Exponential Models</b></span>
+          <span>// SKILL: <b>3.B — Apply Definitions &amp; Properties</b></span>
+          <span>// CLASS SCORE: <b>56% — from Unit 2 PCK</b></span>
+        </div>
+      </div>
+      <span class="step-status">LOCKED</span>
+    </div>
+    <div class="step-body">
+      <div class="perf-strip t3">
+        <div class="perf-icon">!</div>
+        <div class="perf-text">On the Unit 2 Progress Check, <b>5 of 9 students</b> correctly constructed the geometric sequence formula. The class swapped the initial value and common ratio, or used a(n) = arⁿ instead of arⁿ⁻¹.</div>
+      </div>
+      <p class="step-instruction">The first four terms of a sequence are <strong>5, 15, 45, 135</strong>. Which expression correctly defines the nth term a(n) of this sequence?</p>
+      <div class="q-card">
+        <div class="q-tag">// TOPIC 2.1 · SKILL 3.B · CUMULATIVE GAP Q12 (UNIT 2 PCK)</div>
+        <div class="choices" id="q12-choices">
+          <label class="choice-item" data-correct="false" onclick="selectMC(12,this,'A')">
+            <div class="choice-letter">A</div>
+            <span class="choice-text">a(n) = 5 + 10(n − 1) — a linear model with common difference 10</span>
+          </label>
+          <label class="choice-item" data-correct="true" onclick="selectMC(12,this,'B')">
+            <div class="choice-letter">B</div>
+            <span class="choice-text">a(n) = 5 · 3^(n−1) — geometric with initial value 5 and common ratio 3</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(12,this,'C')">
+            <div class="choice-letter">C</div>
+            <span class="choice-text">a(n) = 5 · 3^n — geometric but off by one factor of 3</span>
+          </label>
+          <label class="choice-item" data-correct="false" onclick="selectMC(12,this,'D')">
+            <div class="choice-letter">D</div>
+            <span class="choice-text">a(n) = 3 · 5^(n−1) — swapping the initial value and common ratio</span>
+          </label>
+        </div>
+      </div>
+      <div class="walkthrough" id="walk-12">
+        <div class="walk-title">// WALKTHROUGH — WHY (B) IS CORRECT</div>
+        <div class="walk-body">
+          <p>First confirm the sequence type: 15/5 = 3, 45/15 = 3, 135/45 = 3. <strong>Constant ratio = 3 → geometric.</strong></p>
+          <p>The standard formula for a geometric sequence is <code>a(n) = a₁ · r^(n−1)</code>, where a₁ is the first term and r is the common ratio.</p>
+          <p><code>a₁ = 5, r = 3 → a(n) = 5 · 3^(n−1)</code></p>
+          <p>Verify: a(1) = 5·3⁰ = 5 ✓, a(2) = 5·3¹ = 15 ✓, a(3) = 5·3² = 45 ✓</p>
+          <div class="walk-trap">
+            <div class="walk-trap-title">// TRAP — THE OFF-BY-ONE AND THE SWAP</div>
+            <div class="walk-trap-body">
+              <strong>(C) 5·3ⁿ</strong> — This uses n instead of (n−1). Check: a(1) = 5·3¹ = 15 ≠ 5. The formula starts at the wrong value. The (n−1) exponent is critical: when n=1, you need 3⁰=1 so the formula returns a₁.<br><br>
+              <strong>(D) 3·5^(n−1)</strong> — The initial value (5) and common ratio (3) are swapped. Always identify: a₁ = first term in the sequence, r = ratio between consecutive terms. Don't guess which is which.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-block" id="diag-12">
+        <div class="diag-title">// SELF-LABEL — FINAL PHASE. BE PRECISE.</div>
+        <div class="diag-prompt">Geometric formula errors fall into three predictable categories. Which was yours?</div>
+        <div class="diag-options">
+          <div class="diag-option" onclick="pickDiag(12,this)"><div class="diag-letter">G1</div><div class="diag-option-text"><strong style="color:var(--text)">Off-by-one exponent</strong> — I wrote 5·3ⁿ instead of 5·3^(n−1), so a(1) = 15 instead of 5.</div></div>
+          <div class="diag-option" onclick="pickDiag(12,this)"><div class="diag-letter">G2</div><div class="diag-option-text"><strong style="color:var(--text)">Swapped a₁ and r</strong> — I identified the ratio (3) as the initial value and the first term (5) as the base of the exponent.</div></div>
+          <div class="diag-option" onclick="pickDiag(12,this)"><div class="diag-letter">G3</div><div class="diag-option-text"><strong style="color:var(--text)">Model-type error</strong> — I identified the sequence as linear (picked constant difference instead of ratio) and chose a linear formula.</div></div>
+          <div class="diag-option" onclick="pickDiag(12,this)"><div class="diag-letter">G4</div><div class="diag-option-text"><strong style="color:var(--text)">Got it right</strong> — I confirmed constant ratio = 3, applied a(n) = 5·3^(n−1), and verified with the first few terms.</div></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="reveal-btn-12" onclick="revealAnswer(12)" disabled>Submit &amp; Reveal →</button>
+        <button class="btn btn-primary" id="advance-btn-12" onclick="completeStep(12)" style="display:none">Lock In &amp; Complete →</button>
+        <span class="gate-msg" id="gate-12">// select an answer to continue</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 2 — DIAGNOSTIC TAXONOMY / RUBRIC                        -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <span class="section-divider-label">// PART 2 — DIAGNOSTIC TAXONOMY · LABEL · IDENTIFY · CONSOLIDATE</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="rubric-section">
+  <div class="rubric-header">
+    <div class="badge">DIAGNOSTIC RUBRIC</div>
+    <div class="rubric-title">A Field Guide to Your Own Errors — AP Pre-Calculus</div>
+  </div>
+  <p class="rubric-intro">
+    This is not a scoring rubric. It is a <strong style="color:var(--text)">diagnostic taxonomy</strong> — a structured way to name the gap behind each wrong answer so that next time you see the same trap, you recognize it before you fall in.
+    For every question you missed, find your row, read the <strong style="color:var(--accent2)">signature</strong>, and run the <strong style="color:var(--accent)">consolidation move</strong> before May 11th.
+  </p>
+
+  <div class="taxonomy-grid">
+    <div class="tax-cell header">Label the Gap</div>
+    <div class="tax-cell header">Identify the Signature</div>
+    <div class="tax-cell header">Consolidate the Move</div>
+
+    <!-- ROW 1: Model Construction (Q1, Q12) -->
+    <div class="tax-cell label-cell bad">
+      <span class="tax-skill-tag crit">SKILL 3.C</span>
+      <div class="tax-label-text">Model Construction<br><small style="font-weight:400;color:var(--muted2)">Q1 · Q12 · Topics 1.13, 2.1</small></div>
+    </div>
+    <div class="tax-cell">
+      You see data growing and pick a model by feel — "it's increasing, so linear" or "it's curving, so quadratic." You skipped the systematic check: differences → ratios → model type. Same error in sequences: you guessed which number was the initial value instead of identifying a₁ = first term and r = consecutive ratio.
+      <div class="signature">"The outputs were growing, so I picked quadratic — I never checked the ratio."</div>
+    </div>
+    <div class="tax-cell">
+      For every table problem: <span class="move">check in this order: (1) constant difference? → linear. (2) constant second difference? → quadratic. (3) constant ratio? → exponential.</span> Do this mechanically every time. For sequences: always verify your formula by substituting n=1,2,3 before committing.
+    </div>
+
+    <!-- ROW 2: Polar Graph Reading (Q2) -->
+    <div class="tax-cell label-cell bad">
+      <span class="tax-skill-tag crit">SKILL 2.B</span>
+      <div class="tax-label-text">Polar Representation<br><small style="font-weight:400;color:var(--muted2)">Q2 · Topic 3.13, 3.14</small></div>
+    </div>
+    <div class="tax-cell">
+      You couldn't match a polar graph to its equation because you didn't have the petal-count rule memorized, or you confused rose curves with limaçons. Both types look complex but obey exact rules. You were pattern-matching by appearance, not by formula structure.
+      <div class="signature">"The graph had 4 petals so I put n=4 in the equation — I didn't know to halve it."</div>
+    </div>
+    <div class="tax-cell">
+      Memorize the two-rule cheat sheet: <span class="move">Rose r=a·sin(nθ): even n → 2n petals; odd n → n petals. Limaçon r=a+b·sin(θ): no petals, just a loop or dimple.</span> Sketch one example of each type from memory until the shape is automatic.
+    </div>
+
+    <!-- ROW 3: Log Intercepts / Asymptote Confusion (Q3) -->
+    <div class="tax-cell label-cell">
+      <span class="tax-skill-tag">SKILL 1.A</span>
+      <div class="tax-label-text">Log Intercept vs Asymptote<br><small style="font-weight:400;color:var(--muted2)">Q3 · Topic 2.13</small></div>
+    </div>
+    <div class="tax-cell">
+      You found the vertical asymptote when the question asked for the x-intercept — or you set f(x)=0 but forgot to account for the vertical shift before converting. These are the two exact mis-steps from Exam 3 Q4.
+      <div class="signature">"I set x − 4 = 0 and said the intercept is x = 4. That's the asymptote."</div>
+    </div>
+    <div class="tax-cell">
+      Two-step fix: <span class="move">(1) Asymptote: set the LOG ARGUMENT to zero → solve for x. (2) x-intercept: set the entire function f(x) = 0, isolate the log, then convert to exponential form.</span> These are different operations — never mix them up. Always identify which one the question is asking for first.
+    </div>
+
+    <!-- ROW 4: Exponential Characteristics (Q4) -->
+    <div class="tax-cell label-cell">
+      <span class="tax-skill-tag">SKILL 3.A</span>
+      <div class="tax-label-text">Exp Function Anatomy<br><small style="font-weight:400;color:var(--muted2)">Q4 · Topic 2.4</small></div>
+    </div>
+    <div class="tax-cell">
+      You misread the coefficient as the base, labeled the asymptote at y = a (the coefficient) instead of y = 0, or called a decay function increasing because the coefficient looked large. Each error treats the coefficient and base as interchangeable — they are not.
+      <div class="signature">"f(x) = 3·(1/2)ˣ — I thought the y-intercept was 1/2 because that's the base."</div>
+    </div>
+    <div class="tax-cell">
+      Three locked-in rules for <span class="move">f(x) = a·bˣ: (1) y-intercept = a (plug in x=0). (2) Growth if b&gt;1, decay if 0&lt;b&lt;1. (3) Horizontal asymptote always y=0 for basic form.</span> Write these three properties on a notecard and drill f(x) = 3·(1/2)ˣ, f(x) = 0.5·2ˣ, and f(x) = −4·eˣ from memory.
+    </div>
+
+    <!-- ROW 5: Transformations from Tables (Q6) -->
+    <div class="tax-cell label-cell warn">
+      <span class="tax-skill-tag proc">SKILL 1.C</span>
+      <div class="tax-label-text">Horizontal Shift in Tables<br><small style="font-weight:400;color:var(--muted2)">Q6 · Topic 1.12</small></div>
+    </div>
+    <div class="tax-cell">
+      You plugged x directly into the table (got f(3)) instead of applying the horizontal shift first (getting f(2)). Or you shifted in the wrong direction — looked up f(4) instead of f(2). The horizontal shift is the most consistently missed transformation in table problems.
+      <div class="signature">"h(3) = f(3−1) + 3 — I just looked up f(3) and added 3. I didn't apply the shift."</div>
+    </div>
+    <div class="tax-cell">
+      Before looking anything up: <span class="move">substitute x into the full input expression first, then look up that value in the table, then apply the outer operation.</span> For h(x) = f(x−1)+3, the lookup is ALWAYS f(x−1) — never f(x). Write the three-step process on scratch paper every time.
+    </div>
+
+    <!-- ROW 6: Residuals (Q7) -->
+    <div class="tax-cell label-cell warn">
+      <span class="tax-skill-tag proc">SKILL 2.A</span>
+      <div class="tax-label-text">Residual Plot Interpretation<br><small style="font-weight:400;color:var(--muted2)">Q7 · Topic 2.6</small></div>
+    </div>
+    <div class="tax-cell">
+      You read a patterned residual plot as evidence the model fits — because the residuals looked "consistent" or "small." This is the inverted interpretation: a pattern in residuals means the model is systematically wrong, not systematically right.
+      <div class="signature">"The residuals made a clean curve, so I thought the model was good. That's backwards."</div>
+    </div>
+    <div class="tax-cell">
+      One rule, memorized: <span class="move">Random scatter around zero = model appropriate. Any visible pattern (U-shape, fan, curve) = wrong model type.</span> When you see a residual plot, ask only: "Is this random scatter, or is there a shape?" Shape = red flag = consider a different model.
+    </div>
+
+    <!-- ROW 7: Misread / Process errors -->
+    <div class="tax-cell label-cell warn">
+      <span class="tax-skill-tag miss">PROCESS</span>
+      <div class="tax-label-text">Misread the Question<br><small style="font-weight:400;color:var(--muted2)">Affects Q3, Q5, Q8, Q11</small></div>
+    </div>
+    <div class="tax-cell">
+      You solved a related but different problem: found the asymptote instead of the intercept, reported the angle instead of the arc length, identified an extremum instead of an inflection point, or found a parameter value that satisfies x(t) but not y(t).
+      <div class="signature">"My calculation was right — I just solved for the wrong thing."</div>
+    </div>
+    <div class="tax-cell">
+      Before any calculation: <span class="move">circle the specific quantity being asked for, write it at the top of your scratch work, and check your final answer against it.</span> "I found x = 4. Does x = 4 answer what was asked? No — the question asked for x-intercept, not asymptote." One check, every time.
+    </div>
+
+    <!-- ROW 8: Concept gaps -->
+    <div class="tax-cell label-cell bad">
+      <span class="tax-skill-tag crit">CONCEPT</span>
+      <div class="tax-label-text">Definition Not Owned<br><small style="font-weight:400;color:var(--muted2)">Affects Q1, Q8, Q9, Q12</small></div>
+    </div>
+    <div class="tax-cell">
+      You didn't know the definition cold: what a point of inflection is (not an extremum), what the inverse procedure is (swap and solve), what the off-by-one in the geometric formula means (n−1 ensures a(1) = a₁). You guessed from partial knowledge.
+      <div class="signature">"I knew there was a formula but I couldn't remember exactly how the pieces fit."</div>
+    </div>
+    <div class="tax-cell">
+      Build a <span class="move">one-page term sheet</span>: every key definition from Units 1–4, stated precisely, with one example. For each definition, write: (1) the formal rule, (2) the most common wrong version, (3) how to tell them apart. Review it twice before May 11th.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 3 — CLASS DATA LOG                                       -->
+<!-- ============================================================ -->
+<div class="section-divider">
+  <span class="section-divider-label">// PART 3 — CLASS DATA LOG · TEACHER-FACING SUMMARY</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="rationale-block">
+  <div class="rationale-card">
+    <div class="scenario-label">// REMEDIATION RATIONALE — 4TH PERIOD · ALA ROOM 501 · CUMULATIVE AP PRE-CALC 2026</div>
+    <p class="rationale-body">
+      This remediation was generated from <strong>real class data</strong> across four assessments: Practice Exam 3 MCQ Part A (28 questions), Practice Exam 1 MCQ (40 questions), Unit 4 Progress Check MCQ Part A (24 questions), and Unit 2 Progress Check MCQ Part A (24 questions).
+      The class demonstrates <em>strong procedural execution</em> — sinusoidal modeling, rational function asymptotes, trig zeros, exponential decay — averaging 85%+ on Exam 1 and showing clean results on direct-apply questions throughout.
+      The collapse is concentrated and <em>predictable</em>: <strong>seven questions at or below 44% accuracy</strong>, with two questions below 35%.
+      The dominant error patterns are <strong>representation translation failures</strong> (not converting between graph types and equations), <strong>transformation table errors</strong> (applying horizontal shifts incorrectly), and <strong>definition ownership gaps</strong> (inflection points, geometric formulas, log intercepts vs asymptotes).
+      These are not random gaps — they share a common root: students recognize the procedure but cannot execute the setup step that precedes it.
+      The prescription is targeted: drill the identification step in isolation for each gap topic before returning to full problems. May 11th is 10 days out. These 12 questions plus the taxonomy rubric are the roadmap.
+    </p>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="score-bar">
+  <div class="score-left">
+    <span>PHASES COMPLETE</span>
+    <span><span class="score-num" id="score-display">0</span><span class="score-denom"> / 12</span></span>
+    <span id="completion-msg" class="completion-msg">// MISSION COMPLETE — GAPS LABELED · MOVES CONSOLIDATED · READY FOR MAY 11</span>
+  </div>
+  <div style="font-size:11px;font-family:var(--mono);color:var(--muted)">AP PRE-CALC 2026 · CUMULATIVE GAP REMEDIATION · STRATOSYN</div>
+</div>
+
+<script>
+// ===== Timer =====
+let seconds = 0;
+const timerEl = document.getElementById('timer');
+setInterval(() => {
+  seconds++;
+  const m = String(Math.floor(seconds / 60)).padStart(2,'0');
+  const s = String(seconds % 60).padStart(2,'0');
+  timerEl.textContent = `${m}:${s}`;
+}, 1000);
+
+// ===== State =====
+const phaseState = {};
+const completed = {};
+const TOTAL = 12;
+for (let i = 1; i <= TOTAL; i++) {
+  phaseState[i] = { selected: null, revealed: false, diag: null };
+  completed[i] = false;
+}
+
+// ===== MC selection =====
+function selectMC(phase, el, letter) {
+  if (phaseState[phase].revealed) return;
+  el.parentElement.querySelectorAll('.choice-item').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  phaseState[phase].selected = { letter, correct: el.dataset.correct === 'true' };
+  document.getElementById(`reveal-btn-${phase}`).disabled = false;
+  document.getElementById(`gate-${phase}`).textContent = '// answer locked — click submit to reveal';
+}
+
+// ===== Reveal =====
+function revealAnswer(phase) {
+  const state = phaseState[phase];
+  if (!state.selected || state.revealed) return;
+  state.revealed = true;
+  const container = document.getElementById(`q${phase}-choices`);
+  container.querySelectorAll('.choice-item').forEach(c => {
+    c.classList.add('disabled');
+    if (c.dataset.correct === 'true') c.classList.add('revealed','correct');
+    else if (c.classList.contains('selected')) c.classList.add('revealed','incorrect');
+  });
+  document.getElementById(`walk-${phase}`).classList.add('visible');
+  document.getElementById(`diag-${phase}`).classList.add('visible');
+  document.getElementById(`reveal-btn-${phase}`).style.display = 'none';
+  const adv = document.getElementById(`advance-btn-${phase}`);
+  adv.style.display = 'inline-block';
+  adv.disabled = true;
+  document.getElementById(`gate-${phase}`).textContent = '// pick a self-diagnosis to unlock advance';
+  setTimeout(() => {
+    document.getElementById(`walk-${phase}`).scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 200);
+}
+
+// ===== Diagnostic =====
+function pickDiag(phase, el) {
+  el.parentElement.querySelectorAll('.diag-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  phaseState[phase].diag = el.dataset.label;
+  document.getElementById(`advance-btn-${phase}`).disabled = false;
+  document.getElementById(`gate-${phase}`).textContent = '// diagnosis logged — click advance to continue';
+}
+
+// ===== Complete =====
+function completeStep(phase) {
+  if (completed[phase]) return;
+  if (!phaseState[phase].revealed || !phaseState[phase].diag) return;
+  completed[phase] = true;
+  const card = document.getElementById(`step-${phase}`);
+  card.classList.remove('active');
+  card.classList.add('completed');
+  const status = card.querySelector('.step-status');
+  if (status) status.textContent = '✓ COMPLETE';
+  const num = card.querySelector('.step-num');
+  if (num) num.textContent = '✓';
+  updateScore();
+  updatePips();
+  if (phase < TOTAL) unlockStep(phase + 1);
+  else document.getElementById('completion-msg').style.display = 'inline';
+}
+
+function unlockStep(n) {
+  const card = document.getElementById(`step-${n}`);
+  if (!card) return;
+  card.classList.remove('locked');
+  card.classList.add('active');
+  const status = card.querySelector('.step-status');
+  if (status) status.textContent = 'ACTIVE';
+  setTimeout(() => card.scrollIntoView({ behavior:'smooth', block:'center' }), 250);
+}
+
+function updateScore() {
+  const n = Object.values(completed).filter(Boolean).length;
+  document.getElementById('score-display').textContent = n;
+}
+
+function updatePips() {
+  for (let i = 1; i <= TOTAL; i++) {
+    const pip = document.getElementById(`pip-${i}`);
+    const card = document.getElementById(`step-${i}`);
+    if (completed[i]) pip.className = 'pip done';
+    else if (!card.classList.contains('locked')) pip.className = 'pip active';
+    else pip.className = 'pip';
+  }
+}
+
+updatePips();
+</script>
+</body>
+</html>
