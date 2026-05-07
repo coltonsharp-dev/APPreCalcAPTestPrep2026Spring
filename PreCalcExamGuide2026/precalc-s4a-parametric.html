@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 4A · Parametric Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#c084fc;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(192,132,252,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(192,132,252,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(192,132,252,0.06) 0%,rgba(56,189,248,0.02) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.28);color:var(--purple);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:var(--purple);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-note{background:rgba(245,200,66,0.05);border:1px solid rgba(245,200,66,0.18);border-left:3px solid var(--gold);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-note strong{color:var(--gold);font-weight:500;}
+  .en-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.green{border-left-color:var(--green);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* PARAM TABLE */
+  .ptable-wrap{overflow-x:auto;margin:12px 0;}
+  .param-table{border-collapse:collapse;font-size:12px;min-width:100%;}
+  .param-table th{background:var(--d2);padding:9px 14px;text-align:center;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);border:1px solid var(--b2);}
+  .param-table td{padding:9px 14px;border:1px solid var(--b);text-align:center;font-weight:300;color:var(--tx2);}
+  .param-table td.t-val{color:var(--purple);font-weight:500;}
+  .param-table td.xy-val{color:var(--gold);font-weight:400;}
+  .param-table tr:hover td{background:var(--glass);}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .graph-wrap{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px;margin:14px 0;}
+  .graph-wrap svg{display:block;max-width:100%;margin:0 auto;}
+  .graph-wrap .g-caption{font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:var(--purple);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.25);color:var(--purple);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(192,132,252,0.16);border-color:var(--purple);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--purple),var(--blue));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 4</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 4A</span>
+  </div>
+  <span class="nav-badge">Parametric Functions</span>
+</nav>
+
+<div class="page">
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 04 · Topics 4.1–4.3</span>
+      <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Section 4A</span>
+    </div>
+    <h1 class="sec-title">Parametric<br><span>Functions</span></h1>
+    <p class="sec-desc">What it means to define x and y separately as functions of t. Plotting parametric curves with direction. Finding parameter values from given coordinates. Rates of change, distance, and the increasing/decreasing analysis — the four things your progress check tested.</p>
+  </div>
+
+  <div class="exam-note">
+    <div class="en-header">📊 From Your Actual Exam Data</div>
+    Your class was consistently at <strong>6 correct, 3-4 wrong</strong> across nearly every parametric question in the Unit 4 Progress Check. No single catastrophic miss — broad even spread of errors. The pattern suggests the concepts are partially understood but the precise reasoning breaks down under pressure. This section rebuilds from the definition up and covers every question type that appeared.
+  </div>
+
+  <!-- ══════════════════════
+       4A.1 · WHAT PARAMETRIC FUNCTIONS ARE
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">4A.1</span>
+      <h2 class="topic-title">What Parametric Functions Are</h2>
+      <span class="topic-sub">Topic 4.1</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Core Idea</div>
+      <p>A parametric function describes a curve where both x and y are defined separately as functions of a third variable <strong>t</strong> (the parameter). Instead of y = f(x), you have:</p>
+      <div class="fbox">
+        <div class="flabel">Parametric Form</div>
+        x(t) = [some function of t]<br>
+        y(t) = [some function of t]<br><br>
+        As t increases through its domain, the point (x(t), y(t)) traces a <strong>path in the xy-plane</strong> with a specific direction.<br><br>
+        <span style="color:var(--tx3);font-size:12px">t is often time. The parametric equations describe WHERE something is (via x and y) and implicitly WHEN it's there (via t).</span>
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Why parametric?</strong> Some curves can't be written as y=f(x) (like circles, which fail the vertical line test). Parametric equations handle any path — including ones that loop, go backwards, or cross themselves. The parameter t adds the crucial dimension of <em>direction and timing</em>.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Plotting a Parametric Curve — Build a Table</div>
+      <p>Choose values of t, compute x(t) and y(t) for each, plot the points (x, y), and connect them <strong>in the order of increasing t</strong>. Add arrows showing direction of travel.</p>
+      <div class="fbox gold">
+        <div class="flabel">Example — Plot x(t) = t², y(t) = t − 1 for t ∈ [−2, 2]</div>
+        <div class="ptable-wrap">
+        <table class="param-table">
+          <tr><th>t</th><th>x(t) = t²</th><th>y(t) = t−1</th><th>Point (x,y)</th></tr>
+          <tr><td class="t-val">−2</td><td class="xy-val">4</td><td class="xy-val">−3</td><td>(4, −3)</td></tr>
+          <tr><td class="t-val">−1</td><td class="xy-val">1</td><td class="xy-val">−2</td><td>(1, −2)</td></tr>
+          <tr><td class="t-val">0</td><td class="xy-val">0</td><td class="xy-val">−1</td><td>(0, −1)</td></tr>
+          <tr><td class="t-val">1</td><td class="xy-val">1</td><td class="xy-val">0</td><td>(1, 0)</td></tr>
+          <tr><td class="t-val">2</td><td class="xy-val">4</td><td class="xy-val">1</td><td>(4, 1)</td></tr>
+        </table>
+        </div>
+        Connect in t-order: (4,−3)→(1,−2)→(0,−1)→(1,0)→(4,1). The curve looks like a sideways parabola with direction arrows pointing upward (as t increases, y increases).
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Finding Parameter Values — Given a Point on the Curve</div>
+      <p>If given a point (a, b), find all values of t such that x(t) = a AND y(t) = b simultaneously. Both equations must be satisfied by the same t.</p>
+      <div class="fbox blue">
+        <div class="flabel">Strategy — Solve Both Equations, Check for Agreement</div>
+        Example: x(t) = t², y(t) = t − 1. Is the point (4, 1) on the curve?<br><br>
+        From x(t)=4: t²=4 → t=2 or t=−2<br>
+        From y(t)=1: t−1=1 → t=2<br><br>
+        t=2 satisfies BOTH → yes, (4,1) is on the curve at <strong>t=2</strong>.<br>
+        t=−2 satisfies x but not y (y(−2)=−3≠1) → that t is rejected.
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>The Q1 miss pattern:</strong> Students solve only x(t)=a and stop, without checking that the same t also satisfies y(t)=b. You must verify BOTH equations give the same t value.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Distance Between Two Points on a Parametric Curve</div>
+      <p>The distance between two points on a parametric curve at t=t₁ and t=t₂ is just the Euclidean distance between those two points:</p>
+      <div class="fbox teal">
+        <div class="flabel">Distance Formula for Parametric Points</div>
+        d = √[(x(t₂) − x(t₁))² + (y(t₂) − y(t₁))²]<br><br>
+        This is the straight-line distance between the two positions — NOT the arc length along the curve.
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Parametric Basics</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'pb','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'pb','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'pb','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="pb-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q1 Type (Parameter Values)</div>x(t) = 2t − 1, y(t) = t² + 3.<br><br>(a) Find the parameter value t when the point is at (3, 7).<br>(b) Find the point on the curve at t = −2.<br>(c) Find the distance between the points at t = 0 and t = 2.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Find t — solve both equations for t, find common value</div><div class="gs-content">x(t)=3: 2t−1=3 → 2t=4 → t=2<br>y(t)=7: t²+3=7 → t²=4 → t=±2<br>Both satisfied when <strong>t=2</strong>. (t=−2 gives x(−2)=−5≠3.)</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Point at t=−2</div><div class="gs-content">x(−2) = 2(−2)−1 = −5<br>y(−2) = (−2)²+3 = 7<br>Point: <strong>(−5, 7)</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Distance between t=0 and t=2</div><div class="gs-content">At t=0: (−1, 3). At t=2: (3, 7).<br>d = √[(3−(−1))² + (7−3)²] = √[16+16] = √32 = <strong>4√2</strong></div></div></div>
+        </div>
+        <div class="pane" id="pb-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>x(t) = t + 1, y(t) = t². Build a table for t = −2,−1,0,1,2. Does this curve pass through the point (0, 1)? If so, at what t?</div>
+          <div class="scaffold-step"><div class="s-prompt">Build the table: fill in x(t) and y(t) for each t value</div><input class="s-input" type="text" placeholder="t=−2: x=−1,y=4 | t=−1: x=0,y=1 | t=0: x=1,y=0 | t=1: x=2,y=1 | t=2: x=3,y=4"/></div>
+          <div class="scaffold-step"><div class="s-prompt">Does (0,1) appear in the table? If so, at what t?</div><input class="s-input" type="text" placeholder="x=0 at t=−1. y=1 at t=−1. Both satisfied at t=..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Describe the shape and direction of this parametric curve.</div><input class="s-input" type="text" placeholder="Shape: ... Direction as t increases: ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Table: t=−2:(−1,4), t=−1:(0,1), t=0:(1,0), t=1:(2,1), t=2:(3,4)<br><br>At t=−1: x=0 AND y=1 → <strong>yes, (0,1) is on the curve at t=−1</strong><br><br>Shape: a sideways parabola opening right (as t increases, x increases monotonically, y=t²=x²→x=(t+1), so y=(x−1)²). Direction: as t increases, the curve moves from upper-left to lower-right to upper-right (passes through minimum at t=0).</div>
+        </div>
+        <div class="pane" id="pb-v3">
+          <div class="problem-box"><div class="p-label">Blind — Robot Position (Q5 Type)</div>A robot's position at time t seconds is given by x(t) = 3cos(πt) and y(t) = 3sin(πt), for t ≥ 0.<br><br>(a) Find the robot's position at t=0, t=0.5, t=1, t=1.5.<br>(b) What shape does the robot trace? What is the period?<br>(c) At what time does the robot first return to its starting position?<br>(d) How far is the robot from the origin at all times?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) t=0: (3,0). t=0.5: (3cos(π/2),3sin(π/2))=(0,3). t=1: (−3,0). t=1.5: (0,−3).<br><br>(b) The robot traces a <strong>circle of radius 3</strong> centered at the origin. Period = 2π/π = <strong>2 seconds</strong>.<br><br>(c) Robot first returns to (3,0) at <strong>t=2 seconds</strong> (one full period).<br><br>(d) Distance from origin = √(x²+y²) = √(9cos²(πt)+9sin²(πt)) = √(9·1) = <strong>3 units</strong> at all times.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       4A.2 · PARAMETRIC MOTION ANALYSIS
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">4A.2</span>
+      <h2 class="topic-title">Parametric Motion Analysis</h2>
+      <span class="topic-sub">Topic 4.2 · Projectile, Intercepts, Extrema</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">x-Intercepts and y-Intercepts of a Parametric Curve</div>
+      <p>To find intercepts of a parametric curve, find the t-values that make one coordinate zero — but verify the curve actually exists at that t within its domain.</p>
+      <div class="fbox">
+        <div class="flabel">Finding Intercepts</div>
+        <strong>x-intercepts:</strong> Set y(t) = 0, solve for t. Compute x(t) at those t values.<br>
+        <strong>y-intercepts:</strong> Set x(t) = 0, solve for t. Compute y(t) at those t values.<br><br>
+        Example: x(t) = t−1, y(t) = t²−4<br>
+        x-int: y(t)=0 → t=±2. Points: x(2)=1 and x(−2)=−3 → x-intercepts at (1,0) and (−3,0)<br>
+        y-int: x(t)=0 → t=1. Point: y(1)=1−4=−3 → y-intercept at (0,−3)
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Local Extrema of x(t) and y(t)</div>
+      <p>The x and y coordinates each have their own extrema as functions of t. To find where <strong>x(t) has a local max/min</strong>, treat x(t) as a function of t and use the same process as for any function — find where the rate of change of x changes sign. Similarly for y(t).</p>
+      <div class="fbox gold">
+        <div class="flabel">Finding Extrema of Each Coordinate</div>
+        To find where x(t) is maximized: find the t value where x(t) has a peak (x(t) increases before, decreases after).<br><br>
+        To find where y(t) is maximized: find the t value where y(t) has a peak.<br><br>
+        <span style="color:var(--tx3);font-size:12px">The x and y extrema don't necessarily occur at the same t — they are independent. A point on the curve where x is maximum isn't necessarily where y is maximum.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Projectile Motion — The Standard Parametric Model</div>
+      <div class="fbox blue">
+        <div class="flabel">Projectile Motion Model</div>
+        x(t) = v₀ cos(θ) · t &nbsp;&nbsp;← horizontal motion (constant speed)<br>
+        y(t) = v₀ sin(θ) · t − ½g·t² + h₀ &nbsp;← vertical (affected by gravity)<br><br>
+        where v₀ = initial speed, θ = launch angle, g = 9.8 m/s² or 32 ft/s², h₀ = initial height<br><br>
+        <strong>To find when it lands:</strong> set y(t) = 0 (or ground level) and solve for t.<br>
+        <strong>Maximum height:</strong> find t that maximizes y(t).<br>
+        <strong>Horizontal range:</strong> x at the landing t value.
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Parametric Motion</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'pm','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'pm','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'pm','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="pm-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q7 Type (Thrown Ball)</div>A ball is thrown from the ground with x(t) = 20t and y(t) = −16t² + 40t (feet, t in seconds).<br><br>(a) Find the maximum height of the ball and when it occurs.<br>(b) When does the ball hit the ground? What is the horizontal distance?<br>(c) Find all x-intercepts of the parametric path.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Maximum height — find peak of y(t)</div><div class="gs-content">y(t) = −16t²+40t = t(−16t+40). This is a downward parabola in t.<br>Vertex at t = −40/(2·(−16)) = 40/32 = <strong>1.25 seconds</strong><br>y(1.25) = −16(1.5625)+40(1.25) = −25+50 = <strong>25 feet</strong></div><div class="gs-why">→ y is maximized when its vertex occurs (quadratic in t). Use t = −b/(2a).</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Landing — set y(t)=0</div><div class="gs-content">−16t²+40t = 0 → t(−16t+40) = 0 → t=0 (launch) or t=40/16=<strong>2.5 seconds</strong><br>Horizontal: x(2.5) = 20(2.5) = <strong>50 feet</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) x-intercepts — set y(t)=0 (same as landing)</div><div class="gs-content">y=0 at t=0 and t=2.5. x-values: x(0)=0 and x(2.5)=50.<br>x-intercepts of the parametric path: <strong>(0, 0) and (50, 0)</strong></div></div></div>
+        </div>
+        <div class="pane" id="pm-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>x(t) = t² − 4, y(t) = t³ − 3t for t ∈ [−2, 2].<br>(a) Find all x-intercepts. (b) Find all y-intercepts. (c) Find the values of t where x(t) has a local minimum.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) x-intercepts: set y(t)=0. t³−3t=t(t²−3)=0 → t=?</div><input class="s-input" type="text" placeholder="t=0, t=√3, t=−√3. In [−2,2]: t=... Compute x(t) at each."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) y-intercepts: set x(t)=0. t²−4=0 → t=? Compute y(t).</div><input class="s-input" type="text" placeholder="t=±2. y(2)=... , y(−2)=... → intercepts: ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) x(t)=t²−4 is a parabola in t. Local minimum at t=?</div><input class="s-input" type="text" placeholder="x(t) is a downward... wait, t² opens upward → min at t=..., x(...)=..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) y(t)=0: t=0, ±√3≈±1.73. In [−2,2]: all three.<br>x(0)=−4, x(√3)=3−4=−1, x(−√3)=−1<br><strong>x-intercepts: (−4,0), (−1,0), (−1,0)</strong> [note (−1,0) reached twice, from t=±√3]<br><br>(b) x(t)=0: t=±2. y(2)=8−6=2, y(−2)=−8+6=−2<br><strong>y-intercepts: (0,2) and (0,−2)</strong><br><br>(c) x(t)=t²−4 opens upward → local min at <strong>t=0</strong>, x(0)=−4. The leftmost point of the curve.</div>
+        </div>
+        <div class="pane" id="pm-v3">
+          <div class="problem-box"><div class="p-label">Blind — Q6 Type (Particle Extrema)</div>A particle moves with x(t) = t³ − 3t² + 2 and y(t) = t² − 2t for 0 ≤ t ≤ 4.<br><br>(a) At what t-values does the particle have a local minimum x-coordinate? Find that minimum x.<br>(b) At what t does the particle cross the x-axis? What are the x-coordinates there?<br>(c) At what t does the particle have minimum y-coordinate?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) x(t)=t³−3t²+2. Look for min: analyze x as function of t. x′=3t²−6t=3t(t−2)=0 → t=0 or t=2. x(0)=2, x(2)=8−12+2=−2, x(4)=64−48+2=18. Local min at <strong>t=2, x=−2</strong>.<br><br>(b) y-axis crossing: y(t)=0 → t²−2t=t(t−2)=0 → t=0 and t=2. x(0)=2, x(2)=−2. <strong>Crosses x-axis at (2,0) and (−2,0)</strong>.<br><br>(c) y(t)=t²−2t=(t−1)²−1. Min at <strong>t=1, y=−1</strong>. Point on curve: x(1)=1−3+2=0 → particle at (0,−1) when y is minimum.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       4A.3 · INCREASING, DECREASING & RATES
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">4A.3</span>
+      <h2 class="topic-title">Increasing, Decreasing &amp; Rates of Change</h2>
+      <span class="topic-sub">Topic 4.3</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">When Is a Parametric Curve Increasing or Decreasing?</div>
+      <p>A parametric curve is described as "increasing" or "decreasing" based on how <strong>y changes as x increases</strong> — not based on t directly. But since both x and y change with t, you need to analyze the relationship carefully.</p>
+      <div class="fbox">
+        <div class="flabel">The Key Framework</div>
+        The parametric curve is <span class="mgreen">increasing</span> (y increases as x increases) when:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;x(t) increasing AND y(t) increasing at the same time (both rates positive)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;OR x(t) decreasing AND y(t) decreasing at the same time (both rates negative)<br><br>
+        The parametric curve is <span class="mred">decreasing</span> (y decreases as x increases) when:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;x(t) increasing AND y(t) decreasing (opposite signs)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;OR x(t) decreasing AND y(t) increasing (opposite signs)
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>Increasing in t ≠ increasing as a curve.</strong> If x(t) is decreasing as t increases, but y(t) is also decreasing as t increases, the curve is going "backwards-left and down" — which means as x increases, y actually increases (since x is going backwards). Think carefully about direction.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Rate of Change of y with Respect to x</div>
+      <p>The rate at which y changes per unit change in x — the slope of the curve at a point — depends on both rates:</p>
+      <div class="fbox purple">
+        <div class="flabel">Rate of Change dy/dx from Parametric Equations</div>
+        <span class="fr"><span class="n">dy</span><span class="d">dx</span></span> = <span class="fr"><span class="n">rate y changes with t</span><span class="d">rate x changes with t</span></span> = <span class="fr"><span class="n">Δy/Δt</span><span class="d">Δx/Δt</span></span><br><br>
+        From a table: slope ≈ <span class="fr"><span class="n">y(t₂) − y(t₁)</span><span class="d">x(t₂) − x(t₁)</span></span><br><br>
+        The curve is increasing where dy/dx &gt; 0 (y and x change in same direction)<br>
+        The curve is decreasing where dy/dx &lt; 0 (y and x change in opposite directions)
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Traversing Similar Curves — The Q11 Concept</div>
+      <p>Two different parametric equations can trace the same geometric curve but at different speeds, in different directions, or over different time intervals. The <strong>orientation (direction of traversal)</strong> and <strong>speed</strong> can differ even when the underlying curve looks the same.</p>
+      <div class="fbox teal">
+        <div class="flabel">Example — Same Curve, Different Traversal</div>
+        Curve A: x(t) = t, y(t) = t² for t ∈ [0, 2]<br>
+        Curve B: x(t) = 2−t, y(t) = (2−t)² for t ∈ [0, 2]<br><br>
+        Both trace the parabola y = x² for x ∈ [0, 2].<br>
+        Curve A: goes LEFT TO RIGHT (x increases as t increases)<br>
+        Curve B: goes RIGHT TO LEFT (x decreases as t increases)<br><br>
+        Same shape — opposite direction.
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Increasing, Decreasing &amp; Rates</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'idr','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'idr','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'idr','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="idr-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q9 &amp; Q10 Type</div>A particle moves with position given by:
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">t</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">1</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td><td style="padding:8px 12px;border:1px solid var(--b);">4</td></tr>
+            <tr style="color:var(--purple);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">x(t)</td><td style="padding:8px 12px;border:1px solid var(--b);">1</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td><td style="padding:8px 12px;border:1px solid var(--b);">6</td><td style="padding:8px 12px;border:1px solid var(--b);">4</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">y(t)</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">5</td><td style="padding:8px 12px;border:1px solid var(--b);">7</td><td style="padding:8px 12px;border:1px solid var(--b);">8</td><td style="padding:8px 12px;border:1px solid var(--b);">6</td></tr>
+          </table></div>
+          (a) On which t-interval is the parametric curve increasing (y increasing as x increases)?<br>(b) Approximate the rate of change dy/dx on [1,2].<br>(c) On [2,3], is x increasing or decreasing? y? Is the curve increasing or decreasing?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Increasing curve — x and y both increasing or both decreasing</div><div class="gs-content">
+            [0,1]: x: 1→3 (↑), y: 2→5 (↑) → both up → <strong>curve increasing</strong><br>
+            [1,2]: x: 3→6 (↑), y: 5→7 (↑) → both up → <strong>curve increasing</strong><br>
+            [2,3]: x: 6→4 (↓), y: 7→8 (↑) → opposite → <strong>curve decreasing</strong><br>
+            [3,4]: x: 4→2 (↓), y: 8→6 (↓) → both down → <strong>curve increasing</strong><br>
+            Curve is increasing on approximately <strong>[0,2]</strong> and <strong>[3,4]</strong>.
+          </div><div class="gs-why">→ When x decreases and y decreases together, the curve is still "increasing" in the y-as-function-of-x sense: as x gets smaller, y also gets smaller, so y is an increasing function of x.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Rate dy/dx on [1,2]</div><div class="gs-content">Δy/Δx = (y(2)−y(1)) / (x(2)−x(1)) = (7−5)/(6−3) = 2/3 ≈ <strong>0.667</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) On [2,3]</div><div class="gs-content">x: 6→4 (decreasing). y: 7→8 (increasing).<br>As x decreases, y increases → y increases when x decreases → <strong>curve is decreasing</strong>.</div></div></div>
+        </div>
+        <div class="pane" id="idr-v2">
+          <div class="problem-box"><div class="p-label">Problem — Traversal Direction (Q11 Type)</div>Two curves are defined for t ∈ [0,1]:<br>Curve A: x(t) = t, y(t) = t²<br>Curve B: x(t) = 1−t, y(t) = (1−t)²<br><br>(a) Do they trace the same geometric shape? Explain.<br>(b) In what direction does each curve traverse its path?<br>(c) At what point do they start (t=0) and end (t=1)?</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Eliminate t from each: what is the relationship between y and x for both curves?</div><input class="s-input" type="text" placeholder="Curve A: y = x² (since y=t², x=t). Curve B: y = ( )² → same?"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) As t increases from 0 to 1, does x(t) increase or decrease for each curve?</div><input class="s-input" type="text" placeholder="Curve A: x=t → as t↑, x↑ → direction: ... Curve B: x=1−t → as t↑, x↓ → direction: ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Find starting and ending points for both curves</div><input class="s-input" type="text" placeholder="A: t=0: ( , ), t=1: ( , ) | B: t=0: ( , ), t=1: ( , )"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Both trace <strong>y = x²</strong> for x ∈ [0,1]. Same shape.<br>(b) Curve A: x=t increases → moves <strong>left to right</strong>. Curve B: x=1−t decreases → moves <strong>right to left</strong>.<br>(c) Curve A: starts (0,0), ends (1,1). Curve B: starts (1,1), ends (0,0). <strong>They travel in opposite directions along the same path.</strong></div>
+        </div>
+        <div class="pane" id="idr-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>x(t) = sin(t), y(t) = cos(t) for t ∈ [0, 2π].<br><br>(a) What geometric shape does this trace? What is the direction?<br>(b) Find all t where x(t) has a local maximum. What is the point on the curve at that t?<br>(c) On [0, π/2], is the parametric curve increasing or decreasing? Show by checking Δy/Δx.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) x²+y² = sin²t+cos²t = 1 → <strong>unit circle</strong>. Direction: at t=0: (0,1) top. At t=π/2: (1,0) right. Moves <strong>clockwise</strong>.<br><br>(b) x(t)=sin(t) max at t=π/2 (sin(π/2)=1). Point: (x,y)=(1, cos(π/2))=<strong>(1, 0)</strong>.<br><br>(c) On [0,π/2]: x=sin(t) increases (0→1). y=cos(t) decreases (1→0). Opposite directions → <strong>curve is decreasing</strong> on this interval. Δy/Δx ≈ (0−1)/(1−0) = −1 &lt; 0 ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 4A</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Key Rule</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--purple);font-weight:500;">Parameter value</td><td style="color:var(--tx2);font-weight:300;">Solve x(t)=a AND y(t)=b. Same t must satisfy both.</td><td style="color:var(--tx3);font-weight:300;">Check BOTH equations — don't stop at one.</td></tr>
+        <tr><td style="color:var(--purple);font-weight:500;">Plot direction</td><td style="color:var(--tx2);font-weight:300;">Connect points in order of increasing t. Add arrows.</td><td style="color:var(--tx3);font-weight:300;">Direction matters — curve can retrace itself.</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">x-intercepts</td><td style="color:var(--tx2);font-weight:300;">Set y(t)=0, find t, compute x(t).</td><td style="color:var(--tx3);font-weight:300;">Same t may give same x multiple times.</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">y-intercepts</td><td style="color:var(--tx2);font-weight:300;">Set x(t)=0, find t, compute y(t).</td><td style="color:var(--tx3);font-weight:300;">Only valid if t is in the given domain.</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Increasing curve</td><td style="color:var(--tx2);font-weight:300;">Δx and Δy same sign → curve increasing.</td><td style="color:var(--tx3);font-weight:300;">Opposite signs → decreasing, regardless of which is negative.</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Rate dy/dx</td><td style="color:var(--tx2);font-weight:300;">Δy/Δx = (y₂−y₁)/(x₂−x₁) from table or formula</td><td style="color:var(--tx3);font-weight:300;">This is slope of the path, not dy/dt or dx/dt alone.</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Same path, diff traversal</td><td style="color:var(--tx2);font-weight:300;">Eliminate t: find y as function of x. Check starting point and direction.</td><td style="color:var(--tx3);font-weight:300;">Same geometric curve ≠ same traversal.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s4a-parametric.html -->
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

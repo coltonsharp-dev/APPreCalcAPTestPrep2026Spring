@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 2B · Logarithmic Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#3effa0;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(62,255,160,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(62,255,160,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(62,255,160,0.06) 0%,rgba(245,200,66,0.02) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.28);color:var(--green);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.25);color:var(--green);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.2;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.purple{border-left-color:var(--purple);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* LOG PROPERTY CARDS */
+  .prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .prop-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px 16px;}
+  .prop-card .pc-name{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;font-weight:500;}
+  .prop-card .pc-rule{font-size:13px;font-weight:400;color:var(--gold);margin-bottom:6px;line-height:1.8;}
+  .prop-card .pc-ex{font-size:11px;font-weight:300;color:var(--tx3);line-height:1.7;}
+
+  /* GRAPH COMPARISON */
+  .graph-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  .graph-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+  .gc-header{padding:10px 14px;border-bottom:1px solid var(--b);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;}
+  .gc-body{padding:12px;}
+  .gc-desc{font-size:11px;font-weight:300;color:var(--tx2);line-height:1.7;margin-top:8px;}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(62,255,160,0.08);border:1px solid rgba(62,255,160,0.25);color:var(--green);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(62,255,160,0.16);border-color:var(--green);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--green),var(--gold));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.prop-grid,.graph-row{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 2</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 2B</span>
+  </div>
+  <span class="nav-badge">Logarithmic Functions</span>
+</nav>
+
+<div class="page">
+
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 02 · Topics 2.10–2.15</span>
+      <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Section 2B</span>
+    </div>
+    <h1 class="sec-title">Logarithmic<br><span>Functions</span></h1>
+    <p class="sec-desc">What a logarithm actually means, the inverse relationship with exponentials, all log properties, solving log and exponential equations, reading and sketching log graphs, and semi-log plots — the five things the AP tests in this unit.</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data — Priority Section</div>
+    <strong>Logarithmic Function Graph - Intercept (Practice Exam 3, Q4):</strong> 5 out of 10 wrong — the single biggest log miss. <strong>Semi-log plots (Q9):</strong> 4 wrong. <strong>Inverses of exponential/log (Q5):</strong> 4 wrong. These three are the focus of this section. The class handles log properties and basic equation solving well — we sharpen the graph reading and semi-log interpretation here.
+  </div>
+
+  <!-- ══════════════════════
+       2B.1 · WHAT A LOG IS
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">2B.1</span>
+      <h2 class="topic-title">What a Logarithm Actually Means</h2>
+      <span class="topic-sub">Topic 2.10</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Definition — Both Directions</div>
+      <p>A logarithm answers the question: <strong>"What exponent on the base gives me this number?"</strong></p>
+      <div class="fbox">
+        <div class="flabel">Logarithm Definition — The Translation</div>
+        log<sub><span class="mblue">b</span></sub>(<span class="mgreen">x</span>) = <span class="m">y</span> &nbsp; ↔ &nbsp; <span class="mblue">b</span><sup><span class="m">y</span></sup> = <span class="mgreen">x</span><br><br>
+        Read as: "<span class="mblue">base b</span> raised to the power <span class="m">y</span> gives <span class="mgreen">x</span>"<br>
+        Or: "log base <span class="mblue">b</span> of <span class="mgreen">x</span> equals <span class="m">y</span>"<br><br>
+        Example: log<sub>2</sub>(8) = 3 &nbsp; ↔ &nbsp; 2³ = 8<br>
+        Example: log<sub>10</sub>(1000) = 3 &nbsp; ↔ &nbsp; 10³ = 1000
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>The mental model:</strong> When you see log<sub>b</sub>(x), ask: "What power do I raise b to in order to get x?" That answer is the log. log<sub>5</sub>(125) = ? → "What power do I raise 5 to to get 125?" → 5³ = 125 → answer is 3.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Common Log and Natural Log</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:16px;">
+          <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:500;">Common Log (log₁₀)</div>
+          <div style="font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;">log(x) with no base shown<br>→ base is <strong style="color:var(--tx);">10</strong><br>log(100) = 2 &nbsp;(10² = 100)<br>log(1) = 0 &nbsp;&nbsp;&nbsp;(10⁰ = 1)<br>log(0.1) = −1 &nbsp;(10⁻¹ = 0.1)</div>
+        </div>
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:16px;">
+          <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:10px;font-weight:500;">Natural Log (ln)</div>
+          <div style="font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;">ln(x) means log<sub>e</sub>(x)<br>→ base is <strong style="color:var(--tx);">e ≈ 2.718</strong><br>ln(e) = 1 &nbsp;&nbsp;&nbsp;(e¹ = e)<br>ln(1) = 0 &nbsp;&nbsp;&nbsp;(e⁰ = 1)<br>ln(e²) = 2 &nbsp;(e² = e²)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Inverse Relationship — Logs Undo Exponentials</div>
+      <p>log<sub>b</sub> and bˣ are <strong>inverse functions</strong>. They undo each other in both orders:</p>
+      <div class="fbox teal">
+        <div class="flabel">Inverse Cancellation Laws</div>
+        b<sup>log<sub>b</sub>(x)</sup> = x &nbsp;&nbsp; (for x &gt; 0) &nbsp;← exponential undoes log<br>
+        log<sub>b</sub>(bˣ) = x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← log undoes exponential<br><br>
+        Examples: &nbsp;10^(log 7) = 7 &nbsp;&nbsp; log(10⁵) = 5 &nbsp;&nbsp; ln(eˣ) = x &nbsp;&nbsp; e^(ln 3) = 3
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>Q5 type from your exam (4 wrong):</strong> "Which of the following is the inverse of f(x) = 3·2ˣ?" Swapping x and y: x = 3·2^y → 2^y = x/3 → y = log₂(x/3). The inverse of an exponential is a logarithm with the same base. The initial multiplier moves inside the log.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Log Definition &amp; Inverses</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'logdef','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'logdef','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'logdef','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="logdef-v1">
+          <div class="problem-box"><div class="p-label">Problem</div>Evaluate without a calculator: (a) log₄(64) &nbsp; (b) log₃(1/9) &nbsp; (c) ln(e⁵) &nbsp; (d) 10^(log 7). Then find the inverse of f(x) = 5·3ˣ.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) log₄(64) — "What power of 4 gives 64?"</div><div class="gs-content">4¹=4, 4²=16, 4³=64 → log₄(64) = <strong>3</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) log₃(1/9) — "What power of 3 gives 1/9?"</div><div class="gs-content">3⁻² = 1/9 → log₃(1/9) = <strong>−2</strong></div><div class="gs-why">→ Fraction → negative exponent. 1/3² = 1/9.</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) ln(e⁵) — log undoes exponential with same base</div><div class="gs-content">log<sub>e</sub>(e⁵) = <strong>5</strong> directly by the cancellation law.</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) 10^(log 7) — exponential undoes log</div><div class="gs-content">= <strong>7</strong> directly by the cancellation law.</div></div></div>
+          <div class="guided-step"><div class="gs-num">5</div><div class="gs-body"><div class="gs-label">Inverse of f(x) = 5·3ˣ</div><div class="gs-content">Swap x and y: x = 5·3^y<br>Isolate the exponential: 3^y = x/5<br>Apply log₃: y = log₃(x/5)<br><strong>f⁻¹(x) = log₃(x/5)</strong></div><div class="gs-why">→ Domain of inverse: x &gt; 0 (log only accepts positive input). Range: all reals.</div></div></div>
+        </div>
+        <div class="pane" id="logdef-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>Find the inverse of each: (a) g(x) = 4ˣ − 3 &nbsp; (b) h(x) = log₂(x + 6)</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) g(x) = 4ˣ − 3. Step 1: swap x and y. Step 2: isolate the exponential. Step 3: apply log₄.</div><input class="s-input" type="text" placeholder="x = 4^y − 3 → 4^y = ... → y = log₄( ... )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) h(x) = log₂(x+6). Step 1: swap x and y. Step 2: the variable is now in the log — convert to exponential form. Step 3: solve for y.</div><input class="s-input" type="text" placeholder="x = log₂(y+6) → 2^x = y+6 → y = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) x = 4^y−3 → 4^y = x+3 → y = log₄(x+3)<br><strong>g⁻¹(x) = log₄(x+3)</strong>, domain: x &gt; −3<br><br>(b) x = log₂(y+6) → 2^x = y+6 → y = 2^x − 6<br><strong>h⁻¹(x) = 2^x − 6</strong>, domain: all reals</div>
+        </div>
+        <div class="pane" id="logdef-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>Simplify completely: (a) log₅(5^(2x+1)) &nbsp; (b) 2^(log₂(x²−3)) &nbsp; (c) e^(3·ln x) &nbsp; (d) log(10^x / 10²)</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) log₅(5^(2x+1)) = <strong>2x+1</strong> (log cancels base-matching exponential)<br><br>(b) 2^(log₂(x²−3)) = <strong>x²−3</strong> (exponential cancels base-matching log)<br><br>(c) e^(3·ln x) = e^(ln x³) = <strong>x³</strong> (power rule inside, then cancel)<br><br>(d) log(10^x / 10²) = log(10^(x−2)) = <strong>x−2</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2B.2 · LOG PROPERTIES
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">2B.2</span>
+      <h2 class="topic-title">Logarithm Properties</h2>
+      <span class="topic-sub">Topic 2.12</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Four Core Properties</div>
+      <div class="prop-grid">
+        <div class="prop-card">
+          <div class="pc-name">Product Rule</div>
+          <div class="pc-rule">logb(M·N) = logb(M) + logb(N)</div>
+          <div class="pc-ex">log(3x) = log 3 + log x<br>Multiplication inside → addition outside</div>
+        </div>
+        <div class="prop-card">
+          <div class="pc-name">Quotient Rule</div>
+          <div class="pc-rule">logb(M/N) = logb(M) − logb(N)</div>
+          <div class="pc-ex">log(x/5) = log x − log 5<br>Division inside → subtraction outside</div>
+        </div>
+        <div class="prop-card">
+          <div class="pc-name">Power Rule</div>
+          <div class="pc-rule">logb(Mⁿ) = n·logb(M)</div>
+          <div class="pc-ex">log(x³) = 3·log x<br>Exponent inside → multiplier outside</div>
+        </div>
+        <div class="prop-card">
+          <div class="pc-name">Change of Base</div>
+          <div class="pc-rule">logb(x) = log(x)/log(b) = ln(x)/ln(b)</div>
+          <div class="pc-ex">log₅(12) = log(12)/log(5)<br>Converts any base to calculator-ready form</div>
+        </div>
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>The most common log property error:</strong> log(M + N) ≠ log M + log N. The product rule applies to <em>multiplication</em> inside the log, not addition. log(x + 5) cannot be split. Also: log(M/N) ≠ log M / log N — division outside is change of base, not the quotient rule.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Two Useful Values to Memorize</div>
+      <div class="fbox gold">
+        <div class="flabel">Always True</div>
+        log<sub>b</sub>(1) = 0 &nbsp;← because b⁰ = 1 for any b<br>
+        log<sub>b</sub>(b) = 1 &nbsp;← because b¹ = b for any b<br><br>
+        Examples: log(1) = 0, &nbsp; ln(1) = 0, &nbsp; log₇(1) = 0<br>
+        log(10) = 1, &nbsp; ln(e) = 1, &nbsp; log₃(3) = 1
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Log Properties</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'logprop','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'logprop','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'logprop','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="logprop-v1">
+          <div class="problem-box"><div class="p-label">Problem — Equivalent Form (AP MCQ Style)</div>Which expression is equivalent to log₂(4x³/y)?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Quotient rule — split the fraction</div><div class="gs-content">log₂(4x³/y) = log₂(4x³) − log₂(y)</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">Product rule — split the numerator</div><div class="gs-content">= log₂(4) + log₂(x³) − log₂(y)</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">Evaluate log₂(4) and apply power rule to log₂(x³)</div><div class="gs-content">log₂(4) = log₂(2²) = 2<br>log₂(x³) = 3·log₂(x)<br><br>= 2 + 3·log₂(x) − log₂(y)<br>= <strong>2 + 3log₂x − log₂y</strong></div><div class="gs-why">→ This is the fully expanded form. Work left to right: fraction first, then multiplication, then exponents.</div></div></div>
+        </div>
+        <div class="pane" id="logprop-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>Write as a single logarithm: 3log x − 2log y + log 5</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Apply power rule in reverse: 3log x = log(?), 2log y = log(?)</div><input class="s-input" type="text" placeholder="3log x = log( ) , 2log y = log( )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — log A + log B = log(AB), log A − log B = log(A/B). Combine all three terms.</div><input class="s-input" type="text" placeholder="= log(x³) − log(y²) + log(5) = log( ... )"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">3log x = log x³ &nbsp;|&nbsp; 2log y = log y²<br><br>log x³ − log y² + log 5 = log(x³·5/y²)<br><br><strong>= log(5x³/y²)</strong></div>
+        </div>
+        <div class="pane" id="logprop-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>Given log 2 ≈ 0.301 and log 3 ≈ 0.477, find without a calculator:<br>(a) log 6 &nbsp; (b) log 18 &nbsp; (c) log(4/9) &nbsp; (d) log₃(2) using change of base</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) log 6 = log(2·3) = log 2 + log 3 = 0.301+0.477 = <strong>0.778</strong><br><br>(b) log 18 = log(2·3²) = log 2 + 2log 3 = 0.301+2(0.477) = 0.301+0.954 = <strong>1.255</strong><br><br>(c) log(4/9) = log 4 − log 9 = 2log 2 − 2log 3 = 2(0.301)−2(0.477) = 0.602−0.954 = <strong>−0.352</strong><br><br>(d) log₃(2) = log 2 / log 3 = 0.301/0.477 ≈ <strong>0.631</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2B.3 · LOG EQUATIONS & GRAPHS
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">2B.3</span>
+      <h2 class="topic-title">Solving Log &amp; Exponential Equations</h2>
+      <span class="topic-sub">Topic 2.13</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Strategy 1 — Convert Between Forms</div>
+      <p>The most direct method: rewrite log form as exponential form (or vice versa) and solve.</p>
+      <div class="fbox">
+        <div class="flabel">Log → Exponential (Isolate, Convert, Solve)</div>
+        log₃(x − 2) = 4<br>
+        → 3⁴ = x − 2 &nbsp;&nbsp;(convert: base^answer = input)<br>
+        → 81 = x − 2<br>
+        → x = <strong>83</strong>
+      </div>
+      <div class="fbox orange">
+        <div class="flabel">Exponential → Log (Isolate, Apply Log)</div>
+        5^(2x) = 200<br>
+        → log(5^(2x)) = log(200) &nbsp;&nbsp;(apply log to both sides)<br>
+        → 2x · log(5) = log(200) &nbsp;(power rule)<br>
+        → x = <span class="fr"><span class="n">log(200)</span><span class="d">2·log(5)</span></span> ≈ <strong>1.646</strong>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Strategy 2 — Same Base Both Sides</div>
+      <p>If both sides can be written as the same base, set the exponents equal.</p>
+      <div class="fbox blue">
+        <div class="flabel">Same Base → Equal Exponents</div>
+        4^(2x−1) = 8^x<br>
+        → (2²)^(2x−1) = (2³)^x<br>
+        → 2^(4x−2) = 2^(3x)<br>
+        → 4x − 2 = 3x<br>
+        → x = <strong>2</strong>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Strategy 3 — Using Log Properties to Solve</div>
+      <div class="fbox purple">
+        <div class="flabel">Combine Logs → Convert → Solve</div>
+        log₂(x) + log₂(x−2) = 3<br>
+        → log₂(x(x−2)) = 3 &nbsp;&nbsp;(product rule: combine)<br>
+        → 2³ = x(x−2) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(convert)<br>
+        → 8 = x² − 2x<br>
+        → x² − 2x − 8 = 0<br>
+        → (x−4)(x+2) = 0<br>
+        → x = 4 or x = −2<br><br>
+        Check: x = −2 → log₂(−2) is undefined → <strong>reject x = −2</strong><br>
+        Answer: <strong>x = 4</strong>
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Always check for extraneous solutions.</strong> Logs require positive arguments. After solving, plug back in and verify the argument of every log in the original equation is positive. Reject any x that makes a log argument zero or negative.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Solving Log &amp; Exp Equations</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'logeq','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'logeq','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'logeq','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="logeq-v1">
+          <div class="problem-box"><div class="p-label">Problem</div>Solve: (a) 3^(x+1) = 81 &nbsp;&nbsp; (b) ln(2x−5) = 3 &nbsp;&nbsp; (c) 2^x = 50</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Same base: 81 = 3⁴</div><div class="gs-content">3^(x+1) = 3⁴ → x+1 = 4 → <strong>x = 3</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) ln → exponential form (base e)</div><div class="gs-content">e³ = 2x−5 → 2x = e³+5 → <strong>x = (e³+5)/2 ≈ 12.54</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Can't make same base — apply log to both sides</div><div class="gs-content">log(2^x) = log(50) → x·log(2) = log(50) → x = log(50)/log(2) = <strong>≈ 5.644</strong></div><div class="gs-why">→ Or equivalently: x = log₂(50) using change of base. Either form is acceptable.</div></div></div>
+        </div>
+        <div class="pane" id="logeq-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>Solve: log₄(x+3) + log₄(x−1) = 2</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Combine the two logs on the left using the product rule</div><input class="s-input" type="text" placeholder="log₄(( )( )) = 2"/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — Convert to exponential form: 4² = ?</div><input class="s-input" type="text" placeholder="16 = (x+3)(x−1) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — Expand and solve the quadratic</div><input class="s-input" type="text" placeholder="x² + 2x − 3 = 16 → x² + 2x − 19 = ... → x = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 4 — Check for extraneous solutions (both log arguments must be positive)</div><input class="s-input" type="text" placeholder="Check x=... : log₄( ) and log₄( ) → valid/invalid?"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">log₄((x+3)(x−1)) = 2 → 4² = (x+3)(x−1) = x²+2x−3<br>16 = x²+2x−3 → x²+2x−19 = 0<br>x = (−2 ± √(4+76))/2 = (−2 ± √80)/2 = −1 ± 2√5<br><br>x = −1+2√5 ≈ 3.47 &nbsp;or&nbsp; x = −1−2√5 ≈ −5.47<br><br>Check x ≈ −5.47: x+3 ≈ −2.47 &lt; 0 → invalid (log of negative)<br>Check x ≈ 3.47: x+3 &gt; 0 ✓ and x−1 &gt; 0 ✓<br><br><strong>x = −1 + 2√5</strong></div>
+        </div>
+        <div class="pane" id="logeq-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>Solve exactly: (a) 2^(3x) = 4^(x+2) &nbsp; (b) log(x+4) − log(x−1) = 1 &nbsp; (c) e^(2x) − 3eˣ − 10 = 0</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) 2^(3x) = (2²)^(x+2) = 2^(2x+4) → 3x = 2x+4 → <strong>x = 4</strong><br><br>(b) log((x+4)/(x−1)) = 1 → (x+4)/(x−1) = 10 → x+4 = 10x−10 → 9x=14 → <strong>x = 14/9</strong><br>Check: x+4=14/9+4&gt;0 ✓, x−1=14/9−1=5/9&gt;0 ✓ Valid.<br><br>(c) Let u = eˣ: u²−3u−10=0 → (u−5)(u+2)=0 → u=5 or u=−2<br>eˣ = −2 is impossible (eˣ &gt; 0 always) → eˣ = 5 → <strong>x = ln 5</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2B.4 · LOG GRAPHS & INTERCEPTS
+  ══════════════════════ -->
+  <div class="topic" id="t4">
+    <div class="topic-header">
+      <span class="topic-num">2B.4</span>
+      <h2 class="topic-title">Log Graph Features &amp; Intercepts</h2>
+      <span class="topic-sub">Topic 2.13 · 🔥 Biggest Miss (5/10 wrong)</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Key Features of f(x) = log<sub>b</sub>(x)</div>
+      <p>The parent log graph has predictable features that shift and transform with the same rules as any function:</p>
+      <table class="dtable">
+        <thead><tr><th>Feature</th><th>Parent: log<sub>b</sub>(x)</th><th>With transformations: a·log<sub>b</sub>(x−h)+k</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--green);font-weight:500;">Domain</td><td style="color:var(--tx2);font-weight:300;">x &gt; 0</td><td style="color:var(--tx3);font-weight:300;">x &gt; h (shifted by horizontal shift h)</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">Range</td><td style="color:var(--tx2);font-weight:300;">All reals (−∞, +∞)</td><td style="color:var(--tx3);font-weight:300;">All reals — always, for any log</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">x-intercept</td><td style="color:var(--tx2);font-weight:300;">(1, 0) — log of 1 is always 0</td><td style="color:var(--tx3);font-weight:300;">Set f(x)=0 and solve. NOT automatically (1,0).</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">y-intercept</td><td style="color:var(--tx2);font-weight:300;">None (undefined at x=0)</td><td style="color:var(--tx3);font-weight:300;">Set x=0 if 0 is in the domain. May exist if h&lt;0.</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">Vertical Asymptote</td><td style="color:var(--tx2);font-weight:300;">x = 0 (the y-axis)</td><td style="color:var(--tx3);font-weight:300;">x = h (where the argument = 0)</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">Behavior</td><td style="color:var(--tx2);font-weight:300;">Increasing if b&gt;1, decreasing if 0&lt;b&lt;1</td><td style="color:var(--tx3);font-weight:300;">Same, modified by vertical stretch/flip</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Finding the x-intercept — The Q4 Miss</div>
+      <p>The most common error: assuming the x-intercept is always (1, 0). It's only (1, 0) for the <em>parent</em> function log<sub>b</sub>(x). Any transformation moves it.</p>
+      <div class="fbox red">
+        <div class="flabel">How to Find the x-intercept of ANY log function</div>
+        Set f(x) = 0 and solve for x. That's all.<br><br>
+        f(x) = log₃(x − 4) + 2<br>
+        0 = log₃(x−4) + 2<br>
+        log₃(x−4) = −2<br>
+        3^(−2) = x−4<br>
+        1/9 = x−4<br>
+        x = 4 + 1/9 = <span class="mred">37/9</span><br><br>
+        The x-intercept is (37/9, 0) — NOT (1, 0).<br>
+        <span style="font-size:11px;color:var(--tx3)">The (1,0) rule only applies to the unshifted parent f(x)=logb(x).</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Finding the y-intercept — When It Exists</div>
+      <p>Set x = 0, but first check: is x=0 in the domain? If the domain requires x &gt; h and h ≥ 0, then x=0 is outside the domain → <strong>no y-intercept</strong>.</p>
+      <div class="fbox teal">
+        <div class="flabel">y-intercept Check</div>
+        f(x) = log₂(x + 8): domain x &gt; −8. x=0 is in domain.<br>
+        f(0) = log₂(0+8) = log₂(8) = 3 → y-intercept at <span class="mteal">(0, 3)</span><br><br>
+        g(x) = log₃(x − 2): domain x &gt; 2. x=0 is NOT in domain.<br>
+        → <span class="mred">No y-intercept.</span> The graph doesn't cross the y-axis.
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Log Graphs &amp; Intercepts</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'lgg','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'lgg','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'lgg','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="lgg-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q4 Type (Intercept)</div>f(x) = log₂(x + 6) − 3<br><br>Find: (a) domain (b) vertical asymptote (c) x-intercept (d) y-intercept (e) describe end behavior as x → −6⁺ and x → +∞</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Domain — argument must be positive</div><div class="gs-content">x + 6 &gt; 0 → <strong>x &gt; −6</strong>, so domain is (−6, ∞)</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Vertical asymptote — where argument = 0</div><div class="gs-content">x + 6 = 0 → <strong>x = −6</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) x-intercept — set f(x) = 0, solve</div><div class="gs-content">log₂(x+6) − 3 = 0<br>log₂(x+6) = 3<br>2³ = x+6<br>8 = x+6<br>x = 2 → <strong>x-intercept: (2, 0)</strong></div><div class="gs-why">→ NOT (1,0). The transformation shifted the intercept to x=2.</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) y-intercept — set x = 0 (check: 0 &gt; −6 ✓)</div><div class="gs-content">f(0) = log₂(0+6) − 3 = log₂(6) − 3 ≈ 2.585 − 3 = −0.415<br><strong>y-intercept ≈ (0, −0.415)</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">5</div><div class="gs-body"><div class="gs-label">(e) End behavior</div><div class="gs-content">As x → −6⁺: argument → 0⁺ → log₂ → −∞ → <strong>f → −∞</strong> (near the VA)<br>As x → +∞: log₂(x+6) → +∞ → <strong>f → +∞</strong> (grows without bound)</div></div></div>
+        </div>
+        <div class="pane" id="lgg-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>g(x) = −log₃(x − 1) + 4<br><br>Find the domain, VA, x-intercept, and y-intercept (or state none exists).</div>
+          <div class="scaffold-step"><div class="s-prompt">Domain: argument x−1 must be > 0 → x > ?</div><input class="s-input" type="text" placeholder="x − 1 > 0 → x > ... → Domain: ( , ∞)"/></div>
+          <div class="scaffold-step"><div class="s-prompt">VA: where does the argument equal 0?</div><input class="s-input" type="text" placeholder="x − 1 = 0 → VA: x = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">x-intercept: set g(x)=0, solve (remember the negative sign!)</div><input class="s-input" type="text" placeholder="0 = −log₃(x−1)+4 → log₃(x−1) = ... → 3^(...)=x−1 → x=..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">y-intercept: is x=0 in the domain? If not, state no y-intercept.</div><input class="s-input" type="text" placeholder="x=0: is 0 > 1? (yes/no) → y-intercept: ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Domain: x−1 &gt; 0 → <strong>x &gt; 1</strong>, Domain: (1, ∞)<br>VA: <strong>x = 1</strong><br><br>x-intercept: 0 = −log₃(x−1)+4 → log₃(x−1) = 4 → 3⁴ = x−1 → x = 82<br><strong>x-intercept: (82, 0)</strong><br><br>y-intercept: x=0 is NOT in domain (0 &lt; 1) → <strong>No y-intercept</strong></div>
+        </div>
+        <div class="pane" id="lgg-v3">
+          <div class="problem-box"><div class="p-label">Blind — Graph Reading</div>A log function has a vertical asymptote at x = 3, passes through (4, 0) and (12, 2). Find the equation of the function in the form f(x) = log_b(x − h).</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">VA at x=3 → h=3 → f(x) = log_b(x−3)<br><br>x-intercept at (4,0): log_b(4−3) = 0 → log_b(1) = 0 ✓ (true for any base — confirms h=3)<br><br>Use (12, 2): log_b(12−3) = 2 → log_b(9) = 2 → b² = 9 → b = 3<br><br><strong>f(x) = log₃(x − 3)</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2B.5 · SEMI-LOG PLOTS
+  ══════════════════════ -->
+  <div class="topic" id="t5">
+    <div class="topic-header">
+      <span class="topic-num">2B.5</span>
+      <h2 class="topic-title">Semi-log Plots</h2>
+      <span class="topic-sub">Topic 2.15 · 🔥 4/10 Wrong</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What a Semi-log Plot Is</div>
+      <p>A <strong>semi-log plot</strong> has a regular (linear) x-axis but a <strong>logarithmic y-axis</strong>. The y-axis doesn't show y values directly — it shows log(y). This is used to <strong>linearize exponential data</strong>: if the original data is exponential, plotting log(y) vs x gives a straight line.</p>
+      <div class="fbox gold">
+        <div class="flabel">The Key Insight</div>
+        If f(x) = a · bˣ (exponential), then:<br>
+        log(f(x)) = log(a) + x·log(b)<br><br>
+        This is <span class="m">Y = mx + c</span> where Y = log(y), m = log(b), c = log(a)<br><br>
+        <strong>Exponential data → straight line on a semi-log plot</strong><br>
+        <strong>The slope of the semi-log line = log(b) = log(growth factor)</strong>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Reading a Semi-log Plot — What Each Feature Means</div>
+      <table class="dtable">
+        <thead><tr><th>On the Semi-log Plot</th><th>What It Means for the Original Data</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--gold);font-weight:500;">Straight line</td><td style="color:var(--tx2);font-weight:300;">Original data is exponential. A straight line on a semi-log plot is the signature of exponential growth/decay.</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">Slope of the line</td><td style="color:var(--tx2);font-weight:300;">slope = log(b) where b is the growth factor. To find b: b = 10^(slope)</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">y-intercept of the line</td><td style="color:var(--tx2);font-weight:300;">log(a) where a is the initial value. To find a: a = 10^(y-intercept)</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">Curved line</td><td style="color:var(--tx2);font-weight:300;">Data is NOT purely exponential (could be polynomial or other)</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>The AP question pattern:</strong> You're given a table of (x, log y) values or a semi-log graph. You're asked to find the original exponential model or to identify whether the data is exponential. If the (x, log y) pairs are linear (constant slope), the original data is exponential.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">From Semi-log to Exponential Model</div>
+      <div class="fbox teal">
+        <div class="flabel">Full Process — Semi-log Table to Exponential Equation</div>
+        Given: x = 0,1,2,3 and log(y) = 1.0, 1.5, 2.0, 2.5<br><br>
+        Step 1: Check that log(y) values are linear in x. Differences: 0.5, 0.5, 0.5 ✓ → data is exponential.<br><br>
+        Step 2: Slope = 0.5 = log(b) → b = 10^0.5 = <span class="mteal">√10 ≈ 3.162</span><br><br>
+        Step 3: y-intercept = log(a) = 1.0 → a = 10¹ = <span class="mteal">10</span><br><br>
+        Step 4: Model: <strong>y = 10 · (√10)ˣ</strong> or equivalently y = 10^(1+0.5x)
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Semi-log Plots</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'semilog','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'semilog','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'semilog','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="semilog-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q9 Type (Semi-log Table)</div>
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">x</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">1</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">log(y)</td><td style="padding:8px 12px;border:1px solid var(--b);">0.6</td><td style="padding:8px 12px;border:1px solid var(--b);">0.9</td><td style="padding:8px 12px;border:1px solid var(--b);">1.2</td><td style="padding:8px 12px;border:1px solid var(--b);">1.5</td></tr>
+          </table></div>
+          Find the exponential model for y in terms of x.
+          </div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Verify the data is linear in the semi-log table</div><div class="gs-content">Differences: 0.9−0.6=0.3, 1.2−0.9=0.3, 1.5−1.2=0.3 → constant → <strong>exponential ✓</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">Find the slope = log(b)</div><div class="gs-content">Slope = 0.3 = log(b) → b = 10^0.3 ≈ <strong>2</strong> (since log 2 ≈ 0.301 ≈ 0.3)</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">Find the initial value a from the y-intercept</div><div class="gs-content">When x=0: log(a) = 0.6 → a = 10^0.6 ≈ <strong>3.98 ≈ 4</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">Write the model</div><div class="gs-content"><strong>y ≈ 4 · 2ˣ</strong></div><div class="gs-why">→ Check: at x=0, y=4, log(4)=0.602≈0.6 ✓. At x=1, y=8, log(8)=0.903≈0.9 ✓</div></div></div>
+        </div>
+        <div class="pane" id="semilog-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">t</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">4</td><td style="padding:8px 12px;border:1px solid var(--b);">6</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">log(P)</td><td style="padding:8px 12px;border:1px solid var(--b);">2.0</td><td style="padding:8px 12px;border:1px solid var(--b);">2.4</td><td style="padding:8px 12px;border:1px solid var(--b);">2.8</td><td style="padding:8px 12px;border:1px solid var(--b);">3.2</td></tr>
+          </table></div>
+          Find the exponential model P(t). Note: inputs are spaced by 2, not 1.</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Confirm linearity. What is the slope of log(P) vs t?</div><input class="s-input" type="text" placeholder="Slope = Δlog(P)/Δt = (2.4−2.0)/(2−0) = .../... = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — slope = log(b) = 0.2 → b = 10^(0.2) = ?</div><input class="s-input" type="text" placeholder="b = 10^0.2 ≈ ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — y-intercept log(a) = 2.0 → a = 10^(2.0) = ?</div><input class="s-input" type="text" placeholder="a = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 4 — Write P(t)</div><input class="s-input" type="text" placeholder="P(t) = ... · (...)ᵗ"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Slope = 0.4/2 = 0.2 per unit of t<br>b = 10^0.2 ≈ <strong>1.585</strong><br>a = 10² = <strong>100</strong><br><br><strong>P(t) = 100 · (10^0.2)ᵗ = 100 · (10^(0.2t))</strong><br><br>Check: P(0)=100, log(100)=2 ✓ &nbsp; P(2)=100·10^0.4≈251, log(251)≈2.4 ✓</div>
+        </div>
+        <div class="pane" id="semilog-v3">
+          <div class="problem-box"><div class="p-label">Blind — Interpreting a Semi-log Statement</div>A semi-log plot of population (log P on y-axis, years on x-axis) shows a straight line with slope 0.04 and y-intercept 3.2.<br><br>(a) What does the slope tell you about population growth?<br>(b) What was the initial population?<br>(c) Write the population model P(t).<br>(d) In how many years will the population be 10 times the initial value?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Slope = 0.04 = log(b) → b = 10^0.04 ≈ 1.096. The population <strong>grows by about 9.6% per year</strong>.<br><br>(b) y-intercept = 3.2 = log(a) → a = 10^3.2 ≈ <strong>1585 people</strong><br><br>(c) P(t) = 1585 · (10^0.04)ᵗ ≈ <strong>1585 · (1.096)ᵗ</strong><br><br>(d) 10 times initial: P(t) = 10·1585 → 10^0.04t · 10^3.2 = 10^4.2<br>0.04t + 3.2 = 4.2 → 0.04t = 1 → <strong>t = 25 years</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 2B</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Key Rule</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:500;">Log definition</td><td style="color:var(--tx2);font-weight:300;">log_b(x)=y ↔ bʸ=x. "What power of b gives x?"</td><td style="color:var(--tx3);font-weight:300;">log(negative) and log(0) are undefined</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Cancellation</td><td style="color:var(--tx2);font-weight:300;">b^(log_b(x)) = x and log_b(bˣ) = x</td><td style="color:var(--tx3);font-weight:300;">Must be same base</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Product rule</td><td style="color:var(--tx2);font-weight:300;">log(MN) = log M + log N</td><td style="color:var(--tx3);font-weight:300;">log(M+N) ≠ log M + log N</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Power rule</td><td style="color:var(--tx2);font-weight:300;">log(Mⁿ) = n·log M</td><td style="color:var(--tx3);font-weight:300;">Exponent moves to front as coefficient</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Change of base</td><td style="color:var(--tx2);font-weight:300;">log_b(x) = log(x)/log(b)</td><td style="color:var(--tx3);font-weight:300;">log(M)/log(N) ≠ log(M/N)</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">x-intercept of log</td><td style="color:var(--tx2);font-weight:300;">Set f(x)=0 and solve. NOT automatically (1,0).</td><td style="color:var(--tx3);font-weight:300;">Transformations shift the intercept</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">y-intercept of log</td><td style="color:var(--tx2);font-weight:300;">Set x=0 only if 0 is in the domain</td><td style="color:var(--tx3);font-weight:300;">May not exist if domain is x&gt;h with h≥0</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Semi-log: slope</td><td style="color:var(--tx2);font-weight:300;">slope = log(b) → b = 10^(slope)</td><td style="color:var(--tx3);font-weight:300;">Account for input spacing (Δt ≠ 1)</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Semi-log: intercept</td><td style="color:var(--tx2);font-weight:300;">y-int = log(a) → a = 10^(y-int)</td><td style="color:var(--tx3);font-weight:300;">Extraneous solutions: always check domain</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s2b-logarithms.html -->
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

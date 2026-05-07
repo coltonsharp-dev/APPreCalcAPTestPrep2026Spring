@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 2A · Sequences & Exponential Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#3effa0;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(62,255,160,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(62,255,160,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(62,255,160,0.055) 0%,rgba(56,189,248,0.02) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.28);color:var(--green);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.25);color:var(--green);}
+  .sec-code{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--green),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-note{border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-note strong{font-weight:500;}
+  .en-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;}
+  .solid-note{background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.18);border-left:3px solid var(--green);}
+  .solid-note strong{color:var(--green);}
+  .solid-note .en-header{color:var(--green);}
+  .watch-note{background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.18);border-left:3px solid var(--gold);}
+  .watch-note strong{color:var(--gold);}
+  .watch-note .en-header{color:var(--gold);}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.purple{border-left-color:var(--purple);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* SEQ COMPARISON */
+  .seq-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  .seq-card{background:var(--d2);border:1px solid var(--b);border-radius:12px;overflow:hidden;}
+  .seq-card .sc-header{padding:14px 18px 10px;border-bottom:1px solid var(--b);}
+  .seq-card .sc-type{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:4px;}
+  .seq-card .sc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;}
+  .seq-card .sc-body{padding:14px 18px;}
+  .seq-card .sc-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.7;}
+  .seq-card .sc-row strong{color:var(--tx);font-weight:500;}
+  .sc-arith .sc-type{color:var(--blue);}
+  .sc-arith .sc-name{color:var(--blue);}
+  .sc-geo .sc-type{color:var(--green);}
+  .sc-geo .sc-name{color:var(--green);}
+
+  /* EXPONENT RULES GRID */
+  .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .exp-card{background:var(--d2);border:1px solid var(--b);border-radius:9px;padding:12px 14px;}
+  .exp-card .ec-rule{font-size:13px;font-weight:400;color:var(--gold);margin-bottom:6px;}
+  .exp-card .ec-name{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--tx3);margin-bottom:6px;}
+  .exp-card .ec-ex{font-size:11px;font-weight:300;color:var(--tx3);}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(62,255,160,0.08);border:1px solid rgba(62,255,160,0.25);color:var(--green);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(62,255,160,0.16);border-color:var(--green);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--green),var(--teal));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.seq-compare,.exp-grid{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 2</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 2A</span>
+  </div>
+  <span class="nav-badge">Sequences &amp; Exponential</span>
+</nav>
+
+<div class="page">
+
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 02 · Topics 2.1–2.5</span>
+      <span class="sec-code">Section 2A</span>
+    </div>
+    <h1 class="sec-title">Sequences &amp;<br><span>Exponential Functions</span></h1>
+    <p class="sec-desc">Arithmetic and geometric sequences, the connection between geometric sequences and exponential functions, exponential growth and decay models, percent change, and every exponent manipulation rule the AP tests.</p>
+  </div>
+
+  <div class="exam-note solid-note">
+    <div class="en-header">📊 From Your Actual Exam Data</div>
+    Your class is <strong>mostly solid here</strong> — sequential and exponential basics are strong. The sub-topics to sharpen: <strong>fractional and negative exponent manipulation</strong> (2.4 — consistent misses across both exams), <strong>exponential end behavior</strong> (2.3 — 3 wrong on practice exam), and <strong>identifying when a table fits exponential vs linear</strong> (2.3/2.5). This is a tune-up, not a rebuild.
+  </div>
+
+  <!-- ══════════════════════
+       2A.1 · SEQUENCES
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">2A.1</span>
+      <h2 class="topic-title">Arithmetic &amp; Geometric Sequences</h2>
+      <span class="topic-sub">Topic 2.1–2.2</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Two Types — Side by Side</div>
+      <div class="seq-compare">
+        <div class="seq-card sc-arith">
+          <div class="sc-header">
+            <div class="sc-type">Arithmetic</div>
+            <div class="sc-name">Add a constant</div>
+          </div>
+          <div class="sc-body">
+            <div class="sc-row"><span>Pattern:</span><strong>Add d each term</strong></div>
+            <div class="sc-row"><span>Common diff:</span><strong>d = aₙ − aₙ₋₁</strong></div>
+            <div class="sc-row"><span>nth term:</span><strong>aₙ = a₁ + (n−1)d</strong></div>
+            <div class="sc-row"><span>Looks like:</span><strong>Linear function</strong></div>
+            <div class="sc-row"><span>Example:</span><strong>3, 7, 11, 15... (d=4)</strong></div>
+            <div class="sc-row"><span>Finite differences:</span><strong>Constant 1st diff</strong></div>
+          </div>
+        </div>
+        <div class="seq-card sc-geo">
+          <div class="sc-header">
+            <div class="sc-type">Geometric</div>
+            <div class="sc-name">Multiply a constant</div>
+          </div>
+          <div class="sc-body">
+            <div class="sc-row"><span>Pattern:</span><strong>Multiply r each term</strong></div>
+            <div class="sc-row"><span>Common ratio:</span><strong>r = aₙ / aₙ₋₁</strong></div>
+            <div class="sc-row"><span>nth term:</span><strong>aₙ = a₁ · rⁿ⁻¹</strong></div>
+            <div class="sc-row"><span>Looks like:</span><strong>Exponential function</strong></div>
+            <div class="sc-row"><span>Example:</span><strong>2, 6, 18, 54... (r=3)</strong></div>
+            <div class="sc-row"><span>Finite differences:</span><strong>Constant ratio</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Identifying the Type from a Table</div>
+      <p>Given a table with equally spaced inputs, check whether the <strong>differences</strong> or <strong>ratios</strong> of outputs are constant:</p>
+      <div class="fbox">
+        <div class="flabel">Detection Method</div>
+        If <span class="mblue">output differences</span> are constant → <span class="mblue">arithmetic</span> (linear behavior)<br>
+        If <span class="mgreen">output ratios</span> are constant → <span class="mgreen">geometric</span> (exponential behavior)<br><br>
+        Table: x = 0,1,2,3 and f(x) = 4, 12, 36, 108<br>
+        Ratios: 12/4 = 3, 36/12 = 3, 108/36 = 3 → <span class="mgreen">constant ratio → geometric/exponential</span>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>AP trap:</strong> Tables with equally spaced inputs. If inputs are not equally spaced, the constant difference / ratio test doesn't apply directly — you need to account for the step size in the input.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Finding a Specific Term</div>
+      <div class="fbox gold">
+        <div class="flabel">Geometric nth Term — Full Process</div>
+        Sequence: 5, 15, 45, 135, ...<br>
+        a₁ = 5, r = 15/5 = 3<br>
+        aₙ = 5 · 3ⁿ⁻¹<br><br>
+        Find a₇: a₇ = 5 · 3⁶ = 5 · 729 = <span class="m">3645</span><br><br>
+        <span style="color:var(--tx3);font-size:12px">The exponent is n−1, NOT n. First term uses n=1, so exponent = 1−1 = 0, giving a₁·r⁰ = a₁ ✓</span>
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Off-by-one error:</strong> Writing aₙ = a₁ · rⁿ instead of a₁ · rⁿ⁻¹. This is the most common geometric sequence mistake. Check: plug in n=1 to verify you get a₁.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Repeated Behavior — Sequence Cycles</div>
+      <p>Some sequences have <strong>repeating patterns</strong>. To find the value of the nth term, find the <strong>remainder</strong> when n is divided by the cycle length. The remainder tells you which position in the cycle you're at.</p>
+      <div class="fbox purple">
+        <div class="flabel">Repeating Sequence Example</div>
+        Sequence: 1, 3, 9, 1, 3, 9, 1, 3, 9, ... (cycle length = 3)<br><br>
+        Find a₂₀: 20 ÷ 3 = 6 remainder 2 → a₂₀ = 2nd element = <span class="mpurple">3</span><br><br>
+        Find a₃₀: 30 ÷ 3 = 10 remainder 0 → remainder 0 means the last element → <span class="mpurple">9</span><br><br>
+        <span style="color:var(--tx3);font-size:12px">Remainder 0 = last element in the cycle. Remainder 1 = first element. Remainder 2 = second element. Etc.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Sequences</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'seq','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'seq','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'seq','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="seq-v1">
+          <div class="problem-box"><div class="p-label">Problem — Geometric Sequence</div>A bouncing ball reaches 80% of its previous height with each bounce. It is dropped from 200 cm.<br>(a) Write the sequence of heights for the first 4 bounces.<br>(b) Find the height after the 8th bounce.<br>(c) Is this arithmetic or geometric? How do you know?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) First four terms — a₁ = 200, r = 0.8</div><div class="gs-content">a₁ = 200<br>a₂ = 200 × 0.8 = 160<br>a₃ = 160 × 0.8 = 128<br>a₄ = 128 × 0.8 = <strong>102.4 cm</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) 8th bounce — use aₙ = a₁ · rⁿ⁻¹</div><div class="gs-content">a₈ = 200 · (0.8)⁷ = 200 · 0.2097... ≈ <strong>41.9 cm</strong></div><div class="gs-why">→ Exponent is n−1 = 8−1 = 7. Don't use n=8 as the exponent.</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Arithmetic or geometric?</div><div class="gs-content"><strong>Geometric</strong> — each term is multiplied by a constant ratio (0.8). The differences between terms are NOT constant (200→160 is −40, 160→128 is −32). Only the ratios are constant.</div></div></div>
+        </div>
+        <div class="pane" id="seq-v2">
+          <div class="problem-box"><div class="p-label">Problem — Repeating Sequence (Q2 type)</div>A sequence repeats: 4, −2, 1, 8, 4, −2, 1, 8, ...<br>(a) What is a₂₅? &nbsp; (b) What is a₃₂? &nbsp; (c) What is a₁₀₀?</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — What is the cycle length? List the repeating block.</div><input class="s-input" type="text" placeholder="Cycle: { , , , } → length = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Find a₂₅: divide 25 by the cycle length. What is the remainder?</div><input class="s-input" type="text" placeholder="25 ÷ 4 = ... remainder ... → position ... in cycle → a₂₅ = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) a₃₂: 32 ÷ 4 = ? remainder ? → which element?</div><input class="s-input" type="text" placeholder="32 ÷ 4 = ... remainder ... → a₃₂ = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) a₁₀₀: 100 ÷ 4 = ? remainder ?</div><input class="s-input" type="text" placeholder="100 ÷ 4 = ... remainder ... → a₁₀₀ = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Cycle: {4, −2, 1, 8} → length = 4<br><br>(a) 25 ÷ 4 = 6 remainder 1 → 1st element → <strong>a₂₅ = 4</strong><br>(b) 32 ÷ 4 = 8 remainder 0 → remainder 0 = last element → <strong>a₃₂ = 8</strong><br>(c) 100 ÷ 4 = 25 remainder 0 → last element → <strong>a₁₀₀ = 8</strong></div>
+        </div>
+        <div class="pane" id="seq-v3">
+          <div class="problem-box"><div class="p-label">Blind — Table Identification</div>
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">n</td><td style="padding:8px 12px;border:1px solid var(--b);">1</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td><td style="padding:8px 12px;border:1px solid var(--b);">4</td><td style="padding:8px 12px;border:1px solid var(--b);">5</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">aₙ</td><td style="padding:8px 12px;border:1px solid var(--b);">6</td><td style="padding:8px 12px;border:1px solid var(--b);">18</td><td style="padding:8px 12px;border:1px solid var(--b);">54</td><td style="padding:8px 12px;border:1px solid var(--b);">162</td><td style="padding:8px 12px;border:1px solid var(--b);">486</td></tr>
+          </table></div>
+          (a) Is this arithmetic or geometric? Show your reasoning using differences and ratios. (b) Write the formula for aₙ. (c) Find a₁₂.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Differences: 12, 36, 108, 324 — NOT constant → not arithmetic<br>Ratios: 18/6=3, 54/18=3, 162/54=3, 486/162=3 — constant → <strong>geometric</strong>, r=3<br><br>Formula: aₙ = 6 · 3ⁿ⁻¹<br><br>a₁₂ = 6 · 3¹¹ = 6 · 177,147 = <strong>1,062,882</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2A.2 · EXPONENTIAL FUNCTIONS
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">2A.2</span>
+      <h2 class="topic-title">Exponential Functions</h2>
+      <span class="topic-sub">Topics 2.3–2.5</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The General Form &amp; Parameters</div>
+      <div class="fbox">
+        <div class="flabel">Standard Form</div>
+        f(x) = <span class="mgreen">a</span> · <span class="mblue">b</span><sup>x</sup><br><br>
+        <span class="mgreen">a</span> = initial value (the y-intercept, value when x=0). If a &gt; 0: starts positive. If a &lt; 0: starts negative.<br>
+        <span class="mblue">b</span> = base (growth or decay factor). <strong>b &gt; 0, b ≠ 1</strong><br>
+        &nbsp;&nbsp;If <span class="mblue">b &gt; 1</span>: exponential <span class="mgreen">growth</span> (multiplying by something &gt; 1)<br>
+        &nbsp;&nbsp;If <span class="mblue">0 &lt; b &lt; 1</span>: exponential <span class="mred">decay</span> (multiplying by something &lt; 1)
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Percent Change → Exponential Base</div>
+      <p>When something grows or decays by a constant percent, the base b is built from that percent:</p>
+      <div class="fbox gold">
+        <div class="flabel">Percent to Base Conversion</div>
+        r% <span class="mgreen">growth</span> each period: base b = 1 + <span class="fr"><span class="n">r</span><span class="d">100</span></span> &nbsp;&nbsp;Example: 5% growth → b = 1.05<br><br>
+        r% <span class="mred">decay</span> each period: base b = 1 − <span class="fr"><span class="n">r</span><span class="d">100</span></span> &nbsp;&nbsp;&nbsp;Example: 8% decay → b = 0.92<br><br>
+        Full model: f(t) = a · (1 ± r)ᵗ &nbsp;← t = number of periods elapsed
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Reverse reading:</strong> If you're given b = 1.12, that means 12% growth per period. If b = 0.85, that means 15% decay per period. Subtract b from 1 for decay: 1 − 0.85 = 0.15 = 15% decay.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">End Behavior — The Watch Zone from Your Data</div>
+      <p>Exponential end behavior depends on whether b &gt; 1 or 0 &lt; b &lt; 1, and whether a is positive or negative.</p>
+      <table class="dtable">
+        <thead><tr><th>Function</th><th>As x → +∞</th><th>As x → −∞</th><th>HA</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--green);font-weight:500;">f(x) = a·bˣ, b&gt;1, a&gt;0</td><td style="color:var(--tx2);font-weight:300;">f → +∞ (grows)</td><td style="color:var(--tx2);font-weight:300;">f → 0⁺</td><td style="color:var(--tx3);font-weight:300;">y = 0</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">f(x) = a·bˣ, 0&lt;b&lt;1, a&gt;0</td><td style="color:var(--tx2);font-weight:300;">f → 0⁺ (decays)</td><td style="color:var(--tx2);font-weight:300;">f → +∞</td><td style="color:var(--tx3);font-weight:300;">y = 0</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">f(x) = a·bˣ + c</td><td style="color:var(--tx2);font-weight:300;">Depends on b</td><td style="color:var(--tx2);font-weight:300;">Depends on b</td><td style="color:var(--tx3);font-weight:300;">y = c (vertical shift)</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>Key insight:</strong> All exponential functions approach the horizontal asymptote y=0 (or y=c if shifted) on one side. The side depends on the base. Exponentials NEVER touch the asymptote — they approach but stay above (or below if a &lt; 0).</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Exponential Functions &amp; Modeling</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'exp','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'exp','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'exp','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="exp-v1">
+          <div class="problem-box"><div class="p-label">Problem — Modeling (2.5 Type)</div>A population of bacteria starts at 500 and triples every 4 hours.<br>(a) Write an exponential model for P(t), where t is hours.<br>(b) Find P(12).<br>(c) What is the horizontal asymptote, and what does it represent in context?<br>(d) What is the percent growth rate per hour?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Build the model — triples every 4 hours</div><div class="gs-content">
+            a = 500 (initial population)<br>
+            Triples every 4 hours → after t hours: P(t) = 500 · 3^(t/4)<br>
+            Or equivalently: P(t) = <strong>500 · (3^(1/4))ᵗ</strong>
+          </div><div class="gs-why">→ t/4 counts how many 4-hour periods have passed. Each complete 4-hour block multiplies by 3.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) P(12)</div><div class="gs-content">P(12) = 500 · 3^(12/4) = 500 · 3³ = 500 · 27 = <strong>13,500 bacteria</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Horizontal asymptote</div><div class="gs-content">HA at <strong>y = 0</strong>. As t → −∞, P → 0. In context: "approaching zero bacteria" (going back in time before the bacteria existed). As t → +∞, P grows without bound — no asymptote on the growth side.</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) Percent growth per hour</div><div class="gs-content">Base per hour = 3^(1/4) ≈ 1.316<br>Percent growth per hour = <strong>≈ 31.6% per hour</strong></div><div class="gs-why">→ Subtract 1 from the base and convert to percent: 1.316 − 1 = 0.316 = 31.6%</div></div></div>
+        </div>
+        <div class="pane" id="exp-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>A car's value decreases by 12% each year. It was worth $24,000 new.<br>(a) Write the exponential model V(t).<br>(b) Find V(5). Round to the nearest dollar.<br>(c) What is the annual decay factor and what percent of value is lost each year?<br>(d) Describe the end behavior as t → +∞.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) 12% decay each year → base = 1 − 0.12 = ? Write V(t) = a · bᵗ</div><input class="s-input" type="text" placeholder="V(t) = ... · ( )ᵗ"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) V(5) = 24000 · (0.88)⁵ = ?</div><input class="s-input" type="text" placeholder="V(5) = 24000 · ... ≈ $..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) State the decay factor and percent lost annually</div><input class="s-input" type="text" placeholder="Decay factor = ... , percent lost = ...%"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(d) End behavior as t → +∞</div><input class="s-input" type="text" placeholder="As t → +∞, V(t) → ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) V(t) = 24000 · (0.88)ᵗ<br>(b) V(5) = 24000 · (0.88)⁵ = 24000 · 0.5277 ≈ <strong>$12,666</strong><br>(c) Decay factor = 0.88. Percent lost = 12% per year.<br>(d) As t → +∞, V(t) → 0⁺ (asymptotically approaches $0 but never reaches it). In context: the car's value approaches but never quite reaches zero.</div>
+        </div>
+        <div class="pane" id="exp-v3">
+          <div class="problem-box"><div class="p-label">Blind — Table Model Construction</div>
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">t (years)</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">1</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">P (thousands)</td><td style="padding:8px 12px;border:1px solid var(--b);">8</td><td style="padding:8px 12px;border:1px solid var(--b);">12</td><td style="padding:8px 12px;border:1px solid var(--b);">18</td><td style="padding:8px 12px;border:1px solid var(--b);">27</td></tr>
+          </table></div>
+          (a) Verify this is exponential. (b) Find the growth factor and percent growth per year. (c) Write P(t). (d) Find P(6).</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Check ratios: 12/8=1.5, 18/12=1.5, 27/18=1.5 — constant → <strong>exponential ✓</strong><br>(b) Growth factor b = 1.5. Percent growth = 50% per year.<br>(c) P(t) = 8 · (1.5)ᵗ thousand people<br>(d) P(6) = 8 · (1.5)⁶ = 8 · 11.39 ≈ <strong>91.1 thousand people</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2A.3 · EXPONENT MANIPULATION
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">2A.3</span>
+      <h2 class="topic-title">Exponent Manipulation</h2>
+      <span class="topic-sub">Topic 2.4 · 🔥 Sub-topic Watch</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">All the Rules — In One Place</div>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="ec-name">Product Rule</div>
+          <div class="ec-rule">bᵐ · bⁿ = bᵐ⁺ⁿ</div>
+          <div class="ec-ex">Same base → add exponents<br>3² · 3⁴ = 3⁶ = 729</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Quotient Rule</div>
+          <div class="ec-rule">bᵐ / bⁿ = bᵐ⁻ⁿ</div>
+          <div class="ec-ex">Same base → subtract exponents<br>5⁷ / 5³ = 5⁴ = 625</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Power Rule</div>
+          <div class="ec-rule">(bᵐ)ⁿ = bᵐⁿ</div>
+          <div class="ec-ex">Power of a power → multiply<br>(2³)⁴ = 2¹² = 4096</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Zero Exponent</div>
+          <div class="ec-rule">b⁰ = 1 (b ≠ 0)</div>
+          <div class="ec-ex">Any nonzero base to the 0th power equals 1<br>7⁰ = 1, (−5)⁰ = 1</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Negative Exponent</div>
+          <div class="ec-rule">b⁻ⁿ = 1/bⁿ</div>
+          <div class="ec-ex">Negative exponent → reciprocal<br>2⁻³ = 1/2³ = 1/8</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Fractional Exponent</div>
+          <div class="ec-rule">b^(m/n) = (ⁿ√b)ᵐ</div>
+          <div class="ec-ex">n = root, m = power<br>8^(2/3) = (∛8)² = 2² = 4</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Fractional = Root</div>
+          <div class="ec-rule">b^(1/n) = ⁿ√b</div>
+          <div class="ec-ex">1/n exponent = nth root<br>16^(1/4) = ⁴√16 = 2</div>
+        </div>
+        <div class="exp-card">
+          <div class="ec-name">Power of Product</div>
+          <div class="ec-rule">(ab)ⁿ = aⁿbⁿ</div>
+          <div class="ec-ex">Distribute to each factor<br>(2x)³ = 8x³</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Fractional Exponents — Full Breakdown</div>
+      <p>This is the most-missed sub-topic. The key is knowing which part of <span class="m">m/n</span> is the root and which is the power:</p>
+      <div class="fbox orange">
+        <div class="flabel">Fractional Exponent → Root and Power</div>
+        b^(<span class="morange">m</span>/<span class="mblue">n</span>) = (<span class="mblue">ⁿ</span>√b)<span class="morange">ᵐ</span> = <span class="mblue">ⁿ</span>√(b<span class="morange">ᵐ</span>)<br><br>
+        <span style="color:var(--tx3);font-size:12px">Denominator = root &nbsp;|&nbsp; Numerator = power</span><br><br>
+        Worked examples:<br>
+        27^(2/3): root = 3, power = 2 → (∛27)² = 3² = <strong>9</strong><br>
+        16^(3/4): root = 4, power = 3 → (⁴√16)³ = 2³ = <strong>8</strong><br>
+        32^(−2/5): negative → reciprocal first → 1/32^(2/5) = 1/(⁵√32)² = 1/2² = <strong>1/4</strong>
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Order of operations for fractional exponents:</strong> Take the root FIRST (if possible), then raise to the power. This keeps the numbers small and manageable. 8^(2/3): take ∛8 = 2 first, then 2² = 4. Much easier than 8² = 64 then ∛64 = 4.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Equivalent Exponential Forms — Rewriting</div>
+      <p>The AP exam frequently asks you to rewrite an exponential expression in a different equivalent form. The goal is to recognize the same base with a different exponent.</p>
+      <div class="fbox teal">
+        <div class="flabel">Rewriting Equivalent Forms</div>
+        2^(3t) = (2³)ᵗ = 8ᵗ &nbsp;&nbsp;&nbsp;&nbsp;← group the base differently<br>
+        9ˣ = (3²)ˣ = 3^(2x) &nbsp;&nbsp;← express in terms of prime base<br>
+        4^(x/2) = (4^(1/2))ˣ = 2ˣ &nbsp;← simplify the fractional exponent<br><br>
+        These rewrites appear when matching: "Which is equivalent to f(x) = 4·8^(2x)?"
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Exponent Manipulation</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'expm','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'expm','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'expm','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="expm-v1">
+          <div class="problem-box"><div class="p-label">Problem — Fractional &amp; Negative Exponents</div>Simplify without a calculator:<br>(a) 64^(2/3) &nbsp;&nbsp; (b) 81^(−3/4) &nbsp;&nbsp; (c) 125^(4/3)</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) 64^(2/3) — denominator is root, numerator is power</div><div class="gs-content">Root first: ∛64 = 4 (since 4³ = 64)<br>Then power: 4² = <strong>16</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) 81^(−3/4) — negative means reciprocal first</div><div class="gs-content">1 / 81^(3/4)<br>⁴√81 = 3 (since 3⁴=81), then 3³ = 27<br>= 1/27 = <strong>1/27</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) 125^(4/3)</div><div class="gs-content">∛125 = 5 (since 5³=125), then 5⁴ = 625 = <strong>625</strong></div></div></div>
+        </div>
+        <div class="pane" id="expm-v2">
+          <div class="problem-box"><div class="p-label">Problem — Equivalent Form (AP MCQ Style)</div>Which expression is equivalent to f(x) = 5 · 4^(3x)?<br><br>(A) 5 · 64ˣ &nbsp;&nbsp; (B) 20 · 4^(3x) &nbsp;&nbsp; (C) 5 · 12ˣ &nbsp;&nbsp; (D) 5 · 4^x</div>
+          <div class="scaffold-step"><div class="s-prompt">Rewrite 4^(3x) by grouping: 4^(3x) = (4³)ˣ = ?ˣ</div><input class="s-input" type="text" placeholder="4^(3x) = (4³)ˣ = (  )ˣ"/></div>
+          <div class="scaffold-step"><div class="s-prompt">So f(x) = 5 · (?)ˣ — which answer choice matches?</div><input class="s-input" type="text" placeholder="f(x) = 5 · ...ˣ → Answer: (...)"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">4^(3x) = (4³)ˣ = 64ˣ<br>f(x) = 5 · 64ˣ<br><strong>Answer: (A)</strong></div>
+        </div>
+        <div class="pane" id="expm-v3">
+          <div class="problem-box"><div class="p-label">Blind — Full Simplification Set</div>Simplify each completely:<br>(a) (x^(2/3) · x^(1/6))^6 &nbsp;&nbsp; (b) (8x³)^(−2/3) &nbsp;&nbsp; (c) 4^(x+1) / 2^x &nbsp;&nbsp; (d) (27/8)^(−2/3)</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Inside: x^(2/3+1/6) = x^(4/6+1/6) = x^(5/6). Then raise to 6th: (x^(5/6))⁶ = x^(5/6·6) = <strong>x⁵</strong><br><br>(b) (8x³)^(−2/3) = 8^(−2/3) · x^(−2) = 1/(∛8)² · 1/x² = 1/4 · 1/x² = <strong>1/(4x²)</strong><br><br>(c) 4^(x+1)/2ˣ = 4·4ˣ/2ˣ = 4·(4/2)ˣ = 4·2ˣ = <strong>4·2ˣ</strong> or 2^(x+2)<br><br>(d) (27/8)^(−2/3) = (8/27)^(2/3) = (∛(8/27))² = (2/3)² = <strong>4/9</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 2A</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Key Formula</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--blue);font-weight:500;">Arithmetic seq</td><td style="color:var(--tx2);font-weight:300;">aₙ = a₁ + (n−1)d. Constant differences.</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Geometric seq</td><td style="color:var(--tx2);font-weight:300;">aₙ = a₁·rⁿ⁻¹. Constant ratios.</td><td style="color:var(--tx3);font-weight:300;">Exponent is n−1, not n. Verify with n=1.</td></tr>
+        <tr><td style="color:var(--purple);font-weight:500;">Repeating seq</td><td style="color:var(--tx2);font-weight:300;">n mod (cycle length) → position in cycle</td><td style="color:var(--tx3);font-weight:300;">Remainder 0 = last element, not first</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Exp growth</td><td style="color:var(--tx2);font-weight:300;">f(t) = a·bᵗ, b = 1+r, b &gt; 1</td><td style="color:var(--tx3);font-weight:300;">b = 1.08 means 8% growth per period</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Exp decay</td><td style="color:var(--tx2);font-weight:300;">f(t) = a·bᵗ, b = 1−r, 0&lt;b&lt;1</td><td style="color:var(--tx3);font-weight:300;">b = 0.85 means 15% decay per period</td></tr>
+        <tr><td style="color:var(--orange);font-weight:500;">Fractional exp</td><td style="color:var(--tx2);font-weight:300;">b^(m/n) = (ⁿ√b)ᵐ. Take root first.</td><td style="color:var(--tx3);font-weight:300;">Denominator = root, numerator = power</td></tr>
+        <tr><td style="color:var(--orange);font-weight:500;">Negative exp</td><td style="color:var(--tx2);font-weight:300;">b⁻ⁿ = 1/bⁿ. Always positive result if b &gt; 0.</td><td style="color:var(--tx3);font-weight:300;">Negative exponent ≠ negative result</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Equivalent form</td><td style="color:var(--tx2);font-weight:300;">b^(nx) = (bⁿ)ˣ. Group, simplify, rewrite.</td><td style="color:var(--tx3);font-weight:300;">Only works with same base</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s2a-sequences.html -->
+
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

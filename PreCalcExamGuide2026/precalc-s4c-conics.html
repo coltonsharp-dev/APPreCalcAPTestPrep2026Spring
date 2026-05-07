@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 4C · Conics & Hyperbolas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#c084fc;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(192,132,252,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(192,132,252,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(192,132,252,0.06) 0%,rgba(56,189,248,0.025) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.28);color:var(--purple);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:var(--purple);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--purple),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.green{border-left-color:var(--green);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* CONIC COMPARE CARDS */
+  .conic-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+  .conic-card{background:var(--d1);border:1px solid var(--b2);border-radius:14px;overflow:hidden;position:relative;}
+  .conic-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+  .cc-ellipse::before{background:linear-gradient(90deg,var(--blue),transparent);}
+  .cc-hyperbola::before{background:linear-gradient(90deg,var(--red),transparent);}
+  .conic-card .cc-header{padding:16px 20px 12px;border-bottom:1px solid var(--b);}
+  .conic-card .cc-type{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:4px;}
+  .cc-ellipse .cc-type{color:var(--blue);}
+  .cc-hyperbola .cc-type{color:var(--red);}
+  .conic-card .cc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;}
+  .conic-card .cc-body{padding:16px 20px;}
+  .conic-card .cc-formula{font-size:13px;font-weight:400;padding:10px 14px;border-radius:8px;border:1px solid;margin-bottom:10px;line-height:1.9;}
+  .cc-ellipse .cc-formula{color:var(--blue);background:rgba(56,189,248,0.06);border-color:rgba(56,189,248,0.2);}
+  .cc-hyperbola .cc-formula{color:var(--red);background:rgba(248,113,113,0.06);border-color:rgba(248,113,113,0.2);}
+  .conic-card .cc-facts{font-size:12px;font-weight:300;color:var(--tx2);line-height:1.85;}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .graph-wrap{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px;margin:14px 0;}
+  .graph-wrap svg{display:block;max-width:100%;margin:0 auto;}
+  .graph-wrap .g-caption{font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:var(--purple);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.25);color:var(--purple);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(192,132,252,0.16);border-color:var(--purple);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  /* COMPLETION BADGE */
+  .complete-badge{background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(56,189,248,0.08));border:1px solid rgba(192,132,252,0.3);border-radius:16px;padding:28px 32px;margin-top:40px;text-align:center;}
+  .cb-icon{font-size:40px;margin-bottom:12px;}
+  .cb-title{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--tx);margin-bottom:8px;}
+  .cb-sub{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.8;margin-bottom:16px;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--purple),var(--teal));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.conic-grid{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 4</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 4C</span>
+  </div>
+  <span class="nav-badge">Conics &amp; Hyperbolas</span>
+</nav>
+
+<div class="page">
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 04 · Topics 4.6–4.7</span>
+      <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Section 4C · Final Section</span>
+    </div>
+    <h1 class="sec-title">Conics<br><span>&amp; Hyperbolas</span></h1>
+    <p class="sec-desc">Ellipses and hyperbolas in standard form — identifying center, vertices, and axes from equations and tables. Graphing from standard form. Parametric conics. Real-world applications. The section that closes out the entire AP Pre-Calculus course.</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data — Priority Section</div>
+    <strong>Hyperbola graphs (Q20):</strong> 2 wrong — the class can read ellipses but struggles with the hyperbola shape and asymptotes. <strong>Conics from table values (Q19):</strong> 3 wrong. <strong>Parametric conics — modeling a hyperbola (Q23):</strong> 3 wrong. The full hyperbola section is built from scratch. Ellipses are solid — this section reinforces and extends to hyperbolas.
+  </div>
+
+  <!-- ══════════════════════
+       4C.1 · ELLIPSES
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">4C.1</span>
+      <h2 class="topic-title">Ellipses</h2>
+      <span class="topic-sub">Topic 4.6</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Standard Form — Two Orientations</div>
+      <div class="fbox blue">
+        <div class="flabel">Ellipse Standard Form</div>
+        <span class="fr"><span class="n">(x−h)²</span><span class="d">a²</span></span> + <span class="fr"><span class="n">(y−k)²</span><span class="d">b²</span></span> = 1<br><br>
+        Center: (<span class="mblue">h</span>, <span class="mblue">k</span>)<br>
+        <strong>If a &gt; b:</strong> major axis is horizontal. Vertices at (h±a, k). Co-vertices at (h, k±b).<br>
+        <strong>If b &gt; a:</strong> major axis is vertical. Vertices at (h, k±b). Co-vertices at (h±a, k).<br>
+        <strong>If a = b:</strong> circle (special case of ellipse)<br><br>
+        <span style="color:var(--tx3);font-size:12px">a = semi-major axis (larger value). b = semi-minor axis (smaller value). The larger denominator tells you the orientation.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Reading Every Feature from the Equation</div>
+      <table class="dtable">
+        <thead><tr><th>Feature</th><th>Horizontal Ellipse (a²&gt;b²)</th><th>Vertical Ellipse (b²&gt;a²)</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--blue);font-weight:500;">Center</td><td style="color:var(--tx2);font-weight:300;">(h, k)</td><td style="color:var(--tx2);font-weight:300;">(h, k)</td></tr>
+          <tr><td style="color:var(--blue);font-weight:500;">Major axis length</td><td style="color:var(--tx2);font-weight:300;">2a (horizontal)</td><td style="color:var(--tx2);font-weight:300;">2b (vertical)</td></tr>
+          <tr><td style="color:var(--blue);font-weight:500;">Vertices (ends of major axis)</td><td style="color:var(--tx2);font-weight:300;">(h±a, k)</td><td style="color:var(--tx2);font-weight:300;">(h, k±b)</td></tr>
+          <tr><td style="color:var(--blue);font-weight:500;">Co-vertices (ends of minor axis)</td><td style="color:var(--tx2);font-weight:300;">(h, k±b)</td><td style="color:var(--tx2);font-weight:300;">(h±a, k)</td></tr>
+          <tr><td style="color:var(--blue);font-weight:500;">Domain</td><td style="color:var(--tx2);font-weight:300;">[h−a, h+a]</td><td style="color:var(--tx2);font-weight:300;">[h−a, h+a]</td></tr>
+          <tr><td style="color:var(--blue);font-weight:500;">Range</td><td style="color:var(--tx2);font-weight:300;">[k−b, k+b]</td><td style="color:var(--tx2);font-weight:300;">[k−b, k+b]</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Ellipse SVG -->
+    <div class="graph-wrap">
+      <svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace">
+        <line x1="20" y1="110" x2="400" y2="110" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+        <line x1="210" y1="10" x2="210" y2="210" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+        <!-- Ellipse: center (210,110), a=120 (horizontal), b=70 -->
+        <ellipse cx="210" cy="110" rx="120" ry="70" fill="rgba(56,189,248,0.1)" stroke="#38bdf8" stroke-width="2"/>
+        <!-- Center -->
+        <circle cx="210" cy="110" r="3" fill="var(--purple)"/>
+        <text x="215" y="108" fill="var(--purple)" font-size="10">(h, k)</text>
+        <!-- Vertices -->
+        <circle cx="330" cy="110" r="4" fill="#38bdf8"/><text x="333" y="107" fill="#38bdf8" font-size="10">(h+a, k)</text>
+        <circle cx="90" cy="110" r="4" fill="#38bdf8"/><text x="40" y="107" fill="#38bdf8" font-size="10">(h−a, k)</text>
+        <!-- Co-vertices -->
+        <circle cx="210" cy="40" r="4" fill="rgba(56,189,248,0.7)"/><text x="215" y="38" fill="rgba(56,189,248,0.7)" font-size="10">(h, k+b)</text>
+        <circle cx="210" cy="180" r="4" fill="rgba(56,189,248,0.7)"/><text x="215" y="192" fill="rgba(56,189,248,0.7)" font-size="10">(h, k−b)</text>
+        <!-- a label -->
+        <line x1="210" y1="118" x2="330" y2="118" stroke="rgba(56,189,248,0.5)" stroke-width="1.5"/>
+        <text x="262" y="130" fill="rgba(56,189,248,0.7)" font-size="10">a (semi-major)</text>
+        <!-- b label -->
+        <line x1="198" y1="110" x2="198" y2="40" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+        <text x="140" y="78" fill="rgba(56,189,248,0.6)" font-size="10">b (semi-minor)</text>
+        <!-- note -->
+        <text x="20" y="18" fill="rgba(255,255,255,0.3)" font-size="9">Horizontal ellipse: a² is under x-term (a&gt;b here)</text>
+      </svg>
+      <div class="g-caption">Horizontal ellipse with center (h,k), semi-major axis a, semi-minor axis b. The major axis is along the direction with the larger denominator.</div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Building an Ellipse from a Table of Points — The Q19 Pattern</div>
+      <p>Given a table of points on the ellipse, identify the center, major axis length, and minor axis length. Look for the maximum and minimum x and y values — they give the extreme points.</p>
+      <div class="fbox gold">
+        <div class="flabel">From Extreme Points to Standard Form</div>
+        Table gives: leftmost point (−1, 3), rightmost (9, 3), topmost (4, 8), bottommost (4, −2)<br><br>
+        Center: midpoint of left/right = ((−1+9)/2, 3) = <span class="m">(4, 3)</span><br>
+        Semi-major axis a = 9−4 = 5 (horizontal, since left-right span is wider)<br>
+        Semi-minor axis b = 8−3 = 5 (wait, if both equal 5, it's a circle!)<br><br>
+        If: left (−2, 3), right (8, 3), top (3, 7), bottom (3, −1):<br>
+        Center: (3, 3). a = 8−3=5 (horiz). b = 7−3=4 (vert).<br>
+        Standard form: <span class="m"><span class="fr"><span class="n">(x−3)²</span><span class="d">25</span></span> + <span class="fr"><span class="n">(y−3)²</span><span class="d">16</span></span> = 1</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Ellipses</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'ell','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'ell','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'ell','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="ell-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q18 Type (Ellipse Vertices)</div>An ellipse has equation <span class="fr"><span class="n">(x+2)²</span><span class="d">36</span></span> + <span class="fr"><span class="n">(y−4)²</span><span class="d">16</span></span> = 1.<br><br>(a) State the center, semi-major axis a, and semi-minor axis b.<br>(b) Find all four vertices and co-vertices.<br>(c) State the domain and range.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Read from standard form</div><div class="gs-content">Center: (h,k) = (−2, 4)<br>a² = 36 → a = 6 (under x, so horizontal major axis)<br>b² = 16 → b = 4<br>a &gt; b → <strong>horizontal ellipse</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Four extreme points</div><div class="gs-content">Vertices (major axis, horizontal): (−2±6, 4) = <strong>(4, 4) and (−8, 4)</strong><br>Co-vertices (minor axis, vertical): (−2, 4±4) = <strong>(−2, 8) and (−2, 0)</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Domain and range</div><div class="gs-content">Domain: [−8, 4] &nbsp;&nbsp;(leftmost to rightmost x)<br>Range: [0, 8] &nbsp;&nbsp;&nbsp;(bottommost to topmost y)</div></div></div>
+        </div>
+        <div class="pane" id="ell-v2">
+          <div class="problem-box"><div class="p-label">Problem — Q19 Type (From Table)</div>An ellipse passes through: (1, 3), (7, 3), (4, 7), (4, −1).<br>Write the equation in standard form.</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Center: midpoint of the leftmost and rightmost x-extremes. Also midpoint of top and bottom.</div><input class="s-input" type="text" placeholder="x-center = (1+7)/2 = ... , y-center = (7+(−1))/2 = ... → Center = ( , )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — a = distance from center to rightmost vertex (horizontal)</div><input class="s-input" type="text" placeholder="a = 7 − x-center = ... , b = 7 − y-center = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — Write in standard form: (x−h)²/a² + (y−k)²/b² = 1</div><input class="s-input" type="text" placeholder="( x − )²/( ) + ( y − )²/( ) = 1"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Center: x=(1+7)/2=4, y=(7+(−1))/2=3 → <strong>(4,3)</strong><br>a = 7−4 = 3 (horizontal, left-right span=6)<br>b = 7−3 = 4 (vertical, top-bottom span=8, so b is larger → vertical major axis)<br><br>Since b&gt;a: major axis is vertical. a²=9 (under x), b²=16 (under y).<br><strong><span class="fr"><span class="n">(x−4)²</span><span class="d">9</span></span> + <span class="fr"><span class="n">(y−3)²</span><span class="d">16</span></span> = 1</strong></div>
+        </div>
+        <div class="pane" id="ell-v3">
+          <div class="problem-box"><div class="p-label">Blind — Elliptical Bridge (Q21 Type)</div>A bridge arch is in the shape of the upper half of an ellipse. The bridge spans 80 feet horizontally and the maximum height at the center is 20 feet. A truck that is 14 feet tall and 10 feet wide needs to pass under the bridge. The truck's center is on the road (the x-axis).<br><br>(a) Write the equation of the ellipse with center at the origin.<br>(b) At x = 5 (5 feet from center, where the truck's edge is), what is the height of the arch?<br>(c) Can the truck pass through?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Horizontal span 80 → a=40. Max height 20 → b=20. Center at origin.<br><strong>x²/1600 + y²/400 = 1</strong><br><br>(b) At x=5: 25/1600 + y²/400 = 1 → y²/400 = 1−25/1600 = 1575/1600 → y²=394.3 → y≈<strong>19.86 feet</strong><br><br>(c) The truck is 14 feet tall and 10 feet wide. At x=5 (the truck edge), the arch height is ≈19.86 feet. Since 19.86 &gt; 14, <strong>yes, the truck can pass</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       4C.2 · HYPERBOLAS
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">4C.2</span>
+      <h2 class="topic-title">Hyperbolas</h2>
+      <span class="topic-sub">Topic 4.6 · 🔥 Q20 Miss</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Ellipse vs Hyperbola — The One Symbol That Changes Everything</div>
+      <p>An ellipse has a <strong>+</strong> between the two fractions. A hyperbola has a <strong>−</strong>. That single sign difference completely changes the shape.</p>
+      <div class="conic-grid">
+        <div class="conic-card cc-ellipse">
+          <div class="cc-header">
+            <div class="cc-type">Ellipse</div>
+            <div class="cc-name" style="color:var(--blue);">Closed, oval shape</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-formula"><span class="fr"><span class="n">(x−h)²</span><span class="d">a²</span></span> <strong>+</strong> <span class="fr"><span class="n">(y−k)²</span><span class="d">b²</span></span> = 1</div>
+            <div class="cc-facts">Both terms positive → bounded shape<br>Center (h,k), two closed loops<br>No asymptotes<br>Domain: [h−a, h+a]<br>Range: [k−b, k+b]</div>
+          </div>
+        </div>
+        <div class="conic-card cc-hyperbola">
+          <div class="cc-header">
+            <div class="cc-type">Hyperbola</div>
+            <div class="cc-name" style="color:var(--red);">Two open branches</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-formula"><span class="fr"><span class="n">(x−h)²</span><span class="d">a²</span></span> <strong>−</strong> <span class="fr"><span class="n">(y−k)²</span><span class="d">b²</span></span> = 1</div>
+            <div class="cc-facts">Subtraction → unbounded shape<br>Two separate branches opening left-right<br>Has asymptotes: y−k = ±(b/a)(x−h)<br>Domain: x≤h−a or x≥h+a</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Two Orientations of a Hyperbola</div>
+      <div class="fbox red">
+        <div class="flabel">Horizontal Hyperbola (x-term first, minus after)</div>
+        <span class="fr"><span class="n">(x−h)²</span><span class="d">a²</span></span> − <span class="fr"><span class="n">(y−k)²</span><span class="d">b²</span></span> = 1<br><br>
+        Opens LEFT and RIGHT<br>
+        Vertices: (h±a, k) &nbsp;&nbsp;← on the x-axis direction<br>
+        Asymptotes: y − k = ±<span class="fr"><span class="n">b</span><span class="d">a</span></span>(x − h)
+      </div>
+      <div class="fbox orange">
+        <div class="flabel">Vertical Hyperbola (y-term first, minus after)</div>
+        <span class="fr"><span class="n">(y−k)²</span><span class="d">b²</span></span> − <span class="fr"><span class="n">(x−h)²</span><span class="d">a²</span></span> = 1<br><br>
+        Opens UP and DOWN<br>
+        Vertices: (h, k±b) &nbsp;&nbsp;← on the y-axis direction<br>
+        Asymptotes: y − k = ±<span class="fr"><span class="n">b</span><span class="d">a</span></span>(x − h)
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Which way does it open?</strong> The positive term tells you. If (x−h)² is positive → opens horizontally (left-right). If (y−k)² is positive → opens vertically (up-down). Think: the branches open toward the positive term.</span>
+      </div>
+    </div>
+
+    <!-- Hyperbola diagram -->
+    <div class="graph-wrap">
+      <svg viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace">
+        <line x1="20" y1="120" x2="420" y2="120" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+        <line x1="220" y1="10" x2="220" y2="230" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+        <!-- Asymptotes: slope ±b/a = ±0.75 through center (220,120) -->
+        <!-- y = ±0.75(x-220)+120 -->
+        <line x1="20" y1="270" x2="420" y2="-30" stroke="rgba(248,113,113,0.25)" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <line x1="20" y1="-30" x2="420" y2="270" stroke="rgba(248,113,113,0.25)" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <!-- Right branch of hyperbola: x from 290 to 420 -->
+        <path d="M420,10 C380,50 350,80 320,105 C305,115 295,118 285,120 C295,122 305,125 320,135 C350,160 380,190 420,230" fill="none" stroke="#f87171" stroke-width="2.5"/>
+        <!-- Left branch: x from 20 to 150 -->
+        <path d="M20,10 C60,50 90,80 120,105 C135,115 145,118 155,120 C145,122 135,125 120,135 C90,160 60,190 20,230" fill="none" stroke="#f87171" stroke-width="2.5"/>
+        <!-- Center -->
+        <circle cx="220" cy="120" r="3" fill="var(--purple)"/>
+        <text x="224" y="118" fill="var(--purple)" font-size="10">(h, k)</text>
+        <!-- Vertices -->
+        <circle cx="295" cy="120" r="4" fill="var(--red)"/>
+        <text x="298" y="117" fill="var(--red)" font-size="10">(h+a, k)</text>
+        <circle cx="145" cy="120" r="4" fill="var(--red)"/>
+        <text x="80" y="117" fill="var(--red)" font-size="10">(h−a, k)</text>
+        <!-- a label -->
+        <line x1="220" y1="130" x2="295" y2="130" stroke="rgba(248,113,113,0.5)" stroke-width="1.5"/>
+        <text x="245" y="142" fill="rgba(248,113,113,0.7)" font-size="10">a</text>
+        <!-- asymptote label -->
+        <text x="330" y="40" fill="rgba(248,113,113,0.5)" font-size="10">y−k=±(b/a)(x−h)</text>
+        <!-- note -->
+        <text x="22" y="18" fill="rgba(255,255,255,0.3)" font-size="9">Horizontal hyperbola: opens left and right. Branches never cross asymptotes.</text>
+      </svg>
+      <div class="g-caption">Horizontal hyperbola centered at (h,k). Vertices at (h±a, k). Asymptotes (red dashed) pass through center with slope ±b/a. Branches open outward and approach but never touch the asymptotes.</div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Complete Hyperbola Feature List</div>
+      <table class="dtable">
+        <thead><tr><th>Feature</th><th>Horizontal: (x−h)²/a² − (y−k)²/b² = 1</th><th>Vertical: (y−k)²/b² − (x−h)²/a² = 1</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--red);font-weight:500;">Center</td><td style="color:var(--tx2);font-weight:300;">(h, k)</td><td style="color:var(--tx2);font-weight:300;">(h, k)</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Opens</td><td style="color:var(--tx2);font-weight:300;">Left and Right</td><td style="color:var(--tx2);font-weight:300;">Up and Down</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Vertices</td><td style="color:var(--tx2);font-weight:300;">(h±a, k)</td><td style="color:var(--tx2);font-weight:300;">(h, k±b)</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Asymptotes</td><td style="color:var(--tx2);font-weight:300;">y−k = ±(b/a)(x−h)</td><td style="color:var(--tx2);font-weight:300;">y−k = ±(b/a)(x−h)</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Domain</td><td style="color:var(--tx2);font-weight:300;">x≤h−a or x≥h+a</td><td style="color:var(--tx2);font-weight:300;">All reals</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Range</td><td style="color:var(--tx2);font-weight:300;">All reals</td><td style="color:var(--tx2);font-weight:300;">y≤k−b or y≥k+b</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>The Q20 error pattern:</strong> Students confuse which direction the hyperbola opens — they see a²=9 and b²=16 and guess the larger denominator tells direction. For hyperbolas, it's the POSITIVE term that determines direction. (x−h)²/a² positive → opens left-right. (y−k)²/b² positive → opens up-down. The size of a² vs b² tells you the asymptote slope, not the orientation.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Hyperbolas</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'hyp','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'hyp','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'hyp','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="hyp-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q20 Type (Hyperbola Graphs)</div>Identify all features of: <span class="fr"><span class="n">(y+1)²</span><span class="d">25</span></span> − <span class="fr"><span class="n">(x−3)²</span><span class="d">9</span></span> = 1<br><br>Then sketch a description of the graph.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Identify orientation — which term is positive?</div><div class="gs-content">(y+1)² is positive (first term) → <strong>vertical hyperbola</strong> → opens UP and DOWN</div><div class="gs-why">→ The positive squared term tells you the direction of opening.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">Center, a, b</div><div class="gs-content">Center: (h,k) = (3, −1) (from x−3 and y+1)<br>b² = 25 → b = 5 (under the y-term, vertical)<br>a² = 9 → a = 3 (under the x-term, horizontal)</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">Vertices — on the y-direction (vertical opens up/down)</div><div class="gs-content">Vertices: (h, k±b) = (3, −1±5) → <strong>(3, 4) and (3, −6)</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">Asymptotes</div><div class="gs-content">y − k = ±(b/a)(x − h) = ±(5/3)(x−3) − 1<br>y + 1 = ±(5/3)(x−3)<br><strong>y = (5/3)(x−3) − 1 &nbsp; and &nbsp; y = −(5/3)(x−3) − 1</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">5</div><div class="gs-body"><div class="gs-label">Graph description</div><div class="gs-content">Center at (3,−1). Upper branch opens upward from vertex (3,4). Lower branch opens downward from vertex (3,−6). Both branches approach the asymptotes but never touch them.</div></div></div>
+        </div>
+        <div class="pane" id="hyp-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>An equation is given: <span class="fr"><span class="n">(x+4)²</span><span class="d">16</span></span> − <span class="fr"><span class="n">(y−2)²</span><span class="d">9</span></span> = 1<br><br>(a) State center, orientation, and vertices.<br>(b) Write the asymptote equations.<br>(c) State domain and range.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) x-term is positive → horizontal. Center from (x+4) and (y−2). a²=16, b²=9.</div><input class="s-input" type="text" placeholder="Center: ( , ). Opens: left/right. a=..., b=.... Vertices: (h±a, k) = ( , ) and ( , )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) Asymptotes: y−k = ±(b/a)(x−h). Substitute h, k, a, b.</div><input class="s-input" type="text" placeholder="y−2 = ±(b/a)(x+4) → y = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Horizontal → domain has gaps, range is all reals</div><input class="s-input" type="text" placeholder="Domain: x ≤ h−a or x ≥ h+a = ... Range: all reals"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) x-term positive → horizontal. Center: (−4, 2). a=4, b=3.<br>Vertices: (−4±4, 2) → <strong>(0, 2) and (−8, 2)</strong><br><br>(b) y−2 = ±(3/4)(x+4)<br><strong>y = (3/4)x+5 and y = −(3/4)x−1</strong><br><br>(c) Domain: x≤−8 or x≥0. Range: all reals.</div>
+        </div>
+        <div class="pane" id="hyp-v3">
+          <div class="problem-box"><div class="p-label">Blind — Identify the Conic</div>Identify each equation as ellipse or hyperbola, state orientation, and find all vertices:<br><br>(a) 9x² − 4y² = 36 &nbsp;&nbsp; (b) 4x² + 9y² = 36 &nbsp;&nbsp; (c) (y−3)²/49 − (x+1)²/25 = 1</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) 9x²−4y²=36 → divide by 36: x²/4−y²/9=1<br><strong>Hyperbola</strong>, horizontal (x-term positive). a²=4→a=2, b²=9→b=3. Center (0,0). Vertices: <strong>(2,0) and (−2,0)</strong>. Asymptotes: y=±(3/2)x.<br><br>(b) 4x²+9y²=36 → x²/9+y²/4=1<br><strong>Ellipse</strong>, horizontal (a²=9&gt;b²=4). Center (0,0). Vertices: <strong>(3,0) and (−3,0)</strong>. Co-vertices: (0,2) and (0,−2).<br><br>(c) (y−3)²/49−(x+1)²/25=1<br><strong>Hyperbola</strong>, vertical (y-term positive). Center (−1,3). b=7, a=5. Vertices: (−1,3±7) = <strong>(−1,10) and (−1,−4)</strong>. Asymptotes: y−3=±(7/5)(x+1).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       4C.3 · PARAMETRIC CONICS
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">4C.3</span>
+      <h2 class="topic-title">Parametric Conics — Ellipses &amp; Hyperbolas</h2>
+      <span class="topic-sub">Topic 4.7 · Q22–Q24</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Parametric Forms for Each Conic</div>
+      <div class="fbox">
+        <div class="flabel">Parametric Ellipse</div>
+        x(t) = a·cos(t) + h &nbsp;&nbsp;&nbsp; y(t) = b·sin(t) + k<br>
+        Traces the ellipse <span class="fr"><span class="n">(x−h)²</span><span class="d">a²</span></span> + <span class="fr"><span class="n">(y−k)²</span><span class="d">b²</span></span> = 1<br><br>
+        <span style="color:var(--tx3);font-size:12px">Uses cos²t + sin²t = 1 to eliminate t.</span>
+      </div>
+      <div class="fbox red">
+        <div class="flabel">Parametric Hyperbola — The Q23 Miss</div>
+        <strong>Horizontal hyperbola:</strong><br>
+        x(t) = a·sec(t) + h &nbsp;&nbsp; y(t) = b·tan(t) + k<br>
+        OR: x(t) = a·cosh(t) + h, y(t) = b·sinh(t) + k (less common in AP Precalc)<br><br>
+        Uses identity: sec²t − tan²t = 1 → (x−h)²/a² − (y−k)²/b² = 1<br><br>
+        <strong>Vertical hyperbola:</strong><br>
+        x(t) = a·tan(t) + h &nbsp;&nbsp; y(t) = b·sec(t) + k<br>
+        Uses: sec²t − tan²t = 1 → (y−k)²/b² − (x−h)²/a² = 1
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>The Q23 miss:</strong> Students use cos/sin for a hyperbola (which gives an ellipse). A hyperbola uses <strong>sec and tan</strong> because the identity is sec²t − tan²t = 1 (with subtraction), not cos²t + sin²t = 1 (with addition). The sign of the identity matches the sign in the conic equation.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Converting Parametric → Rectangular for Conics</div>
+      <p>The elimination technique depends on which trig identity applies:</p>
+      <div class="fbox teal">
+        <div class="flabel">Elimination Strategy</div>
+        <strong>For ellipse</strong> (cos/sin): isolate cos and sin, then use cos²t + sin²t = 1<br><br>
+        <strong>For hyperbola</strong> (sec/tan): isolate sec and tan, then use sec²t − tan²t = 1<br><br>
+        Example: x(t) = 3sec(t), y(t) = 2tan(t)<br>
+        sec(t) = x/3, tan(t) = y/2<br>
+        sec²t − tan²t = 1: (x/3)² − (y/2)² = 1 → <span class="mteal">x²/9 − y²/4 = 1</span> (horizontal hyperbola)
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Parametric Conics</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'parcon','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'parcon','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'parcon','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="parcon-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q23 Type (Modeling a Hyperbola)</div>Write parametric equations for the hyperbola <span class="fr"><span class="n">(x−1)²</span><span class="d">16</span></span> − <span class="fr"><span class="n">(y+2)²</span><span class="d">9</span></span> = 1.<br><br>Then convert x(t) = 5tan(t), y(t) = 3sec(t) to rectangular form and identify the conic.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Parametric form for the given hyperbola</div><div class="gs-content">Horizontal hyperbola (x-term positive) → use sec for x, tan for y<br>a² = 16 → a = 4. b² = 9 → b = 3. h=1, k=−2.<br><strong>x(t) = 4sec(t) + 1, &nbsp; y(t) = 3tan(t) − 2</strong></div><div class="gs-why">→ Verify: sec²t−tan²t=1 gives ((x−1)/4)²−((y+2)/3)²=1 ✓</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">Convert x=5tan(t), y=3sec(t) to rectangular</div><div class="gs-content">tan(t) = x/5, sec(t) = y/3<br>Use sec²t − tan²t = 1: (y/3)² − (x/5)² = 1<br><strong>y²/9 − x²/25 = 1</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">Identify the conic</div><div class="gs-content">y-term is positive (y²/9) → <strong>vertical hyperbola</strong>. Center (0,0), b=3 (vertical), a=5 (horizontal). Vertices: (0, ±3).</div></div></div>
+        </div>
+        <div class="pane" id="parcon-v2">
+          <div class="problem-box"><div class="p-label">Problem — Q22 Type (Rewriting as Implicit)</div>x(t) = 4cos(t) − 1, y(t) = 2sin(t) + 3. Rewrite as an implicit rectangular equation and identify the shape.</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Isolate cos(t) and sin(t)</div><input class="s-input" type="text" placeholder="cos(t) = (x+1)/4 , sin(t) = (y−3)/2"/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — Apply the identity cos²t + sin²t = 1</div><input class="s-input" type="text" placeholder="((x+1)/4)² + ((y−3)/2)² = 1 → simplify..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — Identify: is a²=b²? If not, which is larger?</div><input class="s-input" type="text" placeholder="a² = 16, b² = 4. a≠b → shape is ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">cos(t)=(x+1)/4, sin(t)=(y−3)/2<br>((x+1)/4)²+((y−3)/2)²=1<br><strong>(x+1)²/16 + (y−3)²/4 = 1</strong><br><br>a²=16&gt;b²=4 → <strong>horizontal ellipse</strong>. Center (−1,3). Semi-major a=4 (horizontal). Semi-minor b=2 (vertical).</div>
+        </div>
+        <div class="pane" id="parcon-v3">
+          <div class="problem-box"><div class="p-label">Blind — Q24 Type (Hyperbola from Graph)</div>A graph shows a hyperbola with vertices at (−3, 0) and (3, 0) and asymptotes y = ±(4/3)x.<br><br>(a) Write the rectangular equation.<br>(b) Write parametric equations for this hyperbola.<br>(c) Which parametric form would produce an ellipse with the same a and b? Write it.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Vertices (±3,0) on x-axis → horizontal hyperbola, center (0,0), a=3. Asymptotes y=±(b/a)x=±(4/3)x → b/a=4/3 → b=4.<br><strong>x²/9 − y²/16 = 1</strong><br><br>(b) Horizontal hyperbola → sec for x, tan for y:<br><strong>x(t) = 3sec(t), y(t) = 4tan(t)</strong><br>Verify: (3sec(t)/3)² − (4tan(t)/4)² = sec²t − tan²t = 1 ✓<br><br>(c) Same a=3, b=4, use cos/sin (+ identity → ellipse):<br><strong>x(t) = 3cos(t), y(t) = 4sin(t)</strong><br>This traces x²/9 + y²/16 = 1 (ellipse, same a and b, different shape).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 4C — Conics</div>
+    <table class="dtable">
+      <thead><tr><th>Conic</th><th>Equation</th><th>Key Features</th><th>Parametric Form</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--blue);font-weight:500;">Ellipse (horiz)</td><td style="color:var(--tx2);font-weight:300;">(x−h)²/a² + (y−k)²/b² = 1, a&gt;b</td><td style="color:var(--tx3);font-weight:300;">Vertices (h±a,k). Co-vert (h,k±b).</td><td style="color:var(--tx3);font-weight:300;">x=a·cos(t)+h, y=b·sin(t)+k</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Ellipse (vert)</td><td style="color:var(--tx2);font-weight:300;">(x−h)²/a² + (y−k)²/b² = 1, b&gt;a</td><td style="color:var(--tx3);font-weight:300;">Vertices (h,k±b). Co-vert (h±a,k).</td><td style="color:var(--tx3);font-weight:300;">x=a·cos(t)+h, y=b·sin(t)+k</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Hyperbola (horiz)</td><td style="color:var(--tx2);font-weight:300;">(x−h)²/a² − (y−k)²/b² = 1</td><td style="color:var(--tx3);font-weight:300;">Vertices (h±a,k). Asymptotes ±(b/a).</td><td style="color:var(--tx3);font-weight:300;">x=a·sec(t)+h, y=b·tan(t)+k</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Hyperbola (vert)</td><td style="color:var(--tx2);font-weight:300;">(y−k)²/b² − (x−h)²/a² = 1</td><td style="color:var(--tx3);font-weight:300;">Vertices (h,k±b). Asymptotes ±(b/a).</td><td style="color:var(--tx3);font-weight:300;">x=a·tan(t)+h, y=b·sec(t)+k</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Ellipse identity</td><td style="color:var(--tx2);font-weight:300;">cos²t + sin²t = 1</td><td style="color:var(--tx3);font-weight:300;">Addition → closed curve</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Hyperbola identity</td><td style="color:var(--tx2);font-weight:300;">sec²t − tan²t = 1</td><td style="color:var(--tx3);font-weight:300;">Subtraction → open branches</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;padding:12px 14px;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:8px;font-size:12px;color:var(--tx2);font-weight:300;">
+      <strong style="color:var(--red);">The one-symbol difference:</strong> Ellipse uses + between terms (bounded, closed). Hyperbola uses − between terms (unbounded, two branches). The positive term in a hyperbola tells you which direction it opens.
+    </div>
+  </div>
+
+  <!-- COMPLETION BADGE -->
+  <div class="complete-badge">
+    <div class="cb-icon">🎓</div>
+    <div class="cb-title">AP Pre-Calculus Guide Complete</div>
+    <div class="cb-sub">All 12 sections built from your actual class data. Every concept from every unit — weighted by what your class actually misses. You've covered the entire course. Now go earn those 5s.</div>
+    <a href="precalc-landing.html" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--purple);text-decoration:none;padding:10px 24px;border-radius:8px;border:1px solid rgba(192,132,252,0.3);background:rgba(192,132,252,0.06);transition:all 0.2s;" onmouseover="this.style.background='rgba(192,132,252,0.14)'" onmouseout="this.style.background='rgba(192,132,252,0.06)'">
+      ← Back to All Sections
+    </a>
+  </div>
+
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s4c-conics.html -->
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

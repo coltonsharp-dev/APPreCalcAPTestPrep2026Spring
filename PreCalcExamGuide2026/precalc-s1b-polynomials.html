@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 1B · Polynomial Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#38bdf8;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(56,189,248,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(56,189,248,0.06) 0%,rgba(192,132,252,0.025) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-unit{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.28);color:var(--blue);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);color:var(--blue);}
+  .sec-code{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.green{border-left-color:var(--green);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.purple{border-left-color:var(--purple);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* END BEHAVIOR GRID */
+  .endbeh-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .eb-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px;text-align:center;}
+  .eb-card .eb-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;font-weight:500;color:var(--tx3);}
+  .eb-card svg{display:block;margin:0 auto 10px;}
+  .eb-card .eb-rule{font-size:12px;font-weight:400;color:var(--gold);margin-bottom:4px;}
+  .eb-card .eb-desc{font-size:11px;font-weight:300;color:var(--tx3);line-height:1.6;}
+
+  /* MULTIPLICITY TABLE */
+  .mult-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0;}
+  .mult-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px;text-align:center;}
+  .mult-card .mc-num{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;margin-bottom:6px;}
+  .mult-card .mc-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .mult-card svg{display:block;margin:0 auto 8px;}
+  .mult-card .mc-desc{font-size:11px;font-weight:300;color:var(--tx2);line-height:1.6;}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);color:var(--blue);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+
+  .graph-wrap{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px;margin-bottom:14px;}
+  .graph-wrap svg{display:block;max-width:100%;margin:0 auto;}
+  .graph-wrap .g-caption{font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;}
+
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.25);color:var(--blue);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(56,189,248,0.16);border-color:var(--blue);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--blue),var(--purple));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.endbeh-grid{grid-template-columns:1fr 1fr;}.mult-grid{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Unit 1</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 1B</span>
+  </div>
+  <span class="nav-badge">Polynomial Functions</span>
+</nav>
+
+<div class="page">
+
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 01 · Topics 1.4–1.6</span>
+      <span class="sec-code">Section 1B</span>
+    </div>
+    <h1 class="sec-title">Polynomial<br><span>Functions</span></h1>
+    <p class="sec-desc">Zeros and multiplicities, local and global extrema, inflection points, concavity of polynomials, end behavior from degree and leading coefficient, and even vs odd functions — all the graph-reading skills the AP tests most.</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data</div>
+    <strong>Points of Inflection (Practice Exam Q2)</strong> had a 4-wrong/5-right split — your class struggles most here. <strong>Extrema identification</strong> and <strong>end behavior described in words</strong> also showed consistent misses. This section prioritizes those three in that order.
+  </div>
+
+  <!-- ══════════════════════
+       1B.1 · EXTREMA & INFLECTION POINTS
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">1B.1</span>
+      <h2 class="topic-title">Extrema &amp; Points of Inflection</h2>
+      <span class="topic-sub">Topic 1.4 · 🔥 Biggest Miss</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Local Extrema — Definitions</div>
+      <p>A <strong>local (relative) maximum</strong> is a point where the function value is greater than all nearby points. The graph has a "peak" there — it's increasing before and decreasing after.</p>
+      <p>A <strong>local (relative) minimum</strong> is a point where the function value is less than all nearby points. The graph has a "valley" there — it's decreasing before and increasing after.</p>
+      <div class="fbox">
+        <div class="flabel">How to Identify from a Graph</div>
+        Local MAX → function changes from <span class="mgreen">increasing</span> to <span class="mred">decreasing</span> (a peak ∧)<br>
+        Local MIN → function changes from <span class="mred">decreasing</span> to <span class="mgreen">increasing</span> (a valley ∨)<br><br>
+        <span style="color:var(--tx3);font-size:12px">State local extrema as a point (x, y) or just the x-value depending on what the question asks.</span>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>Local ≠ Global (Absolute).</strong> A local max is the highest point in its neighborhood. The global (absolute) maximum is the highest point on the entire domain. A polynomial can have multiple local maxima but only one global maximum (if bounded).</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Points of Inflection — The Most Missed Concept</div>
+      <p>A <strong>point of inflection</strong> is where the graph changes concavity — from concave up to concave down, or from concave down to concave up. It is NOT a maximum or minimum. It is where the <em>rate of change</em> switches from increasing to decreasing or vice versa.</p>
+      <div class="fbox red">
+        <div class="flabel">Point of Inflection — Definition</div>
+        A point where concavity changes (∪ to ∩, or ∩ to ∪).<br><br>
+        At a point of inflection: the function goes from "speeding up" to "slowing down" (or vice versa).<br><br>
+        <span class="mred">It is NOT a local max or min.</span> The function can be increasing through an inflection point, decreasing through one, or have a flat tangent — but it doesn't change direction of increase/decrease.
+      </div>
+
+      <!-- Inflection point SVG diagram -->
+      <div class="graph-wrap">
+        <svg viewBox="0 0 440 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace">
+          <!-- axes -->
+          <line x1="30" y1="155" x2="420" y2="155" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <line x1="30" y1="10" x2="30" y2="160" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <!-- cubic curve with inflection around x=220 -->
+          <path d="M50,140 C80,135 120,115 160,95 C200,75 220,65 260,50 C300,35 340,25 390,15" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <!-- local max around x=120 — wait let me do a better polynomial -->
+          <!-- Actually draw: increases concave down, then inflection, then increases concave up -->
+          <!-- Clear S-curve: concave down left half, concave up right half, inflection in middle -->
+          <!-- Redraw: -->
+          <path d="M50,145 C90,140 140,120 180,85 C220,48 260,28 320,18 C360,12 390,10 410,8" fill="none" stroke="none"/>
+          <!-- Better: f(x)=x^3 style centered -->
+          <path d="M60,150 C100,148 130,135 160,110 C185,90 210,75 225,65 C240,55 265,40 300,25 C330,14 370,8 400,5" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <!-- inflection point at x=225 approx -->
+          <circle cx="225" cy="65" r="5" fill="#f5c842"/>
+          <!-- concave down label left side -->
+          <text x="70" y="100" fill="rgba(248,113,113,0.8)" font-size="10">Concave down ∩</text>
+          <text x="70" y="113" fill="rgba(248,113,113,0.7)" font-size="9">rate of change decreasing</text>
+          <!-- concave up label right side -->
+          <text x="270" y="32" fill="rgba(62,255,160,0.8)" font-size="10">Concave up ∪</text>
+          <text x="270" y="45" fill="rgba(62,255,160,0.7)" font-size="9">rate of change increasing</text>
+          <!-- inflection label -->
+          <line x1="225" y1="65" x2="225" y2="155" stroke="rgba(245,200,66,0.3)" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="228" y="148" fill="rgba(245,200,66,0.8)" font-size="10">inflection</text>
+          <text x="228" y="160" fill="rgba(245,200,66,0.7)" font-size="9">point</text>
+          <!-- arrow annotation -->
+          <text x="35" y="15" fill="rgba(56,189,248,0.6)" font-size="9">Function increases throughout — but concavity flips at the inflection point</text>
+        </svg>
+        <div class="g-caption">The inflection point (gold dot) is where concavity switches. The function is increasing the entire time — the inflection point does NOT mark a direction change, only a concavity change.</div>
+      </div>
+
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Most common error on your exam data:</strong> Students identify a point of inflection as a local maximum or minimum. They see the curve "changing shape" and mark it as an extremum. Remember — inflection = concavity change only. Extremum = direction change (increase to decrease or vice versa).</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Reading a Polynomial Graph — What Every Feature Tells You</div>
+      <table class="dtable">
+        <thead><tr><th>Graph Feature</th><th>Mathematical Name</th><th>What Changed</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--gold);font-weight:500;">Peak ∧ (goes up then down)</td><td style="color:var(--tx2);font-weight:300;">Local Maximum</td><td style="color:var(--tx3);font-weight:300;">Increasing → Decreasing</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">Valley ∨ (goes down then up)</td><td style="color:var(--tx2);font-weight:300;">Local Minimum</td><td style="color:var(--tx3);font-weight:300;">Decreasing → Increasing</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">S-curve bend (still same direction)</td><td style="color:var(--tx2);font-weight:300;">Point of Inflection</td><td style="color:var(--tx3);font-weight:300;">Concavity (∪↔∩)</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">Flat section with upward arms</td><td style="color:var(--tx2);font-weight:300;">Concave up region</td><td style="color:var(--tx3);font-weight:300;">Rate of change increasing</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">Arched section</td><td style="color:var(--tx2);font-weight:300;">Concave down region</td><td style="color:var(--tx3);font-weight:300;">Rate of change decreasing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Extrema &amp; Inflection Points</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'ext','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'ext','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'ext','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="ext-v1">
+          <div class="problem-box"><div class="p-label">Problem — AP Style (Practice Exam Q2 Type)</div>A polynomial function f has exactly two local maxima, one local minimum, and one point of inflection on the interval shown.<br><br>The graph shows: f rises to a peak at (1, 6), drops to a valley at (3, 2), rises to a second peak at (5, 8), then descends. The graph has an S-bend between x=2 and x=4 where concavity switches.<br><br>Identify: (a) all local maxima with x-values, (b) the local minimum, (c) the approximate location of any inflection points, (d) the global maximum on the visible portion.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Local maxima — where does f change from increasing to decreasing?</div><div class="gs-content">At (1, 6): f increases before x=1 and decreases after → <strong>local max at x = 1, value 6</strong><br>At (5, 8): f increases before x=5 and decreases after → <strong>local max at x = 5, value 8</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Local minimum — where does f change from decreasing to increasing?</div><div class="gs-content">At (3, 2): f decreases before x=3 and increases after → <strong>local min at x = 3, value 2</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Inflection point — where does concavity switch?</div><div class="gs-content">The S-bend between x=2 and x=4 shows concavity changing. The inflection point is approximately at <strong>x ≈ 3</strong> (in the S-curve region between the peaks and valley).<br><br>Note: the inflection point is NOT at the local max or min — it's where the <em>bending direction</em> of the curve switches.</div><div class="gs-why">→ Key: inflection points often appear between a local max and local min on a polynomial, but they are at a different x-value than the extrema.</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) Global maximum on visible portion</div><div class="gs-content">Compare all local max values: 6 vs 8. The <strong>global maximum is at x=5 with value 8</strong> — it's the largest y-value among all local maxima.</div></div></div>
+        </div>
+        <div class="pane" id="ext-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>The graph of f shows: starts low, rises steeply, curves over a peak at (2, 10), decreases through an S-bend around x=4, reaches a valley at (6, 1), then rises again. The concavity changes from concave down to concave up somewhere between x=3 and x=5.<br><br>(a) Where is the local maximum? (b) Where is the local minimum? (c) Where is the inflection point (approximate)? (d) Is the inflection point a local max, local min, or neither?</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Local max: where does the graph peak (change from increasing to decreasing)?</div><input class="s-input" type="text" placeholder="Local max at x = ..., f( ) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) Local min: where does the graph valley (change from decreasing to increasing)?</div><input class="s-input" type="text" placeholder="Local min at x = ..., f( ) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Inflection point: where does concavity switch? (between x=3 and x=5)</div><input class="s-input" type="text" placeholder="Inflection point at approximately x = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(d) Is the inflection point a local extremum? Why or why not?</div><input class="s-input" type="text" placeholder="It is neither a max nor min because ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Local max at <strong>x = 2, f(2) = 10</strong> (function increases before x=2, decreases after)<br>(b) Local min at <strong>x = 6, f(6) = 1</strong> (function decreases before x=6, increases after)<br>(c) Inflection point at approximately <strong>x ≈ 4</strong> (middle of the S-bend where concavity flips from ∩ to ∪)<br>(d) <strong>Neither.</strong> At the inflection point, the function is still decreasing — it has not changed direction. An extremum requires a change from increasing to decreasing or vice versa. The inflection point only changes <em>how</em> it's decreasing (from fast-then-slow to slow-then-fast).</div>
+        </div>
+        <div class="pane" id="ext-v3">
+          <div class="problem-box"><div class="p-label">Blind — Vocabulary Precision</div>A student looking at a cubic polynomial graph says: "The curve bends at x=2, so x=2 must be a local maximum." <br><br>(a) What error is the student making?<br>(b) What is x=2 actually called if the curve just bends (changes concavity) there?<br>(c) Write the conditions that would make x=2 a local maximum instead.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) The student is confusing a <strong>change in concavity</strong> with a <strong>change in direction</strong>. "The curve bends" means concavity changes — not that the function switched from increasing to decreasing.<br><br>(b) If the curve only changes concavity at x=2 (bends but keeps going the same direction), x=2 is a <strong>point of inflection</strong>.<br><br>(c) For x=2 to be a local maximum: the function must be <strong>increasing for x &lt; 2 and decreasing for x &gt; 2</strong> — the curve must peak and reverse direction. Just bending without reversing is an inflection point, not a max.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       1B.2 · ZEROS & MULTIPLICITIES
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">1B.2</span>
+      <h2 class="topic-title">Zeros, Multiplicities &amp; Even/Odd Functions</h2>
+      <span class="topic-sub">Topic 1.5</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Zeros of a Polynomial</div>
+      <p>A <strong>zero</strong> (root, x-intercept) of a polynomial f is a value x = c where f(c) = 0. For a polynomial in factored form f(x) = a(x − c₁)ⁿ¹(x − c₂)ⁿ²···, each factor gives a zero.</p>
+      <div class="fbox">
+        <div class="flabel">From Factored Form to Zeros</div>
+        f(x) = 2(x − 3)²(x + 1)(x − 5)<br><br>
+        Zeros: <span class="mblue">x = 3</span> (from x−3=0), <span class="mblue">x = −1</span> (from x+1=0), <span class="mblue">x = 5</span> (from x−5=0)<br><br>
+        Degree: 2 + 1 + 1 = <span class="mgreen">4</span> (sum of all exponents)
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Multiplicity — How the Graph Behaves at Each Zero</div>
+      <p>The <strong>multiplicity</strong> of a zero is the exponent on its factor. It controls what the graph does when it reaches that x-intercept.</p>
+      <div class="mult-grid">
+        <div class="mult-card">
+          <div class="mc-num" style="color:var(--blue);">1</div>
+          <div class="mc-label">Odd (1, 3, 5...)</div>
+          <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="30" x2="70" y2="30" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <path d="M10,50 Q40,30 70,10" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            <circle cx="40" cy="30" r="3" fill="#38bdf8"/>
+          </svg>
+          <div class="mc-desc">Graph <strong>crosses</strong> the x-axis — goes through it from one side to the other.</div>
+        </div>
+        <div class="mult-card">
+          <div class="mc-num" style="color:var(--gold);">2</div>
+          <div class="mc-label">Even (2, 4, 6...)</div>
+          <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="40" x2="70" y2="40" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <path d="M10,10 Q40,50 70,10" fill="none" stroke="#f5c842" stroke-width="2"/>
+            <circle cx="40" cy="40" r="3" fill="#f5c842"/>
+          </svg>
+          <div class="mc-desc">Graph <strong>touches</strong> (bounces off) the x-axis — stays on the same side.</div>
+        </div>
+        <div class="mult-card">
+          <div class="mc-num" style="color:var(--purple);">3</div>
+          <div class="mc-label">Odd ≥ 3 (flattened)</div>
+          <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="30" x2="70" y2="30" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <path d="M10,52 Q30,32 40,30 Q50,28 70,8" fill="none" stroke="#c084fc" stroke-width="2"/>
+            <circle cx="40" cy="30" r="3" fill="#c084fc"/>
+          </svg>
+          <div class="mc-desc">Graph crosses but is <strong>flat/tangent</strong> at the axis — an S-curve through the zero.</div>
+        </div>
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Memory shortcut:</strong> Even multiplicity = even = bounce (like an even bounce). Odd multiplicity = odd = odd behavior = it pushes through. Higher odd (3,5) = flattens before crossing, like it's tired.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Even and Odd Functions</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:16px;">
+          <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;font-weight:500;">Even Function</div>
+          <div style="font-size:12px;font-weight:300;color:var(--tx2);line-height:1.8;">Symmetric about the <strong style="color:var(--tx);">y-axis</strong><br>f(−x) = f(x) for all x<br>Graph folds onto itself left-right<br><em>Examples: x², x⁴, cos x</em></div>
+        </div>
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:16px;">
+          <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;font-weight:500;">Odd Function</div>
+          <div style="font-size:12px;font-weight:300;color:var(--tx2);line-height:1.8;">Symmetric about the <strong style="color:var(--tx);">origin</strong><br>f(−x) = −f(x) for all x<br>Graph rotates 180° onto itself<br><em>Examples: x, x³, sin x</em></div>
+        </div>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>Even/Odd function ≠ even/odd degree.</strong> f(x) = x² + 1 is even (y-axis symmetry). f(x) = x² + x is neither even nor odd — it has even-degree terms mixed with odd-degree terms. To test: substitute −x and check if you get f(x) (even), −f(x) (odd), or neither.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Zeros, Multiplicities &amp; Symmetry</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'zeros','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'zeros','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'zeros','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="zeros-v1">
+          <div class="problem-box"><div class="p-label">Problem</div>f(x) = (x + 2)³(x − 1)²(x − 4)<br><br>(a) Find all zeros and their multiplicities.<br>(b) Describe graph behavior at each zero.<br>(c) What is the degree of f?<br>(d) Is this an even or odd function? Check algebraically.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Zeros and multiplicities</div><div class="gs-content">
+            x = −2 (from x+2=0), multiplicity <strong>3</strong> (odd)<br>
+            x = 1 (from x−1=0), multiplicity <strong>2</strong> (even)<br>
+            x = 4 (from x−4=0), multiplicity <strong>1</strong> (odd)
+          </div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Graph behavior at each zero</div><div class="gs-content">
+            At x = −2 (mult 3, odd): graph <strong>crosses with an S-flattening</strong> — passes through axis but is tangent-flat there<br>
+            At x = 1 (mult 2, even): graph <strong>touches (bounces)</strong> — touches the x-axis and turns back<br>
+            At x = 4 (mult 1, odd): graph <strong>crosses cleanly</strong> — straight through the axis
+          </div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Degree</div><div class="gs-content">3 + 2 + 1 = <strong>degree 6</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) Even/odd — substitute −x</div><div class="gs-content">f(−x) = (−x+2)³(−x−1)²(−x−4) — this is neither equal to f(x) nor −f(x).<br><strong>f is neither even nor odd.</strong></div></div></div>
+        </div>
+        <div class="pane" id="zeros-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>A graph shows a polynomial that crosses the x-axis at x=−3 (cleanly), bounces at x=1, and crosses with an S-shape at x=5. Write the simplest possible factored form for f(x).</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — What multiplicity does each zero have?<br>Crosses cleanly = mult ?, Bounces = mult ?, S-shape cross = mult ?</div><input class="s-input" type="text" placeholder="x=−3: mult ... , x=1: mult ... , x=5: mult ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — Write the factored form using the simplest possible multiplicities</div><input class="s-input" type="text" placeholder="f(x) = a(x + 3)^( )(x − 1)^( )(x − 5)^( )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — What is the minimum degree of this polynomial?</div><input class="s-input" type="text" placeholder="Min degree = ... + ... + ... = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Crosses cleanly → mult 1 (odd). Bounces → mult 2 (even). S-shape cross → mult 3 (odd).<br><br><strong>f(x) = a(x + 3)¹(x − 1)²(x − 5)³</strong><br><br>Minimum degree = 1 + 2 + 3 = <strong>6</strong></div>
+        </div>
+        <div class="pane" id="zeros-v3">
+          <div class="problem-box"><div class="p-label">Blind — Even/Odd Test</div>Determine algebraically whether each function is even, odd, or neither:<br><br>(a) f(x) = x⁴ − 3x² + 7 &nbsp;&nbsp; (b) g(x) = x³ + 2x &nbsp;&nbsp; (c) h(x) = x³ + x² − 1</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) f(−x) = (−x)⁴−3(−x)²+7 = x⁴−3x²+7 = f(x) → <strong>EVEN</strong> (y-axis symmetry)<br><br>(b) g(−x) = (−x)³+2(−x) = −x³−2x = −(x³+2x) = −g(x) → <strong>ODD</strong> (origin symmetry)<br><br>(c) h(−x) = (−x)³+(−x)²−1 = −x³+x²−1. This ≠ h(x) and ≠ −h(x) → <strong>NEITHER</strong><br><br>Key: for even, all terms must have even exponents. For odd, all terms must have odd exponents. Any mix → neither.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       1B.3 · END BEHAVIOR
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">1B.3</span>
+      <h2 class="topic-title">End Behavior</h2>
+      <span class="topic-sub">Topic 1.6 · Described in Words</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Four End Behavior Cases</div>
+      <p>End behavior describes what happens to f(x) as x → +∞ and as x → −∞. It is determined by the <strong>degree</strong> and the <strong>sign of the leading coefficient</strong> only. Everything else is irrelevant for end behavior.</p>
+    </div>
+
+    <div class="endbeh-grid">
+      <div class="eb-card">
+        <div class="eb-label">Even Degree · Positive Leading Coeff</div>
+        <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,60 Q30,65 60,20 Q90,65 110,60" fill="none" stroke="#3effa0" stroke-width="2.5"/>
+          <text x="2" y="20" fill="rgba(62,255,160,0.6)" font-size="11" font-family="DM Mono">↑</text>
+          <text x="107" y="20" fill="rgba(62,255,160,0.6)" font-size="11" font-family="DM Mono">↑</text>
+        </svg>
+        <div class="eb-rule">Up on both ends ↑↑</div>
+        <div class="eb-desc">As x→±∞, f(x)→+∞<br>Example: f(x) = 2x⁴ − x + 1</div>
+      </div>
+      <div class="eb-card">
+        <div class="eb-label">Even Degree · Negative Leading Coeff</div>
+        <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,10 Q30,5 60,50 Q90,5 110,10" fill="none" stroke="#f87171" stroke-width="2.5"/>
+          <text x="2" y="60" fill="rgba(248,113,113,0.6)" font-size="11" font-family="DM Mono">↓</text>
+          <text x="107" y="60" fill="rgba(248,113,113,0.6)" font-size="11" font-family="DM Mono">↓</text>
+        </svg>
+        <div class="eb-rule">Down on both ends ↓↓</div>
+        <div class="eb-desc">As x→±∞, f(x)→−∞<br>Example: f(x) = −3x² + 5</div>
+      </div>
+      <div class="eb-card">
+        <div class="eb-label">Odd Degree · Positive Leading Coeff</div>
+        <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,65 Q40,50 60,35 Q80,20 110,5" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <text x="2" y="60" fill="rgba(248,113,113,0.6)" font-size="11" font-family="DM Mono">↓</text>
+          <text x="107" y="20" fill="rgba(62,255,160,0.6)" font-size="11" font-family="DM Mono">↑</text>
+        </svg>
+        <div class="eb-rule">Down left, Up right ↓↑</div>
+        <div class="eb-desc">x→−∞: f→−∞ &nbsp; x→+∞: f→+∞<br>Example: f(x) = x³ − 2x</div>
+      </div>
+      <div class="eb-card">
+        <div class="eb-label">Odd Degree · Negative Leading Coeff</div>
+        <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,5 Q40,20 60,35 Q80,50 110,65" fill="none" stroke="#c084fc" stroke-width="2.5"/>
+          <text x="2" y="20" fill="rgba(62,255,160,0.6)" font-size="11" font-family="DM Mono">↑</text>
+          <text x="107" y="60" fill="rgba(248,113,113,0.6)" font-size="11" font-family="DM Mono">↓</text>
+        </svg>
+        <div class="eb-rule">Up left, Down right ↑↓</div>
+        <div class="eb-desc">x→−∞: f→+∞ &nbsp; x→+∞: f→−∞<br>Example: f(x) = −x³ + x</div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The AP Exam Verbal Form — This Is What Gets Missed</div>
+      <p>The AP doesn't just ask for arrows. It asks you to <strong>describe end behavior in words</strong> or match verbal descriptions to equations. Here's the exact language structure:</p>
+      <div class="fbox gold">
+        <div class="flabel">Verbal Template — Fill in the Blanks</div>
+        "As x increases without bound, f(x) <span class="m">[increases / decreases]</span> without bound."<br>
+        "As x decreases without bound, f(x) <span class="m">[increases / decreases]</span> without bound."<br><br>
+        For f(x) = −2x³ + 5x:<br>
+        "As x → +∞, f(x) → <span class="mred">−∞</span>" → "As x increases without bound, f <strong>decreases</strong> without bound."<br>
+        "As x → −∞, f(x) → <span class="mgreen">+∞</span>" → "As x decreases without bound, f <strong>increases</strong> without bound."
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Exact miss from your Q6:</strong> "Polynomial Functions - end behavior described." Students see the equation and get the arrows right but then describe them backwards verbally. Practice converting: x → −∞ with f → +∞ means "as x decreases without bound, the function <em>increases</em> without bound."</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">How to Find the Leading Term</div>
+      <p>For expanded polynomials, the leading term is the highest-degree term. For factored polynomials, <strong>multiply only the leading terms</strong> of each factor:</p>
+      <div class="fbox teal">
+        <div class="flabel">Leading Term from Factored Form</div>
+        f(x) = −3(x − 2)²(x + 1)³<br><br>
+        Leading term = −3 · (x)² · (x)³ = <span class="mteal">−3x⁵</span><br><br>
+        Degree = 5 (odd), Leading coefficient = −3 (negative)<br>
+        End behavior: <span class="mgreen">Up left</span> ↑, <span class="mred">Down right</span> ↓
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · End Behavior</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'end','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'end','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'end','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="end-v1">
+          <div class="problem-box"><div class="p-label">Problem — Verbal Description (Q6 Type)</div>f(x) = −4(x − 1)²(x + 3)<br><br>(a) Find the leading term.<br>(b) State the end behavior using arrow notation.<br>(c) Describe the end behavior in words (the AP verbal format).</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Leading term from factored form</div><div class="gs-content">−4 · (x)² · (x) = <strong>−4x³</strong><br>Degree 3 (odd), leading coefficient −4 (negative)</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Arrow notation</div><div class="gs-content">Odd degree + negative leading coefficient = Up left, Down right<br><strong>As x → −∞, f(x) → +∞</strong><br><strong>As x → +∞, f(x) → −∞</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Verbal description — AP format</div><div class="gs-content"><em>"As x <strong>decreases</strong> without bound, f(x) <strong>increases</strong> without bound."</em><br><em>"As x <strong>increases</strong> without bound, f(x) <strong>decreases</strong> without bound."</em></div><div class="gs-why">→ The key flip: x→−∞ means x is decreasing. f→+∞ means f is increasing. Map each arrow to its verbal counterpart.</div></div></div>
+        </div>
+        <div class="pane" id="end-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>g(x) = 2(x + 4)(x − 2)²(x + 1)²<br><br>(a) What is the degree? Leading coefficient? (b) Describe end behavior with arrows. (c) Write both verbal statements using "increases/decreases without bound."</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Leading term = 2·x·x²·x² = 2x^(?). Degree = ? Leading coeff = ?</div><input class="s-input" type="text" placeholder="Leading term = ... , degree = ... , LC = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) Even/odd degree? Positive/negative LC? → which end behavior case?</div><input class="s-input" type="text" placeholder="As x→+∞, f→ ... As x→−∞, f→ ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Write both verbal descriptions using "increases/decreases without bound"</div><input class="s-input" type="text" placeholder="As x increases without bound, f ... As x decreases without bound, f ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Leading term = 2x⁵, degree = 5 (odd), leading coeff = 2 (positive)<br><br>(b) Odd + positive = Down left, Up right:<br>As x→+∞, f→+∞ &nbsp;|&nbsp; As x→−∞, f→−∞<br><br>(c) "As x <strong>increases</strong> without bound, f(x) <strong>increases</strong> without bound."<br>"As x <strong>decreases</strong> without bound, f(x) <strong>decreases</strong> without bound."</div>
+        </div>
+        <div class="pane" id="end-v3">
+          <div class="problem-box"><div class="p-label">Blind — Match Verbal to Equation</div>Match each verbal end behavior description to the correct polynomial:<br><br>Functions: (A) f(x) = −x⁴ + 3x² &nbsp; (B) f(x) = 2x³ − x &nbsp; (C) f(x) = −2x⁵ + x³ &nbsp; (D) f(x) = x⁶ − 4<br><br>Descriptions:<br>I. "As x increases and decreases without bound, f decreases without bound."<br>II. "As x increases without bound, f increases without bound; as x decreases without bound, f decreases without bound."<br>III. "As x increases without bound, f decreases without bound; as x decreases without bound, f increases without bound."<br>IV. "As x increases and decreases without bound, f increases without bound."</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">A: −x⁴ → even degree, negative LC → ↓↓ → Description <strong>I</strong><br>B: 2x³ → odd degree, positive LC → ↓↑ → Description <strong>II</strong><br>C: −2x⁵ → odd degree, negative LC → ↑↓ → Description <strong>III</strong><br>D: x⁶ → even degree, positive LC → ↑↑ → Description <strong>IV</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 1B</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Rule</th><th>Key Trap</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--gold);font-weight:500;">Local Max</td><td style="color:var(--tx2);font-weight:300;">f changes increasing → decreasing (peak)</td><td style="color:var(--tx3);font-weight:300;">Not the same as inflection point</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Local Min</td><td style="color:var(--tx2);font-weight:300;">f changes decreasing → increasing (valley)</td><td style="color:var(--tx3);font-weight:300;">Not the same as inflection point</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Inflection Pt</td><td style="color:var(--tx2);font-weight:300;">Concavity changes (∪↔∩) — direction unchanged</td><td style="color:var(--tx3);font-weight:300;">Function keeps going same direction through it</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Mult odd (1)</td><td style="color:var(--tx2);font-weight:300;">Graph crosses the x-axis cleanly</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Mult even (2)</td><td style="color:var(--tx2);font-weight:300;">Graph bounces (touches and turns)</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Mult odd (3)</td><td style="color:var(--tx2);font-weight:300;">Graph crosses with S-flattening</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Even function</td><td style="color:var(--tx2);font-weight:300;">f(−x) = f(x) — y-axis symmetry</td><td style="color:var(--tx3);font-weight:300;">Even function ≠ even degree</td></tr>
+        <tr><td style="color:var(--orange);font-weight:500;">Odd function</td><td style="color:var(--tx2);font-weight:300;">f(−x) = −f(x) — origin symmetry</td><td style="color:var(--tx3);font-weight:300;">Test by substituting −x</td></tr>
+        <tr><td style="color:var(--purple);font-weight:500;">End behavior</td><td style="color:var(--tx2);font-weight:300;">Degree + sign of LC only. Even→same ends. Odd→opposite ends.</td><td style="color:var(--tx3);font-weight:300;">x→−∞ = x decreasing, not negative f</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s1b-polynomials.html -->
+
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

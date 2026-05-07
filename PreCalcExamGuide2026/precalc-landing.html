@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calculus — Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f; --d1:#0b0f1e; --d2:#111828; --d3:#161e30;
+    --glass:rgba(255,255,255,0.044); --gb:rgba(255,255,255,0.08);
+    --shine:rgba(255,255,255,0.13); --b:rgba(255,255,255,0.07); --b2:rgba(255,255,255,0.12);
+    --green:#3effa0; --gold:#f5c842; --red:#f87171;
+    --blue:#38bdf8; --purple:#c084fc; --cyan:#00e5ff;
+    --orange:#fb923c; --pink:#f472b6; --teal:#2dd4bf;
+    --tx:#dde6f5; --tx2:#8898b8; --tx3:#4a5570;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;}
+
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:linear-gradient(rgba(56,189,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.03) 1px,transparent 1px);
+    background-size:48px 48px;pointer-events:none;z-index:0;
+  }
+  body::after{
+    content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);
+    width:1000px;height:700px;
+    background:radial-gradient(ellipse at center,rgba(192,132,252,0.07) 0%,rgba(56,189,248,0.04) 40%,transparent 70%);
+    pointer-events:none;z-index:0;
+  }
+
+  /* ── HEADER ── */
+  header{position:relative;z-index:1;padding:64px 48px 48px;max-width:1240px;margin:0 auto;}
+
+  .header-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--purple);margin-bottom:20px;
+    padding:6px 14px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);
+    opacity:0;animation:fadeUp 0.6s 0.05s forwards;
+  }
+  .header-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--purple);}
+
+  h1{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:clamp(40px,6vw,72px);line-height:0.95;
+    letter-spacing:-0.03em;margin-bottom:20px;
+    opacity:0;animation:fadeUp 0.6s 0.15s forwards;
+  }
+  h1 .line1{display:block;color:var(--tx);}
+  h1 .line2{
+    display:block;
+    background:linear-gradient(135deg,var(--purple) 0%,var(--blue) 50%,var(--cyan) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+
+  .header-sub{
+    font-size:13px;font-weight:300;color:var(--tx2);max-width:580px;line-height:1.85;
+    opacity:0;animation:fadeUp 0.6s 0.25s forwards;
+  }
+
+  .stats-row{
+    display:flex;gap:20px;flex-wrap:wrap;margin-top:36px;
+    opacity:0;animation:fadeUp 0.6s 0.35s forwards;
+  }
+  .stat-pill{
+    display:flex;align-items:center;gap:8px;
+    background:var(--glass);border:1px solid var(--b);border-radius:100px;
+    padding:7px 14px;font-size:11px;font-weight:400;color:var(--tx2);letter-spacing:0.06em;
+  }
+  .stat-pill .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+  /* ── MAIN CONTENT ── */
+  main{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 48px 80px;}
+
+  /* ── UNIT GROUP ── */
+  .unit-group{margin-bottom:52px;}
+
+  .unit-header{
+    display:flex;align-items:center;gap:0;
+    margin-bottom:20px;
+    opacity:0;animation:fadeUp 0.5s forwards;
+  }
+  .unit-badge{
+    font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+    padding:5px 14px;border-radius:4px 0 0 4px;
+    white-space:nowrap;
+  }
+  .unit-label{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+    padding:5px 18px;border-radius:0 4px 4px 0;
+    border-left:none;flex:1;
+    white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+  }
+  .unit-line{flex:1;height:1px;background:var(--b);margin-left:16px;}
+
+  /* Unit color themes */
+  .u1 .unit-badge{background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25);color:var(--blue);}
+  .u1 .unit-label{background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.15);border-left:none;color:var(--blue);}
+
+  .u2 .unit-badge{background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);}
+  .u2 .unit-label{background:rgba(62,255,160,0.04);border:1px solid rgba(62,255,160,0.14);border-left:none;color:var(--green);}
+
+  .u3 .unit-badge{background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.22);color:var(--gold);}
+  .u3 .unit-label{background:rgba(245,200,66,0.04);border:1px solid rgba(245,200,66,0.14);border-left:none;color:var(--gold);}
+
+  .u4 .unit-badge{background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.22);color:var(--purple);}
+  .u4 .unit-label{background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.14);border-left:none;color:var(--purple);}
+
+  /* ── CARD GRID ── */
+  .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+
+  /* ── SECTION CARD ── */
+  .section-card{
+    position:relative;
+    background:var(--glass);border:1px solid var(--b);border-radius:16px;
+    padding:26px 24px 22px;text-decoration:none;color:inherit;
+    overflow:hidden;cursor:pointer;
+    transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+    opacity:0;animation:fadeUp 0.5s forwards;
+  }
+  .section-card::before{
+    content:'';position:absolute;inset:0;border-radius:16px;
+    background:linear-gradient(135deg,var(--card-glow,transparent) 0%,transparent 60%);
+    opacity:0;transition:opacity 0.3s;
+  }
+  .section-card::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--card-accent,var(--blue)),transparent);
+    opacity:0;transition:opacity 0.3s;
+  }
+  .section-card:hover{
+    border-color:var(--card-accent,var(--blue));
+    transform:translateY(-3px);
+    box-shadow:0 14px 48px rgba(0,0,0,0.5),0 0 0 1px var(--card-accent,var(--blue));
+  }
+  .section-card:hover::before,.section-card:hover::after{opacity:1;}
+
+  /* card header row */
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+
+  .card-code{
+    font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--card-accent,var(--blue));
+    display:flex;align-items:center;gap:8px;
+  }
+  .card-code::before{content:'';display:block;width:18px;height:1px;background:var(--card-accent,var(--blue));}
+
+  /* data badge showing class struggle level */
+  .struggle-badge{
+    font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:3px 8px;border-radius:100px;
+  }
+  .sb-high{background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);color:var(--red);}
+  .sb-med{background:rgba(245,200,66,0.12);border:1px solid rgba(245,200,66,0.25);color:var(--gold);}
+  .sb-low{background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.2);color:var(--green);}
+
+  .card-title{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:17px;
+    letter-spacing:-0.01em;line-height:1.2;color:var(--tx);margin-bottom:8px;
+  }
+  .card-desc{
+    font-size:11px;font-weight:300;color:var(--tx2);line-height:1.75;margin-bottom:16px;
+  }
+
+  .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:18px;}
+  .tag{
+    font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:3px 8px;border-radius:100px;
+    background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:var(--tx3);
+  }
+  .tag.hot{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.18);color:rgba(248,113,113,0.8);}
+
+  .card-arrow{
+    position:absolute;bottom:22px;right:22px;
+    width:30px;height:30px;border-radius:50%;
+    background:var(--gb);border:1px solid var(--b);
+    display:flex;align-items:center;justify-content:center;
+    transition:background 0.25s,border-color 0.25s,transform 0.25s;
+  }
+  .section-card:hover .card-arrow{
+    background:var(--card-accent,var(--blue));
+    border-color:var(--card-accent,var(--blue));
+    transform:translate(2px,-2px);
+  }
+  .card-arrow svg{width:13px;height:13px;stroke:var(--tx2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.25s;}
+  .section-card:hover .card-arrow svg{stroke:var(--void);}
+
+  /* ── FOOTER ── */
+  footer{
+    position:relative;z-index:1;max-width:1240px;margin:0 auto;
+    padding:24px 48px 48px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    border-top:1px solid var(--b);
+  }
+  footer span{font-size:11px;font-weight:300;color:var(--tx3);letter-spacing:0.08em;}
+
+  .footer-mark{display:grid;grid-template-columns:repeat(3,9px);grid-template-rows:repeat(3,9px);gap:3px;}
+  .footer-mark .sq{width:9px;height:9px;border-radius:2px;background:var(--b);}
+  .footer-mark .sq.admin{background:rgba(245,200,66,0.5);}
+  .footer-mark .sq.teacher{background:rgba(0,229,255,0.4);}
+  .footer-mark .sq.student{background:rgba(184,207,255,0.3);}
+  .footer-mark .sq.core{background:rgba(62,255,160,0.7);}
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+  .unit-group:nth-child(1) .unit-header{animation-delay:0.1s;}
+  .unit-group:nth-child(2) .unit-header{animation-delay:0.2s;}
+  .unit-group:nth-child(3) .unit-header{animation-delay:0.3s;}
+  .unit-group:nth-child(4) .unit-header{animation-delay:0.4s;}
+
+  /* card stagger per unit */
+  .unit-group:nth-child(1) .section-card:nth-child(1){animation-delay:0.12s;}
+  .unit-group:nth-child(1) .section-card:nth-child(2){animation-delay:0.18s;}
+  .unit-group:nth-child(1) .section-card:nth-child(3){animation-delay:0.24s;}
+  .unit-group:nth-child(2) .section-card:nth-child(1){animation-delay:0.22s;}
+  .unit-group:nth-child(2) .section-card:nth-child(2){animation-delay:0.28s;}
+  .unit-group:nth-child(2) .section-card:nth-child(3){animation-delay:0.34s;}
+  .unit-group:nth-child(3) .section-card:nth-child(1){animation-delay:0.32s;}
+  .unit-group:nth-child(3) .section-card:nth-child(2){animation-delay:0.38s;}
+  .unit-group:nth-child(3) .section-card:nth-child(3){animation-delay:0.44s;}
+  .unit-group:nth-child(4) .section-card:nth-child(1){animation-delay:0.42s;}
+  .unit-group:nth-child(4) .section-card:nth-child(2){animation-delay:0.48s;}
+  .unit-group:nth-child(4) .section-card:nth-child(3){animation-delay:0.54s;}
+
+  @media(max-width:900px){
+    header,main,footer{padding-left:24px;padding-right:24px;}
+    .card-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:600px){
+    h1{font-size:36px;}
+    header,main,footer{padding-left:16px;padding-right:16px;}
+    .card-grid{grid-template-columns:1fr;}
+    .unit-label{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow"><span class="dot"></span>AP Pre-Calculus · Personalized Study System</div>
+  <h1>
+    <span class="line1">Master Every</span>
+    <span class="line2">Function.</span>
+  </h1>
+  <p class="header-sub">12 sections built from your actual class data — weighted by what your specific class is missing on progress checks and practice exams. Guided walkthroughs, then your own practice on every concept.</p>
+
+  <div class="stats-row">
+    <div class="stat-pill"><span class="dot" style="background:var(--blue)"></span>4 Units · 12 Sections</div>
+    <div class="stat-pill"><span class="dot" style="background:var(--purple)"></span>90+ Concept Blocks</div>
+    <div class="stat-pill"><span class="dot" style="background:var(--green)"></span>3-Version Practice Per Topic</div>
+    <div class="stat-pill"><span class="dot" style="background:var(--gold)"></span>Built From Real Exam Data</div>
+    <div class="stat-pill"><span class="dot" style="background:var(--red)"></span>🔥 Hot Topics Flagged</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════
+       UNIT 1 · POLYNOMIAL & RATIONAL
+  ═══════════════════════════ -->
+  <div class="unit-group u1">
+    <div class="unit-header">
+      <span class="unit-badge">Unit 01</span>
+      <span class="unit-label">Polynomial &amp; Rational Functions</span>
+      <div class="unit-line"></div>
+    </div>
+    <div class="card-grid">
+
+      <!-- 1A -->
+      <a class="section-card" href="precalc-s1a-change.html" target="_blank"
+         style="--card-accent:#38bdf8;--card-glow:rgba(56,189,248,0.06);">
+        <div class="card-top">
+          <div class="card-code">1A</div>
+          <span class="struggle-badge sb-med">Watch</span>
+        </div>
+        <div class="card-title">Functions &amp; Change in Tandem</div>
+        <div class="card-desc">Increasing/decreasing behavior, average rate of change, concavity, and how two quantities change together — the language the whole course is built on.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 1.1–1.3</span>
+          <span class="tag hot">Concavity</span>
+          <span class="tag hot">AROC</span>
+          <span class="tag">Change in Tandem</span>
+          <span class="tag">Rate at a Point</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 1B -->
+      <a class="section-card" href="precalc-s1b-polynomials.html" target="_blank"
+         style="--card-accent:#38bdf8;--card-glow:rgba(56,189,248,0.06);">
+        <div class="card-top">
+          <div class="card-code">1B</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">Polynomial Functions</div>
+        <div class="card-desc">Zeros and their multiplicities, extrema and local behavior, end behavior from degree and leading coefficient, even and odd functions.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 1.4–1.6</span>
+          <span class="tag hot">Extrema</span>
+          <span class="tag hot">End Behavior</span>
+          <span class="tag hot">Inflection Pts</span>
+          <span class="tag">Zeros &amp; Intercepts</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 1C -->
+      <a class="section-card" href="precalc-s1c-rational.html" target="_blank"
+         style="--card-accent:#38bdf8;--card-glow:rgba(56,189,248,0.06);">
+        <div class="card-top">
+          <div class="card-code">1C</div>
+          <span class="struggle-badge sb-med">Watch</span>
+        </div>
+        <div class="card-title">Rational Functions &amp; Function Operations</div>
+        <div class="card-desc">Vertical and horizontal asymptotes, holes, slant asymptotes, transformations, function models, polynomial inequalities, and the Binomial Theorem.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 1.7–1.13</span>
+          <span class="tag hot">Holes vs Asymptotes</span>
+          <span class="tag">Transformations</span>
+          <span class="tag">Slant Asymptote</span>
+          <span class="tag">Function Models</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════
+       UNIT 2 · EXPONENTIAL & LOG
+  ═══════════════════════════ -->
+  <div class="unit-group u2">
+    <div class="unit-header">
+      <span class="unit-badge">Unit 02</span>
+      <span class="unit-label">Exponential &amp; Logarithmic Functions</span>
+      <div class="unit-line"></div>
+    </div>
+    <div class="card-grid">
+
+      <!-- 2A -->
+      <a class="section-card" href="precalc-s2a-sequences.html" target="_blank"
+         style="--card-accent:#3effa0;--card-glow:rgba(62,255,160,0.05);">
+        <div class="card-top">
+          <div class="card-code">2A</div>
+          <span class="struggle-badge sb-low">Solid</span>
+        </div>
+        <div class="card-title">Sequences &amp; Exponential Functions</div>
+        <div class="card-desc">Arithmetic and geometric sequences, exponential growth and decay, percent change, equivalent forms, and fractional/negative exponent manipulation.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 2.1–2.5</span>
+          <span class="tag hot">Fractional Exponents</span>
+          <span class="tag">Geometric Sequences</span>
+          <span class="tag">Growth vs Decay</span>
+          <span class="tag">Percent Change</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 2B -->
+      <a class="section-card" href="precalc-s2b-logarithms.html" target="_blank"
+         style="--card-accent:#3effa0;--card-glow:rgba(62,255,160,0.05);">
+        <div class="card-top">
+          <div class="card-code">2B</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">Logarithmic Functions</div>
+        <div class="card-desc">Log properties, log equations, graphs of log functions, common and natural log, solving exponential equations with logs, semi-log plots.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 2.10–2.15</span>
+          <span class="tag hot">Log Properties</span>
+          <span class="tag hot">Semi-log Plots</span>
+          <span class="tag hot">Solving Equations</span>
+          <span class="tag">Log Graphs</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 2C -->
+      <a class="section-card" href="precalc-s2c-composition.html" target="_blank"
+         style="--card-accent:#3effa0;--card-glow:rgba(62,255,160,0.05);">
+        <div class="card-top">
+          <div class="card-code">2C</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">Composition, Inverses &amp; Modeling</div>
+        <div class="card-desc">Function composition (analytical, tabular, graphical), inverse functions, finding and verifying inverses, residual plots, model validation, and regression selection.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 2.6–2.9, 2.14–2.15</span>
+          <span class="tag hot">Inverse Graphical</span>
+          <span class="tag hot">Residuals</span>
+          <span class="tag hot">Composition Multi-step</span>
+          <span class="tag">Model Validation</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════
+       UNIT 3 · TRIG & POLAR
+  ═══════════════════════════ -->
+  <div class="unit-group u3">
+    <div class="unit-header">
+      <span class="unit-badge">Unit 03</span>
+      <span class="unit-label">Trigonometric &amp; Polar Functions</span>
+      <div class="unit-line"></div>
+    </div>
+    <div class="card-grid">
+
+      <!-- 3A -->
+      <a class="section-card" href="precalc-s3a-unitcircle.html" target="_blank"
+         style="--card-accent:#f5c842;--card-glow:rgba(245,200,66,0.05);">
+        <div class="card-top">
+          <div class="card-code">3A</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">The Unit Circle &amp; Trig Functions</div>
+        <div class="card-desc">Radian measure definition and conversion, the unit circle from memory, definitions of all six trig functions, reference angles, and exact values.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 3.1–3.5</span>
+          <span class="tag hot">Radian Definition</span>
+          <span class="tag hot">Exact Values</span>
+          <span class="tag">Sin/Cos/Tan Definitions</span>
+          <span class="tag">Reference Angles</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 3B -->
+      <a class="section-card" href="precalc-s3b-sinusoidal.html" target="_blank"
+         style="--card-accent:#f5c842;--card-glow:rgba(245,200,66,0.05);">
+        <div class="card-top">
+          <div class="card-code">3B</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">Sinusoidal Functions &amp; Modeling</div>
+        <div class="card-desc">Amplitude, period, midline, phase shift — all four parameters from graphs, tables, and equations. Sinusoidal modeling with real contexts. Trig zeros and equations.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 3.6–3.10</span>
+          <span class="tag hot">A·sin(Bx+C)+D</span>
+          <span class="tag hot">Period from Graph</span>
+          <span class="tag hot">Trig Equations</span>
+          <span class="tag">Modeling Height/Tide</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 3C -->
+      <a class="section-card" href="precalc-s3c-polar.html" target="_blank"
+         style="--card-accent:#f5c842;--card-glow:rgba(245,200,66,0.05);">
+        <div class="card-top">
+          <div class="card-code">3C</div>
+          <span class="struggle-badge sb-med">Watch</span>
+        </div>
+        <div class="card-title">Reciprocal Trig, Identities &amp; Polar</div>
+        <div class="card-desc">Sec, csc, tan, cot characteristics and graphs. Double-angle identities. Polar coordinates, polar graphs (rose curves, limaçons), and complex numbers in polar form.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 3.11–3.15</span>
+          <span class="tag hot">Polar Graphs</span>
+          <span class="tag hot">Double-Angle</span>
+          <span class="tag">Sec &amp; Csc Graphs</span>
+          <span class="tag">Complex Polar Form</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════
+       UNIT 4 · PARAMETRIC & CONICS
+  ═══════════════════════════ -->
+  <div class="unit-group u4">
+    <div class="unit-header">
+      <span class="unit-badge">Unit 04</span>
+      <span class="unit-label">Functions Involving Parameters, Vectors &amp; Conics</span>
+      <div class="unit-line"></div>
+    </div>
+    <div class="card-grid">
+
+      <!-- 4A -->
+      <a class="section-card" href="precalc-s4a-parametric.html" target="_blank"
+         style="--card-accent:#c084fc;--card-glow:rgba(192,132,252,0.05);">
+        <div class="card-top">
+          <div class="card-code">4A</div>
+          <span class="struggle-badge sb-med">Watch</span>
+        </div>
+        <div class="card-title">Parametric Functions</div>
+        <div class="card-desc">Parametric function definitions, graphing (x(t), y(t)), finding parameter values, distance between points, rates of change, and increasing/decreasing behavior.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 4.1–4.3</span>
+          <span class="tag hot">Finding Parameter Values</span>
+          <span class="tag">Particle Motion</span>
+          <span class="tag">Rates of Change</span>
+          <span class="tag">Path Tracing</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 4B -->
+      <a class="section-card" href="precalc-s4b-implicit.html" target="_blank"
+         style="--card-accent:#c084fc;--card-glow:rgba(192,132,252,0.05);">
+        <div class="card-top">
+          <div class="card-code">4B</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">Parametric Lines, Circles &amp; Implicit</div>
+        <div class="card-desc">Parametrically defined lines and circles, rewriting parametric equations, implicitly defined relations — graphs, intersection points, and rates of change.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 4.4–4.5</span>
+          <span class="tag hot">Implicit Rate of Change</span>
+          <span class="tag hot">Rewriting Parametric</span>
+          <span class="tag">Parametric Circle</span>
+          <span class="tag">Intersection Points</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+      <!-- 4C -->
+      <a class="section-card" href="precalc-s4c-conics.html" target="_blank"
+         style="--card-accent:#c084fc;--card-glow:rgba(192,132,252,0.05);">
+        <div class="card-top">
+          <div class="card-code">4C</div>
+          <span class="struggle-badge sb-high">Priority</span>
+        </div>
+        <div class="card-title">Conics &amp; Hyperbolas</div>
+        <div class="card-desc">Ellipses and hyperbolas — standard forms, vertices, foci, graphing from equations and tables. Parametric forms of conics. Real-world applications like bridge heights.</div>
+        <div class="card-tags">
+          <span class="tag">Topics 4.6–4.7</span>
+          <span class="tag hot">Ellipse Standard Form</span>
+          <span class="tag hot">Hyperbola Graphs</span>
+          <span class="tag">Parametric Conics</span>
+          <span class="tag">Vertices &amp; Foci</span>
+        </div>
+        <div class="card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="5 5 19 5 19 19"/></svg></div>
+      </a>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>AP Pre-Calculus · Study System · Built for Room 501 · ALA Queen Creek</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq admin"></div><div class="sq admin"></div>
+    <div class="sq teacher"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq student"></div><div class="sq student"></div>
+  </div>
+  <span>Stratosyn · 2026</span>
+</footer>
+
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-landing.html -->
+
+</body>
+</html>

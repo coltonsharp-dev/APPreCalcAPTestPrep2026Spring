@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 4B · Parametric Lines, Circles & Implicit</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#c084fc;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(192,132,252,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(192,132,252,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(192,132,252,0.06) 0%,rgba(248,113,113,0.02) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.28);color:var(--purple);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:var(--purple);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--purple),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.green{border-left-color:var(--green);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* CONVERSION TABLE */
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .graph-wrap{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px;margin:14px 0;}
+  .graph-wrap svg{display:block;max-width:100%;margin:0 auto;}
+  .graph-wrap .g-caption{font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.25);color:var(--purple);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.25);color:var(--purple);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(192,132,252,0.16);border-color:var(--purple);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--purple),var(--red));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 4</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 4B</span>
+  </div>
+  <span class="nav-badge">Lines, Circles &amp; Implicit</span>
+</nav>
+
+<div class="page">
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 04 · Topics 4.4–4.5</span>
+      <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Section 4B</span>
+    </div>
+    <h1 class="sec-title">Parametric Lines,<br><span>Circles &amp; Implicit</span></h1>
+    <p class="sec-desc">Parametrically defined lines — converting between parametric and rectangular forms. Parametric circles with center shifts and radius scaling. Implicitly defined relations — reading their graphs, finding intersection points, and computing rates of change.</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data — Priority Section</div>
+    The Unit 4 Progress Check data shows consistent 2-3 wrong on every topic in this section. <strong>Parametric circle transformations (Q14):</strong> 2 wrong. <strong>Implicit intersection points (Q15):</strong> 2 wrong. <strong>Implicit rate of change (Q17):</strong> 3 wrong. This section covers each type from scratch — the conceptual foundations first, then the specific question patterns that appeared.
+  </div>
+
+  <!-- ══════════════════════
+       4B.1 · PARAMETRIC LINES
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">4B.1</span>
+      <h2 class="topic-title">Parametrically Defined Lines</h2>
+      <span class="topic-sub">Topic 4.4</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Parametric Line Form</div>
+      <p>A line in the plane can be written parametrically by specifying a <strong>starting point (x₀, y₀)</strong> and a <strong>direction vector (a, b)</strong>. As t varies, the point (x, y) moves along the line.</p>
+      <div class="fbox">
+        <div class="flabel">Parametric Line — Standard Form</div>
+        x(t) = x₀ + <span class="mblue">a</span>·t<br>
+        y(t) = y₀ + <span class="mblue">b</span>·b·t<br><br>
+        where (x₀, y₀) is a point on the line at t=0, and (<span class="mblue">a</span>, <span class="mblue">b</span>) is the direction vector<br><br>
+        Slope of the line = <span class="fr"><span class="n">b</span><span class="d">a</span></span> (rise over run from the direction vector)
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Converting Parametric Line ↔ Rectangular Form</div>
+      <p>To eliminate t and get y = mx + c: solve one equation for t, substitute into the other.</p>
+      <div class="fbox gold">
+        <div class="flabel">Parametric → Rectangular: Eliminate t</div>
+        x(t) = 2 + 3t &nbsp;&nbsp; y(t) = 1 − 2t<br><br>
+        From x: 3t = x−2 → t = <span class="fr"><span class="n">x−2</span><span class="d">3</span></span><br><br>
+        Substitute into y: y = 1 − 2·<span class="fr"><span class="n">x−2</span><span class="d">3</span></span> = 1 − <span class="fr"><span class="n">2x−4</span><span class="d">3</span></span> = <span class="fr"><span class="n">3−2x+4</span><span class="d">3</span></span> = <span class="fr"><span class="n">7−2x</span><span class="d">3</span></span><br><br>
+        Or: <span class="m">y = −<span class="fr"><span class="n">2</span><span class="d">3</span></span>x + <span class="fr"><span class="n">7</span><span class="d">3</span></span></span>
+      </div>
+      <div class="fbox blue">
+        <div class="flabel">Rectangular → Parametric: Introduce t</div>
+        y = 3x − 5 → Let x(t) = t, then y(t) = 3t − 5<br>
+        Or: Let x(t) = t + 2, then y(t) = 3(t+2)−5 = 3t+1 (different parameterization, same line)<br><br>
+        <span style="color:var(--tx3);font-size:12px">There are infinitely many valid parameterizations. The AP just asks you to find one valid form or match a given one.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Key Features of a Parametric Line</div>
+      <table class="dtable">
+        <thead><tr><th>Feature</th><th>How to Find It</th><th>Example from x=2+3t, y=1−2t</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--purple);font-weight:500;">Starting point (t=0)</td><td style="color:var(--tx2);font-weight:300;">Plug in t=0</td><td style="color:var(--tx3);font-weight:300;">(2, 1)</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Direction vector</td><td style="color:var(--tx2);font-weight:300;">Coefficients of t: (a, b)</td><td style="color:var(--tx3);font-weight:300;">(3, −2)</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Slope</td><td style="color:var(--tx2);font-weight:300;">b/a = Δy coeff / Δx coeff</td><td style="color:var(--tx3);font-weight:300;">−2/3</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Speed of traversal</td><td style="color:var(--tx2);font-weight:300;">√(a² + b²) (distance per unit t)</td><td style="color:var(--tx3);font-weight:300;">√(9+4) = √13</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Direction of travel</td><td style="color:var(--tx2);font-weight:300;">Sign of a: positive → right, negative → left</td><td style="color:var(--tx3);font-weight:300;">Moving right (a=3&gt;0)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Parametric Lines</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'pl','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'pl','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'pl','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="pl-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q12 Type (Rewriting)</div>A parametric line is defined by x(t) = 4 − 2t and y(t) = −1 + 5t.<br>(a) Find the slope and starting point.<br>(b) Rewrite as a rectangular equation y = mx + b.<br>(c) Find the point on the line at t = 3.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Slope and starting point</div><div class="gs-content">Starting point (t=0): x(0)=4, y(0)=−1 → <strong>(4, −1)</strong><br>Direction vector: (a, b) = (−2, 5)<br>Slope = b/a = 5/(−2) = <strong>−5/2</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Eliminate t</div><div class="gs-content">From x: 4−2t = x → 2t = 4−x → t = (4−x)/2<br>Substitute into y: y = −1 + 5·(4−x)/2 = −1 + (20−5x)/2 = (−2+20−5x)/2 = (18−5x)/2<br><strong>y = −<span class="fr"><span class="n">5</span><span class="d">2</span></span>x + 9</strong></div><div class="gs-why">→ Verify: point (4,−1): y = −5/2(4)+9 = −10+9 = −1 ✓</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Point at t=3</div><div class="gs-content">x(3) = 4−2(3) = −2, y(3) = −1+5(3) = 14 → <strong>(−2, 14)</strong></div></div></div>
+        </div>
+        <div class="pane" id="pl-v2">
+          <div class="problem-box"><div class="p-label">Problem — Q13 Type (Video Game)</div>A character in a video game moves with x(t) = 1 + 4t and y(t) = 3 − 4t, starting at t=0.<br>(a) At what time does the character reach x = 9?<br>(b) Does the character pass through the point (5, 0)? If so, at what t?<br>(c) Write the line in slope-intercept form.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Solve x(t) = 9: 1+4t = 9 → t = ?</div><input class="s-input" type="text" placeholder="4t = 8 → t = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) Find t where x=5, then check y at that t</div><input class="s-input" type="text" placeholder="x=5: 1+4t=5 → t=1. y(1) = 3−4(1) = ... Does y=0?"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Eliminate t: from x(t)=1+4t get t=(x−1)/4. Substitute into y(t).</div><input class="s-input" type="text" placeholder="y = 3 − 4·(x−1)/4 = 3 − (x−1) = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) 1+4t=9 → t=2. Character reaches x=9 at <strong>t=2</strong>.<br>(b) x=5 → t=1. y(1)=3−4=−1≠0 → <strong>no, (5,0) is not on the path</strong>.<br>(c) y = 3−4·(x−1)/4 = 3−(x−1) = 3−x+1 = <strong>y = −x + 4</strong></div>
+        </div>
+        <div class="pane" id="pl-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>Two particles move along straight lines:<br>Particle A: x(t) = 1+2t, y(t) = 3+t<br>Particle B: x(t) = 5−t, y(t) = 1+3t<br><br>(a) Do the paths (lines) intersect? If so, where?<br>(b) Do the particles occupy the same position at the same time?<br>(c) What is the slope of each line?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Eliminate t from each line separately:<br>A: t=(x−1)/2. y=3+(x−1)/2=(x+5)/2 → y=(x+5)/2<br>B: t=5−x. y=1+3(5−x)=16−3x → y=16−3x<br>Intersection: (x+5)/2=16−3x → x+5=32−6x → 7x=27 → x=27/7. y=(27/7+5)/2=62/14=31/7.<br><strong>Paths intersect at (27/7, 31/7)</strong>.<br><br>(b) At that point: From A: t=(27/7−1)/2=10/7. From B: t=5−27/7=8/7. Different t → <strong>particles don't meet simultaneously</strong>.<br><br>(c) Slope A = 1/2. Slope B = −3.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       4B.2 · PARAMETRIC CIRCLES
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">4B.2</span>
+      <h2 class="topic-title">Parametrically Defined Circles</h2>
+      <span class="topic-sub">Topic 4.4 · Q14 Watch</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Standard Parametric Circle</div>
+      <p>A circle of radius r centered at (h, k) has the parametric form:</p>
+      <div class="fbox">
+        <div class="flabel">Parametric Circle — All Four Variations</div>
+        x(t) = <span class="mblue">r</span>·cos(t) + <span class="mgreen">h</span><br>
+        y(t) = <span class="mblue">r</span>·sin(t) + <span class="mgreen">k</span><br><br>
+        where <span class="mblue">r</span> = radius, (<span class="mgreen">h</span>, <span class="mgreen">k</span>) = center, t ∈ [0, 2π]<br><br>
+        <strong>Identifying from the equation:</strong><br>
+        x(t) = a·cos(t) + h: the coefficient of cos is the radius. The constant is the x-center.<br>
+        y(t) = a·sin(t) + k: the coefficient of sin is the radius. The constant is the y-center.
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Transformations of Parametric Circles — The Q14 Type</div>
+      <p>When a parametric circle is transformed, each parameter in (r, h, k) changes in a specific way. Recognizing which transformation was applied is the key skill.</p>
+      <table class="dtable">
+        <thead><tr><th>Transformation Applied</th><th>Effect on Parametric Equations</th><th>Effect on Circle</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--purple);font-weight:500;">Shift right by c</td><td style="color:var(--tx2);font-weight:300;">x(t) = r·cos(t) + (h+c)</td><td style="color:var(--tx3);font-weight:300;">Center moves right, radius unchanged</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Shift up by c</td><td style="color:var(--tx2);font-weight:300;">y(t) = r·sin(t) + (k+c)</td><td style="color:var(--tx3);font-weight:300;">Center moves up, radius unchanged</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Scale radius by factor s</td><td style="color:var(--tx2);font-weight:300;">x(t) = (r·s)·cos(t) + h, y(t) = (r·s)·sin(t) + k</td><td style="color:var(--tx3);font-weight:300;">Radius changes, center unchanged</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Reflect over x-axis</td><td style="color:var(--tx2);font-weight:300;">y(t) = −r·sin(t) − k (negate y)</td><td style="color:var(--tx3);font-weight:300;">Circle flips — center goes to (h, −k)</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>The Q14 pattern:</strong> You're given x(t)=a·cos(t)+h, y(t)=b·sin(t)+k and asked what happens when a transformation is applied. Read the modified constants carefully — if a changes but h doesn't, it's a radius change. If h changes but a doesn't, it's a center shift.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Converting Parametric Circle → Rectangular Form</div>
+      <p>Use the Pythagorean identity cos²t + sin²t = 1 to eliminate t:</p>
+      <div class="fbox teal">
+        <div class="flabel">Elimination via Pythagorean Identity</div>
+        x(t) = 3cos(t) + 2 &nbsp;→&nbsp; cos(t) = (x−2)/3<br>
+        y(t) = 3sin(t) − 1 &nbsp;→&nbsp; sin(t) = (y+1)/3<br><br>
+        cos²t + sin²t = 1: &nbsp;((x−2)/3)² + ((y+1)/3)² = 1<br><br>
+        → <span class="mteal">(x−2)² + (y+1)² = 9</span> &nbsp;← circle: center (2,−1), radius 3
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Parametric Circles</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'pc','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'pc','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'pc','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="pc-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q14 Type (Circle Transformation)</div>A circle is defined by x(t) = 4cos(t) + 1, y(t) = 4sin(t) − 3.<br><br>(a) Identify center, radius, and direction.<br>(b) The circle is shifted 3 units right and 2 units up. Write the new parametric equations.<br>(c) The original circle is then scaled so the radius doubles. Write those equations.<br>(d) Convert the original to rectangular form.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Identify features</div><div class="gs-content">Radius = coefficient of cos/sin = <strong>4</strong><br>Center = (h, k) = (1, −3) (the constants added to each)<br>Direction: counterclockwise (standard parametric circle direction)</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Shift right 3, up 2 — change the constants</div><div class="gs-content">New center: (1+3, −3+2) = (4, −1)<br>x(t) = 4cos(t) + 4<br>y(t) = 4sin(t) − 1<br><strong>x(t)=4cos(t)+4, y(t)=4sin(t)−1</strong></div><div class="gs-why">→ Shifts only change the constants (h, k). Radius stays 4.</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Double the radius — change the cos/sin coefficients</div><div class="gs-content">New radius = 8. Center stays at (1, −3).<br>x(t) = <strong>8</strong>cos(t) + 1<br>y(t) = <strong>8</strong>sin(t) − 3</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) Rectangular form</div><div class="gs-content">cos(t) = (x−1)/4, sin(t) = (y+3)/4<br>((x−1)/4)² + ((y+3)/4)² = 1<br><strong>(x−1)² + (y+3)² = 16</strong></div></div></div>
+        </div>
+        <div class="pane" id="pc-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>x(t) = 5cos(t), y(t) = 5sin(t), t ∈ [0, 2π].<br>(a) What circle does this trace? Center and radius?<br>(b) Write equations for a circle with the same radius but centered at (3, −4).<br>(c) Write equations for a circle centered at the origin with half the radius, traversed clockwise.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Coefficients of cos and sin = radius. Constants = center coordinates.</div><input class="s-input" type="text" placeholder="Radius = ..., Center = ( , )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) Same radius (5), center (3,−4). Add center to each equation.</div><input class="s-input" type="text" placeholder="x(t) = 5cos(t) + ... , y(t) = 5sin(t) + ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Half radius = 2.5, center at origin (h=k=0). For clockwise: use cos(−t) or replace sin with −sin.</div><input class="s-input" type="text" placeholder="x(t) = 2.5cos(t), y(t) = −2.5sin(t) (clockwise reversal)"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Radius=5, Center=(0,0) — unit circle scaled by 5.<br>(b) x(t) = 5cos(t)+3, y(t) = 5sin(t)−4<br>(c) <strong>x(t) = 2.5cos(t), y(t) = −2.5sin(t)</strong> (negative sin reverses the y-direction → clockwise)</div>
+        </div>
+        <div class="pane" id="pc-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>x(t) = 2cos(t) + 5, y(t) = 3sin(t) − 1.<br><br>(a) Is this a circle or an ellipse? How do you know?<br>(b) Write it in rectangular form. Identify the shape and all key features.<br>(c) What are the four extreme points (leftmost, rightmost, topmost, bottommost) of this curve?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) <strong>Ellipse</strong> — the coefficients of cos and sin are different (2 ≠ 3). A circle requires equal coefficients.<br><br>(b) cos(t)=(x−5)/2, sin(t)=(y+1)/3<br>((x−5)/2)²+((y+1)/3)²=1<br><strong>(x−5)²/4 + (y+1)²/9 = 1</strong><br>Ellipse: center (5,−1), horizontal semi-axis a=2, vertical semi-axis b=3.<br><br>(c) Left: (5−2, −1)=<strong>(3,−1)</strong>. Right: (5+2,−1)=<strong>(7,−1)</strong>. Top: (5,−1+3)=<strong>(5,2)</strong>. Bottom: (5,−1−3)=<strong>(5,−4)</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       4B.3 · IMPLICITLY DEFINED RELATIONS
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">4B.3</span>
+      <h2 class="topic-title">Implicitly Defined Relations</h2>
+      <span class="topic-sub">Topic 4.5 · Q15–Q17</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What Implicitly Defined Means</div>
+      <p>An <strong>implicitly defined relation</strong> is an equation in x and y where y is NOT isolated — both variables appear together. The set of all (x, y) pairs satisfying the equation forms a curve in the plane, but that curve may not pass the vertical line test.</p>
+      <div class="fbox">
+        <div class="flabel">Examples of Implicit Relations</div>
+        x² + y² = 25 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← circle (y not isolated)<br>
+        x² + 4y² = 16 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← ellipse<br>
+        xy = 12 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← hyperbola<br>
+        y² = x + 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← sideways parabola<br>
+        x³ + y³ = 3xy &nbsp;&nbsp;&nbsp;&nbsp;← folium (complex curve)
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Reading Graphs of Implicit Relations</div>
+      <p>To determine if a point (a, b) lies on an implicitly defined curve, <strong>substitute x=a and y=b into the equation and check if it's satisfied</strong>.</p>
+      <div class="fbox blue">
+        <div class="flabel">Point on Curve — Check by Substitution</div>
+        Is (3, 4) on x² + y² = 25?<br>
+        3² + 4² = 9 + 16 = 25 = 25 ✓ → <strong>yes, (3,4) is on the circle</strong><br><br>
+        Is (2, 3) on x² + y² = 25?<br>
+        4 + 9 = 13 ≠ 25 → <strong>no, (2,3) is not on the circle</strong>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Finding Intersection Points — The Q15 Type</div>
+      <p>To find where two implicit curves intersect, find the (x, y) pairs that satisfy <strong>both equations simultaneously</strong>. This is a system of equations.</p>
+      <div class="fbox gold">
+        <div class="flabel">Intersection Point Strategy</div>
+        Curve 1: x² + y² = 25<br>
+        Curve 2: y = x − 1<br><br>
+        Substitute Curve 2 into Curve 1:<br>
+        x² + (x−1)² = 25<br>
+        x² + x² − 2x + 1 = 25<br>
+        2x² − 2x − 24 = 0<br>
+        x² − x − 12 = 0<br>
+        (x−4)(x+3) = 0 → x = 4 or x = −3<br><br>
+        y = x−1: y(4) = 3, y(−3) = −4<br>
+        <span class="mgreen">Intersection points: (4, 3) and (−3, −4)</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Rate of Change on an Implicit Curve — The Q17 Type</div>
+      <p>The rate of change of y with respect to x along an implicit curve is found differently from explicit functions — but at the AP Pre-Calc level, it's approximated numerically from nearby points on the curve, or from the slope of a tangent line at a given point.</p>
+      <div class="fbox orange">
+        <div class="flabel">Approximating Rate at a Point on an Implicit Curve</div>
+        Given: x² + y² = 25, find the approximate rate of change at (3, 4).<br><br>
+        Find a nearby point on the same curve: at x=3.1: 3.1²+y²=25 → y²=15.39 → y≈3.923<br>
+        Rate ≈ <span class="fr"><span class="n">Δy</span><span class="d">Δx</span></span> = <span class="fr"><span class="n">3.923−4</span><span class="d">3.1−3</span></span> = <span class="fr"><span class="n">−0.077</span><span class="d">0.1</span></span> ≈ <strong>−0.77</strong><br><br>
+        The tangent line at (3,4) on this circle has slope approximately −3/4 ≈ −0.75 (by symmetry of circles). Close to our approximation ✓<br><br>
+        <span style="color:var(--tx3);font-size:12px">For the AP Pre-Calc exam, you approximate from nearby points or are given values — full implicit differentiation isn't required.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Implicit Relations</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'imp','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'imp','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'imp','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="imp-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q15 &amp; Q17 Type</div>The implicit relation x² + y² − 4x + 6y = 12 defines a circle.<br><br>(a) Complete the square to write in standard form. Identify center and radius.<br>(b) Find the intersection points with the line y = x − 6.<br>(c) At the point (6, 0), approximate the rate of change dy/dx by finding a nearby point on the circle.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Complete the square</div><div class="gs-content">x²−4x + y²+6y = 12<br>(x²−4x+4) + (y²+6y+9) = 12+4+9<br>(x−2)² + (y+3)² = 25<br>Center: <strong>(2, −3)</strong>, Radius: <strong>5</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Intersection with y = x−6</div><div class="gs-content">Substitute y=x−6 into (x−2)²+(y+3)²=25:<br>(x−2)²+(x−6+3)²=25<br>(x−2)²+(x−3)²=25<br>x²−4x+4+x²−6x+9=25<br>2x²−10x+13=25<br>2x²−10x−12=0<br>x²−5x−6=0<br>(x−6)(x+1)=0 → x=6 or x=−1<br>y: y(6)=0, y(−1)=−7<br>Points: <strong>(6, 0) and (−1, −7)</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Rate at (6, 0) — find nearby point on circle</div><div class="gs-content">At x=5.9: (5.9−2)²+(y+3)²=25 → (3.9)²+(y+3)²=25 → (y+3)²=25−15.21=9.79 → y+3=3.129 → y=0.129<br>Rate ≈ (0.129−0)/(5.9−6) = 0.129/(−0.1) ≈ <strong>−1.29</strong><br><br>Check: The center is (2,−3). The slope from center to (6,0) is (0−(−3))/(6−2) = 3/4. Tangent is perpendicular: slope = −4/3 ≈ −1.33. Close to our approximation ✓</div></div></div>
+        </div>
+        <div class="pane" id="imp-v2">
+          <div class="problem-box"><div class="p-label">Problem — Implicit Graph Reading</div>The relation x² − y² = 9 defines a curve (hyperbola).<br>(a) Check: is (5, 4) on the curve? Is (4, √7) on the curve?<br>(b) For what values of x does a real y exist? (Find the domain.)<br>(c) Find the y-values when x = 5.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) Substitute each point into x²−y²=9</div><input class="s-input" type="text" placeholder="(5,4): 25−16=... =9? (4,√7): 16−7=... =9?"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) y²=x²−9. For real y, need x²−9≥0. When is x²≥9?</div><input class="s-input" type="text" placeholder="x²≥9 → |x|≥3 → domain: x≤−3 or x≥3"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) x=5: y²=25−9=16 → y=?</div><input class="s-input" type="text" placeholder="y = ±..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) (5,4): 25−16=9=9 ✓ <strong>On the curve</strong>. (4,√7): 16−7=9=9 ✓ <strong>On the curve</strong>.<br>(b) y²=x²−9≥0 → x²≥9 → <strong>|x|≥3, i.e. x≤−3 or x≥3</strong><br>(c) y²=16 → <strong>y=4 or y=−4</strong>. Points: (5,4) and (5,−4).</div>
+        </div>
+        <div class="pane" id="imp-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>Two curves: C₁: x² + y² = 100 and C₂: y = (3/4)x − 5.<br><br>(a) Find all intersection points of C₁ and C₂.<br>(b) At each intersection point, state which quadrant it's in.<br>(c) Which intersection point is "higher" (larger y-coordinate)?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Substitute y=(3/4)x−5 into x²+y²=100:<br>x²+((3/4)x−5)²=100<br>x²+(9/16)x²−(30/4)x+25=100<br>(25/16)x²−(15/2)x−75=0<br>Multiply by 16/25: x²−24x/5−48=0 → multiply by 5: 5x²−24x−240=0<br>Wait let me redo:<br>(25/16)x²−(15/2)x−75=0 × 16: 25x²−120x−1200=0 ÷5: 5x²−24x−240=0<br>x=[24±√(576+4800)]/10=[24±√5376]/10=[24±73.3]/10<br>x₁=(24+73.3)/10≈9.73 or x₂=(24−73.3)/10≈−4.93<br><br>y₁=(3/4)(9.73)−5≈7.3−5=<strong>2.30</strong>. y₂=(3/4)(−4.93)−5≈−3.70−5=<strong>−8.70</strong><br><br>Intersection: approximately <strong>(9.73, 2.30)</strong> in QI and <strong>(−4.93, −8.70)</strong> in QIII.<br><br>(c) <strong>(9.73, 2.30) is higher</strong> (larger y-coordinate).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 4B</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Key Rule</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--purple);font-weight:500;">Parametric line</td><td style="color:var(--tx2);font-weight:300;">x=x₀+at, y=y₀+bt. Slope=b/a.</td><td style="color:var(--tx3);font-weight:300;">Speed = √(a²+b²) per unit t, not slope</td></tr>
+        <tr><td style="color:var(--purple);font-weight:500;">Eliminate t (line)</td><td style="color:var(--tx2);font-weight:300;">Solve one for t, substitute into other</td><td style="color:var(--tx3);font-weight:300;">Domain restriction if t is bounded</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Parametric circle</td><td style="color:var(--tx2);font-weight:300;">x=r·cos(t)+h, y=r·sin(t)+k. Center=(h,k), radius=r.</td><td style="color:var(--tx3);font-weight:300;">Unequal coefficients → ellipse, not circle</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Circle transformation</td><td style="color:var(--tx2);font-weight:300;">Shift → change constants. Scale → change r coefficients.</td><td style="color:var(--tx3);font-weight:300;">Don't confuse which constant does what</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Ellipse parametric</td><td style="color:var(--tx2);font-weight:300;">x=a·cos(t)+h, y=b·sin(t)+k. a≠b.</td><td style="color:var(--tx3);font-weight:300;">Eliminate t using identity: cos²+sin²=1</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Implicit — point check</td><td style="color:var(--tx2);font-weight:300;">Substitute (a,b) into the equation. If satisfied → on curve.</td><td style="color:var(--tx3);font-weight:300;">Both x and y must be substituted</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Implicit — intersections</td><td style="color:var(--tx2);font-weight:300;">Solve the system of two equations simultaneously</td><td style="color:var(--tx3);font-weight:300;">Two curves can have 0, 1, 2, or more intersection points</td></tr>
+        <tr><td style="color:var(--orange);font-weight:500;">Implicit — rate</td><td style="color:var(--tx2);font-weight:300;">Approximate with Δy/Δx using a nearby point on the curve</td><td style="color:var(--tx3);font-weight:300;">Stay on the curve when finding the second point</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s4b-implicit.html -->
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

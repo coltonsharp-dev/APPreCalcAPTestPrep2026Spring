@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 2C · Composition, Inverses & Modeling</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#3effa0;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(62,255,160,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(62,255,160,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(62,255,160,0.055) 0%,rgba(192,132,252,0.025) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.28);color:var(--green);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.25);color:var(--green);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--green),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.purple{border-left-color:var(--purple);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* COMPOSITION FLOW DIAGRAM */
+  .flow-diagram{background:var(--d1);border:1px solid var(--b);border-radius:12px;padding:20px;margin:14px 0;}
+  .flow-row{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+  .flow-node{background:var(--d2);border:1px solid var(--b2);border-radius:10px;padding:12px 18px;text-align:center;min-width:100px;}
+  .fn-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .fn-val{font-size:14px;font-weight:500;}
+  .flow-arrow{padding:0 12px;color:var(--tx3);font-size:18px;flex-shrink:0;}
+  .flow-caption{font-size:11px;color:var(--tx3);margin-top:12px;line-height:1.6;}
+
+  /* GRAPHICAL INVERSE */
+  .graph-wrap{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px;margin:14px 0;}
+  .graph-wrap svg{display:block;max-width:100%;margin:0 auto;}
+  .graph-wrap .g-caption{font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;}
+
+  /* RESIDUAL VISUAL */
+  .resid-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  .resid-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px;}
+  .resid-card .rc-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;font-weight:500;}
+  .resid-card svg{display:block;margin:0 auto 10px;}
+  .resid-card .rc-verdict{font-size:12px;font-weight:500;margin-bottom:4px;}
+  .resid-card .rc-desc{font-size:11px;font-weight:300;color:var(--tx3);line-height:1.6;}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(62,255,160,0.08);border:1px solid rgba(62,255,160,0.25);color:var(--green);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(62,255,160,0.16);border-color:var(--green);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--green),var(--purple));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.resid-grid{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 2</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 2C</span>
+  </div>
+  <span class="nav-badge">Composition &amp; Inverses</span>
+</nav>
+
+<div class="page">
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 02 · Topics 2.6–2.9, 2.14–2.15</span>
+      <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Section 2C</span>
+    </div>
+    <h1 class="sec-title">Composition,<br><span>Inverses &amp; Modeling</span></h1>
+    <p class="sec-desc">Function composition from equations, tables, and graphs. Inverse functions — finding them algebraically and reading them graphically. Residuals and model validation. The section your exam data says needs the most work in Unit 2.</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data — Priority Section</div>
+    <strong>Table-based composition and inverses (Q6, Practice Exam 3):</strong> 4 of 10 wrong. <strong>Graphical inverse (Q9, Unit 2 Progress Check):</strong> 4 of 5 wrong — highest miss rate in the unit. <strong>Residuals (Q27, Practice Exam 3):</strong> 5 of 10 wrong. Multi-step composition and inverse-with-composition also consistently split. This section rebuilds these from scratch.
+  </div>
+
+  <!-- ══════════════════════
+       2C.1 · FUNCTION COMPOSITION
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">2C.1</span>
+      <h2 class="topic-title">Function Composition</h2>
+      <span class="topic-sub">Topic 2.7</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What Composition Is — The Chain of Functions</div>
+      <p>Composition feeds the output of one function as the input into another. Written (f ∘ g)(x) = f(g(x)), it means: <strong>evaluate g first, then feed that result into f</strong>.</p>
+      <div class="flow-diagram">
+        <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px;">f(g(x)) — The Order of Operations</div>
+        <div class="flow-row">
+          <div class="flow-node"><div class="fn-label">Input</div><div class="fn-val" style="color:var(--tx3);">x</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="fn-label">Apply g first</div><div class="fn-val" style="color:var(--orange);">g(x)</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="fn-label">Feed into f</div><div class="fn-val" style="color:var(--blue);">f(g(x))</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><div class="fn-label">Final Output</div><div class="fn-val" style="color:var(--green);">answer</div></div>
+        </div>
+        <div class="flow-caption">Reading f(g(x)): the function closest to x is always applied first. g acts on x first, then f acts on the result.</div>
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Order matters — composition is NOT commutative.</strong> f(g(x)) ≠ g(f(x)) in general. f(g(2)) means: find g(2) first, then apply f to that result. g(f(2)) means: find f(2) first, then apply g. Different order = different answer.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Three Ways Composition Appears on the AP</div>
+      <div class="fbox">
+        <div class="flabel">Type 1 — Analytical (from formulas)</div>
+        f(x) = 2x + 1, g(x) = x² − 3<br>
+        f(g(x)) = f(x²−3) = 2(x²−3) + 1 = <span class="mgreen">2x² − 5</span><br>
+        g(f(x)) = g(2x+1) = (2x+1)² − 3 = 4x²+4x+1−3 = <span class="morange">4x² + 4x − 2</span>
+      </div>
+      <div class="fbox blue">
+        <div class="flabel">Type 2 — From a Table (Q6 / Q18 type — high miss rate)</div>
+        <table style="width:100%;font-size:12px;margin:8px 0;border-collapse:collapse;">
+          <tr style="color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">
+            <td style="padding:6px 10px;border:1px solid var(--b);">x</td><td style="padding:6px 10px;border:1px solid var(--b);">1</td><td style="padding:6px 10px;border:1px solid var(--b);">2</td><td style="padding:6px 10px;border:1px solid var(--b);">3</td><td style="padding:6px 10px;border:1px solid var(--b);">4</td>
+          </tr>
+          <tr style="color:var(--gold);">
+            <td style="padding:6px 10px;border:1px solid var(--b);color:var(--tx3);">f(x)</td><td style="padding:6px 10px;border:1px solid var(--b);">5</td><td style="padding:6px 10px;border:1px solid var(--b);">3</td><td style="padding:6px 10px;border:1px solid var(--b);">1</td><td style="padding:6px 10px;border:1px solid var(--b);">2</td>
+          </tr>
+          <tr style="color:var(--blue);">
+            <td style="padding:6px 10px;border:1px solid var(--b);color:var(--tx3);">g(x)</td><td style="padding:6px 10px;border:1px solid var(--b);">2</td><td style="padding:6px 10px;border:1px solid var(--b);">4</td><td style="padding:6px 10px;border:1px solid var(--b);">1</td><td style="padding:6px 10px;border:1px solid var(--b);">3</td>
+          </tr>
+        </table>
+        f(g(2)) = f(4) = <span class="mgreen">2</span> &nbsp;&nbsp;← g(2)=4 first, then f(4)=2<br>
+        g(f(3)) = g(1) = <span class="mgreen">2</span> &nbsp;&nbsp;← f(3)=1 first, then g(1)=2<br>
+        f(f(2)) = f(3) = <span class="mgreen">1</span> &nbsp;&nbsp;← f(2)=3 first, then f(3)=1
+      </div>
+      <div class="fbox purple">
+        <div class="flabel">Type 3 — Real-World Composition (water ripples / nested context)</div>
+        A stone dropped in water creates ripples. Radius: r(t) = 3t (feet). Area: A(r) = πr²<br>
+        Area as function of time: A(r(t)) = A(3t) = π(3t)² = <span class="mpurple">9πt²</span><br><br>
+        Read: "A composed with r" = "area in terms of time" = plug r(t) into A(r).
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Function Composition</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'comp','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'comp','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'comp','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="comp-v1">
+          <div class="problem-box"><div class="p-label">Problem — Table Composition (Q6 Type, Most Missed)</div>Using the table above, find: (a) f(g(1)) &nbsp; (b) g(f(4)) &nbsp; (c) f(g(g(2)))</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) f(g(1)) — evaluate g(1) first, then f of that result</div><div class="gs-content">g(1) = 2 (from table) → f(2) = 3 → <strong>f(g(1)) = 3</strong></div><div class="gs-why">→ The innermost function acts first. g(1) gives us the input for f.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) g(f(4)) — evaluate f(4) first, then g of that result</div><div class="gs-content">f(4) = 2 (from table) → g(2) = 4 → <strong>g(f(4)) = 4</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) f(g(g(2))) — work inside out: three layers</div><div class="gs-content">
+            Layer 1 (innermost): g(2) = 4<br>
+            Layer 2: g(4) = 3 (now apply g to the 4 we got)<br>
+            Layer 3: f(3) = 1<br>
+            <strong>f(g(g(2))) = 1</strong>
+          </div><div class="gs-why">→ Three-layer composition: always evaluate from the inside out. Each output becomes the next input.</div></div></div>
+        </div>
+        <div class="pane" id="comp-v2">
+          <div class="problem-box"><div class="p-label">Problem — Analytical Composition</div>f(x) = √x and g(x) = 4x − 3<br><br>(a) Find f(g(x)) and state its domain.<br>(b) Find g(f(x)) and simplify.<br>(c) Evaluate g(f(16)).</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) f(g(x)) = f(4x−3) = √(4x−3). Domain: argument must be ≥ 0. Solve 4x−3 ≥ 0.</div><input class="s-input" type="text" placeholder="f(g(x)) = √( ) , domain: x ≥ ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) g(f(x)) = g(√x) = 4(√x) − 3 = ?</div><input class="s-input" type="text" placeholder="g(f(x)) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) g(f(16)): find f(16) first, then g of that</div><input class="s-input" type="text" placeholder="f(16) = √16 = ... → g( ) = 4( ) − 3 = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) f(g(x)) = √(4x−3). Domain: 4x−3 ≥ 0 → <strong>x ≥ 3/4</strong><br>(b) g(f(x)) = 4√x − 3. Domain: x ≥ 0.<br>(c) f(16) = 4. g(4) = 4(4)−3 = <strong>13</strong></div>
+        </div>
+        <div class="pane" id="comp-v3">
+          <div class="problem-box"><div class="p-label">Blind — Decomposing a Composition</div>h(x) = (3x + 2)⁵. Express h as f(g(x)) by identifying appropriate f and g. Then verify by computing f(g(x)).<br><br>Also: the area of a square with side s is A(s)=s². A window's side length in terms of time t (seconds) is s(t)=2t+1 feet. Write the area as a function of time and find A when t=3.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">h(x) = (3x+2)⁵: Let g(x) = 3x+2 (inner) and f(x) = x⁵ (outer)<br>Verify: f(g(x)) = f(3x+2) = (3x+2)⁵ = h(x) ✓<br><br>Area: A(s(t)) = A(2t+1) = (2t+1)² = <strong>4t²+4t+1</strong><br>At t=3: A = 4(9)+4(3)+1 = 36+12+1 = <strong>49 sq ft</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2C.2 · INVERSE FUNCTIONS
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">2C.2</span>
+      <h2 class="topic-title">Inverse Functions — All Three Representations</h2>
+      <span class="topic-sub">Topic 2.8 · 🔥 Highest Miss Rate in Unit 2</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What an Inverse Does</div>
+      <p>The inverse function f⁻¹ reverses what f does: if f takes input a to output b, then f⁻¹ takes input b back to output a. The input and output swap roles.</p>
+      <div class="fbox">
+        <div class="flabel">The Core Property</div>
+        f(a) = b &nbsp;↔&nbsp; f⁻¹(b) = a<br><br>
+        f(f⁻¹(x)) = x &nbsp;and&nbsp; f⁻¹(f(x)) = x &nbsp;← they cancel each other<br><br>
+        <span style="color:var(--tx3);font-size:12px">Domain of f = Range of f⁻¹. Range of f = Domain of f⁻¹.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Inverse from a Table — The Most Missed</div>
+      <p>To find f⁻¹ from a table: <strong>swap the x and y columns</strong>. Every row (x, y) in the f table becomes (y, x) in the f⁻¹ table.</p>
+      <div class="fbox gold">
+        <div class="flabel">Table Swap Method</div>
+        <table style="width:100%;font-size:12px;margin:8px 0;border-collapse:collapse;">
+          <tr style="color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">
+            <td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">Table for f</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">x</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">1</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">2</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">3</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">4</td>
+          </tr>
+          <tr style="color:var(--gold);">
+            <td style="padding:6px 10px;border:1px solid var(--b);color:var(--tx3);">f(x)</td><td style="padding:6px 10px;border:1px solid var(--b);color:var(--tx3);"></td><td style="padding:6px 10px;border:1px solid var(--b);">7</td><td style="padding:6px 10px;border:1px solid var(--b);">5</td><td style="padding:6px 10px;border:1px solid var(--b);">9</td><td style="padding:6px 10px;border:1px solid var(--b);">3</td>
+          </tr>
+          <tr style="color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-top:8px;">
+            <td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">Table for f⁻¹</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">x</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">7</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">5</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">9</td><td style="padding:6px 10px;border:1px solid var(--b);background:var(--d2);">3</td>
+          </tr>
+          <tr style="color:var(--green);">
+            <td style="padding:6px 10px;border:1px solid var(--b);color:var(--tx3);">f⁻¹(x)</td><td style="padding:6px 10px;border:1px solid var(--b);color:var(--tx3);"></td><td style="padding:6px 10px;border:1px solid var(--b);">1</td><td style="padding:6px 10px;border:1px solid var(--b);">2</td><td style="padding:6px 10px;border:1px solid var(--b);">3</td><td style="padding:6px 10px;border:1px solid var(--b);">4</td>
+          </tr>
+        </table>
+        f⁻¹(7) = 1 &nbsp; f⁻¹(5) = 2 &nbsp; f⁻¹(9) = 3 &nbsp; f⁻¹(3) = 4<br>
+        <span style="color:var(--tx3);font-size:12px">The output column of f becomes the input column of f⁻¹.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Graphical Inverse — Reading f⁻¹ from a Graph of f</div>
+      <p>The graph of f⁻¹ is the <strong>reflection of the graph of f over the line y = x</strong>. Every point (a, b) on f's graph becomes (b, a) on f⁻¹'s graph.</p>
+
+      <!-- Graphical inverse SVG -->
+      <div class="graph-wrap">
+        <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace">
+          <!-- axes -->
+          <line x1="30" y1="250" x2="360" y2="250" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <line x1="30" y1="10" x2="30" y2="260" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <!-- y=x line of reflection -->
+          <line x1="30" y1="250" x2="350" y2="30" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="300" y="42" fill="rgba(255,255,255,0.3)" font-size="10">y=x</text>
+          <!-- f(x) curve — increasing, concave down through quadrant 1 -->
+          <path d="M50,240 C80,200 120,150 160,110 C200,70 250,50 320,35" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <!-- f⁻¹(x) — reflection, increasing concave up -->
+          <path d="M50,320 C50,250 60,200 90,170 C130,130 180,100 230,80 C280,60 320,45 340,40" fill="none" stroke="none"/>
+          <!-- manually computed reflection points -->
+          <path d="M38,235 C60,225 90,200 130,160 C170,120 220,90 320,50" fill="none" stroke="rgba(62,255,160,0.5)" stroke-width="2" stroke-dasharray="6 4"/>
+          <!-- point on f: (2,5) → scaled: x=2units=80+30=110 from left, y=5units=250-5*40=50 -->
+          <!-- let's use actual points -->
+          <!-- Point A on f at approx (100,170) → represents f(?) = ? -->
+          <circle cx="110" cy="165" r="5" fill="#38bdf8"/>
+          <text x="115" y="160" fill="#38bdf8" font-size="10">(a, b)</text>
+          <!-- Point A reflected at (170,110) -->
+          <circle cx="165" cy="110" r="5" fill="#3effa0"/>
+          <text x="170" y="106" fill="#3effa0" font-size="10">(b, a)</text>
+          <!-- dashed connecting line between the two points -->
+          <line x1="110" y1="165" x2="165" y2="110" stroke="rgba(245,200,66,0.4)" stroke-width="1" stroke-dasharray="3 3"/>
+          <!-- curve labels -->
+          <text x="290" y="28" fill="#38bdf8" font-size="11">y = f(x)</text>
+          <text x="30" y="125" fill="rgba(62,255,160,0.8)" font-size="11">y = f⁻¹(x)</text>
+          <!-- axis labels -->
+          <text x="355" y="255" fill="rgba(255,255,255,0.3)" font-size="10">x</text>
+          <text x="22" y="14" fill="rgba(255,255,255,0.3)" font-size="10">y</text>
+        </svg>
+        <div class="g-caption">f (blue) and f⁻¹ (green dashed) are reflections across y=x. Point (a,b) on f becomes (b,a) on f⁻¹. To read f⁻¹(b) from a graph of f: find b on the y-axis of f, read the corresponding x — that's your answer.</div>
+      </div>
+
+      <div class="fbox red">
+        <div class="flabel">How to Read f⁻¹(b) from a Graph of f — Step by Step</div>
+        To find f⁻¹(5) using a graph of f:<br>
+        Step 1: Find where f(x) = 5 on the graph (find y=5 on the curve)<br>
+        Step 2: Read the x-value at that point<br>
+        Step 3: That x-value is f⁻¹(5)<br><br>
+        Example: if the graph shows f(3) = 5, then f⁻¹(5) = 3.<br>
+        <span style="color:var(--tx3);font-size:12px">You are NOT reading the y-value from the inverse graph — you are finding where f equals the input you're given.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Inverse Algebraically — Swap and Solve</div>
+      <ol style="counter-reset:step;list-style:none;padding:0;display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);"><div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;">1</div><div style="font-size:13px;font-weight:300;color:var(--tx2);">Write y = f(x)</div></div>
+        <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);"><div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;">2</div><div style="font-size:13px;font-weight:300;color:var(--tx2);"><strong style="color:var(--tx);">Swap x and y</strong> — this is the key step that reverses input/output</div></div>
+        <div style="display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);"><div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;">3</div><div style="font-size:13px;font-weight:300;color:var(--tx2);">Solve for y — isolate y on one side</div></div>
+        <div style="display:flex;gap:14px;padding:10px 0;"><div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;">4</div><div style="font-size:13px;font-weight:300;color:var(--tx2);">Rename y as f⁻¹(x). State the domain restriction if needed.</div></div>
+      </ol>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Verifying an Inverse — Composition Check</div>
+      <p>Two functions are inverses if and only if <strong>f(g(x)) = x AND g(f(x)) = x</strong> for all x in the domain. You must check both compositions.</p>
+      <div class="fbox teal">
+        <div class="flabel">Verification Example</div>
+        f(x) = 3x − 5, &nbsp; g(x) = (x+5)/3<br><br>
+        f(g(x)) = 3·<span class="fr"><span class="n">x+5</span><span class="d">3</span></span> − 5 = (x+5) − 5 = <span class="mteal">x ✓</span><br>
+        g(f(x)) = <span class="fr"><span class="n">(3x−5)+5</span><span class="d">3</span></span> = <span class="fr"><span class="n">3x</span><span class="d">3</span></span> = <span class="mteal">x ✓</span><br><br>
+        Both equal x → confirmed inverses.
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Inverse Functions</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'inv','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'inv','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'inv','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="inv-v1">
+          <div class="problem-box"><div class="p-label">Problem — Table Inverse (Q6 Type)</div>
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">x</td><td style="padding:8px 12px;border:1px solid var(--b);">−1</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">5</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">f(x)</td><td style="padding:8px 12px;border:1px solid var(--b);">4</td><td style="padding:8px 12px;border:1px solid var(--b);">−1</td><td style="padding:8px 12px;border:1px solid var(--b);">6</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td></tr>
+          </table></div>
+          Find: (a) f⁻¹(0) &nbsp; (b) f⁻¹(4) &nbsp; (c) f(f⁻¹(6)) &nbsp; (d) f⁻¹(f(−1))</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) f⁻¹(0) — find x where f(x) = 0</div><div class="gs-content">Scan the f(x) row for the value 0. f(5) = 0 → <strong>f⁻¹(0) = 5</strong></div><div class="gs-why">→ The inverse asks: "what input to f gives output 0?" Answer: x=5, because f(5)=0.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) f⁻¹(4) — find x where f(x) = 4</div><div class="gs-content">f(−1) = 4 → <strong>f⁻¹(4) = −1</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) f(f⁻¹(6)) — cancellation law</div><div class="gs-content">f(f⁻¹(x)) = x always. So f(f⁻¹(6)) = <strong>6</strong></div><div class="gs-why">→ Don't compute — use the cancellation law. f and f⁻¹ undo each other.</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) f⁻¹(f(−1)) — cancellation law</div><div class="gs-content">f⁻¹(f(x)) = x always. So f⁻¹(f(−1)) = <strong>−1</strong></div></div></div>
+        </div>
+        <div class="pane" id="inv-v2">
+          <div class="problem-box"><div class="p-label">Problem — Graphical Inverse (Q9 Type — 4/5 wrong)</div>The graph of f passes through (1, 3), (2, 5), (4, 7), and (6, 9).<br><br>(a) Find f⁻¹(3), f⁻¹(7), and f⁻¹(9) from the graph.<br>(b) Find the x-intercept of f⁻¹.<br>(c) If the graph of f has a y-intercept at (0, 2), what point is on the graph of f⁻¹?</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) To find f⁻¹(3): find where f(x) = 3 on the graph (look for y=3), then read x.</div><input class="s-input" type="text" placeholder="f(?)=3: x=... → f⁻¹(3)=... | f(?)=7: x=... → f⁻¹(7)=... | f(?)=9: x=... → f⁻¹(9)=..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) x-intercept of f⁻¹: where does f⁻¹(x) = 0? This means: where does f(x) = ? for its inverse to output 0?</div><input class="s-input" type="text" placeholder="f⁻¹(x)=0 when f(0)=x. f⁻¹ has x-intercept at x = f(0) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Point (0,2) on f means f(0)=2. Swap to get point on f⁻¹.</div><input class="s-input" type="text" placeholder="(0,2) on f → ( , ) on f⁻¹"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) f(1)=3 → <strong>f⁻¹(3)=1</strong> &nbsp;|&nbsp; f(4)=7 → <strong>f⁻¹(7)=4</strong> &nbsp;|&nbsp; f(6)=9 → <strong>f⁻¹(9)=6</strong><br><br>(b) f⁻¹(x)=0 means we need f(0)=x. The y-intercept of f is (0,2), so f(0)=2. Therefore f⁻¹(2)=0 → <strong>x-intercept of f⁻¹ is at x=2</strong>, point (2,0).<br><br>(c) (0,2) on f → swap → <strong>(2,0) on f⁻¹</strong></div>
+        </div>
+        <div class="pane" id="inv-v3">
+          <div class="problem-box"><div class="p-label">Blind</div>(a) Find f⁻¹(x) for f(x) = (2x−1)/(x+3) using the swap-and-solve method.<br>(b) Verify using composition: compute f(f⁻¹(x)) and confirm it equals x.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) y = (2x−1)/(x+3). Swap: x = (2y−1)/(y+3)<br>x(y+3) = 2y−1<br>xy+3x = 2y−1<br>xy−2y = −1−3x<br>y(x−2) = −(1+3x)<br>y = −(1+3x)/(x−2) = (3x+1)/(2−x)<br><strong>f⁻¹(x) = (3x+1)/(2−x)</strong>, domain: x ≠ 2<br><br>(b) f(f⁻¹(x)) = f((3x+1)/(2−x)) = [2·(3x+1)/(2−x)−1] / [(3x+1)/(2−x)+3]<br>Numerator: (6x+2)/(2−x) − 1 = (6x+2−(2−x))/(2−x) = (7x)/(2−x)<br>Denominator: (3x+1)/(2−x) + 3 = (3x+1+6−3x)/(2−x) = 7/(2−x)<br>f(f⁻¹(x)) = [(7x)/(2−x)] / [7/(2−x)] = 7x/7 = <strong>x ✓</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       2C.3 · RESIDUALS & MODEL VALIDATION
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">2C.3</span>
+      <h2 class="topic-title">Residuals &amp; Model Validation</h2>
+      <span class="topic-sub">Topic 2.6 · 🔥 5/10 Wrong on Practice Exam</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What a Residual Is</div>
+      <p>A <strong>residual</strong> is the difference between the actual observed value and the value predicted by the model. It measures how well the model fits at a specific point.</p>
+      <div class="fbox red">
+        <div class="flabel">Residual Formula</div>
+        Residual = <span class="mgreen">Actual value</span> − <span class="mred">Predicted value</span><br>
+        = y<sub>observed</sub> − y<sub>model</sub><br><br>
+        Positive residual: actual &gt; predicted → model <strong>underestimates</strong><br>
+        Negative residual: actual &lt; predicted → model <strong>overestimates</strong>
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Order matters in the formula.</strong> Residual = actual MINUS predicted. Not predicted minus actual. A positive residual means the model fell short (data is above the model line). A negative residual means the model went too high.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Residual Plots — Reading Them to Validate a Model</div>
+      <p>A residual plot shows the residuals on the y-axis vs the x-values (or predicted values) on the x-axis. The pattern in the residual plot tells you whether the model is appropriate.</p>
+
+      <div class="resid-grid">
+        <div class="resid-card">
+          <div class="rc-label" style="color:var(--green);">Good Fit — Random Scatter</div>
+          <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- zero line -->
+            <line x1="10" y1="50" x2="150" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <!-- random scattered points above and below -->
+            <circle cx="20" cy="35" r="3" fill="#3effa0"/><circle cx="35" cy="60" r="3" fill="#3effa0"/>
+            <circle cx="50" cy="42" r="3" fill="#3effa0"/><circle cx="65" cy="55" r="3" fill="#3effa0"/>
+            <circle cx="80" cy="38" r="3" fill="#3effa0"/><circle cx="95" cy="62" r="3" fill="#3effa0"/>
+            <circle cx="110" cy="45" r="3" fill="#3effa0"/><circle cx="125" cy="58" r="3" fill="#3effa0"/>
+            <circle cx="140" cy="40" r="3" fill="#3effa0"/>
+          </svg>
+          <div class="rc-verdict" style="color:var(--green);">Model is appropriate ✓</div>
+          <div class="rc-desc">Points scattered randomly above and below zero. No pattern. Model type fits the data well.</div>
+        </div>
+        <div class="resid-card">
+          <div class="rc-label" style="color:var(--red);">Bad Fit — Curved Pattern</div>
+          <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="50" x2="150" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <!-- U-shape residuals — negative then positive pattern -->
+            <circle cx="20" cy="35" r="3" fill="#f87171"/><circle cx="35" cy="28" r="3" fill="#f87171"/>
+            <circle cx="50" cy="55" r="3" fill="#f87171"/><circle cx="65" cy="65" r="3" fill="#f87171"/>
+            <circle cx="80" cy="68" r="3" fill="#f87171"/><circle cx="95" cy="62" r="3" fill="#f87171"/>
+            <circle cx="110" cy="42" r="3" fill="#f87171"/><circle cx="125" cy="30" r="3" fill="#f87171"/>
+            <circle cx="140" cy="22" r="3" fill="#f87171"/>
+          </svg>
+          <div class="rc-verdict" style="color:var(--red);">Model is NOT appropriate ✗</div>
+          <div class="rc-desc">U-shape or arch pattern visible. Systematic error — try a different model type (exponential instead of linear, etc.)</div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>The AP question pattern for residuals:</strong> You're given a residual plot and asked "Does the linear/exponential model appear appropriate?" Answer based on the shape. Random scatter → yes. Any curve, U-shape, fan, or trend → no, and name what you see.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Choosing the Right Model Type — From a Table or Plot</div>
+      <table class="dtable">
+        <thead><tr><th>Evidence from Data</th><th>Model to Use</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--blue);font-weight:500;">Constant first differences</td><td style="color:var(--tx2);font-weight:300;">Linear f(x) = mx + b</td><td style="color:var(--tx3);font-weight:300;">Adds a constant amount each step</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">Constant ratios</td><td style="color:var(--tx2);font-weight:300;">Exponential f(x) = a·bˣ</td><td style="color:var(--tx3);font-weight:300;">Multiplies by constant each step</td></tr>
+          <tr><td style="color:var(--gold);font-weight:500;">Constant second differences</td><td style="color:var(--tx2);font-weight:300;">Quadratic f(x) = ax²+bx+c</td><td style="color:var(--tx3);font-weight:300;">Second differences constant → degree 2</td></tr>
+          <tr><td style="color:var(--orange);font-weight:500;">Semi-log plot is linear</td><td style="color:var(--tx2);font-weight:300;">Exponential</td><td style="color:var(--tx3);font-weight:300;">Log linearizes exponential data</td></tr>
+          <tr><td style="color:var(--purple);font-weight:500;">Residual plot: random scatter</td><td style="color:var(--tx2);font-weight:300;">Current model is correct</td><td style="color:var(--tx3);font-weight:300;">No systematic error</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Residual plot: U or arch pattern</td><td style="color:var(--tx2);font-weight:300;">Wrong model — try different type</td><td style="color:var(--tx3);font-weight:300;">Systematic error indicates wrong model family</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Residuals &amp; Model Validation</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'resid','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'resid','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'resid','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="resid-v1">
+          <div class="problem-box"><div class="p-label">Problem — Q27 Type (5/10 wrong)</div>A linear model predicts sales (thousands) as S_pred(t) = 12 + 3t. Actual data: t=1: S=16, t=2: S=17, t=3: S=22, t=4: S=26.<br><br>(a) Compute the residual at each time point.<br>(b) Does the residual plot suggest the linear model is appropriate? Explain.<br>(c) What model type might fit better?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Residuals = Actual − Predicted</div><div class="gs-content">
+            t=1: Predicted=15, Actual=16 → residual = 16−15 = <strong>+1</strong><br>
+            t=2: Predicted=18, Actual=17 → residual = 17−18 = <strong>−1</strong><br>
+            t=3: Predicted=21, Actual=22 → residual = 22−21 = <strong>+1</strong><br>
+            t=4: Predicted=24, Actual=26 → residual = 26−24 = <strong>+2</strong>
+          </div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Pattern analysis</div><div class="gs-content">Residuals: +1, −1, +1, +2. These don't show a clear curve — mostly scatter near zero with slight increase at t=4. <strong>The linear model is reasonably appropriate</strong>, but the slightly increasing pattern at the end suggests it may underfit at higher t values.</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) If residuals curve upward at higher t</div><div class="gs-content">An upward curving residual pattern in a linear model suggests the data may actually be <strong>exponential or quadratic</strong> — growing faster than a straight line. Checking ratios of actual values: 16, 17, 22, 26 — ratios aren't constant. Second differences: 1, 5, 4 — not constant either. A <strong>quadratic or exponential</strong> model could be tried.</div></div></div>
+        </div>
+        <div class="pane" id="resid-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>A researcher fits an exponential model to data. The residual plot shows: points at x=1,2,3 are all negative, points at x=4,5 are positive, points at x=6,7 are negative again. Is the exponential model appropriate? What does this suggest?</div>
+          <div class="scaffold-step"><div class="s-prompt">Does the residual plot show random scatter or a pattern?</div><input class="s-input" type="text" placeholder="The pattern is: (describe it) → random / not random"/></div>
+          <div class="scaffold-step"><div class="s-prompt">What does a non-random residual pattern tell you about the model?</div><input class="s-input" type="text" placeholder="It means the model is ... and the data might actually be ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">State your conclusion about whether the exponential model is appropriate.</div><input class="s-input" type="text" placeholder="The exponential model is/is not appropriate because ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">Pattern: negative, negative, negative, positive, positive, negative, negative — a W or arch pattern → <strong>systematic, NOT random scatter</strong><br><br>This means the exponential model has systematic error — it's repeatedly over/under predicting in a pattern.<br><br><strong>The exponential model is NOT appropriate</strong> for this data. The alternating pattern suggests a different function type (possibly sinusoidal, polynomial, or the data has an oscillating structure) would be a better fit.</div>
+        </div>
+        <div class="pane" id="resid-v3">
+          <div class="problem-box"><div class="p-label">Blind — Full Model Validation</div>Data: x = 1,2,3,4,5 and y = 3, 7, 13, 21, 31.<br>(a) Check first differences, second differences, and ratios. What model fits best?<br>(b) A linear model gives predicted values 1, 5, 9, 13, 17. Compute all residuals.<br>(c) Do the residuals confirm your answer to (a)? Explain using the residual pattern.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) 1st differences: 4,6,8,10 — increasing (not constant → not linear)<br>2nd differences: 2,2,2 — <strong>constant → quadratic model</strong><br>Ratios: 7/3≈2.3, 13/7≈1.9, 21/13≈1.6 — not constant → not exponential<br>Best model: <strong>quadratic</strong><br><br>(b) Residuals (actual−predicted): 3−1=2, 7−5=2, 13−9=4, 21−13=8, 31−17=14<br><br>(c) Residuals are 2, 2, 4, 8, 14 — <strong>all positive and rapidly increasing</strong>. This confirms the linear model is wrong — it consistently underestimates and gets worse over time. The increasing pattern confirms the data grows faster than linear (consistent with quadratic).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 2C</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Key Rule</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--orange);font-weight:500;">Composition order</td><td style="color:var(--tx2);font-weight:300;">f(g(x)): g first, then f. Always inside out.</td><td style="color:var(--tx3);font-weight:300;">f∘g ≠ g∘f in general</td></tr>
+        <tr><td style="color:var(--orange);font-weight:500;">Table composition</td><td style="color:var(--tx2);font-weight:300;">f(g(2)): look up g(2), then look up f of that number</td><td style="color:var(--tx3);font-weight:300;">Don't look up f(2) first — g acts first</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Table inverse</td><td style="color:var(--tx2);font-weight:300;">f⁻¹(b) = x where f(x) = b. Scan f row for b.</td><td style="color:var(--tx3);font-weight:300;">Swap columns — don't look up b in the x row</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Graph inverse</td><td style="color:var(--tx2);font-weight:300;">f⁻¹(b): find where f equals b on graph, read x.</td><td style="color:var(--tx3);font-weight:300;">You are reading from the f graph, not an inverse graph</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Cancellation</td><td style="color:var(--tx2);font-weight:300;">f(f⁻¹(x)) = x and f⁻¹(f(x)) = x always</td><td style="color:var(--tx3);font-weight:300;">Only works when x is in the domain</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Residual formula</td><td style="color:var(--tx2);font-weight:300;">Actual − Predicted (not the other way)</td><td style="color:var(--tx3);font-weight:300;">Positive = underestimate. Negative = overestimate.</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Residual plot: good</td><td style="color:var(--tx2);font-weight:300;">Random scatter around zero → model appropriate</td><td style="color:var(--tx3);font-weight:300;">—</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Residual plot: bad</td><td style="color:var(--tx2);font-weight:300;">Any pattern (U, arch, trend) → wrong model type</td><td style="color:var(--tx3);font-weight:300;">Name the pattern in your justification</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s2c-composition.html -->
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

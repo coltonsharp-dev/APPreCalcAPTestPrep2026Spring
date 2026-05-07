@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 3A · The Unit Circle & Trig Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#f5c842;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(245,200,66,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(245,200,66,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(245,200,66,0.055) 0%,rgba(56,189,248,0.02) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.28);color:var(--gold);}
+
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.25);color:var(--gold);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.green{border-left-color:var(--green);}
+  .fbox.blue{border-left-color:var(--blue);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.purple{border-left-color:var(--purple);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* TRIG VALUES TABLE */
+  .trig-table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .trig-table th{background:var(--d2);padding:10px 12px;text-align:center;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);border:1px solid var(--b2);}
+  .trig-table td{padding:10px 12px;border:1px solid var(--b);text-align:center;font-weight:300;color:var(--tx2);}
+  .trig-table td.angle{color:var(--gold);font-weight:500;}
+  .trig-table td.val{color:var(--tx);font-weight:400;}
+  .trig-table tr:hover td{background:var(--glass);}
+  .trig-table .thead-row{background:var(--d1);}
+
+  /* QUADRANT GRID */
+  .quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .quad-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px 16px;}
+  .quad-card .qc-num{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:8px;}
+  .quad-card .qc-signs{font-size:14px;font-weight:400;line-height:1.8;margin-bottom:6px;}
+  .quad-card .qc-range{font-size:11px;font-weight:300;color:var(--tx3);}
+
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .mteal{color:var(--teal);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.25);color:var(--gold);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.25);color:var(--gold);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(245,200,66,0.16);border-color:var(--gold);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--gold),var(--orange));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.quad-grid{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span style="font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Unit 3</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Section 3A</span>
+  </div>
+  <span class="nav-badge">Unit Circle &amp; Trig</span>
+</nav>
+
+<div class="page">
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 03 · Topics 3.1–3.5</span>
+      <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);">Section 3A</span>
+    </div>
+    <h1 class="sec-title">The Unit Circle<br><span>&amp; Trig Functions</span></h1>
+    <p class="sec-desc">What a radian actually is (the definition your class misses most), the full unit circle from first principles, the six trig function definitions, reference angles, and exact values — built to stay in memory, not just memorized for a day.</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data — Priority Section</div>
+    <strong>Radian Measure - Definition (Practice Exam 3, Q16):</strong> 5 out of 10 wrong — the highest miss rate in all of Unit 3. The class knows the conversion formula (degrees × π/180) but not what a radian <em>actually is</em>. The AP tests the definition, not just the conversion. This section starts there and doesn't move on until it's locked.
+  </div>
+
+  <!-- ══════════════════════
+       3A.1 · RADIAN MEASURE
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">3A.1</span>
+      <h2 class="topic-title">Radian Measure — The Definition</h2>
+      <span class="topic-sub">Topic 3.2 · 🔥 5/10 Wrong</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What a Radian Actually Is</div>
+      <p>A radian is not just a unit — it's a ratio. Specifically, a radian is the angle whose <strong>arc length equals the radius</strong> of the circle.</p>
+      <div class="fbox red">
+        <div class="flabel">The Definition (This Is What the AP Tests)</div>
+        One radian = the angle θ such that the arc it intercepts has length equal to the radius r<br><br>
+        More generally: &nbsp; θ (in radians) = <span class="fr"><span class="n" style="color:var(--red);">arc length s</span><span class="d" style="color:var(--blue);">radius r</span></span> = <span class="fr"><span class="n">s</span><span class="d">r</span></span><br><br>
+        Or: &nbsp; s = r·θ &nbsp;&nbsp;← arc length formula
+      </div>
+      <!-- Radian definition diagram -->
+      <div style="background:var(--d1);border:1px solid var(--b);border-radius:12px;padding:20px;margin:14px 0;display:flex;justify-content:center;">
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace">
+          <!-- circle -->
+          <circle cx="120" cy="110" r="80" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          <!-- radius line along x-axis -->
+          <line x1="120" y1="110" x2="200" y2="110" stroke="#38bdf8" stroke-width="2"/>
+          <!-- radius line at ~57.3 degrees -->
+          <line x1="120" y1="110" x2="163" y2="41" stroke="#38bdf8" stroke-width="2"/>
+          <!-- arc from angle 0 to ~1 rad -->
+          <path d="M200,110 A80,80 0 0,0 163,41" fill="none" stroke="#f5c842" stroke-width="3"/>
+          <!-- labels -->
+          <text x="155" y="122" fill="#38bdf8" font-size="11">r</text>
+          <text x="135" y="80" fill="#38bdf8" font-size="11">r</text>
+          <text x="190" y="75" fill="#f5c842" font-size="12" font-weight="500">s = r</text>
+          <!-- angle arc -->
+          <path d="M150,110 A30,30 0 0,0 135,90" fill="none" stroke="rgba(245,200,66,0.5)" stroke-width="1.5"/>
+          <text x="147" y="103" fill="rgba(245,200,66,0.8)" font-size="11">1 rad</text>
+          <!-- annotation -->
+          <text x="4" y="18" fill="rgba(255,255,255,0.4)" font-size="10">When arc length = radius,</text>
+          <text x="4" y="30" fill="rgba(255,255,255,0.4)" font-size="10">the angle is exactly 1 radian.</text>
+          <!-- right side label -->
+          <text x="215" y="60" fill="rgba(245,200,66,0.7)" font-size="10">Arc length</text>
+          <text x="215" y="72" fill="rgba(245,200,66,0.7)" font-size="10">= radius</text>
+          <text x="215" y="84" fill="rgba(245,200,66,0.7)" font-size="10">= 1 radian</text>
+        </svg>
+      </div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Why 2π radians = 360°:</strong> A full circle has circumference 2πr. Dividing by r: 2πr/r = 2π. So a full circle = 2π radians. This isn't a conversion fact to memorize — it follows directly from the definition s/r = θ where s = full circumference = 2πr.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Degrees ↔ Radians Conversion</div>
+      <div class="fbox">
+        <div class="flabel">Conversion Formulas</div>
+        Degrees → Radians: &nbsp; θ<sub>rad</sub> = θ<sub>deg</sub> × <span class="fr"><span class="n">π</span><span class="d">180</span></span><br>
+        Radians → Degrees: &nbsp; θ<sub>deg</sub> = θ<sub>rad</sub> × <span class="fr"><span class="n">180</span><span class="d">π</span></span><br><br>
+        <strong>Key pairs to know cold:</strong><br>
+        0° = 0 &nbsp;|&nbsp; 30° = π/6 &nbsp;|&nbsp; 45° = π/4 &nbsp;|&nbsp; 60° = π/3 &nbsp;|&nbsp; 90° = π/2<br>
+        120° = 2π/3 &nbsp;|&nbsp; 135° = 3π/4 &nbsp;|&nbsp; 150° = 5π/6 &nbsp;|&nbsp; 180° = π<br>
+        210° = 7π/6 &nbsp;|&nbsp; 225° = 5π/4 &nbsp;|&nbsp; 240° = 4π/3 &nbsp;|&nbsp; 270° = 3π/2<br>
+        300° = 5π/3 &nbsp;|&nbsp; 315° = 7π/4 &nbsp;|&nbsp; 330° = 11π/6 &nbsp;|&nbsp; 360° = 2π
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>AP radian definition question pattern (Q16 type):</strong> "An angle of θ radians is formed in a circle with radius r. The arc length intercepted is s. Which of the following must be true?" Answer: s = rθ. The AP tests whether you know the definition, not just the conversion table.</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Radian Definition &amp; Conversion</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'rad','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'rad','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'rad','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="rad-v1">
+          <div class="problem-box"><div class="p-label">Problem — Definition Type (Q16 Type, 5/10 Wrong)</div>A circle has radius 5 cm. An angle θ intercepts an arc of length 10 cm.<br>(a) Find θ in radians.<br>(b) Convert θ to degrees.<br>(c) If the radius were doubled to 10 cm but θ stayed the same, what would the new arc length be?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Use the definition: θ = s/r</div><div class="gs-content">θ = s/r = 10/5 = <strong>2 radians</strong></div><div class="gs-why">→ This IS the definition. Radian = arc length divided by radius. No formula needed beyond knowing the definition.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Convert 2 radians to degrees</div><div class="gs-content">2 × (180/π) = 360/π ≈ <strong>114.6°</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Double the radius, same angle</div><div class="gs-content">s = r·θ = 10 · 2 = <strong>20 cm</strong></div><div class="gs-why">→ Arc length scales proportionally with radius. Doubling r doubles s for the same angle.</div></div></div>
+        </div>
+        <div class="pane" id="rad-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>Convert: (a) 5π/4 to degrees &nbsp; (b) 210° to radians &nbsp; (c) Find the arc length on a circle of radius 6 cm intercepted by an angle of π/3 radians.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) 5π/4 × (180/π) = ?</div><input class="s-input" type="text" placeholder="5π/4 × 180/π = 5 × 180/4 = ...°"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) 210° × (π/180) = ?</div><input class="s-input" type="text" placeholder="210 × π/180 = .../... = ...π"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Arc length s = r·θ with r=6, θ=π/3</div><input class="s-input" type="text" placeholder="s = 6 · π/3 = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) 5π/4 × 180/π = 5×45 = <strong>225°</strong><br>(b) 210 × π/180 = 7π/6 = <strong>7π/6 radians</strong><br>(c) s = 6·(π/3) = <strong>2π cm ≈ 6.28 cm</strong></div>
+        </div>
+        <div class="pane" id="rad-v3">
+          <div class="problem-box"><div class="p-label">Blind — Definition-Based (AP MCQ style)</div>(a) A wheel of radius 4 feet rotates through an angle of 3π/2 radians. How far does a point on the rim travel?<br><br>(b) An angle θ intercepts an arc of length 12π cm on a circle of circumference 36π cm. Find θ in radians and degrees.<br><br>(c) True or false: "A 2-radian angle is larger than a 90° angle." Justify.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) s = r·θ = 4·(3π/2) = <strong>6π feet ≈ 18.85 feet</strong><br><br>(b) Circumference = 36π, so r = 18 (since C=2πr → r=18). θ = s/r = 12π/18 = <strong>2π/3 radians = 120°</strong><br><br>(c) <strong>True.</strong> 90° = π/2 ≈ 1.571 radians. 2 radians &gt; π/2 ≈ 1.571. So a 2-radian angle is slightly larger than a right angle.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       3A.2 · THE UNIT CIRCLE
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">3A.2</span>
+      <h2 class="topic-title">The Unit Circle</h2>
+      <span class="topic-sub">Topic 3.3–3.4</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Why the Unit Circle Has Radius 1</div>
+      <p>The unit circle is a circle centered at the origin with radius <strong>r = 1</strong>. Because r = 1, the arc length formula s = rθ becomes s = θ, meaning arc length in radians equals the angle itself. This is also why trig functions become so clean on the unit circle: since r = 1, the coordinates directly equal sin and cos.</p>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Definitions on the Unit Circle</div>
+      <div class="fbox">
+        <div class="flabel">Trig Functions from Unit Circle Coordinates</div>
+        A point P = (<span class="mblue">x</span>, <span class="mgreen">y</span>) on the unit circle at angle θ satisfies:<br><br>
+        cos(θ) = <span class="mblue">x-coordinate</span> &nbsp;&nbsp; sin(θ) = <span class="mgreen">y-coordinate</span><br><br>
+        tan(θ) = <span class="fr"><span class="n" style="color:var(--green);">y</span><span class="d" style="color:var(--blue);">x</span></span> = <span class="fr"><span class="n">sin θ</span><span class="d">cos θ</span></span><br><br>
+        csc(θ) = <span class="fr"><span class="n">1</span><span class="d">sin θ</span></span> &nbsp; sec(θ) = <span class="fr"><span class="n">1</span><span class="d">cos θ</span></span> &nbsp; cot(θ) = <span class="fr"><span class="n">cos θ</span><span class="d">sin θ</span></span>
+      </div>
+    </div>
+
+    <!-- Full unit circle -->
+    <div style="background:var(--d1);border:1px solid var(--b);border-radius:12px;padding:20px;margin:14px 0;">
+      <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px;text-align:center;">The Complete Unit Circle — All 16 Standard Angles</div>
+      <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace" style="max-width:100%;display:block;margin:0 auto;">
+        <!-- outer circle -->
+        <circle cx="240" cy="240" r="180" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+        <!-- axes -->
+        <line x1="40" y1="240" x2="440" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <line x1="240" y1="40" x2="240" y2="440" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+
+        <!-- QUADRANT I points and labels -->
+        <!-- 0° / 0 rad → (1,0) scaled → (420,240) -->
+        <circle cx="420" cy="240" r="4" fill="var(--gold)"/>
+        <text x="425" y="237" fill="var(--gold)" font-size="10" font-weight="500">0, 2π</text>
+        <text x="425" y="249" fill="rgba(255,255,255,0.5)" font-size="9">(1, 0)</text>
+
+        <!-- 30° / π/6 → cos=√3/2≈0.866, sin=0.5 → (240+180×0.866, 240-180×0.5) = (396,150) -->
+        <circle cx="396" cy="150" r="4" fill="var(--blue)"/>
+        <text x="400" y="142" fill="var(--blue)" font-size="10">π/6</text>
+        <text x="400" y="154" fill="rgba(255,255,255,0.45)" font-size="9">(√3/2, 1/2)</text>
+
+        <!-- 45° / π/4 → cos=sin=√2/2≈0.707 → (240+127, 240-127) = (367,113) -->
+        <circle cx="367" cy="113" r="4" fill="var(--blue)"/>
+        <text x="370" y="105" fill="var(--blue)" font-size="10">π/4</text>
+        <text x="370" y="118" fill="rgba(255,255,255,0.45)" font-size="9">(√2/2, √2/2)</text>
+
+        <!-- 60° / π/3 → cos=0.5, sin=√3/2≈0.866 → (240+90, 240-156) = (330,84) -->
+        <circle cx="330" cy="84" r="4" fill="var(--blue)"/>
+        <text x="310" y="72" fill="var(--blue)" font-size="10">π/3</text>
+        <text x="293" y="85" fill="rgba(255,255,255,0.45)" font-size="9">(1/2, √3/2)</text>
+
+        <!-- 90° / π/2 → (0,1) → (240,60) -->
+        <circle cx="240" cy="60" r="4" fill="var(--gold)"/>
+        <text x="248" y="52" fill="var(--gold)" font-size="10">π/2</text>
+        <text x="248" y="64" fill="rgba(255,255,255,0.5)" font-size="9">(0, 1)</text>
+
+        <!-- QUADRANT II -->
+        <!-- 120° / 2π/3 → cos=-0.5, sin=√3/2 → (240-90, 240-156) = (150,84) -->
+        <circle cx="150" cy="84" r="4" fill="var(--purple)"/>
+        <text x="80" y="72" fill="var(--purple)" font-size="10">2π/3</text>
+        <text x="80" y="85" fill="rgba(255,255,255,0.45)" font-size="9">(−1/2, √3/2)</text>
+
+        <!-- 135° / 3π/4 → (-√2/2,√2/2) → (113,113) -->
+        <circle cx="113" cy="113" r="4" fill="var(--purple)"/>
+        <text x="55" y="105" fill="var(--purple)" font-size="10">3π/4</text>
+        <text x="40" y="118" fill="rgba(255,255,255,0.45)" font-size="9">(−√2/2,√2/2)</text>
+
+        <!-- 150° / 5π/6 → (-√3/2,1/2) → (84,150) -->
+        <circle cx="84" cy="150" r="4" fill="var(--purple)"/>
+        <text x="10" y="143" fill="var(--purple)" font-size="10">5π/6</text>
+        <text x="8" y="156" fill="rgba(255,255,255,0.45)" font-size="9">(−√3/2,1/2)</text>
+
+        <!-- 180° / π → (-1,0) → (60,240) -->
+        <circle cx="60" cy="240" r="4" fill="var(--gold)"/>
+        <text x="10" y="237" fill="var(--gold)" font-size="10">π</text>
+        <text x="6" y="249" fill="rgba(255,255,255,0.5)" font-size="9">(−1, 0)</text>
+
+        <!-- QUADRANT III -->
+        <!-- 210° / 7π/6 → (-√3/2,-1/2) → (84,330) -->
+        <circle cx="84" cy="330" r="4" fill="var(--red)"/>
+        <text x="10" y="325" fill="var(--red)" font-size="10">7π/6</text>
+        <text x="6" y="337" fill="rgba(255,255,255,0.45)" font-size="9">(−√3/2,−1/2)</text>
+
+        <!-- 225° / 5π/4 → (-√2/2,-√2/2) → (113,367) -->
+        <circle cx="113" cy="367" r="4" fill="var(--red)"/>
+        <text x="44" y="361" fill="var(--red)" font-size="10">5π/4</text>
+        <text x="30" y="374" fill="rgba(255,255,255,0.45)" font-size="9">(−√2/2,−√2/2)</text>
+
+        <!-- 240° / 4π/3 → (-1/2,-√3/2) → (150,396) -->
+        <circle cx="150" cy="396" r="4" fill="var(--red)"/>
+        <text x="80" y="407" fill="var(--red)" font-size="10">4π/3</text>
+        <text x="76" y="418" fill="rgba(255,255,255,0.45)" font-size="9">(−1/2,−√3/2)</text>
+
+        <!-- 270° / 3π/2 → (0,-1) → (240,420) -->
+        <circle cx="240" cy="420" r="4" fill="var(--gold)"/>
+        <text x="248" y="418" fill="var(--gold)" font-size="10">3π/2</text>
+        <text x="248" y="430" fill="rgba(255,255,255,0.5)" font-size="9">(0, −1)</text>
+
+        <!-- QUADRANT IV -->
+        <!-- 300° / 5π/3 → (1/2,-√3/2) → (330,396) -->
+        <circle cx="330" cy="396" r="4" fill="var(--orange)"/>
+        <text x="296" y="407" fill="var(--orange)" font-size="10">5π/3</text>
+        <text x="290" y="418" fill="rgba(255,255,255,0.45)" font-size="9">(1/2,−√3/2)</text>
+
+        <!-- 315° / 7π/4 → (√2/2,-√2/2) → (367,367) -->
+        <circle cx="367" cy="367" r="4" fill="var(--orange)"/>
+        <text x="370" y="362" fill="var(--orange)" font-size="10">7π/4</text>
+        <text x="370" y="375" fill="rgba(255,255,255,0.45)" font-size="9">(√2/2,−√2/2)</text>
+
+        <!-- 330° / 11π/6 → (√3/2,-1/2) → (396,330) -->
+        <circle cx="396" cy="330" r="4" fill="var(--orange)"/>
+        <text x="400" y="325" fill="var(--orange)" font-size="10">11π/6</text>
+        <text x="400" y="337" fill="rgba(255,255,255,0.45)" font-size="9">(√3/2,−1/2)</text>
+
+        <!-- Quadrant labels -->
+        <text x="330" y="195" fill="rgba(56,189,248,0.4)" font-size="13" font-weight="700">I</text>
+        <text x="140" y="195" fill="rgba(192,132,252,0.4)" font-size="13" font-weight="700">II</text>
+        <text x="135" y="300" fill="rgba(248,113,113,0.4)" font-size="13" font-weight="700">III</text>
+        <text x="325" y="300" fill="rgba(251,146,60,0.4)" font-size="13" font-weight="700">IV</text>
+
+        <!-- center point -->
+        <circle cx="240" cy="240" r="3" fill="rgba(255,255,255,0.3)"/>
+      </svg>
+      <div style="font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;">Each point is (cos θ, sin θ). Blue = QI, Purple = QII, Red = QIII, Orange = QIV. Gold = axes.</div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Memory Strategy — The Three Special Triangles</div>
+      <p>The unit circle coordinates come from two special right triangles. Know these and you can reconstruct the entire unit circle.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0;">
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">30-60-90</div>
+          <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 8px;display:block;">
+            <polygon points="10,70 90,70 10,10" fill="rgba(245,200,66,0.1)" stroke="rgba(245,200,66,0.4)" stroke-width="1.5"/>
+            <text x="30" y="78" fill="rgba(245,200,66,0.7)" font-size="9">√3</text>
+            <text x="2" y="42" fill="rgba(245,200,66,0.7)" font-size="9">1</text>
+            <text x="50" y="42" fill="rgba(245,200,66,0.7)" font-size="9">2</text>
+            <text x="12" y="22" fill="rgba(255,255,255,0.5)" font-size="8">60°</text>
+            <text x="60" y="68" fill="rgba(255,255,255,0.5)" font-size="8">30°</text>
+          </svg>
+          <div style="font-size:11px;font-weight:300;color:var(--tx2);line-height:1.7;">Sides: 1, √3, 2<br>sin 30°=1/2, cos 30°=√3/2<br>sin 60°=√3/2, cos 60°=1/2</div>
+        </div>
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">45-45-90</div>
+          <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 8px;display:block;">
+            <polygon points="10,70 90,70 90,10" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+            <text x="40" y="78" fill="rgba(56,189,248,0.7)" font-size="9">1</text>
+            <text x="92" y="42" fill="rgba(56,189,248,0.7)" font-size="9">1</text>
+            <text x="40" y="35" fill="rgba(56,189,248,0.7)" font-size="9">√2</text>
+            <text x="12" y="68" fill="rgba(255,255,255,0.5)" font-size="8">45°</text>
+            <text x="70" y="22" fill="rgba(255,255,255,0.5)" font-size="8">45°</text>
+          </svg>
+          <div style="font-size:11px;font-weight:300;color:var(--tx2);line-height:1.7;">Sides: 1, 1, √2<br>sin 45°=√2/2, cos 45°=√2/2<br>tan 45°=1</div>
+        </div>
+        <div style="background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px;text-align:center;">
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Axes</div>
+          <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto 8px;display:block;">
+            <circle cx="50" cy="40" r="30" fill="none" stroke="rgba(62,255,160,0.3)" stroke-width="1.5"/>
+            <line x1="20" y1="40" x2="80" y2="40" stroke="rgba(62,255,160,0.4)" stroke-width="1.5"/>
+            <line x1="50" y1="10" x2="50" y2="70" stroke="rgba(62,255,160,0.4)" stroke-width="1.5"/>
+            <circle cx="80" cy="40" r="3" fill="#3effa0"/>
+            <circle cx="50" cy="10" r="3" fill="#3effa0"/>
+          </svg>
+          <div style="font-size:11px;font-weight:300;color:var(--tx2);line-height:1.7;">0°: (1,0)<br>90°: (0,1)<br>180°: (−1,0)<br>270°: (0,−1)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Unit Circle Values</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'uc','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'uc','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'uc','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="uc-v1">
+          <div class="problem-box"><div class="p-label">Problem</div>Find the exact value of each without a calculator:<br>(a) cos(2π/3) &nbsp; (b) sin(5π/4) &nbsp; (c) tan(7π/6) &nbsp; (d) cos(−π/6)</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) cos(2π/3) — Quadrant II, reference angle π/3</div><div class="gs-content">2π/3 is in QII (between π/2 and π). Reference angle = π − 2π/3 = π/3.<br>cos(π/3) = 1/2. In QII, cosine is negative.<br>cos(2π/3) = <strong>−1/2</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) sin(5π/4) — Quadrant III, reference angle π/4</div><div class="gs-content">5π/4 is in QIII (between π and 3π/2). Reference angle = 5π/4 − π = π/4.<br>sin(π/4) = √2/2. In QIII, sine is negative.<br>sin(5π/4) = <strong>−√2/2</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) tan(7π/6) — Quadrant III</div><div class="gs-content">Reference angle = 7π/6 − π = π/6. tan(π/6) = 1/√3 = √3/3. In QIII, tan is positive (sin and cos both negative, so negative/negative = positive).<br>tan(7π/6) = <strong>√3/3</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">(d) cos(−π/6) — negative angle means clockwise</div><div class="gs-content">−π/6 is the same as going clockwise from 0 by π/6, landing in QIV where cosine is positive.<br>cos(−π/6) = cos(π/6) = <strong>√3/2</strong></div><div class="gs-why">→ Cosine is an even function: cos(−θ) = cos(θ). So cos(−π/6) = cos(π/6).</div></div></div>
+        </div>
+        <div class="pane" id="uc-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>Without a calculator, evaluate: (a) sin(3π/2) &nbsp; (b) tan(π/4) &nbsp; (c) sec(π/3) &nbsp; (d) csc(5π/6)</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) 3π/2 is on a coordinate axis. What point is at 270° on the unit circle?</div><input class="s-input" type="text" placeholder="Point at 270°: ( , ) → sin(3π/2) = y-coord = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) tan(π/4): use the triangle or coordinates at 45°. cos=sin=√2/2. tan=sin/cos=?</div><input class="s-input" type="text" placeholder="tan(π/4) = (√2/2)/(√2/2) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) sec(π/3) = 1/cos(π/3). What is cos(60°)?</div><input class="s-input" type="text" placeholder="cos(π/3) = ... → sec(π/3) = 1/( ) = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(d) csc(5π/6) = 1/sin(5π/6). Reference angle = π−5π/6 = π/6, QII so sin positive.</div><input class="s-input" type="text" placeholder="sin(5π/6) = sin(π/6) = ... → csc(5π/6) = 1/( ) = ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) Point at 3π/2 is (0,−1) → sin(3π/2) = <strong>−1</strong><br>(b) tan(π/4) = 1 → <strong>1</strong><br>(c) cos(π/3)=1/2 → sec(π/3) = 1/(1/2) = <strong>2</strong><br>(d) sin(5π/6)=sin(π/6)=1/2 → csc(5π/6) = <strong>2</strong></div>
+        </div>
+        <div class="pane" id="uc-v3">
+          <div class="problem-box"><div class="p-label">Blind — All Six Functions</div>θ is in Quadrant III and cos θ = −4/5. Find sin θ, tan θ, csc θ, sec θ, and cot θ.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">QII: cos = x = −4/5. Using x²+y²=1: (4/5)²+y²=1 → y²=9/25 → y=±3/5. In QIII, y&lt;0 → sin θ = y = <strong>−3/5</strong><br><br>tan θ = sin/cos = (−3/5)/(−4/5) = <strong>3/4</strong> (positive in QIII ✓)<br>csc θ = 1/sin = 1/(−3/5) = <strong>−5/3</strong><br>sec θ = 1/cos = 1/(−4/5) = <strong>−5/4</strong><br>cot θ = cos/sin = (−4/5)/(−3/5) = <strong>4/3</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       3A.3 · REFERENCE ANGLES & SIGNS
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">3A.3</span>
+      <h2 class="topic-title">Reference Angles &amp; Quadrant Signs</h2>
+      <span class="topic-sub">Topics 3.4–3.5</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Reference Angles — The Shortcut to Any Exact Value</div>
+      <p>The reference angle is the <strong>positive acute angle between the terminal side and the x-axis</strong>. It's always between 0 and π/2. Every non-axis angle has a reference angle, and the trig values at the original angle equal the trig values at the reference angle — with the sign adjusted for the quadrant.</p>
+      <div class="fbox gold">
+        <div class="flabel">Reference Angle by Quadrant</div>
+        QI (0 to π/2): &nbsp;&nbsp; ref = θ itself<br>
+        QII (π/2 to π): &nbsp; ref = π − θ<br>
+        QIII (π to 3π/2): ref = θ − π<br>
+        QIV (3π/2 to 2π): ref = 2π − θ<br><br>
+        <span style="color:var(--tx3);font-size:12px">Then: |trig(θ)| = trig(ref angle). Adjust sign based on quadrant.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Sign of Each Trig Function by Quadrant — ASTC</div>
+      <div class="quad-grid">
+        <div class="quad-card">
+          <div class="qc-num" style="color:var(--blue);">QI</div>
+          <div class="qc-signs"><span class="mgreen">All positive</span></div>
+          <div class="qc-range">0 &lt; θ &lt; π/2</div>
+        </div>
+        <div class="quad-card">
+          <div class="qc-num" style="color:var(--purple);">QII</div>
+          <div class="qc-signs"><span class="mgreen">Sin</span> positive<br><span class="mred">Cos, Tan</span> negative</div>
+          <div class="qc-range">π/2 &lt; θ &lt; π</div>
+        </div>
+        <div class="quad-card">
+          <div class="qc-num" style="color:var(--red);">QIII</div>
+          <div class="qc-signs"><span class="mgreen">Tan</span> positive<br><span class="mred">Sin, Cos</span> negative</div>
+          <div class="qc-range">π &lt; θ &lt; 3π/2</div>
+        </div>
+        <div class="quad-card">
+          <div class="qc-num" style="color:var(--orange);">QIV</div>
+          <div class="qc-signs"><span class="mgreen">Cos</span> positive<br><span class="mred">Sin, Tan</span> negative</div>
+          <div class="qc-range">3π/2 &lt; θ &lt; 2π</div>
+        </div>
+      </div>
+      <div class="fbox purple">
+        <div class="flabel">The ASTC Memory Device</div>
+        <strong>A</strong>ll <strong>S</strong>tudents <strong>T</strong>ake <strong>C</strong>alculus<br><br>
+        QI = <strong>A</strong>ll positive &nbsp; QII = <strong>S</strong>ine positive &nbsp; QIII = <strong>T</strong>angent positive &nbsp; QIV = <strong>C</strong>osine positive<br><br>
+        Reciprocals follow the same sign as their base: csc follows sin, sec follows cos, cot follows tan.
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Complete Special Value Table</div>
+      <table class="trig-table">
+        <tr class="thead-row">
+          <th>θ (rad)</th><th>θ (deg)</th><th>sin θ</th><th>cos θ</th><th>tan θ</th>
+        </tr>
+        <tr><td class="angle">0</td><td class="angle">0°</td><td class="val">0</td><td class="val">1</td><td class="val">0</td></tr>
+        <tr><td class="angle">π/6</td><td class="angle">30°</td><td class="val">1/2</td><td class="val">√3/2</td><td class="val">√3/3</td></tr>
+        <tr><td class="angle">π/4</td><td class="angle">45°</td><td class="val">√2/2</td><td class="val">√2/2</td><td class="val">1</td></tr>
+        <tr><td class="angle">π/3</td><td class="angle">60°</td><td class="val">√3/2</td><td class="val">1/2</td><td class="val">√3</td></tr>
+        <tr><td class="angle">π/2</td><td class="angle">90°</td><td class="val">1</td><td class="val">0</td><td class="val">undefined</td></tr>
+        <tr><td class="angle">2π/3</td><td class="angle">120°</td><td class="val">√3/2</td><td class="val">−1/2</td><td class="val">−√3</td></tr>
+        <tr><td class="angle">3π/4</td><td class="angle">135°</td><td class="val">√2/2</td><td class="val">−√2/2</td><td class="val">−1</td></tr>
+        <tr><td class="angle">5π/6</td><td class="angle">150°</td><td class="val">1/2</td><td class="val">−√3/2</td><td class="val">−√3/3</td></tr>
+        <tr><td class="angle">π</td><td class="angle">180°</td><td class="val">0</td><td class="val">−1</td><td class="val">0</td></tr>
+        <tr><td class="angle">7π/6</td><td class="angle">210°</td><td class="val">−1/2</td><td class="val">−√3/2</td><td class="val">√3/3</td></tr>
+        <tr><td class="angle">5π/4</td><td class="angle">225°</td><td class="val">−√2/2</td><td class="val">−√2/2</td><td class="val">1</td></tr>
+        <tr><td class="angle">4π/3</td><td class="angle">240°</td><td class="val">−√3/2</td><td class="val">−1/2</td><td class="val">√3</td></tr>
+        <tr><td class="angle">3π/2</td><td class="angle">270°</td><td class="val">−1</td><td class="val">0</td><td class="val">undefined</td></tr>
+        <tr><td class="angle">5π/3</td><td class="angle">300°</td><td class="val">−√3/2</td><td class="val">1/2</td><td class="val">−√3</td></tr>
+        <tr><td class="angle">7π/4</td><td class="angle">315°</td><td class="val">−√2/2</td><td class="val">√2/2</td><td class="val">−1</td></tr>
+        <tr><td class="angle">11π/6</td><td class="angle">330°</td><td class="val">−1/2</td><td class="val">√3/2</td><td class="val">−√3/3</td></tr>
+        <tr><td class="angle">2π</td><td class="angle">360°</td><td class="val">0</td><td class="val">1</td><td class="val">0</td></tr>
+      </table>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Reference Angles &amp; Signs</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'ref','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'ref','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'ref','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="ref-v1">
+          <div class="problem-box"><div class="p-label">Problem — Full Reference Angle Process</div>Find the exact value of tan(11π/6) using the reference angle method. Show every step.</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Identify the quadrant</div><div class="gs-content">11π/6 ≈ 5.76 radians. 3π/2 ≈ 4.71 and 2π ≈ 6.28. Since 4.71 &lt; 5.76 &lt; 6.28 → <strong>QIV</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">Find the reference angle</div><div class="gs-content">QIV: ref = 2π − θ = 2π − 11π/6 = 12π/6 − 11π/6 = <strong>π/6</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">Evaluate at reference angle</div><div class="gs-content">tan(π/6) = 1/√3 = √3/3</div></div></div>
+          <div class="guided-step"><div class="gs-num">4</div><div class="gs-body"><div class="gs-label">Apply the quadrant sign</div><div class="gs-content">In QIV, tangent is <strong>negative</strong> (ASTC: only Cosine positive in QIV)<br>tan(11π/6) = <strong>−√3/3</strong></div></div></div>
+        </div>
+        <div class="pane" id="ref-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>Find the exact value using reference angles: (a) sin(4π/3) &nbsp; (b) cos(5π/4) &nbsp; (c) tan(5π/3)</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) 4π/3: which quadrant? Ref angle = 4π/3 − π = ? Sign of sin in that quadrant?</div><input class="s-input" type="text" placeholder="Quadrant: ... Ref: π/3. sin(π/3)= ... Sign in Q?: ... → sin(4π/3)=..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) 5π/4: which quadrant? Ref angle = 5π/4 − π = ? Sign of cos?</div><input class="s-input" type="text" placeholder="Quadrant: ... Ref: π/4. cos(π/4)= ... Sign: ... → cos(5π/4)=..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) 5π/3: which quadrant? Ref = 2π−5π/3 = ? Sign of tan?</div><input class="s-input" type="text" placeholder="Quadrant: ... Ref: π/3. tan(π/3)=√3. Sign: ... → tan(5π/3)=..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) QIII. Ref=π/3. sin(π/3)=√3/2. QIII sin is negative → <strong>−√3/2</strong><br>(b) QIII. Ref=π/4. cos(π/4)=√2/2. QIII cos is negative → <strong>−√2/2</strong><br>(c) QIV. Ref=π/3. tan(π/3)=√3. QIV tan is negative → <strong>−√3</strong></div>
+        </div>
+        <div class="pane" id="ref-v3">
+          <div class="problem-box"><div class="p-label">Blind — Mixed Exact Values</div>Evaluate exactly (no calculator):<br>(a) sin(−4π/3) &nbsp; (b) cos(17π/6) &nbsp; (c) tan(−7π/4) &nbsp; (d) csc(5π/3)</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) sin(−4π/3): sin is odd → sin(−θ)=−sin(θ) → −sin(4π/3). QIII ref=π/3. sin(π/3)=√3/2, QIII sin negative → sin(4π/3)=−√3/2. So sin(−4π/3) = −(−√3/2) = <strong>√3/2</strong><br><br>(b) cos(17π/6): 17π/6 = 2π + 5π/6 → same as cos(5π/6). QII ref=π/6. cos(π/6)=√3/2. QII cos negative → <strong>−√3/2</strong><br><br>(c) tan(−7π/4): tan is odd → −tan(7π/4). QIV ref=π/4. tan(π/4)=1. QIV tan negative → tan(7π/4)=−1. So tan(−7π/4) = −(−1) = <strong>1</strong><br><br>(d) csc(5π/3) = 1/sin(5π/3). QIV ref=π/3. sin(π/3)=√3/2. QIV sin negative → sin(5π/3)=−√3/2. csc = 1/(−√3/2) = <strong>−2/√3 = −2√3/3</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 3A</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Key Rule</th><th>Watch Out</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--red);font-weight:500;">Radian definition</td><td style="color:var(--tx2);font-weight:300;">θ = s/r → 1 rad = angle where arc = radius</td><td style="color:var(--tx3);font-weight:300;">The AP tests the definition, not just the conversion</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">Arc length</td><td style="color:var(--tx2);font-weight:300;">s = rθ (θ must be in radians)</td><td style="color:var(--tx3);font-weight:300;">Convert to radians first if given degrees</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Unit circle coords</td><td style="color:var(--tx2);font-weight:300;">Point = (cos θ, sin θ)</td><td style="color:var(--tx3);font-weight:300;">cos = x, sin = y. Not the other way around.</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Tan definition</td><td style="color:var(--tx2);font-weight:300;">tan θ = sin θ / cos θ = y/x</td><td style="color:var(--tx3);font-weight:300;">Undefined when cos θ = 0 (at π/2, 3π/2)</td></tr>
+        <tr><td style="color:var(--purple);font-weight:500;">ASTC signs</td><td style="color:var(--tx2);font-weight:300;">All, Sin, Tan, Cos — which is positive in QI,II,III,IV</td><td style="color:var(--tx3);font-weight:300;">Reciprocals match their base function's sign</td></tr>
+        <tr><td style="color:var(--orange);font-weight:500;">Reference angles</td><td style="color:var(--tx2);font-weight:300;">QII: π−θ. QIII: θ−π. QIV: 2π−θ</td><td style="color:var(--tx3);font-weight:300;">Always acute. Between 0 and π/2.</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Even/Odd identities</td><td style="color:var(--tx2);font-weight:300;">cos(−θ)=cos(θ). sin(−θ)=−sin(θ). tan(−θ)=−tan(θ)</td><td style="color:var(--tx3);font-weight:300;">cos is even (symmetric). sin and tan are odd.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s3a-unitcircle.html -->
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>

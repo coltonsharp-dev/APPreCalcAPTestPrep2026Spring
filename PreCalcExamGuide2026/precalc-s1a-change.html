@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 1A · Functions & Change in Tandem</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f;--d1:#0b0f1e;--d2:#111828;
+    --glass:rgba(255,255,255,0.044);--b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.12);
+    --green:#3effa0;--gold:#f5c842;--red:#f87171;--blue:#38bdf8;
+    --purple:#c084fc;--cyan:#00e5ff;--orange:#fb923c;--teal:#2dd4bf;
+    --tx:#dde6f5;--tx2:#8898b8;--tx3:#4a5570;--accent:#38bdf8;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(56,189,248,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.02) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+  body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(56,189,248,0.06) 0%,rgba(0,229,255,0.025) 45%,transparent 70%);pointer-events:none;z-index:0;}
+
+  /* NAV */
+  .topnav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);}
+  .back-btn{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid var(--b);background:var(--glass);transition:all 0.2s;}
+  .back-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-unit{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .nav-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);}
+  .nav-badge{font-size:11px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:100px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.28);color:var(--blue);}
+
+  /* LAYOUT */
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:48px 32px 100px;}
+
+  /* HEADER */
+  .section-header{margin-bottom:52px;}
+  .sec-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .sec-unit-badge{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:4px 12px;border-radius:100px;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);color:var(--blue);}
+  .sec-code{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);line-height:1.0;letter-spacing:-0.02em;margin-bottom:16px;}
+  .sec-title span{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .sec-desc{font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.8;}
+
+  /* EXAM ALERT */
+  .exam-alert{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--red);border-radius:10px;padding:14px 18px;margin-bottom:32px;font-size:12px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .exam-alert strong{color:var(--red);font-weight:500;}
+  .ea-header{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+
+  /* TOPIC */
+  .topic{margin-bottom:60px;}
+  .topic-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--b);}
+  .topic-num{font-size:11px;font-weight:500;letter-spacing:0.15em;color:var(--accent);min-width:36px;}
+  .topic-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--tx);}
+  .topic-sub{font-size:11px;color:var(--tx3);font-weight:300;margin-left:auto;}
+
+  /* CONCEPT */
+  .concept{background:var(--glass);border:1px solid var(--b);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+  .concept-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .concept p{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:10px;}
+  .concept p:last-child{margin-bottom:0;}
+  .concept strong{color:var(--tx);font-weight:500;}
+
+  /* FORMULA BOX */
+  .fbox{background:var(--d2);border:1px solid var(--b2);border-left:3px solid var(--accent);border-radius:8px;padding:16px 20px;margin:12px 0;font-size:13px;font-weight:400;color:var(--tx);line-height:2.1;}
+  .fbox .flabel{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+  .fbox.gold{border-left-color:var(--gold);}
+  .fbox.green{border-left-color:var(--green);}
+  .fbox.red{border-left-color:var(--red);}
+  .fbox.purple{border-left-color:var(--purple);}
+  .fbox.orange{border-left-color:var(--orange);}
+  .fbox.teal{border-left-color:var(--teal);}
+
+  /* CALLOUT */
+  .callout{display:flex;gap:12px;align-items:flex-start;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:300;line-height:1.75;margin:10px 0;}
+  .callout-warn{background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.2);color:var(--tx2);}
+  .callout-tip{background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.18);color:var(--tx2);}
+  .callout-err{background:rgba(248,113,113,0.07);border:1px solid rgba(248,113,113,0.2);color:var(--tx2);}
+  .callout-info{background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.2);color:var(--tx2);}
+  .callout-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+  .callout strong{font-weight:500;color:var(--tx);}
+
+  /* BEHAVIOR TABLE */
+  .beh-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .beh-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:14px 16px;}
+  .beh-card .bc-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;font-weight:500;}
+  .beh-card .bc-body{font-size:12px;font-weight:300;color:var(--tx2);line-height:1.8;}
+  .beh-card .bc-body strong{color:var(--tx);font-weight:500;}
+
+  /* CONCAVITY VISUAL */
+  .concav-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  .concav-card{background:var(--d2);border:1px solid var(--b);border-radius:10px;padding:16px;text-align:center;}
+  .concav-card .cc-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;font-weight:500;}
+  .concav-card svg{display:block;margin:0 auto 10px;}
+  .concav-card .cc-desc{font-size:11px;font-weight:300;color:var(--tx2);line-height:1.7;}
+  .concav-card .cc-desc strong{color:var(--tx);font-weight:500;}
+
+  /* TANDEM TABLE */
+  .dtable{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0;}
+  .dtable th{background:var(--d2);padding:10px 14px;text-align:left;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);border-bottom:1px solid var(--b2);}
+  .dtable td{padding:10px 14px;border-bottom:1px solid var(--b);color:var(--tx2);font-weight:300;vertical-align:top;line-height:1.7;}
+  .dtable tr:hover td{background:var(--glass);}
+
+  /* MATH */
+  .m{color:var(--gold);font-weight:500;}
+  .mblue{color:var(--blue);font-weight:500;}
+  .mgreen{color:var(--green);font-weight:500;}
+  .mred{color:var(--red);font-weight:500;}
+  .mpurple{color:var(--purple);font-weight:500;}
+  .morange{color:var(--orange);font-weight:500;}
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  /* GUIDED STEPS */
+  .guided-step{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;padding:14px;background:var(--glass);border:1px solid var(--b);border-radius:10px;}
+  .gs-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25);color:var(--blue);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .gs-body{flex:1;}
+  .gs-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--tx3);margin-bottom:4px;}
+  .gs-content{font-size:13px;font-weight:300;color:var(--tx2);line-height:1.75;}
+  .gs-content strong{color:var(--tx);font-weight:500;}
+  .gs-why{font-size:11px;color:var(--tx3);font-style:italic;margin-top:4px;}
+
+  /* PRACTICE */
+  .practice-section{margin-top:24px;border:1px solid var(--b2);border-radius:14px;overflow:hidden;}
+  .practice-header{background:var(--d2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);}
+  .practice-header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx);}
+  .practice-tabs{display:flex;gap:4px;}
+  .ptab{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent;color:var(--tx3);transition:all 0.2s;background:transparent;}
+  .ptab.active{background:var(--glass);border-color:var(--accent);color:var(--accent);}
+  .ptab:hover:not(.active){color:var(--tx2);}
+  .practice-body{padding:24px;}
+  .pane{display:none;}
+  .pane.active{display:block;}
+
+  .problem-box{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px 22px;margin-bottom:18px;font-size:14px;color:var(--tx);line-height:1.8;}
+  .problem-box .p-label{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;}
+
+  /* GRAPH EMBED */
+  .graph-wrap{background:var(--d1);border:1px solid var(--b);border-radius:10px;padding:18px;margin-bottom:14px;}
+  .graph-wrap svg{display:block;max-width:100%;margin:0 auto;}
+  .graph-wrap .g-caption{font-size:11px;color:var(--tx3);text-align:center;margin-top:10px;line-height:1.6;}
+
+  .scaffold-step{padding:12px 16px;margin-bottom:10px;border:1px dashed rgba(255,255,255,0.1);border-radius:8px;}
+  .scaffold-step .s-prompt{font-size:12px;color:var(--tx3);margin-bottom:8px;}
+  .scaffold-step .s-input{background:var(--d2);border:1px solid var(--b2);border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);width:100%;outline:none;transition:border-color 0.2s;}
+  .scaffold-step .s-input:focus{border-color:var(--accent);}
+
+  .reveal-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.08em;padding:9px 20px;border-radius:8px;cursor:pointer;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.25);color:var(--blue);transition:all 0.2s;margin-top:14px;}
+  .reveal-btn:hover{background:rgba(56,189,248,0.16);border-color:var(--blue);}
+  .answer-box{display:none;margin-top:14px;padding:16px 20px;background:rgba(62,255,160,0.05);border:1px solid rgba(62,255,160,0.2);border-radius:10px;font-size:13px;font-weight:300;color:var(--tx2);line-height:1.9;}
+  .answer-box strong{color:var(--green);font-weight:500;}
+  .answer-box.shown{display:block;}
+
+  .div-line{border:none;border-top:1px solid var(--b);margin:48px 0 0;}
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;transform:scaleX(0);transition:transform 0.1s;}
+  .scroll-top{position:fixed;bottom:32px;right:32px;z-index:50;width:40px;height:40px;border-radius:50%;background:var(--d2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx3);transition:all 0.2s;opacity:0;pointer-events:none;}
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--accent);color:var(--accent);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  @media(max-width:600px){.page{padding:32px 16px 80px;}.topnav{padding:12px 16px;}.beh-grid,.concav-row{grid-template-columns:1fr;}.nav-center{display:none;}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Guide
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Unit 1</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span class="nav-title">Section 1A</span>
+  </div>
+  <span class="nav-badge">Change in Tandem</span>
+</nav>
+
+<div class="page">
+
+  <div class="section-header">
+    <div class="sec-eyebrow">
+      <span class="sec-unit-badge">Unit 01 · Topics 1.1–1.3</span>
+      <span class="sec-code">Section 1A</span>
+    </div>
+    <h1 class="sec-title">Functions &amp;<br><span>Change in Tandem</span></h1>
+    <p class="sec-desc">How to read, describe, and calculate how quantities change together — increasing, decreasing, concavity, average rate of change, and rate at a point. This is the language every other unit builds on.</p>
+  </div>
+
+  <!-- EXAM DATA ALERT -->
+  <div class="exam-alert">
+    <div class="ea-header">📊 From Your Actual Exam Data</div>
+    Questions on <strong>Average Rate of Change (graphical)</strong> and <strong>Concavity interpretation</strong> showed split responses — these are the two concepts to lock down first. The class is strong on identifying increasing/decreasing from graphs but trips on describing the <em>rate</em> of that change and what concavity says about it.
+  </div>
+
+  <!-- ══════════════════════
+       1A.1 · CHANGE IN TANDEM
+  ══════════════════════ -->
+  <div class="topic" id="t1">
+    <div class="topic-header">
+      <span class="topic-num">1A.1</span>
+      <h2 class="topic-title">Change in Tandem</h2>
+      <span class="topic-sub">Topic 1.1</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What It Means</div>
+      <p>Two quantities <strong>change in tandem</strong> when one changes as a result of the other changing. On a graph, we describe how the output (y) changes as the input (x) increases.</p>
+      <p>The AP exam asks you to translate between verbal descriptions, graphs, and tables — not just identify up/down, but describe the <em>nature</em> of the change.</p>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Four Basic Behaviors — Know All Language Forms</div>
+      <div class="beh-grid">
+        <div class="beh-card">
+          <div class="bc-label" style="color:var(--green);">Increasing</div>
+          <div class="bc-body">As x increases, y <strong>increases</strong>.<br>Graph goes upward left to right.<br><em>As input increases, output increases.</em></div>
+        </div>
+        <div class="beh-card">
+          <div class="bc-label" style="color:var(--red);">Decreasing</div>
+          <div class="bc-body">As x increases, y <strong>decreases</strong>.<br>Graph goes downward left to right.<br><em>As input increases, output decreases.</em></div>
+        </div>
+        <div class="beh-card">
+          <div class="bc-label" style="color:var(--blue);">Increasing then Decreasing</div>
+          <div class="bc-body">Graph rises, reaches a <strong>local maximum</strong>, then falls. Behavior changes at the turning point.</div>
+        </div>
+        <div class="beh-card">
+          <div class="bc-label" style="color:var(--orange);">Decreasing then Increasing</div>
+          <div class="bc-body">Graph falls, reaches a <strong>local minimum</strong>, then rises. Behavior changes at the turning point.</div>
+        </div>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>AP language trap:</strong> The exam describes change in tandem verbally. "As the car's speed increases, fuel efficiency decreases" — you must match this to a decreasing graph. Practice translating real-world sentences into graph behaviors.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Intervals of Increase and Decrease — How to State Them</div>
+      <p>State intervals using the <strong>input variable (x)</strong>, not the output. Use interval notation or inequality notation.</p>
+      <div class="fbox">
+        <div class="flabel">Correct Format</div>
+        f is increasing on the interval <span class="mgreen">(a, b)</span> &nbsp;← open interval notation<br>
+        f is decreasing for <span class="mgreen">a &lt; x &lt; b</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← inequality notation<br><br>
+        <span style="color:var(--tx3);font-size:12px">Both are acceptable. Use the input values (x-coordinates) at the endpoints — not the y-values.</span>
+      </div>
+      <div class="callout callout-err">
+        <span class="callout-icon">❌</span>
+        <span><strong>Common error:</strong> Stating the interval using y-values. "f is increasing from 2 to 8" when 2 and 8 are output values is wrong. The interval must use the x-values: "f is increasing on (1, 4)."</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Change in Tandem</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'cit','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'cit','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'cit','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="cit-v1">
+          <div class="problem-box"><div class="p-label">Problem — AP Style</div>The graph of a function f is shown. The graph increases from x=0 to x=3, reaches a local maximum at x=3, decreases from x=3 to x=7, and increases from x=7 onward.<br><br>(a) On what intervals is f increasing?<br>(b) On what intervals is f decreasing?<br>(c) Where does f have a local minimum?</div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">(a) Intervals where f is increasing</div><div class="gs-content">f increases on <strong>(0, 3)</strong> and <strong>(7, ∞)</strong>.<br>These are the x-intervals where the graph moves upward.</div><div class="gs-why">→ Use the x-values at the boundaries of each increasing segment. Always open parentheses at the turning points.</div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">(b) Intervals where f is decreasing</div><div class="gs-content">f decreases on <strong>(3, 7)</strong>.</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">(c) Local minimum</div><div class="gs-content">f has a local minimum at <strong>x = 7</strong> — where the decrease ends and increase begins (a valley in the graph).</div><div class="gs-why">→ Local min: f changes from decreasing to increasing. Local max: f changes from increasing to decreasing.</div></div></div>
+        </div>
+        <div class="pane" id="cit-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>A function g is decreasing on (−∞, −2), has a local minimum at x = −2, is increasing on (−2, 5), has a local maximum at x = 5, and is decreasing on (5, ∞).<br><br>(a) On what intervals is g increasing?<br>(b) Where are the local extrema and what type are they?<br>(c) A student says "g is positive on (−2, 5)." Is this necessarily true? Explain.</div>
+          <div class="scaffold-step"><div class="s-prompt">(a) State the interval where g is increasing using correct notation</div><input class="s-input" type="text" placeholder="g is increasing on (  ,  )"/></div>
+          <div class="scaffold-step"><div class="s-prompt">(b) State each local extremum, its x-value, and type</div><input class="s-input" type="text" placeholder="Local min at x = ... , local max at x = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">(c) Explain why increasing on an interval does NOT mean the function is positive there</div><input class="s-input" type="text" placeholder="Increasing means output is getting larger, but ..."/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) g is increasing on <strong>(−2, 5)</strong><br><br>(b) Local minimum at x = −2 (decreasing changes to increasing). Local maximum at x = 5 (increasing changes to decreasing).<br><br>(c) <strong>Not necessarily true.</strong> Increasing means the output values are getting larger as x increases — but the output could still be negative. For example, g could go from −10 to −3 on (−2, 5) — increasing but still negative the entire time. Increasing/decreasing describes direction of change, not sign of values.</div>
+        </div>
+        <div class="pane" id="cit-v3">
+          <div class="problem-box"><div class="p-label">Problem — Real World Context</div>A car's distance from home (miles) is modeled by d(t) where t is hours. d increases from t=0 to t=2, stays constant from t=2 to t=3, then decreases from t=3 to t=5, reaching d=0 at t=5.<br><br>(a) Describe in words what is happening during each time interval.<br>(b) On what interval is d decreasing?<br>(c) What does d=0 at t=5 mean in context?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) [0,2]: car is driving away from home. [2,3]: car is stopped (parked). [3,5]: car is driving back toward home.<br><br>(b) d is decreasing on <strong>(3, 5)</strong><br><br>(c) d(5) = 0 means <strong>the car has returned home</strong> — distance from home is zero at t=5 hours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       1A.2 · AVERAGE RATE OF CHANGE
+  ══════════════════════ -->
+  <div class="topic" id="t2">
+    <div class="topic-header">
+      <span class="topic-num">1A.2</span>
+      <h2 class="topic-title">Average Rate of Change</h2>
+      <span class="topic-sub">Topic 1.2–1.3 · Exam Miss Alert</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Formula</div>
+      <p>The average rate of change (AROC) of a function f over an interval [a, b] is the slope of the <strong>secant line</strong> connecting the two endpoints. It tells you how much the output changes per unit of input change on average.</p>
+      <div class="fbox">
+        <div class="flabel">Average Rate of Change Formula</div>
+        AROC = <span class="fr"><span class="n">f(b) − f(a)</span><span class="d">b − a</span></span> = <span class="fr"><span class="n">Δy</span><span class="d">Δx</span></span> = <span class="fr"><span class="n">change in output</span><span class="d">change in input</span></span><br><br>
+        <span style="color:var(--tx3);font-size:12px">This is the slope formula applied to two specific points on the function.</span>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>What AROC is NOT:</strong> AROC is not the slope at a single point (that's rate of change at a point). AROC measures the overall slope across an entire interval. A function can be increasing on an interval with a negative AROC if it starts high and ends lower — wait, no. Actually AROC is positive when f(b) &gt; f(a). But on a non-linear function, AROC changes as the interval changes.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">AROC from a Table</div>
+      <div class="fbox gold">
+        <div class="flabel">Example — from a table</div>
+        <table style="width:100%;font-size:12px;margin:8px 0;">
+          <tr style="color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">
+            <td style="padding:4px 8px;">x</td><td style="padding:4px 8px;">1</td><td style="padding:4px 8px;">3</td><td style="padding:4px 8px;">5</td><td style="padding:4px 8px;">7</td>
+          </tr>
+          <tr style="color:var(--gold);">
+            <td style="padding:4px 8px;color:var(--tx3);">f(x)</td><td style="padding:4px 8px;">4</td><td style="padding:4px 8px;">10</td><td style="padding:4px 8px;">8</td><td style="padding:4px 8px;">14</td>
+          </tr>
+        </table>
+        AROC on [1, 5] = <span class="fr"><span class="n">f(5) − f(1)</span><span class="d">5 − 1</span></span> = <span class="fr"><span class="n">8 − 4</span><span class="d">4</span></span> = <span class="mgreen">1</span><br><br>
+        AROC on [3, 7] = <span class="fr"><span class="n">14 − 10</span><span class="d">7 − 3</span></span> = <span class="fr"><span class="n">4</span><span class="d">4</span></span> = <span class="mgreen">1</span><br><br>
+        AROC on [1, 7] = <span class="fr"><span class="n">14 − 4</span><span class="d">7 − 1</span></span> = <span class="fr"><span class="n">10</span><span class="d">6</span></span> = <span class="mgreen">5/3</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">AROC from a Graph — The Secant Line</div>
+      <p>On a graph, AROC is the <strong>slope of the line connecting two points</strong> on the curve. Draw the secant line, then use rise over run.</p>
+      <div class="graph-wrap">
+        <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono,monospace">
+          <line x1="30" y1="155" x2="360" y2="155" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <line x1="30" y1="10" x2="30" y2="160" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <!-- curve -->
+          <path d="M50,140 C90,130 120,90 160,70 C200,50 240,55 280,45 C310,38 330,35 350,30" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <!-- two points -->
+          <circle cx="80" cy="128" r="5" fill="#f5c842"/>
+          <circle cx="280" cy="45" r="5" fill="#f5c842"/>
+          <!-- secant line -->
+          <line x1="60" y1="140" x2="310" y2="30" stroke="rgba(245,200,66,0.7)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <!-- vertical and horizontal legs -->
+          <line x1="80" y1="128" x2="280" y2="128" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="280" y1="128" x2="280" y2="45" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+          <!-- labels -->
+          <text x="72" y="148" fill="rgba(245,200,66,0.8)" font-size="10">(a, f(a))</text>
+          <text x="285" y="43" fill="rgba(245,200,66,0.8)" font-size="10">(b, f(b))</text>
+          <text x="160" y="148" fill="rgba(255,255,255,0.35)" font-size="10">b − a (run)</text>
+          <text x="290" y="92" fill="rgba(255,255,255,0.35)" font-size="10">f(b)−f(a)</text>
+          <text x="290" y="103" fill="rgba(255,255,255,0.35)" font-size="10">(rise)</text>
+          <text x="100" y="55" fill="rgba(245,200,66,0.7)" font-size="10">secant line</text>
+          <text x="100" y="65" fill="rgba(245,200,66,0.7)" font-size="9">slope = AROC</text>
+        </svg>
+        <div class="g-caption">The slope of the secant line connecting (a, f(a)) and (b, f(b)) is the AROC of f on [a, b].</div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Units of AROC — Always Include Them</div>
+      <p>AROC has units of <strong>[output units] per [input unit]</strong>. The AP exam tests whether you can interpret AROC in context.</p>
+      <div class="fbox teal">
+        <div class="flabel">Context Examples</div>
+        Distance (miles) vs time (hours): AROC has units of <span class="mteal">miles per hour (mph)</span><br>
+        Temperature (°F) vs time (hours): AROC has units of <span class="mteal">degrees per hour</span><br>
+        Cost ($) vs items sold: AROC has units of <span class="mteal">dollars per item</span>
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Average Rate of Change</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'aroc','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'aroc','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'aroc','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="aroc-v1">
+          <div class="problem-box"><div class="p-label">Problem — Table Version (AP Style)</div>
+            The table shows the cost C(n) in dollars of producing n items:
+            <div style="margin:10px 0;overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+              <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;">
+                <td style="padding:8px 12px;border:1px solid var(--b);">n (items)</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">10</td><td style="padding:8px 12px;border:1px solid var(--b);">20</td><td style="padding:8px 12px;border:1px solid var(--b);">30</td>
+              </tr>
+              <tr style="color:var(--gold);">
+                <td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">C(n) ($)</td><td style="padding:8px 12px;border:1px solid var(--b);">50</td><td style="padding:8px 12px;border:1px solid var(--b);">130</td><td style="padding:8px 12px;border:1px solid var(--b);">190</td><td style="padding:8px 12px;border:1px solid var(--b);">270</td>
+              </tr>
+            </table></div>
+            Find the AROC of C on [10, 30]. Interpret in context.
+          </div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Apply the AROC formula</div><div class="gs-content">AROC = <span class="fr"><span class="n">C(30) − C(10)</span><span class="d">30 − 10</span></span> = <span class="fr"><span class="n">270 − 130</span><span class="d">20</span></span> = <span class="fr"><span class="n">140</span><span class="d">20</span></span> = <strong>7</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">State the units</div><div class="gs-content">Output = dollars, Input = items → units = <strong>dollars per item</strong></div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">Interpret in context</div><div class="gs-content"><em>"Between 10 and 30 items produced, the cost increases at an average rate of <strong>$7 per item</strong>."</em></div><div class="gs-why">→ The full interpretation needs: the quantity ($), the rate (per item), and the interval (between 10 and 30 items).</div></div></div>
+        </div>
+        <div class="pane" id="aroc-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>f(x) = x² + 2x. Find the AROC on [1, 4]. Then interpret what the secant line slope represents.</div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Calculate f(1) and f(4)</div><input class="s-input" type="text" placeholder="f(1) = 1 + 2 = ... , f(4) = 16 + 8 = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — Apply AROC = [f(4)−f(1)] / (4−1)</div><input class="s-input" type="text" placeholder="AROC = ( − ) / ( − ) = ... / ... = ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — What does this number represent geometrically?</div><input class="s-input" type="text" placeholder="It is the slope of the ... line connecting ( , ) and ( , )"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">f(1) = 1+2 = 3 &nbsp;|&nbsp; f(4) = 16+8 = 24<br>AROC = (24−3)/(4−1) = 21/3 = <strong>7</strong><br><br>This is the slope of the secant line connecting the points (1, 3) and (4, 24) on the parabola. It means f increases by 7 units on average for each unit increase in x on [1,4].</div>
+        </div>
+        <div class="pane" id="aroc-v3">
+          <div class="problem-box"><div class="p-label">Problem — AP MCQ Style</div>The height h(t) in feet of a ball after t seconds is given by: h(0)=6, h(1)=22, h(2)=30, h(3)=22, h(4)=6.<br><br>(a) Find the AROC of h on [0, 2].<br>(b) Find the AROC of h on [2, 4].<br>(c) What does the sign change between (a) and (b) tell you about the ball?</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) AROC on [0,2] = (30−6)/2 = <strong>12 ft/s</strong> (positive — ball rising)<br>(b) AROC on [2,4] = (6−30)/2 = <strong>−12 ft/s</strong> (negative — ball falling)<br><br>(c) The AROC changes from positive to negative, indicating that the ball reached its <strong>maximum height somewhere around t=2</strong> and is now falling. The symmetry (same magnitude, opposite signs) confirms t=2 is the peak.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div-line">
+
+  <!-- ══════════════════════
+       1A.3 · CONCAVITY
+  ══════════════════════ -->
+  <div class="topic" id="t3">
+    <div class="topic-header">
+      <span class="topic-num">1A.3</span>
+      <h2 class="topic-title">Concavity &amp; Rate of Change at a Point</h2>
+      <span class="topic-sub">Topic 1.3 · Exam Miss Alert 🔥</span>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">What Concavity Describes</div>
+      <p>While increasing/decreasing tells you the <em>direction</em> a function moves, concavity tells you how the <em>rate of change</em> itself is changing — is the function speeding up or slowing down in its increase or decrease?</p>
+    </div>
+
+    <div class="concav-row">
+      <div class="concav-card">
+        <div class="cc-label" style="color:var(--green);">Concave Up ∪</div>
+        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,70 Q60,10 110,70" fill="none" stroke="#3effa0" stroke-width="2.5"/>
+        </svg>
+        <div class="cc-desc">
+          Rate of change is <strong>increasing</strong>.<br>
+          Function is increasing at an <strong>increasing rate</strong>, OR decreasing at a <strong>decreasing rate</strong>.<br>
+          Tangent lines lie <strong>below</strong> the curve.
+        </div>
+      </div>
+      <div class="concav-card">
+        <div class="cc-label" style="color:var(--red);">Concave Down ∩</div>
+        <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,10 Q60,70 110,10" fill="none" stroke="#f87171" stroke-width="2.5"/>
+        </svg>
+        <div class="cc-desc">
+          Rate of change is <strong>decreasing</strong>.<br>
+          Function is increasing at a <strong>decreasing rate</strong>, OR decreasing at an <strong>increasing rate</strong>.<br>
+          Tangent lines lie <strong>above</strong> the curve.
+        </div>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">The Four Combinations — This Is What the AP Tests</div>
+      <table class="dtable">
+        <thead><tr><th>Behavior</th><th>Concavity</th><th>What It Means</th><th>Real Example</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--green);font-weight:500;">Increasing</td><td style="color:var(--green);font-weight:300;">Concave Up</td><td style="color:var(--tx2);font-weight:300;">Increasing faster and faster</td><td style="color:var(--tx3);font-weight:300;">Accelerating car</td></tr>
+          <tr><td style="color:var(--green);font-weight:500;">Increasing</td><td style="color:var(--red);font-weight:300;">Concave Down</td><td style="color:var(--tx2);font-weight:300;">Increasing but slowing down</td><td style="color:var(--tx3);font-weight:300;">Car approaching a speed limit</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Decreasing</td><td style="color:var(--green);font-weight:300;">Concave Up</td><td style="color:var(--tx2);font-weight:300;">Decreasing but slowing down</td><td style="color:var(--tx3);font-weight:300;">Ball slowing as it rolls uphill</td></tr>
+          <tr><td style="color:var(--red);font-weight:500;">Decreasing</td><td style="color:var(--red);font-weight:300;">Concave Down</td><td style="color:var(--tx2);font-weight:300;">Decreasing faster and faster</td><td style="color:var(--tx3);font-weight:300;">Free-falling object speeding up</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <span><strong>Memory shortcut for concavity:</strong> Concave up = <strong>cup holds water ∪</strong> = rate of change increasing. Concave down = <strong>frown ∩</strong> = rate of change decreasing. These shapes tell you if the function is "accelerating" or "decelerating" in its behavior.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Rate of Change at a Point — Approximating with AROC</div>
+      <p>The <strong>rate of change at a specific point</strong> (the instantaneous rate) can be approximated by computing the AROC over a very small interval around that point.</p>
+      <div class="fbox blue">
+        <div class="flabel">How to Approximate from a Table</div>
+        To approximate the rate of change at x = 3 using nearby table values:<br><br>
+        Use the closest available interval: AROC on [2, 4] ≈ <span class="fr"><span class="n">f(4) − f(2)</span><span class="d">4 − 2</span></span><br><br>
+        Or use just one side if the other isn't available: AROC on [3, 5] ≈ rate at x = 3<br><br>
+        <span style="color:var(--tx3);font-size:12px">On the AP exam, this is often asked as "approximate the rate of change at x = 3 using the table." Use the symmetric interval around the point when possible.</span>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <span><strong>AP exam trap:</strong> The question may ask for rate of change "at x = 3" when the table doesn't have x = 3. Use the surrounding values — the symmetric interval gives the best approximation. If the table has x = 2 and x = 4, use those.</span>
+      </div>
+    </div>
+
+    <div class="concept">
+      <div class="concept-title">Concavity Changes the AROC — Understanding the Pattern</div>
+      <p>When a function is <strong>concave up</strong>, the AROC on successive equal-width intervals is <strong>increasing</strong> (each successive AROC is larger than the previous). When <strong>concave down</strong>, the AROC on successive intervals is <strong>decreasing</strong>. This is exactly how the AP tests concavity from a table.</p>
+      <div class="fbox orange">
+        <div class="flabel">Detecting Concavity from a Table — The AROC Method</div>
+        If AROC on [0,2] = 3, AROC on [2,4] = 5, AROC on [4,6] = 8...<br>
+        ARoC is <span class="mgreen">increasing</span> → function is <span class="mgreen">concave up</span> on that interval<br><br>
+        If AROC on [0,2] = 8, AROC on [2,4] = 5, AROC on [4,6] = 3...<br>
+        AROC is <span class="mred">decreasing</span> → function is <span class="mred">concave down</span> on that interval
+      </div>
+    </div>
+
+    <div class="practice-section">
+      <div class="practice-header">
+        <span class="practice-header-title">Practice · Concavity &amp; Rate at a Point</span>
+        <div class="practice-tabs">
+          <button class="ptab active" onclick="switchTab(this,'conc','v1')">Guided</button>
+          <button class="ptab" onclick="switchTab(this,'conc','v2')">Scaffolded</button>
+          <button class="ptab" onclick="switchTab(this,'conc','v3')">Blind</button>
+        </div>
+      </div>
+      <div class="practice-body">
+        <div class="pane active" id="conc-v1">
+          <div class="problem-box"><div class="p-label">Problem — AP Style (Q10 type)</div>
+          A function f has the following values:
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">x</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">4</td><td style="padding:8px 12px;border:1px solid var(--b);">6</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">f(x)</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td><td style="padding:8px 12px;border:1px solid var(--b);">9</td><td style="padding:8px 12px;border:1px solid var(--b);">12</td><td style="padding:8px 12px;border:1px solid var(--b);">13</td></tr>
+          </table></div>
+          Is f concave up or concave down on [0, 6]? Justify using AROC values.
+          </div>
+          <div class="guided-step"><div class="gs-num">1</div><div class="gs-body"><div class="gs-label">Compute AROC on each sub-interval</div><div class="gs-content">
+            AROC on [0,2] = (9−3)/2 = <strong>3</strong><br>
+            AROC on [2,4] = (12−9)/2 = <strong>1.5</strong><br>
+            AROC on [4,6] = (13−12)/2 = <strong>0.5</strong>
+          </div></div></div>
+          <div class="guided-step"><div class="gs-num">2</div><div class="gs-body"><div class="gs-label">Determine if the AROC values are increasing or decreasing</div><div class="gs-content">3 → 1.5 → 0.5: the AROC values are <strong>decreasing</strong>.</div></div></div>
+          <div class="guided-step"><div class="gs-num">3</div><div class="gs-body"><div class="gs-label">State the conclusion</div><div class="gs-content"><em>"Since the average rates of change on successive equal-width intervals are decreasing (3, 1.5, 0.5), f is <strong>concave down</strong> on [0, 6]."</em></div><div class="gs-why">→ Decreasing AROC = concave down. Note f is still increasing (all values rise), just slowing down. Increasing + concave down = increases at a decreasing rate.</div></div></div>
+        </div>
+        <div class="pane" id="conc-v2">
+          <div class="problem-box"><div class="p-label">Problem</div>
+          <div style="margin:10px 0;overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:var(--d2);color:var(--tx3);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;"><td style="padding:8px 12px;border:1px solid var(--b);">t</td><td style="padding:8px 12px;border:1px solid var(--b);">0</td><td style="padding:8px 12px;border:1px solid var(--b);">1</td><td style="padding:8px 12px;border:1px solid var(--b);">2</td><td style="padding:8px 12px;border:1px solid var(--b);">3</td></tr>
+            <tr style="color:var(--gold);"><td style="padding:8px 12px;border:1px solid var(--b);color:var(--tx2);">P(t)</td><td style="padding:8px 12px;border:1px solid var(--b);">100</td><td style="padding:8px 12px;border:1px solid var(--b);">115</td><td style="padding:8px 12px;border:1px solid var(--b);">140</td><td style="padding:8px 12px;border:1px solid var(--b);">180</td></tr>
+          </table></div>
+          P(t) is a population (thousands). Is P concave up or concave down? Approximate the rate of change at t=1. Interpret both in context.
+          </div>
+          <div class="scaffold-step"><div class="s-prompt">Step 1 — Calculate AROC on [0,1], [1,2], [2,3]</div><input class="s-input" type="text" placeholder="[0,1]: ... , [1,2]: ... , [2,3]: ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 2 — Are these ARoC values increasing or decreasing? What does that tell you about concavity?</div><input class="s-input" type="text" placeholder="ARoC values: ... → concave up / down because ..."/></div>
+          <div class="scaffold-step"><div class="s-prompt">Step 3 — Approximate rate at t=1 using symmetric interval [0,2]</div><input class="s-input" type="text" placeholder="AROC on [0,2] = (P(2)−P(0))/(2−0) = ... ≈ rate at t=1"/></div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">AROC [0,1] = 15, AROC [1,2] = 25, AROC [2,3] = 40<br>15 → 25 → 40: ARoC is <strong>increasing → concave up</strong><br><br>Rate at t=1 ≈ AROC on [0,2] = (140−100)/2 = <strong>20 thousand people per year</strong><br><br><strong>Interpretation:</strong> The population is growing at an increasing rate (concave up — growth is accelerating). At t=1, the population is growing at approximately 20,000 people per year.</div>
+        </div>
+        <div class="pane" id="conc-v3">
+          <div class="problem-box"><div class="p-label">Problem — Verbal Description</div>A student says: "This function is increasing AND concave down on the interval [2, 8]." <br><br>(a) Describe in plain English what the function is doing on this interval.<br>(b) Sketch the general shape of such a graph (describe it in words).<br>(c) Give a real-world scenario that would have this behavior.</div>
+          <button class="reveal-btn" onclick="toggleAnswer(this)">✓ Reveal Answer</button>
+          <div class="answer-box">(a) The function's output is getting larger as x increases, but the rate at which it grows is slowing down. Each equal step in x produces a smaller increase in y than the previous step.<br><br>(b) The graph curves upward-left-to-right (rising) but bends like a hill on top (∩ shape), not like a bowl. It goes up, but levels off as it goes.<br><br>(c) <strong>A car accelerating then maintaining speed</strong> — distance increases but rate of increase (speed) is slowing. Or: <strong>a medication's effect after a dose</strong> — effect increases but with diminishing returns over time. Or: <strong>learning a new skill</strong> — improvement increases but the rate of improvement slows.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div style="background:var(--d2);border:1px solid var(--b2);border-radius:12px;padding:20px 24px;margin-top:8px;">
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:16px;">Quick Reference · Section 1A</div>
+    <table class="dtable">
+      <thead><tr><th>Concept</th><th>Formula / Rule</th><th>Key Trap</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--blue);font-weight:500;">Increasing</td><td style="color:var(--tx2);font-weight:300;">As x↑, y↑ — state as interval of x-values</td><td style="color:var(--tx3);font-weight:300;">Don't use y-values to state the interval</td></tr>
+        <tr><td style="color:var(--blue);font-weight:500;">Decreasing</td><td style="color:var(--tx2);font-weight:300;">As x↑, y↓ — state as interval of x-values</td><td style="color:var(--tx3);font-weight:300;">Decreasing ≠ negative. Just getting smaller.</td></tr>
+        <tr><td style="color:var(--gold);font-weight:500;">AROC</td><td style="color:var(--tx2);font-weight:300;">[f(b)−f(a)] / (b−a) — slope of secant line</td><td style="color:var(--tx3);font-weight:300;">Always include units. Order matters: f(b)−f(a) not f(a)−f(b).</td></tr>
+        <tr><td style="color:var(--green);font-weight:500;">Concave Up ∪</td><td style="color:var(--tx2);font-weight:300;">AROC on successive intervals is increasing</td><td style="color:var(--tx3);font-weight:300;">Concave up and decreasing: decreasing at a decreasing rate (slowing)</td></tr>
+        <tr><td style="color:var(--red);font-weight:500;">Concave Down ∩</td><td style="color:var(--tx2);font-weight:300;">AROC on successive intervals is decreasing</td><td style="color:var(--tx3);font-weight:300;">Concave down and increasing: increasing at a decreasing rate (slowing)</td></tr>
+        <tr><td style="color:var(--teal);font-weight:500;">Rate at a point</td><td style="color:var(--tx2);font-weight:300;">Approximate with symmetric AROC around that x</td><td style="color:var(--tx3);font-weight:300;">Use [x−h, x+h] for best approximation from table</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</div>
+
+<!-- iframe embed: file:////Volumes/DevDrive/Portable_Python/LifeOS/ObsidianPortableRoot/Debello Master Link/DebelloAI/libraries/projects/Stratosyn/Approved/precalc-s1a-change.html -->
+
+<script>
+  function switchTab(btn,group,version){
+    const sec=btn.closest('.practice-section');
+    sec.querySelector('.practice-body').querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    sec.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    sec.querySelector('#'+group+'-'+version).classList.add('active');
+  }
+  function toggleAnswer(btn){
+    const box=btn.nextElementSibling;
+    box.classList.contains('shown')?(box.classList.remove('shown'),btn.innerHTML='✓ Reveal Answer'):(box.classList.add('shown'),btn.innerHTML='▲ Hide Answer');
+  }
+  window.addEventListener('scroll',()=>{
+    const pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+    document.getElementById('progressBar').style.transform=`scaleX(${pct})`;
+    document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+  });
+</script>
+</body>
+</html>
