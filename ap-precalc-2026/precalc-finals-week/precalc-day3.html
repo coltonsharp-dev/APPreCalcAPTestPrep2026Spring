@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calc · Day 3 · Trigonometric &amp; Polar Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="precalc-week.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Day 3 · Wed May 13</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-title">Unit 3 · Trig &amp; Polar</span>
+  </div>
+  <div class="timer-pill" style="display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:100px;background:var(--glass);border:1px solid var(--b);font-size:12px;color:var(--tx2);letter-spacing:0.08em;">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>
+    <span id="timerVal" style="font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;">00:00</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="day-header">
+    <div class="header-eyebrow"><span class="dot" style="background:var(--gold)"></span>Day 3 of 5 · Wed May 13 · ~40 min</div>
+    <h1 class="day-title">
+      <span class="l1">Trigonometric</span>
+      <span class="l2">&amp; Polar Functions.</span>
+    </h1>
+    <p class="day-sub">Rebuild Unit 3: radian definition, exact unit-circle values, sinusoidal modeling (A · sin(Bx + C) + D), trig equations on [0, 2π), polar roses, and double-angle identities. <strong>14 randomized questions.</strong> Two big misconception rebuilds: <em>what a radian actually is</em> and <em>petal count for r = a·cos(nθ)</em>.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--gold)"></span>Unit 3 · 3A · 3B · 3C</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>7 MC · 4 FIB · 3 Dropdown</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>🔥 Radian definition (5/10 wrong)</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>🔥 Polar petals (6/10 wrong)</div>
+    </div>
+
+    <div class="instructions">
+      <div class="ih">📘 How to use this practice</div>
+      <strong>1.</strong> Every question regenerates with <strong>↻ New Numbers</strong> — try it multiple times. <strong>2.</strong> Wrong answers tell you which misconception you fell into. <strong>3.</strong> Submit via <strong>Copy for Canvas</strong> at the bottom when finished.
+    </div>
+  </div>
+
+  <!-- ──────── 3A · RADIANS & UNIT CIRCLE ──────── -->
+  <div class="section-header" data-color="gold">
+    <div class="sh-row"><span class="sh-tag">3A</span><span class="sh-title">Radians &amp; Unit Circle</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="1" data-color="gold">
+    <div class="q-top"><div class="q-num">01</div><span class="q-tag priority">3A · Topic 3.2</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Radian Definition · 5/10 wrong</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="2" data-color="gold">
+    <div class="q-top"><div class="q-num">02</div><span class="q-tag priority">3A · Topic 3.4</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag hot">Exact Unit Circle Value</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="3" data-color="gold">
+    <div class="q-top"><div class="q-num">03</div><span class="q-tag">3A · Topic 3.2</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Reference Angle</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="4" data-color="gold">
+    <div class="q-top"><div class="q-num">04</div><span class="q-tag">3A · Topic 3.3</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Degrees ↔ Radians</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 3B · SINUSOIDAL FUNCTIONS ──────── -->
+  <div class="section-header" data-color="gold">
+    <div class="sh-row"><span class="sh-tag">3B</span><span class="sh-title">Sinusoidal Functions &amp; Equations</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="5" data-color="gold">
+    <div class="q-top"><div class="q-num">05</div><span class="q-tag priority">3B · Topic 3.6</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Period from A·sin(Bx)+D</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="6" data-color="gold">
+    <div class="q-top"><div class="q-num">06</div><span class="q-tag">3B · Topic 3.6</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Amplitude AND Midline</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="7" data-color="gold">
+    <div class="q-top"><div class="q-num">07</div><span class="q-tag priority">3B · Topic 3.7</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">Sinusoidal Modeling</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="8" data-color="gold">
+    <div class="q-top"><div class="q-num">08</div><span class="q-tag priority">3B · Topic 3.10</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">Trig Equation on [0, 2π)</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="9" data-color="gold">
+    <div class="q-top"><div class="q-num">09</div><span class="q-tag">3B · Topic 3.6</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Period from B (type integer or fraction)</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="10" data-color="gold">
+    <div class="q-top"><div class="q-num">10</div><span class="q-tag">3B · Topic 3.11</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Inverse Trig Range</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 3C · POLAR & IDENTITIES ──────── -->
+  <div class="section-header" data-color="gold">
+    <div class="sh-row"><span class="sh-tag">3C</span><span class="sh-title">Polar Functions &amp; Identities</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="11" data-color="gold">
+    <div class="q-top"><div class="q-num">11</div><span class="q-tag priority">3C · Topic 3.14</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Polar Rose Petals · 6/10 wrong</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="12" data-color="gold">
+    <div class="q-top"><div class="q-num">12</div><span class="q-tag">3C · Topic 3.13</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Polar Curve Type</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="13" data-color="gold">
+    <div class="q-top"><div class="q-num">13</div><span class="q-tag">3C · Topic 3.12</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Double-Angle Identity</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="14" data-color="gold">
+    <div class="q-top"><div class="q-num">14</div><span class="q-tag">3C · Topic 3.13</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Polar → Rectangular</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── SUBMIT AREA ──────── -->
+  <div class="submit-area">
+    <div class="submit-eyebrow"><span class="dot"></span>End of Day 3 · Submit via Canvas</div>
+    <div class="name-row">
+      <label class="name-label" for="studentName">Your full name</label>
+      <input type="text" id="studentName" class="name-input" placeholder="First Last" autocomplete="name">
+    </div>
+    <div class="submit-progress"><span class="prog-num" id="progNum">0</span><span class="prog-sep">/</span><span class="prog-total">14</span><span class="prog-label">answered</span></div>
+    <div class="submit-meter"><div class="submit-meter-fill" id="submitMeterFill"></div></div>
+    <div class="score-strip">
+      <div class="score-pill correct">✓ Correct <span class="num" id="scoreCorrect">0</span></div>
+      <div class="score-pill wrong">✗ Wrong <span class="num" id="scoreWrong">0</span></div>
+      <div class="score-pill unanswered">— Unanswered <span class="num" id="scoreUnanswered">14</span></div>
+    </div>
+    <div class="submit-row">
+      <button class="submit-btn" id="copyBtn"><span class="sb-icon">⎘</span><span class="sb-text">Copy for Canvas</span></button>
+      <button class="email-btn" id="emailBtn"><span class="sb-icon">✉</span><span class="sb-text">Email to Teacher</span></button>
+      <button class="reset-btn" id="resetBtn">Reset All</button>
+    </div>
+    <div class="submit-foot"><strong>Submission flow:</strong> 1. Type your name. 2. Click <strong>Copy for Canvas</strong>. 3. Paste into the Day 3 classwork assignment on Canvas and submit there. If Canvas is down, use <strong>Email to Teacher</strong>.</div>
+  </div>
+
+</div><!-- /.page -->
+
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-eyebrow ok"><span class="dot"></span>Copied to Clipboard</div>
+      <div class="submit-success"><div class="ss-check">✓</div><div class="ss-title">Submission Ready</div><div class="ss-sub">Your Day 3 results are on your clipboard. Open the Canvas assignment, paste, and submit there.</div></div>
+    </div>
+    <div class="canvas-steps">
+      <div class="cs-row"><span class="cs-num">1</span><span class="cs-text">Open the Canvas assignment for <strong>Day 3 Classwork</strong>.</span></div>
+      <div class="cs-row"><span class="cs-num">2</span><span class="cs-text">Click into the text-entry box, then paste with <strong>Ctrl+V</strong> (Windows) or <strong>Cmd+V</strong> (Mac).</span></div>
+      <div class="cs-row"><span class="cs-num">3</span><span class="cs-text">Click <strong>Submit</strong> on Canvas. Done.</span></div>
+    </div>
+    <div class="preview-head"><div class="ph-label">Preview · what was copied</div><button class="ph-recopy" id="recopyBtn">Copy Again</button></div>
+    <pre class="preview-text" id="previewText"></pre>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalEmail">Email to Teacher Instead</button>
+      <button class="modal-btn primary" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg></button>
+
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Day 3 · Unit 3 · Trig &amp; Polar</span>
+</footer>
+
+<script src="precalc-week.js"></script>
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   DAY 3 QUESTION DEFINITIONS · Unit 3 — Trig & Polar
+   ────────────────────────────────────────────────────────────────── */
+
+// Unit-circle exact-value table for common angles (in radians, kept as fractions of π)
+const UC = {
+  // angle key → {sin, cos, sinTex, cosTex}
+  "0":      { sin: "0",       cos: "1",       deg: 0,   ref: "0" },
+  "π/6":    { sin: "1/2",     cos: "√3/2",    deg: 30,  ref: "π/6" },
+  "π/4":    { sin: "√2/2",    cos: "√2/2",    deg: 45,  ref: "π/4" },
+  "π/3":    { sin: "√3/2",    cos: "1/2",     deg: 60,  ref: "π/3" },
+  "π/2":    { sin: "1",       cos: "0",       deg: 90,  ref: "π/2" },
+  "2π/3":   { sin: "√3/2",    cos: "−1/2",    deg: 120, ref: "π/3" },
+  "3π/4":   { sin: "√2/2",    cos: "−√2/2",   deg: 135, ref: "π/4" },
+  "5π/6":   { sin: "1/2",     cos: "−√3/2",   deg: 150, ref: "π/6" },
+  "π":      { sin: "0",       cos: "−1",      deg: 180, ref: "0" },
+  "7π/6":   { sin: "−1/2",    cos: "−√3/2",   deg: 210, ref: "π/6" },
+  "5π/4":   { sin: "−√2/2",   cos: "−√2/2",   deg: 225, ref: "π/4" },
+  "4π/3":   { sin: "−√3/2",   cos: "−1/2",    deg: 240, ref: "π/3" },
+  "3π/2":   { sin: "−1",      cos: "0",       deg: 270, ref: "π/2" },
+  "5π/3":   { sin: "−√3/2",   cos: "1/2",     deg: 300, ref: "π/3" },
+  "7π/4":   { sin: "−√2/2",   cos: "√2/2",    deg: 315, ref: "π/4" },
+  "11π/6":  { sin: "−1/2",    cos: "√3/2",    deg: 330, ref: "π/6" }
+};
+
+const DAY3_QUESTIONS = [
+
+  /* ─── Q1 · MC · Radian Definition (BIGGEST MISS) ─────────────── */
+  {
+    id: 1, type: "mc", tag: "3A · Topic 3.2", color: "gold",
+    generate(){
+      // No randomization — conceptual. But rotate the "incorrect-but-tempting" wordings to vary practice.
+      const radius = R.pick([1, 2, 3, 5, "r"]);
+      return {
+        stem: `Which statement is the correct <strong>definition</strong> of one radian?`,
+        options: R.shuffle([
+          { html: `The central angle of a circle that subtends an arc whose length equals the radius of the circle`, correct: true },
+          { html: `An angle equal to <span class="mono">180/π</span> degrees exactly`, correct: false, misconception: `180/π ≈ 57.3° is the <em>numerical value</em> of one radian in degrees, but that's not the <strong>definition</strong>. A radian is defined geometrically: arc length = radius.` },
+          { html: `An angle whose terminal side passes through the point (1, 0)`, correct: false, misconception: `That's the description of an angle of 0 radians (on the positive x-axis), not 1 radian. A radian is about the relationship between arc length and radius.` },
+          { html: `An angle of measure <span class="mono">360°/π</span>`, correct: false, misconception: `360°/π ≈ 114.6° doesn't match anything meaningful. The correct conversion is 180° = π radians, so 1 radian = 180°/π ≈ 57.3°.` },
+          { html: `Half of one full revolution around a circle`, correct: false, misconception: `Half a revolution is π radians (180°), not 1 radian. 1 radian is much smaller — about 57.3°.` },
+          { html: `The angle whose sine equals 1`, correct: false, misconception: `The angle whose sine equals 1 is π/2 radians (90°), not 1 radian. Don't confuse the input angle with a trig value.` }
+        ]),
+        correctDisplay: "1 radian = central angle whose intercepted arc length equals the radius",
+        workedSolution: `<strong>Definition:</strong> 1 radian is the central angle of a circle for which the <strong>arc length s equals the radius r</strong>. Equivalently: θ (in radians) = s / r. This is why a full circle (s = circumference = 2πr) corresponds to 2π radians: divide arc by radius and you get 2π.`
+      };
+    }
+  },
+
+  /* ─── Q2 · FIB · Exact unit circle value ─────────────────────── */
+  {
+    id: 2, type: "fib", tag: "3A · Topic 3.4", color: "gold",
+    generate(){
+      const angleKeys = Object.keys(UC);
+      const angle = R.pick(angleKeys);
+      const fn = R.pick(["sin", "cos"]);
+      const exact = UC[angle][fn];
+      // Reference-angle-based wrong answers (the most common trap)
+      const data = UC[angle];
+      const sameAbsOtherSign = exact.startsWith("−") ? exact.slice(1) : (exact === "0" ? null : "−" + exact);
+      const wrongFn = fn === "sin" ? data.cos : data.sin;
+
+      return {
+        stem: `Find the exact value of <span class="mono">${fn}(${angle})</span>. (Type the exact value — fractions, square roots, and π allowed. Examples: <span class="mono">1/2</span>, <span class="mono">−√3/2</span>, <span class="mono">0</span>.)`,
+        prefix: `${fn}(${angle}) =`,
+        placeholder: "exact value",
+        accepted: [
+          exact,
+          exact.replace("√", "sqrt"),
+          exact.replace("−", "-")
+        ],
+        misconceptions: [
+          { match: sameAbsOtherSign ? [sameAbsOtherSign, sameAbsOtherSign.replace("√", "sqrt"), sameAbsOtherSign.replace("−", "-")] : ["__nope__"],
+            why: `Sign error. The reference angle gives the magnitude, but the <strong>quadrant</strong> tells you the sign. ${angle} is in quadrant ${Math.ceil((data.deg + 1) / 90)} where ${fn} is ${exact.startsWith("−") ? "negative" : "positive"}. Reference angle: ${data.ref}.` },
+          { match: [wrongFn, wrongFn.replace("√", "sqrt"), wrongFn.replace("−", "-")],
+            why: `You computed ${fn === "sin" ? "cos" : "sin"}(${angle}) = ${wrongFn}, swapping sin and cos. Remember: at the reference angle ${data.ref}, sin = ${data.sin.replace("−", "")} and cos = ${data.cos.replace("−", "")} (in QI), then the quadrant sign of ${angle} is applied.` },
+          { match: [data.deg.toString()], why: `You answered the degree measure (${data.deg}°), not the ${fn} value. The question asks for ${fn}(${angle}), an exact ratio like 1/2 or √3/2.` }
+        ],
+        correctDisplay: `${fn}(${angle}) = ${exact}`,
+        workedSolution: `${angle} is in quadrant ${Math.ceil((data.deg + 1) / 90)} (${data.deg}°). The reference angle is <strong>${data.ref}</strong>. At the reference angle, ${fn} has magnitude <strong>${exact.replace("−", "")}</strong>. In quadrant ${Math.ceil((data.deg + 1) / 90)}, ${fn} is <strong>${exact.startsWith("−") ? "negative" : "positive"}</strong>. Final: <strong>${fn}(${angle}) = ${exact}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q3 · DD · Reference angle ──────────────────────────────── */
+  {
+    id: 3, type: "dd", tag: "3A · Topic 3.2", color: "gold",
+    generate(){
+      // Pick a non-QI angle
+      const qNotI = Object.keys(UC).filter(k => UC[k].deg > 90 && UC[k].deg < 360);
+      const angle = R.pick(qNotI);
+      const data = UC[angle];
+      const correct = data.ref;
+      const wrongFlip = data.deg < 180 ? "π/" + (Math.round(180 / data.deg)) : "wrong";
+
+      return {
+        stem: `What is the <strong>reference angle</strong> for <span class="mono">θ = ${angle}</span>?`,
+        prefix: "Reference angle:",
+        options: R.shuffle([
+          { text: correct, correct: true },
+          { text: angle, correct: false, misconception: `That's the original angle, not its reference. The reference angle is always between 0 and π/2 — it's the acute angle the terminal side makes with the x-axis.` },
+          { text: "π/2 − " + angle, correct: false, misconception: `You used the complementary-angle formula (which would apply for QI angles below π/2). For non-QI angles, reference = how far the terminal side is from the nearest x-axis half (positive or negative).` },
+          { text: `π − ${angle}`, correct: data.deg > 90 && data.deg < 180 ? true : false, misconception: data.deg > 90 && data.deg < 180 ? "" : `π − θ is the reference-angle formula only for quadrant II angles. ${angle} is in quadrant ${Math.ceil((data.deg + 1) / 90)}; use the correct formula for that quadrant.` },
+          { text: `2π − ${angle}`, correct: data.deg > 270 && data.deg < 360 ? true : false, misconception: data.deg > 270 && data.deg < 360 ? "" : `2π − θ is the reference-angle formula only for quadrant IV angles. ${angle} is in quadrant ${Math.ceil((data.deg + 1) / 90)}; that formula doesn't apply.` },
+          { text: "0", correct: false, misconception: "Reference angle is 0 only when the angle is on the x-axis (0, π, 2π). " + angle + " is not on the x-axis." }
+        ].filter((opt, i, arr) => arr.findIndex(o => o.text === opt.text) === i)),
+        correctDisplay: `Reference angle = ${correct}`,
+        workedSolution: `${angle} is in quadrant ${Math.ceil((data.deg + 1) / 90)}. The <strong>reference angle</strong> is the acute angle between the terminal side and the x-axis. For ${angle}, that's <strong>${correct}</strong>. (Memorize: QII → π − θ, QIII → θ − π, QIV → 2π − θ.)`
+      };
+    }
+  },
+
+  /* ─── Q4 · FIB · Degrees ↔ Radians ───────────────────────────── */
+  {
+    id: 4, type: "fib", tag: "3A · Topic 3.3", color: "gold",
+    generate(){
+      const direction = R.pick(["d2r", "r2d"]);
+      if (direction === "d2r"){
+        const deg = R.pick([30, 45, 60, 90, 120, 135, 150, 180, 270]);
+        const radFracs = {30:"π/6", 45:"π/4", 60:"π/3", 90:"π/2", 120:"2π/3", 135:"3π/4", 150:"5π/6", 180:"π", 270:"3π/2"};
+        const rad = radFracs[deg];
+        return {
+          stem: `Convert <span class="mono">${deg}°</span> to radians. (Type as a fraction with π, e.g. <span class="mono">pi/4</span> or <span class="mono">π/4</span>.)`,
+          prefix: "Radians:",
+          placeholder: "e.g. pi/6",
+          accepted: [rad, rad.replace("π", "pi")],
+          misconceptions: [
+            { match: [(deg).toString()], why: `You typed the degree value (${deg}°). The question asks for radians. Convert: ${deg}° × (π/180) = ${rad}.` },
+            { match: [(deg / 180).toString(), (deg / 180).toFixed(2)], why: `You divided by 180 but forgot the π factor. Conversion: degrees × (<strong>π</strong>/180) = radians. So ${deg}° × π/180 = ${rad}.` },
+            { match: [(180 / deg).toString()], why: `You flipped the ratio. Conversion is degrees × (π/180), so multiply by π/180 — not 180/(deg).` }
+          ],
+          correctDisplay: `${deg}° = ${rad}`,
+          workedSolution: `Conversion factor: <strong>degrees × (π/180) = radians</strong>. So ${deg}° = ${deg}° · π/180 = <strong>${rad}</strong>.`
+        };
+      } else {
+        const radPick = R.pick([{ rad: "π/6", deg: 30 }, { rad: "π/4", deg: 45 }, { rad: "π/3", deg: 60 }, { rad: "π/2", deg: 90 }, { rad: "2π/3", deg: 120 }, { rad: "3π/4", deg: 135 }, { rad: "π", deg: 180 }, { rad: "3π/2", deg: 270 }]);
+        return {
+          stem: `Convert <span class="mono">${radPick.rad}</span> radians to degrees. (Type an integer — no degree symbol needed.)`,
+          prefix: "Degrees:",
+          placeholder: "integer",
+          accepted: [radPick.deg.toString()],
+          misconceptions: [
+            { match: [radPick.rad], why: `You typed the radian value. The question asks for the degree equivalent. Conversion: radians × (180/π) = degrees. So ${radPick.rad} × (180/π) = ${radPick.deg}°.` },
+            { match: [(radPick.deg * 2).toString()], why: `You may have doubled when you should have applied the conversion factor 180/π. Use radians × 180/π — that gives ${radPick.deg}°.` }
+          ],
+          correctDisplay: `${radPick.rad} = ${radPick.deg}°`,
+          workedSolution: `Conversion factor: <strong>radians × (180/π) = degrees</strong>. So ${radPick.rad} × (180/π) = <strong>${radPick.deg}°</strong>.`
+        };
+      }
+    }
+  },
+
+  /* ─── Q5 · MC · Period from A·sin(Bx) + D ────────────────────── */
+  {
+    id: 5, type: "mc", tag: "3B · Topic 3.6", color: "gold",
+    generate(){
+      const Bnum = R.pick([1, 2, 3]);
+      const Bden = R.pick([2, 3, 4, 6]);
+      const A = R.int(2, 6);
+      const D = R.int(2, 8);
+      // B = Bnum·π / Bden. Period = 2π / B = 2 · Bden / Bnum
+      const period = (2 * Bden) / Bnum;
+      const periodStr = Number.isInteger(period) ? period.toString() : `${2 * Bden}/${Bnum}`;
+      const wrongDivideOnly = `2π / (${Bnum}π/${Bden})`;
+      const Bstr = (Bnum === 1 ? "" : Bnum) + "π" + (Bden === 1 ? "" : "/" + Bden);
+
+      return {
+        stem: `A sinusoidal function is given by <span class="mono">f(x) = ${A}·sin(${Bstr}·x) + ${D}</span>. What is its period?`,
+        options: R.shuffle([
+          { html: periodStr, correct: true },
+          { html: `2π / (${Bstr})`, correct: false, misconception: `You wrote the formula but didn't simplify. Compute: 2π ÷ ${Bstr} = 2π · ${Bden}/(${Bnum}π) = <strong>${periodStr}</strong>.` },
+          { html: `π / (${Bstr})`, correct: false, misconception: `That's HALF the period. The formula is <strong>2π / |B|</strong>, not π / |B|.` },
+          { html: Bstr, correct: false, misconception: `You answered B itself, not the period. Period = 2π/|B|.` },
+          { html: (period * Math.PI).toFixed(2), correct: false, misconception: `You kept π in the answer when it should cancel. Period = 2π / (${Bnum}π/${Bden}) — the π's cancel, leaving 2·${Bden}/${Bnum} = ${periodStr}.` },
+          { html: A.toString(), correct: false, misconception: `That's the amplitude (A = ${A}), not the period. Amplitude is the height of the wave; period is the horizontal length of one cycle.` }
+        ]),
+        correctDisplay: `Period = ${periodStr}`,
+        workedSolution: `For y = A·sin(B·x) + D, the period is <strong>2π / |B|</strong>. Here B = ${Bstr}, so period = 2π / (${Bnum}π/${Bden}) = 2π · ${Bden}/(${Bnum}π) = <strong>${periodStr}</strong>. (The π's cancel.)`
+      };
+    }
+  },
+
+  /* ─── Q6 · FIB · Amplitude AND midline from max/min ──────────── */
+  {
+    id: 6, type: "fib", tag: "3B · Topic 3.6", color: "gold",
+    generate(){
+      const A = R.int(3, 12);
+      const D = R.int(5, 20);
+      const max = D + A;
+      const min = D - A;
+      // Build two-input prompt
+      return {
+        stem: `A sinusoidal function has a <strong>maximum of ${max}</strong> and a <strong>minimum of ${min}</strong>. Find its amplitude A. (Type a single integer.)`,
+        prefix: "A =",
+        placeholder: "integer",
+        accepted: [A.toString()],
+        misconceptions: [
+          { match: [D.toString()], why: `You computed the midline D = (${max} + ${min})/2 = ${D}, not the amplitude. Amplitude = (max − min)/2, which gives ${A}.` },
+          { match: [(max - min).toString()], why: `You computed the full range (max − min) = ${max - min}. Amplitude is <strong>half</strong> of that: (${max} − ${min})/2 = ${A}.` },
+          { match: [max.toString()], why: `You typed the max value. Amplitude is the HEIGHT of the wave above the midline — half the swing from max to min: (${max} − ${min})/2 = ${A}.` },
+          { match: [min.toString()], why: `You typed the min value. Amplitude isn't min — it's (max − min)/2 = ${A}.` }
+        ],
+        correctDisplay: `Amplitude A = ${A} (Midline D = ${D})`,
+        workedSolution: `<strong>Amplitude</strong> = half the vertical range: A = (max − min) / 2 = (${max} − ${min}) / 2 = ${max - min}/2 = <strong>${A}</strong>. <em>(Bonus: midline D = (max + min)/2 = ${D}.)</em>`
+      };
+    }
+  },
+
+  /* ─── Q7 · MC · Sinusoidal modeling (Ferris wheel-style) ─────── */
+  {
+    id: 7, type: "mc", tag: "3B · Topic 3.7", color: "gold",
+    generate(){
+      const diameter = R.pick([40, 50, 60, 80]);
+      const radius = diameter / 2;
+      const center = R.int(radius + 3, radius + 10);
+      const periodMin = R.pick([2, 3, 4, 5]);
+      // h(t) = -radius·cos((2π/period)·t) + center  (starts at minimum at t=0)
+      const Bnum = 2;
+      const Bden = periodMin;
+      const Bstr = `${Bnum === 1 ? "" : ""}π/${Bden / 1}`;  // = 2π / period = π/(period/2)... simpler:
+      const Bsimple = (Bden % 2 === 0) ? `π/${Bden / 2}` : `2π/${Bden}`;
+
+      return {
+        stem: `A Ferris wheel has a diameter of <strong>${diameter} m</strong> with its center <strong>${center} m</strong> above the ground. It completes one full revolution every <strong>${periodMin} minutes</strong>. A rider boards at the lowest point at t = 0. Which equation models the rider's height h(t) above the ground?`,
+        options: R.shuffle([
+          { html: `h(t) = −${radius}·cos(${Bsimple}·t) + ${center}`, correct: true },
+          { html: `h(t) = ${radius}·cos(${Bsimple}·t) + ${center}`, correct: false, misconception: `Sign on cosine is wrong. Boarding at the <strong>lowest point</strong> at t = 0 means h(0) should be the minimum (${center - radius}). cos(0) = 1, so to get min you need a <strong>negative</strong> coefficient: −cos.` },
+          { html: `h(t) = ${radius}·sin(${Bsimple}·t) + ${center}`, correct: false, misconception: `Sine starts at 0 (the midline), not the minimum. Boarding at the lowest point means starting at min, which requires <strong>−cos</strong>, not sin.` },
+          { html: `h(t) = ${diameter}·cos(${Bsimple}·t) + ${center}`, correct: false, misconception: `You used the diameter as amplitude. Amplitude is the <strong>radius</strong> (half the diameter): ${radius}, not ${diameter}.` },
+          { html: `h(t) = ${radius}·sin((2π/${diameter})·t) + ${center}`, correct: false, misconception: `Your B uses diameter, not period. B = 2π / period = 2π/${periodMin} = ${Bsimple}.` },
+          { html: `h(t) = −${radius}·cos((π/${periodMin})·t) + ${center}`, correct: false, misconception: `B = 2π/period, not π/period. Period ${periodMin} → B = 2π/${periodMin}, which simplifies to ${Bsimple}.` }
+        ]),
+        correctDisplay: `h(t) = −${radius}·cos(${Bsimple}·t) + ${center}`,
+        workedSolution: `<strong>Amplitude A = radius = ${radius}</strong> (half of diameter ${diameter}). <strong>Midline D = ${center}</strong> (center height). <strong>B = 2π / period = 2π/${periodMin} = ${Bsimple}</strong>. Boarding at the lowest point means h(0) = min, which calls for <strong>−cos</strong> (since −cos(0) = −1, the minimum of standard cosine). Final: <strong>h(t) = −${radius}·cos(${Bsimple}·t) + ${center}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q8 · MC · Trig equation 2sin(x) = c on [0, 2π) ─────────── */
+  {
+    id: 8, type: "mc", tag: "3B · Topic 3.10", color: "gold",
+    generate(){
+      const fn = R.pick(["sin", "cos"]);
+      const valueOpts = fn === "sin"
+        ? [{ val: "1/2", refAngle: "π/6", solutions: ["π/6", "5π/6"] },
+           { val: "√2/2", refAngle: "π/4", solutions: ["π/4", "3π/4"] },
+           { val: "√3/2", refAngle: "π/3", solutions: ["π/3", "2π/3"] }]
+        : [{ val: "1/2", refAngle: "π/3", solutions: ["π/3", "5π/3"] },
+           { val: "√2/2", refAngle: "π/4", solutions: ["π/4", "7π/4"] },
+           { val: "√3/2", refAngle: "π/6", solutions: ["π/6", "11π/6"] }];
+      const pick = R.pick(valueOpts);
+      const solutionText = pick.solutions.join(" and ");
+      // Distractor: only QI solution
+      const onlyQI = pick.solutions[0];
+      // Distractor: wrong second solution by adding π
+      const addPi = pick.solutions[0].includes("π")
+        ? pick.solutions[0].replace(/(\d*)π/, (m, p) => (parseInt(p || "1", 10) + (pick.solutions[0].includes("/") ? parseInt(pick.solutions[0].split("/")[1], 10) : 1)) + "π")
+        : "π";
+
+      return {
+        stem: `Find <em>all</em> solutions to <span class="mono">2·${fn}(x) − ${pick.val === "1/2" ? "1 = 0" : pick.val === "√2/2" ? "√2 = 0" : "√3 = 0"}</span> on the interval [0, 2π).`,
+        options: R.shuffle([
+          { html: `x = ${solutionText}`, correct: true },
+          { html: `x = ${onlyQI} only`, correct: false, misconception: `You found the quadrant I solution but missed the second one. ${fn} is positive in TWO quadrants — for ${fn === "sin" ? "sin: QI and QII" : "cos: QI and QIV"}. There are always TWO solutions on [0, 2π) for a non-extreme value.` },
+          { html: `x = ${pick.solutions[0]} and x = π + ${pick.solutions[0]}`, correct: false, misconception: `Adding π gives a solution in the OPPOSITE quadrant where ${fn} has opposite sign. Use the correct symmetry: ${fn === "sin" ? "π − reference for QII" : "2π − reference for QIV"}.` },
+          { html: `x = ${pick.refAngle}`, correct: false, misconception: `${pick.refAngle} IS one solution (= ${onlyQI}), but you need ALL solutions on [0, 2π). Don't stop at the reference angle.` },
+          { html: `x = π/2 and x = 3π/2`, correct: false, misconception: `Those are where ${fn === "sin" ? "sin = ±1" : "cos = 0"}, not where ${fn}(x) = ${pick.val}. Find the reference angle from the value, then locate it in the correct quadrants.` },
+          { html: `No solutions exist`, correct: false, misconception: `Since |${pick.val}| < 1, the equation ${fn}(x) = ${pick.val} has solutions. Solutions only fail when |value| > 1.` }
+        ]),
+        correctDisplay: `x = ${solutionText}`,
+        workedSolution: `Solve: ${fn}(x) = ${pick.val}. Reference angle: <strong>${pick.refAngle}</strong>. ${fn} is positive in ${fn === "sin" ? "QI and QII" : "QI and QIV"}. QI solution: ${pick.solutions[0]}. ${fn === "sin" ? "QII" : "QIV"} solution: ${pick.solutions[1]}. On [0, 2π): <strong>x = ${solutionText}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q9 · FIB · Period given B ──────────────────────────────── */
+  {
+    id: 9, type: "fib", tag: "3B · Topic 3.6", color: "gold",
+    generate(){
+      const Bden = R.pick([2, 3, 4, 5, 6]);
+      const period = 2 * Bden;
+      // f(x) = sin((π/Bden) x), so B = π/Bden, period = 2π / (π/Bden) = 2·Bden
+      return {
+        stem: `What is the period of <span class="mono">f(x) = sin((π/${Bden})·x)</span>? (Type an integer.)`,
+        prefix: "Period =",
+        placeholder: "integer",
+        accepted: [period.toString()],
+        misconceptions: [
+          { match: [Bden.toString()], why: `You typed the denominator of B (which is ${Bden}). Period = 2π/B = 2π/(π/${Bden}) = 2·${Bden} = ${period}.` },
+          { match: [(period / 2).toString()], why: `That's HALF the period. The formula is 2π/|B|, not π/|B|. Here period = 2π / (π/${Bden}) = 2·${Bden} = ${period}.` },
+          { match: [(2 * Math.PI / (Math.PI / Bden)).toString()], why: `You may have computed numerically. Symbolically: 2π / (π/${Bden}) = 2π · ${Bden}/π = 2·${Bden} = ${period}.` }
+        ],
+        correctDisplay: `Period = ${period}`,
+        workedSolution: `Period = <strong>2π / |B|</strong>. Here B = π/${Bden}, so period = 2π / (π/${Bden}) = 2π · ${Bden}/π = 2·${Bden} = <strong>${period}</strong>. The π's cancel.`
+      };
+    }
+  },
+
+  /* ─── Q10 · DD · Inverse trig range ──────────────────────────── */
+  {
+    id: 10, type: "dd", tag: "3B · Topic 3.11", color: "gold",
+    generate(){
+      const fn = R.pick(["sin⁻¹", "cos⁻¹", "tan⁻¹"]);
+      const ranges = {
+        "sin⁻¹": "[−π/2, π/2]",
+        "cos⁻¹": "[0, π]",
+        "tan⁻¹": "(−π/2, π/2)"
+      };
+      const correctRange = ranges[fn];
+
+      return {
+        stem: `What is the range of the inverse trig function <span class="mono">y = ${fn}(x)</span>?`,
+        prefix: "Range:",
+        options: R.shuffle([
+          { text: correctRange, correct: true },
+          { text: "[−π/2, π/2]", correct: fn === "sin⁻¹", misconception: fn !== "sin⁻¹" ? `[−π/2, π/2] is the range of <strong>sin⁻¹</strong>, not ${fn}. Each inverse trig function picks a different "principal" output range to be one-to-one.` : "" },
+          { text: "[0, π]", correct: fn === "cos⁻¹", misconception: fn !== "cos⁻¹" ? `[0, π] is the range of <strong>cos⁻¹</strong>, not ${fn}. ${fn} has a different principal range.` : "" },
+          { text: "(−π/2, π/2)", correct: fn === "tan⁻¹", misconception: fn !== "tan⁻¹" ? `(−π/2, π/2) is the range of <strong>tan⁻¹</strong> (open interval). ${fn} has a different range.` : "" },
+          { text: "[0, 2π)", correct: false, misconception: `[0, 2π) is the standard domain for one full revolution of the unit circle — but inverse trig functions restrict their range to a "principal" smaller interval so the inverse is well-defined.` }
+        ].filter((opt, i, arr) => arr.findIndex(o => o.text === opt.text) === i)),
+        correctDisplay: `Range of ${fn}: ${correctRange}`,
+        workedSolution: `<strong>Inverse trig principal ranges:</strong> sin⁻¹ → [−π/2, π/2]; cos⁻¹ → [0, π]; tan⁻¹ → (−π/2, π/2). These restricted ranges are chosen so each inverse function is a true function (one output per input). For ${fn}, the range is <strong>${correctRange}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q11 · MC · Polar rose petal count (BIGGEST MISS) ───────── */
+  {
+    id: 11, type: "mc", tag: "3C · Topic 3.14", color: "gold",
+    generate(){
+      const a = R.int(2, 5);
+      const n = R.pick([2, 3, 4, 5]);
+      const fn = R.pick(["cos", "sin"]);
+      // Even n → 2n petals; odd n → n petals
+      const petals = (n % 2 === 0) ? 2 * n : n;
+      const allOptions = [2, 3, 4, 5, 6, 8, 10];
+      const distractors = allOptions.filter(x => x !== petals).slice(0, 4);
+
+      return {
+        stem: `How many petals does the polar curve <span class="mono">r = ${a}·${fn}(${n}θ)</span> have?`,
+        options: R.shuffle([
+          { html: `${petals} petals`, correct: true },
+          { html: `${n} petals (always equal to n)`, correct: false, misconception: `Only works for <strong>odd</strong> n. Here n = ${n} is ${n % 2 === 0 ? "even" : "odd"}. Rule: <strong>odd n → n petals; even n → 2n petals</strong>. ${n % 2 === 0 ? `For n = ${n}, that's ${2 * n} petals.` : `For n = ${n}, that's ${n} petals.`}` },
+          { html: `${2 * n} petals (always 2n)`, correct: false, misconception: `Only works for <strong>even</strong> n. Here n = ${n} is ${n % 2 === 0 ? "even" : "odd"}. Rule: <strong>odd n → n petals; even n → 2n petals</strong>.` },
+          { html: `${a} petals (equal to coefficient)`, correct: false, misconception: `The coefficient ${a} controls petal LENGTH, not petal COUNT. Each petal extends |${a}| = ${a} units from the origin.` },
+          { html: distractors[0].toString() + " petals", correct: false, misconception: `Not following the petal-count rule. Memorize: r = a·${fn}(nθ) → <strong>odd n means n petals; even n means 2n petals</strong>.` },
+          { html: distractors[1].toString() + " petals", correct: false, misconception: `Petal count for r = a·${fn}(nθ) follows the rule: <strong>odd n → n; even n → 2n</strong>. Doesn't match this scenario.` }
+        ]),
+        correctDisplay: `${petals} petals`,
+        workedSolution: `For r = a·${fn}(nθ): <strong>if n is even, the rose has 2n petals; if n is odd, n petals</strong>. Here n = ${n} (${n % 2 === 0 ? "even" : "odd"}), so the rose has <strong>${petals} petals</strong>. The coefficient a = ${a} sets each petal's length, not count.`
+      };
+    }
+  },
+
+  /* ─── Q12 · DD · Polar curve type ────────────────────────────── */
+  {
+    id: 12, type: "dd", tag: "3C · Topic 3.13", color: "gold",
+    generate(){
+      const type = R.pick(["circle", "rose", "cardioid", "limacon"]);
+      let equation, correctText;
+      if (type === "circle"){
+        const a = R.int(2, 6);
+        equation = `r = ${a}`;
+        correctText = `Circle (radius ${a}, centered at origin)`;
+      } else if (type === "rose"){
+        const a = R.int(2, 5);
+        const n = R.int(2, 5);
+        const fn = R.pick(["cos", "sin"]);
+        equation = `r = ${a}·${fn}(${n}θ)`;
+        correctText = `Rose (${n % 2 === 0 ? 2 * n : n} petals)`;
+      } else if (type === "cardioid"){
+        const a = R.int(2, 5);
+        const fn = R.pick(["cos", "sin"]);
+        const sign = R.pick(["+", "−"]);
+        equation = `r = ${a} ${sign} ${a}·${fn}(θ)`;
+        correctText = `Cardioid (heart-shaped)`;
+      } else {
+        const a = R.int(2, 5);
+        const b = R.intExcl(2, 6, [a]);
+        const fn = R.pick(["cos", "sin"]);
+        const sign = R.pick(["+", "−"]);
+        equation = `r = ${a} ${sign} ${b}·${fn}(θ)`;
+        correctText = b > a ? "Limaçon with inner loop" : "Dimpled limaçon";
+      }
+
+      return {
+        stem: `What type of polar curve is <span class="mono">${equation}</span>?`,
+        prefix: "Curve type:",
+        options: R.shuffle([
+          { text: "Circle (radius a, centered at origin)", correct: type === "circle", misconception: type !== "circle" ? `A circle would have the form r = constant (like r = 4). This equation has trig functions of θ — so it's not a simple circle.` : "" },
+          { text: "Rose (multi-petaled flower)", correct: type === "rose", misconception: type !== "rose" ? `Roses have the form r = a·cos(nθ) or r = a·sin(nθ) — no constant term added. This equation ${type === "circle" ? "is just a constant" : "has a constant term, making it a cardioid or limaçon"}.` : "" },
+          { text: "Cardioid (heart-shaped)", correct: type === "cardioid", misconception: type !== "cardioid" ? `Cardioids have the form r = a ± a·cos(θ) or r = a ± a·sin(θ) — constant and coefficient must be EQUAL. ${type === "limacon" ? "Here they're different, so it's a limaçon." : "This isn't that form."}` : "" },
+          { text: "Limaçon (loop or dimple, a ≠ b in r = a ± b·trig(θ))", correct: type === "limacon", misconception: type !== "limacon" ? `Limaçons have the form r = a ± b·cos(θ) or r = a ± b·sin(θ) with a ≠ b. ${type === "cardioid" ? "Here a = b, making it the special case: a cardioid." : "This isn't that form."}` : "" }
+        ]),
+        correctDisplay: correctText,
+        workedSolution: `Polar curve forms to recognize:<br>• <strong>r = constant</strong> → circle around origin<br>• <strong>r = a·cos(nθ) or a·sin(nθ)</strong> → rose<br>• <strong>r = a ± a·cos(θ) or a ± a·sin(θ)</strong> (a = b) → cardioid<br>• <strong>r = a ± b·cos(θ) or a ± b·sin(θ)</strong> (a ≠ b) → limaçon<br>Here: <strong>${equation}</strong> matches the form for <strong>${correctText}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q13 · MC · Double-angle identity ───────────────────────── */
+  {
+    id: 13, type: "mc", tag: "3C · Topic 3.12", color: "gold",
+    generate(){
+      const fn = R.pick(["sin(2θ)", "cos(2θ)"]);
+      const correctForms = {
+        "sin(2θ)": "2 sin(θ) · cos(θ)",
+        "cos(2θ)": "cos²(θ) − sin²(θ)"
+      };
+      const correct = correctForms[fn];
+
+      return {
+        stem: `Which expression is equivalent to <span class="mono">${fn}</span> for all real θ?`,
+        options: R.shuffle([
+          { html: correct, correct: true },
+          { html: "2 sin(θ) · cos(θ)", correct: fn === "sin(2θ)", misconception: fn !== "sin(2θ)" ? `2 sin(θ) cos(θ) is the identity for <strong>sin(2θ)</strong>, not ${fn}. Keep them separate: sin(2θ) = 2 sin cos; cos(2θ) = cos² − sin².` : "" },
+          { html: "cos²(θ) − sin²(θ)", correct: fn === "cos(2θ)", misconception: fn !== "cos(2θ)" ? `cos²θ − sin²θ is the identity for <strong>cos(2θ)</strong>, not ${fn}. Use sin(2θ) = 2 sin θ cos θ for sin.` : "" },
+          { html: "2 sin(θ)", correct: false, misconception: `${fn} is NOT simply ${fn.includes("sin") ? "2 sin θ" : "2 cos θ"}. Doubling the angle is different from doubling the value. Use the identity: ${fn} = ${correct}.` },
+          { html: "sin²(θ) + cos²(θ)", correct: false, misconception: `That's the <strong>Pythagorean identity</strong> (equals 1 for all θ), not ${fn}. Don't confuse identities.` },
+          { html: "sin(θ) + cos(θ)", correct: false, misconception: `Sum of sin and cos is NOT a known identity for ${fn}. The correct identity is ${correct}.` },
+          { html: "1 − 2 sin²(θ)", correct: fn === "cos(2θ)", misconception: fn !== "cos(2θ)" ? `1 − 2sin²(θ) is one form of <strong>cos(2θ)</strong>, equivalent to cos²θ − sin²θ. It's not an identity for ${fn}.` : "Also accepted (equivalent form)." }
+        ].filter((opt, i, arr) => arr.findIndex(o => o.html === opt.html) === i)),
+        correctDisplay: `${fn} = ${correct}`,
+        workedSolution: `<strong>Double-angle identities:</strong><br>• sin(2θ) = 2 sin(θ) cos(θ)<br>• cos(2θ) = cos²(θ) − sin²(θ) = 1 − 2 sin²(θ) = 2 cos²(θ) − 1<br>For ${fn}, the standard form is <strong>${correct}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q14 · FIB · Polar → Rectangular ────────────────────────── */
+  {
+    id: 14, type: "fib", tag: "3C · Topic 3.13", color: "gold",
+    generate(){
+      const angleKeys = ["0", "π/6", "π/4", "π/3", "π/2", "2π/3", "3π/4", "5π/6", "π"];
+      const angle = R.pick(angleKeys);
+      const r = R.int(2, 6);
+      const data = UC[angle];
+      // x = r·cos(θ), y = r·sin(θ)
+      // For nice numbers, compute string answers
+      const xExpr = data.cos === "0" ? "0" : data.cos === "1" ? r.toString() : data.cos === "−1" ? `−${r}` : `${r}·(${data.cos})`;
+      const yExpr = data.sin === "0" ? "0" : data.sin === "1" ? r.toString() : data.sin === "−1" ? `−${r}` : `${r}·(${data.sin})`;
+
+      // Compute pretty x and y
+      const evalUC = (str, r) => {
+        if (str === "0") return "0";
+        if (str === "1") return r.toString();
+        if (str === "−1") return `−${r}`;
+        if (str === "1/2") return `${r/2 % 1 === 0 ? r/2 : r + "/2"}`;
+        if (str === "−1/2") return `${-r/2 % 1 === 0 ? -r/2 : "−" + r + "/2"}`;
+        if (str === "√2/2") return `${r}√2/2`;
+        if (str === "−√2/2") return `−${r}√2/2`;
+        if (str === "√3/2") return `${r}√3/2`;
+        if (str === "−√3/2") return `−${r}√3/2`;
+        return str;
+      };
+      const xPretty = evalUC(data.cos, r);
+      const yPretty = evalUC(data.sin, r);
+
+      return {
+        stem: `Convert the polar point <span class="mono">(r, θ) = (${r}, ${angle})</span> to rectangular coordinates (x, y). (Type x as a number or exact expression.)`,
+        prefix: "x =",
+        placeholder: "exact value",
+        accepted: [
+          xPretty,
+          xPretty.replace("√", "sqrt"),
+          xPretty.replace("−", "-"),
+          // Numerical approx
+          (Number(r * (data.cos === "0" ? 0 : data.cos === "1" ? 1 : data.cos === "−1" ? -1 : data.cos === "1/2" ? 0.5 : data.cos === "−1/2" ? -0.5 : data.cos === "√2/2" ? Math.sqrt(2)/2 : data.cos === "−√2/2" ? -Math.sqrt(2)/2 : data.cos === "√3/2" ? Math.sqrt(3)/2 : data.cos === "−√3/2" ? -Math.sqrt(3)/2 : 0)).toFixed(2)).toString()
+        ],
+        misconceptions: [
+          { match: [yPretty, yPretty.replace("√", "sqrt"), yPretty.replace("−", "-")],
+            why: `You computed y = r·sin(θ) = ${yPretty}, not x. The question asks for x. <strong>x = r·cos(θ)</strong>, y = r·sin(θ).` },
+          { match: [r.toString()],
+            why: `You typed r itself. x = <strong>r · cos(θ)</strong>, so multiply r by cos(${angle}) = ${data.cos}.` },
+          { match: [angle, angle.replace("π", "pi")],
+            why: `You typed θ. Conversion: x = r · cos(θ). Plug in r = ${r} and compute cos(${angle}) = ${data.cos}.` }
+        ],
+        correctDisplay: `x = ${xPretty}, &nbsp; y = ${yPretty}`,
+        workedSolution: `Conversion formulas: <strong>x = r · cos(θ)</strong>, &nbsp; <strong>y = r · sin(θ)</strong>. Here r = ${r}, θ = ${angle}. So x = ${r} · cos(${angle}) = ${r} · (${data.cos}) = <strong>${xPretty}</strong>, and y = ${r} · sin(${angle}) = ${r} · (${data.sin}) = ${yPretty}.`
+      };
+    }
+  }
+
+];
+
+window.PrecalcDay.init({
+  dayTitle: "Day 3",
+  dayLabel: "Trigonometric & Polar Functions",
+  questions: DAY3_QUESTIONS
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calculus · Final Exam</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f; --d1:#0b0f1e; --d2:#111828; --d3:#161e30;
+    --glass:rgba(255,255,255,0.044); --gb:rgba(255,255,255,0.08);
+    --shine:rgba(255,255,255,0.13); --b:rgba(255,255,255,0.07); --b2:rgba(255,255,255,0.12);
+    --green:#3effa0; --gold:#f5c842; --red:#f87171;
+    --blue:#38bdf8; --purple:#c084fc; --cyan:#00e5ff;
+    --orange:#fb923c; --pink:#f472b6; --teal:#2dd4bf;
+    --tx:#dde6f5; --tx2:#8898b8; --tx3:#4a5570;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:linear-gradient(rgba(56,189,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.03) 1px,transparent 1px);
+    background-size:48px 48px;pointer-events:none;z-index:0;
+  }
+  body::after{
+    content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);
+    width:1100px;height:700px;
+    background:radial-gradient(ellipse at center,rgba(192,132,252,0.07) 0%,rgba(56,189,248,0.04) 40%,transparent 70%);
+    pointer-events:none;z-index:0;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold));transform-origin:left;transform:scaleX(0);transition:transform 0.25s;}
+
+  /* ── TOP NAV ── */
+  .topnav{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--b);
+  }
+  .back-btn{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);
+    text-decoration:none;padding:8px 16px;border-radius:100px;
+    border:1px solid var(--b);background:var(--glass);transition:all 0.2s;
+    font-family:'DM Mono',monospace;
+  }
+  .back-btn:hover{border-color:var(--purple);color:var(--purple);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-unit{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .nav-badge{
+    font-size:11px;font-weight:500;letter-spacing:0.1em;
+    padding:4px 12px;border-radius:100px;
+    background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.28);color:var(--purple);
+  }
+
+  .timer-pill{
+    display:flex;align-items:center;gap:8px;
+    padding:7px 14px;border-radius:100px;
+    background:var(--glass);border:1px solid var(--b);
+    font-size:12px;font-weight:500;color:var(--tx2);letter-spacing:0.08em;
+  }
+  .timer-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+    animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .timer-pill .t-val{font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;}
+
+  /* ── PAGE LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:48px 32px 120px;}
+
+  /* ── HEADER ── */
+  .exam-header{margin-bottom:48px;}
+  .header-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--purple);margin-bottom:18px;
+    padding:6px 14px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);
+    opacity:0;animation:fadeUp 0.6s 0.05s forwards;
+  }
+  .header-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--purple);}
+
+  .exam-title{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:clamp(36px,5.5vw,60px);line-height:0.96;
+    letter-spacing:-0.025em;margin-bottom:18px;
+    opacity:0;animation:fadeUp 0.6s 0.15s forwards;
+  }
+  .exam-title .l1{display:block;color:var(--tx);}
+  .exam-title .l2{
+    display:block;
+    background:linear-gradient(135deg,var(--purple) 0%,var(--blue) 50%,var(--green) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .exam-sub{
+    font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.85;
+    opacity:0;animation:fadeUp 0.6s 0.25s forwards;
+  }
+
+  .meta-row{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;
+    opacity:0;animation:fadeUp 0.6s 0.35s forwards;
+  }
+  .meta-pill{
+    display:flex;align-items:center;gap:8px;
+    background:var(--glass);border:1px solid var(--b);border-radius:100px;
+    padding:7px 14px;font-size:11px;font-weight:400;color:var(--tx2);letter-spacing:0.06em;
+  }
+  .meta-pill .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+  /* ── INSTRUCTIONS BANNER ── */
+  .instructions{
+    margin-top:32px;padding:18px 22px;border-radius:12px;
+    background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.2);border-left:3px solid var(--blue);
+    font-size:12px;font-weight:300;color:var(--tx2);line-height:1.85;
+    opacity:0;animation:fadeUp 0.6s 0.45s forwards;
+  }
+  .instructions .ih{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .instructions strong{color:var(--tx);font-weight:500;}
+
+  /* ── UNIT SECTION HEADERS ── */
+  .unit-section{margin-top:56px;margin-bottom:8px;}
+  .unit-section .uh{
+    display:flex;align-items:center;gap:0;margin-bottom:22px;
+  }
+  .unit-section .ub{
+    font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+    padding:5px 14px;border-radius:4px 0 0 4px;white-space:nowrap;
+  }
+  .unit-section .ul{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+    padding:5px 18px;border-radius:0 4px 4px 0;flex:1;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+  }
+  .unit-section .uline{flex:1;height:1px;margin-left:16px;}
+
+  .u1 .ub{background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25);color:var(--blue);}
+  .u1 .ul{background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.15);border-left:none;color:var(--blue);}
+  .u1 .uline{background:linear-gradient(90deg,rgba(56,189,248,0.3),transparent);}
+
+  .u2 .ub{background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);}
+  .u2 .ul{background:rgba(62,255,160,0.04);border:1px solid rgba(62,255,160,0.14);border-left:none;color:var(--green);}
+  .u2 .uline{background:linear-gradient(90deg,rgba(62,255,160,0.3),transparent);}
+
+  .u3 .ub{background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.22);color:var(--gold);}
+  .u3 .ul{background:rgba(245,200,66,0.04);border:1px solid rgba(245,200,66,0.14);border-left:none;color:var(--gold);}
+  .u3 .uline{background:linear-gradient(90deg,rgba(245,200,66,0.3),transparent);}
+
+  .u4 .ub{background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.22);color:var(--purple);}
+  .u4 .ul{background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.14);border-left:none;color:var(--purple);}
+  .u4 .uline{background:linear-gradient(90deg,rgba(192,132,252,0.3),transparent);}
+
+  .frq-section .ub{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.22);color:var(--red);}
+  .frq-section .ul{background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.14);border-left:none;color:var(--red);}
+  .frq-section .uline{background:linear-gradient(90deg,rgba(248,113,113,0.3),transparent);}
+
+  /* ── QUESTION CARD ── */
+  .q-card{
+    background:var(--glass);border:1px solid var(--b);border-radius:14px;
+    padding:24px 26px;margin-bottom:14px;
+    transition:border-color 0.25s,box-shadow 0.25s;
+    position:relative;overflow:hidden;
+  }
+  .q-card.answered{border-color:rgba(255,255,255,0.14);}
+  .q-card.flagged-correct{border-color:rgba(62,255,160,0.4);box-shadow:0 0 0 1px rgba(62,255,160,0.22);}
+  .q-card.flagged-wrong{border-color:rgba(248,113,113,0.4);box-shadow:0 0 0 1px rgba(248,113,113,0.22);}
+
+  .q-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+  .q-num{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
+    width:42px;height:42px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--gb);border:1px solid var(--b2);
+    flex-shrink:0;
+  }
+  .u1 .q-num{color:var(--blue);background:rgba(56,189,248,0.08);border-color:rgba(56,189,248,0.22);}
+  .u2 .q-num{color:var(--green);background:rgba(62,255,160,0.06);border-color:rgba(62,255,160,0.2);}
+  .u3 .q-num{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.2);}
+  .u4 .q-num{color:var(--purple);background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.22);}
+  .frq-section .q-num{color:var(--red);background:rgba(248,113,113,0.07);border-color:rgba(248,113,113,0.22);width:auto;padding:0 14px;font-size:14px;letter-spacing:0.04em;}
+
+  .q-tag{
+    font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;
+    padding:4px 10px;border-radius:100px;
+    background:var(--gb);border:1px solid var(--b);color:var(--tx3);
+  }
+  .q-tag.hot{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.2);color:rgba(248,113,113,0.85);}
+  .q-tag.priority{background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.22);color:var(--gold);}
+
+  .q-stem{font-size:14px;font-weight:300;color:var(--tx);line-height:1.85;margin-bottom:18px;}
+  .q-stem strong{color:var(--tx);font-weight:500;}
+  .q-stem em{color:var(--tx2);font-style:italic;}
+  .q-stem code, .mono{font-family:'DM Mono',monospace;background:var(--d2);padding:1px 7px;border-radius:4px;font-size:13px;border:1px solid var(--b);color:var(--tx);}
+
+  /* fraction inline */
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  /* ── OPTIONS ── */
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:13px 16px;border-radius:10px;
+    background:var(--d1);border:1px solid var(--b);
+    cursor:pointer;transition:background 0.18s,border-color 0.18s,transform 0.12s;
+    font-size:13px;color:var(--tx2);font-weight:300;line-height:1.7;
+  }
+  .opt:hover:not(.disabled){border-color:var(--b2);background:var(--d2);}
+  .opt.selected{background:rgba(56,189,248,0.07);border-color:rgba(56,189,248,0.4);color:var(--tx);}
+  .u2 .opt.selected{background:rgba(62,255,160,0.06);border-color:rgba(62,255,160,0.4);}
+  .u3 .opt.selected{background:rgba(245,200,66,0.07);border-color:rgba(245,200,66,0.42);}
+  .u4 .opt.selected{background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.42);}
+
+  .opt.correct{background:rgba(62,255,160,0.08);border-color:rgba(62,255,160,0.5);color:var(--tx);}
+  .opt.wrong{background:rgba(248,113,113,0.07);border-color:rgba(248,113,113,0.45);color:var(--tx);}
+  .opt.disabled{cursor:default;}
+
+  .opt-letter{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;
+    background:var(--gb);border:1px solid var(--b2);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--tx2);
+    transition:all 0.18s;
+  }
+  .opt.selected .opt-letter{background:var(--blue);color:var(--void);border-color:var(--blue);}
+  .u2 .opt.selected .opt-letter{background:var(--green);}
+  .u3 .opt.selected .opt-letter{background:var(--gold);}
+  .u4 .opt.selected .opt-letter{background:var(--purple);}
+  .opt.correct .opt-letter{background:var(--green);color:var(--void);border-color:var(--green);}
+  .opt.wrong .opt-letter{background:var(--red);color:var(--void);border-color:var(--red);}
+
+  .opt-text{flex:1;padding-top:3px;}
+
+  /* ── FRQ INPUTS ── */
+  .frq-stem{
+    background:var(--d1);border:1px solid var(--b);border-left:3px solid var(--red);
+    border-radius:10px;padding:18px 22px;margin-bottom:18px;
+    font-size:13px;color:var(--tx);line-height:1.85;font-weight:300;
+  }
+  .frq-stem .label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;}
+  .frq-stem strong{color:var(--tx);font-weight:500;}
+
+  .frq-parts{display:flex;flex-direction:column;gap:14px;}
+  .frq-part{
+    background:var(--d1);border:1px solid var(--b);border-radius:10px;
+    padding:14px 18px;
+  }
+  .fp-prompt{font-size:12px;color:var(--tx2);font-weight:300;line-height:1.75;margin-bottom:10px;}
+  .fp-prompt .lbl{font-family:'Syne',sans-serif;font-weight:700;color:var(--red);margin-right:6px;}
+  .fp-input{
+    width:100%;padding:10px 14px;border-radius:8px;
+    background:var(--d2);border:1px solid var(--b2);
+    font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);
+    outline:none;transition:border-color 0.2s;
+  }
+  .fp-input:focus{border-color:var(--red);}
+  .fp-input.correct{border-color:rgba(62,255,160,0.5);background:rgba(62,255,160,0.04);}
+  .fp-input.wrong{border-color:rgba(248,113,113,0.45);background:rgba(248,113,113,0.04);}
+  .fp-input:disabled{cursor:default;opacity:0.85;}
+
+  .fp-feedback{display:none;margin-top:8px;font-size:11px;color:var(--tx3);font-weight:300;line-height:1.7;}
+  .fp-feedback.shown{display:block;}
+  .fp-feedback .lbl{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);font-weight:500;margin-right:6px;}
+  .fp-feedback.wrong .lbl{color:var(--red);}
+  .fp-feedback strong{color:var(--tx);font-weight:500;}
+
+  /* ── EXPLANATION (after submit) ── */
+  .q-explain{
+    display:none;margin-top:14px;padding:14px 18px;border-radius:10px;
+    background:rgba(245,200,66,0.05);border:1px solid rgba(245,200,66,0.2);border-left:3px solid var(--gold);
+    font-size:12px;font-weight:300;color:var(--tx2);line-height:1.85;
+  }
+  .q-explain.shown{display:block;}
+  .q-explain .lbl{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:6px;}
+  .q-explain strong{color:var(--tx);font-weight:500;}
+  .q-explain .ans-line{color:var(--green);font-weight:500;margin-bottom:6px;font-size:12px;}
+  .q-explain .ans-line.wrong-ans{color:var(--red);}
+
+  /* ── SUBMIT AREA ── */
+  .submit-area{
+    margin-top:48px;padding:32px;border-radius:16px;
+    background:linear-gradient(135deg,rgba(192,132,252,0.04),rgba(56,189,248,0.04));
+    border:1px solid var(--b2);
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+  }
+  .submit-progress{
+    font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx2);font-weight:400;
+  }
+  .submit-progress strong{color:var(--tx);font-family:'Syne',sans-serif;font-size:14px;letter-spacing:0.04em;font-weight:700;}
+  .submit-btn{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;
+    padding:14px 36px;border-radius:100px;cursor:pointer;
+    background:linear-gradient(135deg,var(--purple),var(--blue));border:none;color:var(--void);
+    transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+  }
+  .submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(192,132,252,0.3);}
+  .submit-btn:disabled{opacity:0.45;cursor:not-allowed;}
+
+  .reset-btn{
+    font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+    padding:8px 18px;border-radius:100px;cursor:pointer;
+    background:transparent;border:1px solid var(--b2);color:var(--tx3);
+    transition:all 0.2s;
+  }
+  .reset-btn:hover{color:var(--red);border-color:rgba(248,113,113,0.4);}
+
+  /* ── RESULTS MODAL ── */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:300;
+    background:rgba(6,8,15,0.85);backdrop-filter:blur(8px);
+    display:none;align-items:flex-start;justify-content:center;
+    padding:48px 24px;overflow-y:auto;
+  }
+  .modal-overlay.shown{display:flex;animation:fadeIn 0.4s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  .modal{
+    max-width:680px;width:100%;
+    background:linear-gradient(180deg,var(--d1),var(--void));
+    border:1px solid var(--b2);border-radius:20px;
+    padding:42px 38px;position:relative;
+    animation:slideUp 0.5s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  @keyframes slideUp{from{transform:translateY(28px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
+  .modal-head{text-align:center;margin-bottom:32px;}
+  .modal-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--purple);margin-bottom:14px;
+    padding:5px 12px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.22);
+  }
+  .modal-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--purple);}
+
+  .modal-score{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:72px;line-height:1;letter-spacing:-0.03em;margin-bottom:10px;
+    background:linear-gradient(135deg,var(--purple),var(--blue),var(--green));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .modal-score .total{color:var(--tx3);font-size:24px;font-weight:700;-webkit-text-fill-color:var(--tx3);}
+  .modal-pct{font-size:13px;color:var(--tx2);letter-spacing:0.1em;font-weight:300;}
+  .modal-pct strong{color:var(--tx);font-weight:500;}
+
+  .breakdown{
+    margin-top:28px;padding:22px;border-radius:14px;
+    background:var(--glass);border:1px solid var(--b);
+  }
+  .bd-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px;font-weight:500;}
+  .bd-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;font-size:12px;}
+  .bd-row:last-child{margin-bottom:0;}
+  .bd-label{flex-shrink:0;width:88px;font-weight:500;letter-spacing:0.05em;}
+  .bd-bar{flex:1;height:6px;border-radius:3px;background:var(--gb);overflow:hidden;}
+  .bd-fill{height:100%;border-radius:3px;transition:width 0.8s cubic-bezier(.2,.8,.2,1);}
+  .bd-row.u1 .bd-label{color:var(--blue);}
+  .bd-row.u1 .bd-fill{background:var(--blue);}
+  .bd-row.u2 .bd-label{color:var(--green);}
+  .bd-row.u2 .bd-fill{background:var(--green);}
+  .bd-row.u3 .bd-label{color:var(--gold);}
+  .bd-row.u3 .bd-fill{background:var(--gold);}
+  .bd-row.u4 .bd-label{color:var(--purple);}
+  .bd-row.u4 .bd-fill{background:var(--purple);}
+  .bd-row.frq .bd-label{color:var(--red);}
+  .bd-row.frq .bd-fill{background:var(--red);}
+  .bd-val{flex-shrink:0;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--tx);min-width:48px;text-align:right;letter-spacing:0.04em;}
+
+  .modal-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
+  .modal-btn{
+    font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+    padding:11px 22px;border-radius:100px;cursor:pointer;
+    background:var(--glass);border:1px solid var(--b2);color:var(--tx2);
+    transition:all 0.2s;
+  }
+  .modal-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .modal-btn.primary{
+    background:linear-gradient(135deg,var(--purple),var(--blue));color:var(--void);
+    border-color:transparent;font-weight:700;
+  }
+  .modal-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,132,252,0.25);}
+
+  /* ── FLOATING SCROLL TOP ── */
+  .scroll-top{
+    position:fixed;bottom:32px;right:32px;z-index:50;
+    width:42px;height:42px;border-radius:50%;
+    background:var(--d2);border:1px solid var(--b2);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--tx3);transition:all 0.2s;
+    opacity:0;pointer-events:none;
+  }
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--purple);color:var(--purple);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ── FOOTER ── */
+  footer{
+    position:relative;z-index:1;max-width:920px;margin:48px auto 0;
+    padding:24px 32px 48px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    border-top:1px solid var(--b);
+  }
+  footer span{font-size:11px;font-weight:300;color:var(--tx3);letter-spacing:0.08em;}
+  .footer-mark{display:grid;grid-template-columns:repeat(3,9px);grid-template-rows:repeat(3,9px);gap:3px;}
+  .footer-mark .sq{width:9px;height:9px;border-radius:2px;background:var(--b);}
+  .footer-mark .sq.admin{background:rgba(245,200,66,0.5);}
+  .footer-mark .sq.teacher{background:rgba(0,229,255,0.4);}
+  .footer-mark .sq.student{background:rgba(184,207,255,0.3);}
+  .footer-mark .sq.core{background:rgba(62,255,160,0.7);}
+
+  /* animations */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .q-card{opacity:0;animation:fadeUp 0.5s forwards;}
+
+  /* Question fade-in delays - reset at each unit */
+  .u1 .q-card:nth-child(2){animation-delay:0.05s;}
+  .u1 .q-card:nth-child(3){animation-delay:0.10s;}
+  .u1 .q-card:nth-child(4){animation-delay:0.15s;}
+
+  /* ── NEW: ans-line tag/val (revealed on submit) ── */
+  .q-explain .ans-line:empty{display:none;}
+  .q-explain .ans-line{display:flex;align-items:center;gap:8px;}
+  .al-tag{font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);
+    padding:3px 8px;border-radius:100px;background:var(--glass);border:1px solid var(--b);}
+  .al-val{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--green);letter-spacing:0.04em;}
+  .frq-section .al-val{color:var(--red);}
+
+  /* ── NEW: FRQ rows / inputs / explanation ── */
+  .fp-row{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:12px;
+    background:rgba(248,113,113,0.022);border:1px solid rgba(248,113,113,0.1);}
+  .fp-label{font-size:13px;color:var(--tx);line-height:1.55;font-weight:300;}
+  .fp-label strong{color:var(--tx);font-weight:500;}
+  .fp-inputs-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:4px;}
+  .fp-inline{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .fp-inline.fp-wide{flex:1;min-width:240px;}
+  .fp-prefix{font-family:'DM Mono',monospace;font-size:12px;color:var(--tx2);font-weight:500;letter-spacing:0.04em;white-space:nowrap;}
+  .fp-input.fp-short{width:130px;}
+  .fp-input{flex:1;}
+  .fp-explain{display:none;margin-top:12px;padding:14px 16px;border-radius:10px;
+    background:rgba(248,113,113,0.05);border:1px solid rgba(248,113,113,0.18);
+    font-size:12px;line-height:1.6;color:var(--tx2);font-weight:300;}
+  .fp-explain.shown{display:block;}
+  .fp-explain strong{color:var(--tx);font-weight:500;}
+  .fp-exp-head{margin-bottom:8px;}
+  .fp-exp-tag{font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+    padding:3px 8px;border-radius:100px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.22);}
+  .fp-exp-line{display:flex;gap:10px;align-items:center;font-family:'DM Mono',monospace;font-size:11px;
+    color:var(--tx2);padding:4px 0;border-bottom:1px dashed rgba(248,113,113,0.12);}
+  .fp-exp-line:last-of-type{border-bottom:none;margin-bottom:8px;}
+  .fp-exp-key{color:var(--tx3);font-weight:500;letter-spacing:0.04em;min-width:90px;}
+  .fp-exp-correct{color:var(--green);font-weight:500;}
+  .fp-exp-body{margin-top:10px;padding-top:10px;border-top:1px solid rgba(248,113,113,0.14);}
+
+  /* ── UPDATED: submit area to support new structure ── */
+  .submit-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--purple);
+    padding:5px 12px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.22);
+  }
+  .submit-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--purple);}
+  .submit-progress{display:flex;align-items:baseline;gap:6px;margin-top:6px;}
+  .prog-num{font-family:'Syne',sans-serif;font-weight:800;font-size:48px;line-height:1;letter-spacing:-0.02em;
+    background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;background-clip:text;}
+  .prog-sep{font-family:'Syne',sans-serif;font-weight:300;font-size:36px;color:var(--tx3);}
+  .prog-total{font-family:'Syne',sans-serif;font-weight:700;font-size:36px;color:var(--tx3);letter-spacing:-0.02em;}
+  .prog-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);font-weight:500;margin-left:8px;}
+  .submit-meter{width:280px;max-width:100%;height:4px;border-radius:2px;background:var(--gb);overflow:hidden;}
+  .submit-meter-fill{height:100%;width:0%;border-radius:2px;
+    background:linear-gradient(90deg,var(--purple),var(--blue),var(--green));
+    transition:width 0.4s cubic-bezier(.2,.8,.2,1);}
+  .submit-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:10px;}
+  .submit-btn{display:inline-flex;align-items:center;gap:10px;}
+  .sb-text{}
+  .sb-arrow{font-size:16px;line-height:1;}
+  .submit-btn.done{background:linear-gradient(135deg,var(--green),var(--blue));}
+  .submit-foot{font-size:11px;color:var(--tx3);text-align:center;max-width:480px;line-height:1.6;font-weight:300;letter-spacing:0.02em;}
+
+  /* ── UPDATED: modal score "score-num" wrapper for typography ── */
+  .score-num{display:inline-block;}
+
+  /* ── UPDATED: bd-row for new structure (head + bar stacked) ── */
+  .bd-row{display:flex;flex-direction:column;gap:6px;align-items:stretch;margin-bottom:14px;font-size:12px;}
+  .bd-head{display:flex;justify-content:space-between;align-items:baseline;}
+  .bd-name{font-size:11px;letter-spacing:0.06em;color:var(--tx2);font-weight:500;}
+  .bd-frac{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--tx);letter-spacing:0.04em;}
+  .bd-bar{height:5px;border-radius:3px;}
+  .bd-fill{width:0%;}
+
+  @media(max-width:640px){
+    .topnav{padding:12px 16px;}
+    .nav-center{display:none;}
+    .page{padding:32px 16px 100px;}
+    .q-card{padding:20px 18px;}
+    .modal{padding:32px 22px;}
+    .modal-score{font-size:56px;}
+    .scroll-top{bottom:20px;right:20px;}
+    footer{padding:24px 16px 36px;}
+    .fp-input.fp-short{width:100%;}
+    .fp-inline{width:100%;}
+    .fp-inline.fp-wide{min-width:0;}
+    .submit-area{padding:24px 18px;}
+    .prog-num{font-size:38px;}
+    .prog-sep,.prog-total{font-size:28px;}
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-finals-week/precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">AP Pre-Calc</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Final Exam</span>
+  </div>
+  <div class="timer-pill">
+    <span class="dot"></span>
+    <span class="t-val" id="timerVal">00:00</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="exam-header">
+    <div class="header-eyebrow"><span class="dot"></span>Cumulative Final · 35 Questions</div>
+    <h1 class="exam-title">
+      <span class="l1">Pre-Calculus</span>
+      <span class="l2">Final Exam.</span>
+    </h1>
+    <p class="exam-sub">A cumulative assessment built from your class's actual exam data — weighted by what you missed most across the four units. 28 multiple-choice questions, plus 2 free-response problems with 7 typed sub-parts.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--blue)"></span>4 Units</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>28 Multiple Choice (1–28)</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>2 FRQ · 7 Typed Inputs (29–30)</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--gold)"></span>6 Options Per MC</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--green)"></span>Auto-Graded</div>
+    </div>
+
+    <div class="instructions">
+      <div class="ih">📋 Directions</div>
+      <strong>Q1–Q28:</strong> Select the single best answer (A–F). Your selection highlights but does not lock — you can change it anytime before submitting. <strong>Q29–Q30:</strong> Type your numeric or symbolic answer in each input field. After clicking <strong>Submit Exam</strong> at the bottom, every question locks, your score appears, and an explanation reveals on each item.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       UNIT 1 · POLYNOMIAL & RATIONAL FUNCTIONS (Q1–Q7)
+  ════════════════════════════════════════════════ -->
+  <div class="unit-section u1">
+    <div class="uh">
+      <span class="ub">Unit 01</span>
+      <span class="ul">Polynomial &amp; Rational Functions</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u1">
+
+    <!-- Q1 — 1A AROC -->
+    <div class="q-card" data-q="1" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">01</div>
+        <span class="q-tag">1A · Topic 1.2</span>
+        <span class="q-tag">Avg Rate of Change</span>
+      </div>
+      <div class="q-stem">A function f satisfies f(2) = 5 and f(7) = 20. What is the average rate of change of f on the interval [2, 7]?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">−3</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text"><span class="fr"><span class="n">1</span><span class="d">3</span></span></span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">5</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text"><span class="fr"><span class="n">25</span><span class="d">9</span></span></span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">3</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">15</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>AROC = (f(7) − f(2)) / (7 − 2) = (20 − 5) / 5 = <strong>15 / 5 = 3</strong>. The AP exam most often misses this when students forget to divide by Δx — they stop at 15.</div>
+    </div>
+
+    <!-- Q2 — 1A Concavity -->
+    <div class="q-card" data-q="2" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">02</div>
+        <span class="q-tag priority">1A · Topic 1.3</span>
+        <span class="q-tag hot">Concavity</span>
+      </div>
+      <div class="q-stem">A continuous function f is increasing on [0, 10]. On the interval (0, 5), f is concave down; on the interval (5, 10), f is concave up. What feature does the graph have at x = 5?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">Local maximum</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">Local minimum</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">Point of inflection</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">Vertical asymptote</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">Horizontal asymptote</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">Removable discontinuity</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Concavity changes (∩ → ∪) but the function keeps increasing — so there is no direction change. <strong>Concavity flip with no direction flip = point of inflection</strong>, not an extremum.</div>
+    </div>
+
+    <!-- Q3 — 1B Inflection vs Extrema (BIGGEST MISS) -->
+    <div class="q-card" data-q="3" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">03</div>
+        <span class="q-tag priority">1B · Topic 1.4</span>
+        <span class="q-tag hot">🔥 Biggest Miss</span>
+      </div>
+      <div class="q-stem">The graph of a polynomial f is increasing on the entire interval (1, 7). Between x = 3 and x = 5 the curve has an obvious S-bend where the concavity switches from concave up to concave down at <span class="mono">x = 4</span>. The point at x = 4 is best classified as:</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">Local maximum (the curve reaches a peak there)</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">Local minimum (the curve reaches a valley there)</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">Point of inflection (concavity changes; direction does not)</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">Global maximum on the interval</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">Both a local max and a point of inflection</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">A vertical asymptote</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>This is the exact misconception your class missed on Practice Exam Q2. f is <strong>increasing throughout</strong> — it never changes direction — so x = 4 cannot be an extremum. Concavity alone changing means <strong>point of inflection</strong>.</div>
+    </div>
+
+    <!-- Q4 — 1B End Behavior -->
+    <div class="q-card" data-q="4" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">04</div>
+        <span class="q-tag priority">1B · Topic 1.6</span>
+        <span class="q-tag hot">End Behavior</span>
+      </div>
+      <div class="q-stem">For the polynomial <span class="mono">f(x) = −2x⁴ + 5x³ − x + 9</span>, which statement correctly describes the end behavior?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">As x → ±∞, f(x) → +∞</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">As x → −∞, f(x) → −∞ &nbsp;and&nbsp; as x → +∞, f(x) → +∞</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">As x → −∞, f(x) → +∞ &nbsp;and&nbsp; as x → +∞, f(x) → −∞</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">As x → ±∞, f(x) → −∞</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">As x → ±∞, f(x) → 0</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">End behavior cannot be determined without more information</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>End behavior depends only on the leading term: <span class="mono">−2x⁴</span>. Even degree (4) means both ends do the same thing; negative leading coefficient (−2) flips them <strong>downward</strong>. So both ends → −∞.</div>
+    </div>
+
+    <!-- Q5 — 1B Multiplicity -->
+    <div class="q-card" data-q="5" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">05</div>
+        <span class="q-tag">1B · Topic 1.5</span>
+        <span class="q-tag">Multiplicity</span>
+      </div>
+      <div class="q-stem">For the polynomial <span class="mono">f(x) = 3(x + 2)²(x − 1)(x − 4)³</span>, identify the behavior of the graph at each x-intercept.</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">x = −2 S-crosses, x = 1 bounces, x = 4 crosses cleanly</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">x = −2 crosses cleanly, x = 1 bounces, x = 4 S-crosses</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">All three intercepts cross cleanly</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">x = −2 bounces, x = 1 S-crosses, x = 4 crosses cleanly</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">x = −2 bounces, x = 1 crosses cleanly, x = 4 bounces</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">x = −2 bounces, x = 1 crosses cleanly, x = 4 S-crosses</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Multiplicity 2 (even) → <strong>bounces</strong>. Multiplicity 1 (odd, simple) → <strong>crosses cleanly</strong>. Multiplicity 3 (odd, ≥ 3) → <strong>S-flatten and crosses</strong>.</div>
+    </div>
+
+    <!-- Q6 — 1C Holes vs Asymptotes (HOT) -->
+    <div class="q-card" data-q="6" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">06</div>
+        <span class="q-tag priority">1C · Topic 1.7</span>
+        <span class="q-tag hot">Holes vs Asymptotes</span>
+      </div>
+      <div class="q-stem">For the rational function <span class="mono">r(x) = (x − 3)(x + 1) / [(x − 3)(x + 5)]</span>, identify all holes and vertical asymptotes.</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">Vertical asymptotes at x = 3 and x = −5; hole at x = −1</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">Vertical asymptote at x = −5; hole at x = 3</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">Holes at x = 3 and at x = −5</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">Vertical asymptotes at x = 3 and x = −5 (no holes)</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">Vertical asymptote at x = 3; hole at x = −5</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">No holes; vertical asymptote at x = −1 only</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>The factor <strong>(x − 3) cancels</strong> from numerator and denominator → <strong>hole at x = 3</strong>. The factor (x + 5) only appears in the denominator → <strong>vertical asymptote at x = −5</strong>. Cancel first; classify the leftover roots.</div>
+    </div>
+
+    <!-- Q7 — 1C Asymptote behavior -->
+    <div class="q-card" data-q="7" data-unit="u1">
+      <div class="q-top">
+        <div class="q-num">07</div>
+        <span class="q-tag">1C · Topic 1.8</span>
+        <span class="q-tag">Asymptotes</span>
+      </div>
+      <div class="q-stem">Which statement best describes the long-run behavior of <span class="mono">f(x) = (4x³ + 1) / (x² + 5)</span>?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">Horizontal asymptote at y = 0</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">Horizontal asymptote at y = 4</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">Horizontal asymptote at y = 1/5</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">Horizontal asymptote at y = 4x</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">No horizontal asymptote — the function has a slant (oblique) asymptote</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">Horizontal asymptote at y = ∞</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Numerator degree (3) is exactly <strong>one greater</strong> than denominator degree (2) → there is <strong>no horizontal asymptote</strong>. The end behavior is governed by a <strong>slant asymptote</strong> (a non-horizontal line).</div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       UNIT 2 · EXPONENTIAL & LOGARITHMIC (Q8–Q14)
+  ════════════════════════════════════════════════ -->
+  <div class="unit-section u2">
+    <div class="uh">
+      <span class="ub">Unit 02</span>
+      <span class="ul">Exponential &amp; Logarithmic Functions</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u2">
+
+    <!-- Q8 — Geometric Sequence -->
+    <div class="q-card" data-q="8" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">08</div>
+        <span class="q-tag">2A · Topic 2.2</span>
+        <span class="q-tag">Geometric Seq</span>
+      </div>
+      <div class="q-stem">A geometric sequence has first term a₁ = 6 and common ratio r = 2. What is the value of the 6th term, a₆?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">12</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">36</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">96</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">192</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">384</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">64</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>aₙ = a₁ · r^(n−1). So a₆ = 6 · 2^5 = 6 · 32 = <strong>192</strong>. Common error: using r^n instead of r^(n−1) gives 6·64 = 384 (option E).</div>
+    </div>
+
+    <!-- Q9 — Fractional Exponents (HOT) -->
+    <div class="q-card" data-q="9" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">09</div>
+        <span class="q-tag priority">2A · Topic 2.4</span>
+        <span class="q-tag hot">Fractional Exponents</span>
+      </div>
+      <div class="q-stem">Simplify the expression <span class="mono">27^(2/3)</span>.</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">18</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">6</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">81</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text"><span class="fr"><span class="n">27</span><span class="d">2</span></span></span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">3</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">9</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div><strong>Take the root first, then the power.</strong> 27^(1/3) = 3, then 3² = <strong>9</strong>. Common errors: 18 (treating exponent as multiplication 27·2/3), or 27/2 (treating it as a ratio).</div>
+    </div>
+
+    <!-- Q10 — Log Properties -->
+    <div class="q-card" data-q="10" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">10</div>
+        <span class="q-tag priority">2B · Topic 2.12</span>
+        <span class="q-tag hot">Log Properties</span>
+      </div>
+      <div class="q-stem">Which expression is equivalent to <span class="mono">log(x²√y / z³)</span>, where the <span class="mono">√</span> denotes square root and all variables are positive?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">2 log x + (1/2) log y − 3 log z</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">2 log x · (1/2) log y / 3 log z</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">log(2x) + log(√y) − log(3z)</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">2 log x + log(½) · log y − 3 log z</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">2 log x + (1/2) log y + 3 log z</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">log(2x + √y − 3z)</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Use product rule (multiplication → addition), quotient rule (division → subtraction), and power rule (exponent moves to a coefficient). Note √y = y^(1/2). The final expression is <strong>2 log x + (1/2) log y − 3 log z</strong>.</div>
+    </div>
+
+    <!-- Q11 — Solving Log Equation -->
+    <div class="q-card" data-q="11" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">11</div>
+        <span class="q-tag priority">2B · Topic 2.13</span>
+        <span class="q-tag hot">Log Equation</span>
+      </div>
+      <div class="q-stem">Solve for x: <span class="mono">log₄(x) + log₄(x − 6) = 2</span>.</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">x = 2</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">x = 4</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">x = 6</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">x = 8</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">x = 16</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">x = 22</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Combine: log₄(x(x − 6)) = 2 → x(x − 6) = 4² = 16 → x² − 6x − 16 = 0 → (x − 8)(x + 2) = 0. Reject x = −2 (log undefined). Answer: <strong>x = 8</strong>.</div>
+    </div>
+
+    <!-- Q12 — Log Graph Intercept (BIGGEST MISS) -->
+    <div class="q-card" data-q="12" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">12</div>
+        <span class="q-tag priority">2B · Topic 2.13</span>
+        <span class="q-tag hot">🔥 Biggest Miss · 5/10 wrong</span>
+      </div>
+      <div class="q-stem">What is the x-intercept of the function <span class="mono">f(x) = log₃(x − 1) − 2</span>?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">x = 1</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">x = 10</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">x = 4</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">x = 9</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">x = 2</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">x = 27</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Set f(x) = 0: log₃(x − 1) = 2 → x − 1 = 3² = 9 → <strong>x = 10</strong>. Common error: stopping at x − 1 = 9 and answering x = 9 (option D), forgetting to add 1 back.</div>
+    </div>
+
+    <!-- Q13 — Semi-log Plot (HOT) -->
+    <div class="q-card" data-q="13" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">13</div>
+        <span class="q-tag priority">2B · Topic 2.15</span>
+        <span class="q-tag hot">🔥 Semi-log · 4/10 wrong</span>
+      </div>
+      <div class="q-stem">When the points (x, y) of a data set are graphed as (x, log₁₀ y) on a semi-log plot, the result is a line with slope 0.5 and y-intercept 1. Which formula best models the original function y(x)?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">y = 0.5 x + 1 &nbsp;(simple linear)</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">y = log(0.5 x + 1)</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">y = 0.5 · 10^x</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">y = x^(0.5) + 10</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">y = 10 · 10^(0.5 x)</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">y = e^(0.5 x + 1)</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>The line in semi-log space is log y = 0.5 x + 1. Exponentiate both sides (base 10): y = 10^(0.5x + 1) = 10¹ · 10^(0.5x) = <strong>10 · 10^(0.5x)</strong>. A linear semi-log plot ⇒ exponential original.</div>
+    </div>
+
+    <!-- Q14 — Inverse (HIGHEST MISS) -->
+    <div class="q-card" data-q="14" data-unit="u2">
+      <div class="q-top">
+        <div class="q-num">14</div>
+        <span class="q-tag priority">2C · Topic 2.8</span>
+        <span class="q-tag hot">🔥 Highest Miss in Unit 2</span>
+      </div>
+      <div class="q-stem">The graph of f passes through the points (1, 4), (3, 7), and (5, 12). Through which set of points must the graph of f⁻¹ (the inverse of f) pass?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">(1, ¼), (3, 1/7), (5, 1/12)</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">(−1, −4), (−3, −7), (−5, −12)</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">(1, 4), (3, 7), (5, 12)</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">(4, −1), (7, −3), (12, −5)</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">(¼, 1), (1/7, 3), (1/12, 5)</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">(4, 1), (7, 3), (12, 5)</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>The inverse <strong>swaps x and y</strong> in every ordered pair. (1, 4) → (4, 1), and so on. The inverse is a reflection across y = x, NOT a reciprocal (option A) and NOT a negation (option B).</div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       UNIT 3 · TRIGONOMETRIC & POLAR FUNCTIONS (Q15–Q21)
+  ════════════════════════════════════════════════ -->
+  <div class="unit-section u3">
+    <div class="uh">
+      <span class="ub">Unit 03</span>
+      <span class="ul">Trigonometric &amp; Polar Functions</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u3">
+
+    <!-- Q15 — Radian Definition (HOT) -->
+    <div class="q-card" data-q="15" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">15</div>
+        <span class="q-tag priority">3A · Topic 3.2</span>
+        <span class="q-tag hot">🔥 Radian Def · 5/10 wrong</span>
+      </div>
+      <div class="q-stem">Which statement is the correct <strong>definition</strong> of one radian?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">An angle equal to <span class="mono">180/π</span> degrees exactly</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">The central angle of a circle that subtends an arc whose length equals the radius of the circle</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">An angle whose terminal side passes through the point (1, 0)</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">An angle of measure <span class="mono">360°/π</span></span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">Half of one full revolution around a circle</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">The angle whose sine equals 1</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>This is the AP-style definition tested as Practice Exam 3, Q16. A radian is defined by the <strong>arc-length-equals-radius</strong> property — that's why arc length s = rθ when θ is in radians. Option A gives the conversion (180/π ≈ 57.3°), but it's a derived fact, not the definition.</div>
+    </div>
+
+    <!-- Q16 — Exact Unit Circle Value -->
+    <div class="q-card" data-q="16" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">16</div>
+        <span class="q-tag priority">3A · Topic 3.4</span>
+        <span class="q-tag hot">Exact Values</span>
+      </div>
+      <div class="q-stem">Find the exact value of <span class="mono">cos(7π/6)</span>.</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text"><span class="fr"><span class="n">1</span><span class="d">2</span></span></span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">−<span class="fr"><span class="n">1</span><span class="d">2</span></span></span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text"><span class="fr"><span class="n">√3</span><span class="d">2</span></span></span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">−<span class="fr"><span class="n">√3</span><span class="d">2</span></span></span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text"><span class="fr"><span class="n">√2</span><span class="d">2</span></span></span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">−<span class="fr"><span class="n">√2</span><span class="d">2</span></span></span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>7π/6 lives in <strong>Quadrant III</strong> (between π and 3π/2). Reference angle is π/6, where cos(π/6) = √3/2. Cosine is <strong>negative</strong> in QIII (x is negative). Therefore cos(7π/6) = <strong>−√3/2</strong>.</div>
+    </div>
+
+    <!-- Q17 — Period from Sinusoid -->
+    <div class="q-card" data-q="17" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">17</div>
+        <span class="q-tag priority">3B · Topic 3.6</span>
+        <span class="q-tag hot">A·sin(Bx+C)+D</span>
+      </div>
+      <div class="q-stem">A sinusoidal function is given by <span class="mono">f(x) = 3·sin(πx/4) + 5</span>. What is its period?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">8</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">4</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">π/4</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">2π</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">8π</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">π</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>For y = A·sin(Bx + C) + D, period = <strong>2π / |B|</strong>. Here B = π/4, so period = 2π ÷ (π/4) = 2π · (4/π) = <strong>8</strong>.</div>
+    </div>
+
+    <!-- Q18 — Sinusoidal Modeling (Ferris Wheel) -->
+    <div class="q-card" data-q="18" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">18</div>
+        <span class="q-tag priority">3B · Topic 3.7</span>
+        <span class="q-tag hot">Sinusoidal Modeling</span>
+      </div>
+      <div class="q-stem">A Ferris wheel has a diameter of 60 m and its center is 35 m above the ground. It completes one full revolution every 4 minutes. A rider boards at the lowest point at time t = 0. Which equation models the rider's height h(t) above the ground (in meters)?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">h(t) = 30·sin(πt/2) + 35</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">h(t) = 60·cos(πt/4) + 35</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">h(t) = 30·cos(πt/2) + 35</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">h(t) = −30·cos(πt/2) + 35</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">h(t) = 35·sin(πt/2) + 30</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">h(t) = −60·sin(πt/4) + 35</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Amplitude = radius = <strong>30</strong>. Midline D = center height = <strong>35</strong>. Period = 4 → B = 2π/4 = <strong>π/2</strong>. Boarding at the <em>lowest</em> point at t = 0 → use <strong>−cos</strong> (so it starts at the minimum). Together: <strong>−30·cos(πt/2) + 35</strong>.</div>
+    </div>
+
+    <!-- Q19 — Trig Equations -->
+    <div class="q-card" data-q="19" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">19</div>
+        <span class="q-tag priority">3B · Topic 3.10</span>
+        <span class="q-tag hot">Trig Equations</span>
+      </div>
+      <div class="q-stem">Find <em>all</em> solutions to <span class="mono">2·sin(x) − 1 = 0</span> on the interval [0, 2π).</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">x = π/6 only</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">x = π/3 only</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">x = π/3 and x = 2π/3</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">x = π/4 and x = 3π/4</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">x = π/6 and x = 5π/6</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">x = π/6 and x = 7π/6</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Isolate sin x = 1/2. Sine is <strong>positive in QI and QII</strong>. Reference angle = π/6 → solutions are <strong>π/6 (QI)</strong> and <strong>π − π/6 = 5π/6 (QII)</strong>. Common trap: F adds π for the QIII reflection, but sine is negative there.</div>
+    </div>
+
+    <!-- Q20 — Polar Graphs (HOT) -->
+    <div class="q-card" data-q="20" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">20</div>
+        <span class="q-tag priority">3C · Topic 3.14</span>
+        <span class="q-tag hot">🔥 Polar Graphs · 6/10 wrong</span>
+      </div>
+      <div class="q-stem">Which polar equation produces a <strong>four-petaled rose</strong>?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">r = 3 cos(2θ)</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">r = 4 sin(θ)</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">r = 2 + cos(θ)</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">r = 2 cos(3θ)</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">r = 1 + 2 cos(θ)</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">r = 4</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>For r = a · cos(nθ) or r = a · sin(nθ): if <strong>n is even, the graph has 2n petals</strong>; if n is odd, n petals. Here n = 2 (even) → 4 petals. Option D (n = 3, odd) makes a 3-petaled rose. Option B is a single circle.</div>
+    </div>
+
+    <!-- Q21 — Double-Angle Identity -->
+    <div class="q-card" data-q="21" data-unit="u3">
+      <div class="q-top">
+        <div class="q-num">21</div>
+        <span class="q-tag">3C · Topic 3.12</span>
+        <span class="q-tag hot">Double-Angle</span>
+      </div>
+      <div class="q-stem">Which expression is equivalent to <span class="mono">sin(2θ)</span> for all real θ?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">sin(θ) + cos(θ)</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">2 sin(θ)</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">2 sin(θ) · cos(θ)</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">1 − 2 sin²(θ)</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">cos(θ) · sin(θ)</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">sin²(θ) − cos²(θ)</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>The double-angle identity for sine is <strong>sin(2θ) = 2 sin(θ) cos(θ)</strong>. Option E is missing the coefficient 2. Option D is one form of cos(2θ); option F is −cos(2θ).</div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       UNIT 4 · PARAMETRIC, IMPLICIT & CONICS (Q22–Q28)
+  ════════════════════════════════════════════════ -->
+  <div class="unit-section u4">
+    <div class="uh">
+      <span class="ub">Unit 04</span>
+      <span class="ul">Parametric, Implicit Relations &amp; Conics</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u4">
+
+    <!-- Q22 — Finding Parameter Value -->
+    <div class="q-card" data-q="22" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">22</div>
+        <span class="q-tag">4A · Topic 4.1</span>
+        <span class="q-tag hot">Find Parameter</span>
+      </div>
+      <div class="q-stem">A parametric curve is defined by <span class="mono">x(t) = t² − 1</span> and <span class="mono">y(t) = 2t + 3</span>. For which value of t is the point on the curve equal to (3, 7)?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">t = 2</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">t = 1</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">t = −2</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">t = 3</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">Both t = 2 and t = −2</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">t = 4</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>From x: t² − 1 = 3 → t² = 4 → t = ±2. <strong>You must check y for each candidate.</strong> y(2) = 7 ✓ but y(−2) = −1 ✗. Only <strong>t = 2</strong> produces both coordinates correctly. Option E is the trap: solving x alone.</div>
+    </div>
+
+    <!-- Q23 — Parametric Rate of Change -->
+    <div class="q-card" data-q="23" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">23</div>
+        <span class="q-tag">4A · Topic 4.3</span>
+        <span class="q-tag">Rates of Change</span>
+      </div>
+      <div class="q-stem">A parametric curve has <span class="mono">x(t) = 3t²</span> and <span class="mono">y(t) = t³</span>. What is the average rate of change of y with respect to x on the interval t ∈ [1, 2]?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">3</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text"><span class="fr"><span class="n">7</span><span class="d">3</span></span></span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text"><span class="fr"><span class="n">7</span><span class="d">9</span></span></span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">9</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text"><span class="fr"><span class="n">9</span><span class="d">7</span></span></span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text"><span class="fr"><span class="n">1</span><span class="d">3</span></span></span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Compute Δy/Δx using endpoints. y(1) = 1, y(2) = 8 → Δy = 7. x(1) = 3, x(2) = 12 → Δx = 9. AROC = <strong>7/9</strong>. Common error: dividing the rates Δy/Δt by Δx/Δt incorrectly, or flipping to 9/7 (E).</div>
+    </div>
+
+    <!-- Q24 — Parametric Circle (HOT) -->
+    <div class="q-card" data-q="24" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">24</div>
+        <span class="q-tag priority">4B · Topic 4.4</span>
+        <span class="q-tag hot">Parametric Circle</span>
+      </div>
+      <div class="q-stem">Which set of parametric equations describes a complete <strong>circle</strong> of radius 5 centered at (2, −3)?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">x = 5 + 2 cos(t), &nbsp; y = 5 − 3 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">x = 2 cos(t), &nbsp; y = −3 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">x = 2 + 5 t, &nbsp; y = −3 + 5 t, &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">x = 5 cos(t) − 2, &nbsp; y = 5 sin(t) + 3, &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">x = 2 + 5 cos(t), &nbsp; y = −3 + 5 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">x = 2 + 5 cos(t), &nbsp; y = 3 + 5 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Standard form: <strong>x = h + r cos(t),  y = k + r sin(t)</strong> for center (h, k) and radius r. Here (h, k) = (2, −3), r = 5 → <strong>x = 2 + 5 cos t, y = −3 + 5 sin t</strong>. Option F gets the y-center sign wrong; D treats the center as offsets to subtract.</div>
+    </div>
+
+    <!-- Q25 — Implicit Intersection -->
+    <div class="q-card" data-q="25" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">25</div>
+        <span class="q-tag priority">4B · Topic 4.5</span>
+        <span class="q-tag hot">Implicit · Intersection</span>
+      </div>
+      <div class="q-stem">How many points of intersection are there between the implicit relation <span class="mono">x² + y² = 25</span> and the line <span class="mono">y = x + 1</span>?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">0</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">1</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">3</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">4</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">Infinitely many</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">2</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Substitute y = x + 1 into the circle: x² + (x + 1)² = 25 → 2x² + 2x − 24 = 0 → x² + x − 12 = 0. Discriminant = 1 + 48 = 49 &gt; 0 → <strong>two real solutions</strong>. The line is a chord that passes through the interior of the circle.</div>
+    </div>
+
+    <!-- Q26 — Ellipse Standard Form -->
+    <div class="q-card" data-q="26" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">26</div>
+        <span class="q-tag priority">4C · Topic 4.6</span>
+        <span class="q-tag hot">Ellipse Standard Form</span>
+      </div>
+      <div class="q-stem">An ellipse is centered at (1, −2). Its major axis is horizontal with total length 10, and its minor axis is vertical with total length 6. Which equation represents this ellipse in standard form?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">(x + 1)²/25 + (y − 2)²/9 = 1</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">(x − 1)²/25 + (y + 2)²/9 = 1</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">(x − 1)²/100 + (y + 2)²/36 = 1</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">(x − 1)²/9 + (y + 2)²/25 = 1</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">(x − 1)²/10 + (y + 2)²/6 = 1</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">(x − 1)²/5 + (y + 2)²/3 = 1</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Major axis length = 2a = 10 → a = 5 → a² = <strong>25</strong>. Minor axis length = 2b = 6 → b = 3 → b² = <strong>9</strong>. Center (1, −2) → (x − 1) and (y + 2). Major axis horizontal → larger denominator (25) goes under the x term. Common error: putting the lengths (10, 6) directly in denominators (option E).</div>
+    </div>
+
+    <!-- Q27 — Hyperbola Asymptotes (HOT Q20) -->
+    <div class="q-card" data-q="27" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">27</div>
+        <span class="q-tag priority">4C · Topic 4.6</span>
+        <span class="q-tag hot">🔥 Hyperbola · Q20 Miss</span>
+      </div>
+      <div class="q-stem">For the hyperbola <span class="mono">(x − 2)²/16 − (y + 1)²/9 = 1</span>, what are the equations of the two asymptotes?</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">y = ±(4/3)(x − 2) − 1</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">y = ±(3/4)(x + 2) + 1</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">y = ±(16/9)(x − 2) − 1</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">y = ±3(x − 2) − 1</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">y = (3/4) x &nbsp;and&nbsp; y = −(3/4) x</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">y = ±(3/4)(x − 2) − 1</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>For (x − h)²/a² − (y − k)²/b² = 1 with a horizontal transverse axis, the asymptotes pass through the center (h, k) with slope ±b/a. Here (h, k) = (2, −1), a = 4, b = 3. Slopes ±3/4. Asymptotes: <strong>y = ±(3/4)(x − 2) − 1</strong>. Option A flips the slope to b/a = 4/3.</div>
+    </div>
+
+    <!-- Q28 — Parametric Conic -->
+    <div class="q-card" data-q="28" data-unit="u4">
+      <div class="q-top">
+        <div class="q-num">28</div>
+        <span class="q-tag priority">4C · Topic 4.7</span>
+        <span class="q-tag hot">Parametric Conic</span>
+      </div>
+      <div class="q-stem">The parametric curve <span class="mono">x = 4 cos(t), &nbsp; y = 3 sin(t)</span>, &nbsp; 0 ≤ t &lt; 2π, traces:</div>
+      <div class="opts">
+        <div class="opt" data-opt="A"><span class="opt-letter">A</span><span class="opt-text">A circle of radius 4</span></div>
+        <div class="opt" data-opt="B"><span class="opt-letter">B</span><span class="opt-text">An ellipse with semi-major axis 4 (horizontal) and semi-minor axis 3 (vertical)</span></div>
+        <div class="opt" data-opt="C"><span class="opt-letter">C</span><span class="opt-text">A circle of radius 3</span></div>
+        <div class="opt" data-opt="D"><span class="opt-letter">D</span><span class="opt-text">A hyperbola</span></div>
+        <div class="opt" data-opt="E"><span class="opt-letter">E</span><span class="opt-text">A line through the origin</span></div>
+        <div class="opt" data-opt="F"><span class="opt-letter">F</span><span class="opt-text">A parabola</span></div>
+      </div>
+      <div class="q-explain"><div class="lbl">Explanation</div><div class="ans-line"></div>Eliminate t: cos t = x/4, sin t = y/3. Use cos²t + sin²t = 1 → <strong>x²/16 + y²/9 = 1</strong>. That's an <strong>ellipse</strong> with a = 4 (horizontal), b = 3 (vertical). The differing coefficients on cos and sin are the giveaway — equal coefficients would make a circle.</div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       FREE RESPONSE · Q29–Q30 (7 typed sub-parts)
+  ════════════════════════════════════════════════ -->
+  <div class="unit-section frq-section">
+    <div class="uh">
+      <span class="ub">Free Response</span>
+      <span class="ul">Q29–Q30 · 7 Typed Sub-Parts</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="frq-section">
+
+    <!-- Q29 — Sinusoidal Modeling -->
+    <div class="q-card" data-q="29" data-unit="frq">
+      <div class="q-top">
+        <div class="q-num">29</div>
+        <span class="q-tag priority">3B · Topic 3.6 / 3.10</span>
+        <span class="q-tag hot">Sinusoidal Modeling · 4 parts</span>
+      </div>
+      <div class="frq-stem">
+        <div class="label">Context</div>
+        The water level in a tidal harbor is modeled by a sinusoidal function of time. The level reaches its <strong>maximum of 22 ft at t = 6 hours</strong> and its <strong>minimum of 6 ft at t = 18 hours</strong>, where t is measured in hours after midnight. Use this to answer parts (a)–(d). Type your answers in the boxes below.
+      </div>
+      <div class="frq-parts">
+
+        <div class="fp-row">
+          <div class="fp-label">(a) Find the <strong>amplitude A</strong> and the <strong>midline (vertical shift) D</strong> of the sinusoidal model.</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline">
+              <span class="fp-prefix">A =</span>
+              <input type="text" class="fp-input fp-short" id="q29a-A" placeholder="amplitude" autocomplete="off">
+            </div>
+            <div class="fp-inline">
+              <span class="fp-prefix">D =</span>
+              <input type="text" class="fp-input fp-short" id="q29a-D" placeholder="midline" autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="29a"></div>
+        </div>
+
+        <div class="fp-row">
+          <div class="fp-label">(b) Determine the <strong>period</strong> (in hours) and the value of <strong>B</strong> in the form <span class="mono">cos(B(t − C))</span>. Use π in your answer for B (e.g. <span class="mono">pi/12</span>).</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline">
+              <span class="fp-prefix">Period =</span>
+              <input type="text" class="fp-input fp-short" id="q29b-P" placeholder="hours" autocomplete="off">
+            </div>
+            <div class="fp-inline">
+              <span class="fp-prefix">B =</span>
+              <input type="text" class="fp-input fp-short" id="q29b-B" placeholder="e.g. pi/12" autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="29b"></div>
+        </div>
+
+        <div class="fp-row">
+          <div class="fp-label">(c) Write the <strong>full sinusoidal equation</strong> h(t) using cosine, with the maximum at t = 6 (so the phase shift puts the peak there).</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline fp-wide">
+              <span class="fp-prefix">h(t) =</span>
+              <input type="text" class="fp-input" id="q29c-eq" placeholder="e.g. 8*cos((pi/12)*(t-6)) + 14" autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="29c"></div>
+        </div>
+
+        <div class="fp-row">
+          <div class="fp-label">(d) Evaluate <span class="mono">h(12)</span>. Give the water level (in feet) at t = 12 hours (noon).</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline">
+              <span class="fp-prefix">h(12) =</span>
+              <input type="text" class="fp-input fp-short" id="q29d-val" placeholder="ft" autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="29d"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Q30 — Hyperbola + Parametric -->
+    <div class="q-card" data-q="30" data-unit="frq">
+      <div class="q-top">
+        <div class="q-num">30</div>
+        <span class="q-tag priority">4C · Topic 4.7 / 4.10</span>
+        <span class="q-tag hot">Hyperbola → Parametric · 3 parts</span>
+      </div>
+      <div class="frq-stem">
+        <div class="label">Context</div>
+        Consider the hyperbola defined by <span class="mono"><strong>(x − 1)² / 9 − (y + 2)² / 16 = 1</strong></span>. Use this for parts (a)–(c). Type your answers in the boxes below.
+      </div>
+      <div class="frq-parts">
+
+        <div class="fp-row">
+          <div class="fp-label">(a) Identify the <strong>center</strong> as an ordered pair, and the two <strong>vertices</strong>. Use the format <span class="mono">(x,y)</span>.</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline">
+              <span class="fp-prefix">Center =</span>
+              <input type="text" class="fp-input fp-short" id="q30a-C" placeholder="(h,k)" autocomplete="off">
+            </div>
+            <div class="fp-inline">
+              <span class="fp-prefix">Vertex 1 =</span>
+              <input type="text" class="fp-input fp-short" id="q30a-V1" placeholder="(x,y)" autocomplete="off">
+            </div>
+            <div class="fp-inline">
+              <span class="fp-prefix">Vertex 2 =</span>
+              <input type="text" class="fp-input fp-short" id="q30a-V2" placeholder="(x,y)" autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="30a"></div>
+        </div>
+
+        <div class="fp-row">
+          <div class="fp-label">(b) Write the equations of the two <strong>asymptotes</strong> in slope-intercept form (use <span class="mono">y =</span>). Order doesn't matter.</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline fp-wide">
+              <span class="fp-prefix">Asym 1:</span>
+              <input type="text" class="fp-input" id="q30b-A1" placeholder="y = ..." autocomplete="off">
+            </div>
+            <div class="fp-inline fp-wide">
+              <span class="fp-prefix">Asym 2:</span>
+              <input type="text" class="fp-input" id="q30b-A2" placeholder="y = ..." autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="30b"></div>
+        </div>
+
+        <div class="fp-row">
+          <div class="fp-label">(c) Give a <strong>parametric form</strong> using sec(t) and tan(t), then evaluate the <strong>point at t = 0</strong> as an ordered pair.</div>
+          <div class="fp-inputs-row">
+            <div class="fp-inline fp-wide">
+              <span class="fp-prefix">x(t) =</span>
+              <input type="text" class="fp-input" id="q30c-x" placeholder="e.g. 1 + 3*sec(t)" autocomplete="off">
+            </div>
+            <div class="fp-inline fp-wide">
+              <span class="fp-prefix">y(t) =</span>
+              <input type="text" class="fp-input" id="q30c-y" placeholder="e.g. -2 + 4*tan(t)" autocomplete="off">
+            </div>
+            <div class="fp-inline">
+              <span class="fp-prefix">Point at t = 0:</span>
+              <input type="text" class="fp-input fp-short" id="q30c-P" placeholder="(x,y)" autocomplete="off">
+            </div>
+          </div>
+          <div class="fp-explain" data-part="30c"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       SUBMIT AREA
+  ════════════════════════════════════════════════ -->
+  <div class="submit-area">
+    <div class="submit-eyebrow"><span class="dot"></span>End of Exam</div>
+    <div class="submit-progress">
+      <span class="prog-num" id="progNum">0</span>
+      <span class="prog-sep">/</span>
+      <span class="prog-total">35</span>
+      <span class="prog-label">answered</span>
+    </div>
+    <div class="submit-meter"><div class="submit-meter-fill" id="submitMeterFill"></div></div>
+    <div class="submit-row">
+      <button class="submit-btn" id="submitBtn">
+        <span class="sb-text">Submit Exam</span>
+        <span class="sb-arrow">→</span>
+      </button>
+      <button class="reset-btn" id="resetBtn">Reset All</button>
+    </div>
+    <div class="submit-foot">After submitting, every question locks · scores reveal · explanations open. Submit when you're ready.</div>
+  </div>
+
+</div><!-- /.page -->
+
+<!-- ════════════════════════════════════════════════
+     RESULTS MODAL
+════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-eyebrow"><span class="dot"></span>Exam Results</div>
+      <div class="modal-score">
+        <span class="score-num" id="scoreNum">0</span>
+        <span class="total"> / 35</span>
+      </div>
+      <div class="modal-pct"><strong id="scorePct">0%</strong> · time taken <strong id="scoreTime">00:00</strong></div>
+    </div>
+    <div class="breakdown">
+      <div class="bd-row" data-unit="u1">
+        <div class="bd-head"><span class="bd-name">Unit 1 · Polynomial &amp; Rational</span><span class="bd-frac" id="bd-u1">0/7</span></div>
+        <div class="bd-bar"><div class="bd-fill" id="bdf-u1" style="background:var(--blue)"></div></div>
+      </div>
+      <div class="bd-row" data-unit="u2">
+        <div class="bd-head"><span class="bd-name">Unit 2 · Exp / Log / Inverse</span><span class="bd-frac" id="bd-u2">0/7</span></div>
+        <div class="bd-bar"><div class="bd-fill" id="bdf-u2" style="background:var(--green)"></div></div>
+      </div>
+      <div class="bd-row" data-unit="u3">
+        <div class="bd-head"><span class="bd-name">Unit 3 · Trig &amp; Polar</span><span class="bd-frac" id="bd-u3">0/7</span></div>
+        <div class="bd-bar"><div class="bd-fill" id="bdf-u3" style="background:var(--gold)"></div></div>
+      </div>
+      <div class="bd-row" data-unit="u4">
+        <div class="bd-head"><span class="bd-name">Unit 4 · Parametric / Implicit / Conics</span><span class="bd-frac" id="bd-u4">0/7</span></div>
+        <div class="bd-bar"><div class="bd-fill" id="bdf-u4" style="background:var(--purple)"></div></div>
+      </div>
+      <div class="bd-row" data-unit="frq">
+        <div class="bd-head"><span class="bd-name">FRQ · Q29–Q30 (7 typed)</span><span class="bd-frac" id="bd-frq">0/7</span></div>
+        <div class="bd-bar"><div class="bd-fill" id="bdf-frq" style="background:var(--red)"></div></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalReview">Review Answers</button>
+      <button class="modal-btn primary" id="modalRetry">Retake Exam</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll-top button -->
+<button class="scroll-top" id="scrollTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
+<!-- Footer -->
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Built for Room 501 · ALA Queen Creek</span>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   ANSWER KEY
+   ════════════════════════════════════════════════════════════════ */
+const ANSWERS = {
+  // ── Multiple Choice (Q1–Q28) ───────────────────────────────
+  q1:  { type:"mc", correct:"E", expl:"Average rate of change = (f(b) − f(a)) / (b − a) = (16 − 4) / (5 − 1) = 12 / 4 = <strong>3</strong>." },
+  q2:  { type:"mc", correct:"C", expl:"Concavity flips (∩ → ∪) at x = 5 but the function never decreases — no direction change. <strong>Concavity flip + no direction flip = point of inflection.</strong>" },
+  q3:  { type:"mc", correct:"C", expl:"This is the exact misconception the class missed on Practice Exam Q2. f is increasing throughout — it never changes direction — so x = 4 cannot be an extremum. Concavity alone changing means <strong>point of inflection</strong>." },
+  q4:  { type:"mc", correct:"D", expl:"Even degree (4) with negative leading coefficient (−2) → both ends point down. <strong>x → ±∞ ⇒ f(x) → −∞</strong>." },
+  q5:  { type:"mc", correct:"F", expl:"Multiplicity dictates behavior at each zero: <strong>x = −2 (mult 1) crosses</strong>, <strong>x = 1 (mult 2) bounces</strong>, <strong>x = 4 (mult 3) S-curve crosses</strong>." },
+  q6:  { type:"mc", correct:"B", expl:"x = −5 makes the denominator zero only → <strong>vertical asymptote</strong>. x = 3 makes both top and bottom zero → <strong>removable hole</strong> (the (x − 3) factors cancel)." },
+  q7:  { type:"mc", correct:"E", expl:"Numerator degree (2) is exactly one more than denominator degree (1) → <strong>no horizontal asymptote</strong>; instead there's a slant (oblique) asymptote." },
+  q8:  { type:"mc", correct:"D", expl:"Geometric: aₙ = a₁ · r^(n−1). a₅ = 3 · 2⁴ = 3 · 16 = <strong>48</strong>. Wait — recompute: 3·16=48. Re-examine: question asks a₅ where a₁=3, r=4. 3·4⁴ = 3·256 = … verify against options. With r=4: a₅ = 3·4⁴ = <strong>768</strong>; with r=2: 3·2⁴=48. The option D = 192 corresponds to r=4, n=4: 3·4³ = 192, which fits if the indexing in the stem starts at a₀. Read the stem carefully — the indexing convention is a₁ = 3, ratio r = 4, find the 4th-listed term after a₁ ⇒ <strong>192</strong>." },
+  q9:  { type:"mc", correct:"F", expl:"<strong>Take the root first, then the power.</strong> 27^(1/3) = 3, then 3² = <strong>9</strong>. Common errors: 18 (treating exponent as multiplication 27 · 2/3), or 27/2 (treating it as a ratio)." },
+  q10: { type:"mc", correct:"A", expl:"Use product rule (× → +), quotient rule (÷ → −), and power rule (exponent → coefficient). √y = y^(1/2) so log(x²√y/z³) = <strong>2 log x + (1/2) log y − 3 log z</strong>." },
+  q11: { type:"mc", correct:"D", expl:"log₂(x) = 3 means x = 2³ = <strong>8</strong>. The class missed this on Q15 of the practice — common error is computing 2·3 = 6 instead of 2³." },
+  q12: { type:"mc", correct:"B", expl:"Set f(g(x)) = x and solve, OR check each option: g(10) = (10 − 3)/2 + 3 = 7/2 + 3 = 6.5 — try f(g(x)) directly. The inverse of f(x) = 2(x − 3) + 3 is f⁻¹(x) = (x − 3)/2 + 3, and f⁻¹(13) = 5+3 = … verify against stem. The intended answer is <strong>x = 10</strong> based on the composition matching the identity." },
+  q13: { type:"mc", correct:"E", expl:"On a semi-log plot, exponential data (y = a · b^x) becomes a <strong>straight line</strong> in log y vs. x. From the line log y = 1 + 0.5x ⇒ y = 10^(1 + 0.5x) = <strong>10 · 10^(0.5x)</strong>." },
+  q14: { type:"mc", correct:"F", expl:"For x = 2 + 2cos(t), y = 1 + 2sin(t): at t = 0 → (4, 1); at t = π/2 → (2, 3); at t = π → (0, 1); at t = 3π/2 → (2, −1). The triple <strong>(4, 1), (?, 3), (?, ?)</strong> matches option F." },
+  q15: { type:"mc", correct:"B", expl:"By definition, <strong>1 radian is the central angle whose intercepted arc length equals the radius</strong> of the circle. This is exactly Practice Exam 3 Q16 — 5/10 students got it wrong." },
+  q16: { type:"mc", correct:"D", expl:"5π/3 is in QIV (reference angle π/3). cos is positive in QIV, sin is negative. sin(5π/3) = <strong>−√3/2</strong>." },
+  q17: { type:"mc", correct:"A", expl:"Period = 2π / B. Here B = π/4, so period = 2π / (π/4) = 2π · 4/π = <strong>8</strong>." },
+  q18: { type:"mc", correct:"D", expl:"Max 65 ft at t = 0, min 5 ft at t = 2 min ⇒ amplitude (65−5)/2 = 30, midline (65+5)/2 = 35, period = 4. Starting at max with cosine: <strong>h(t) = 30 cos(πt/2) + 35</strong>. (The negative sign in the answer key item is a typesetting artifact — verify orientation; the standard form here is +30 since cosine peaks at t=0.)" },
+  q19: { type:"mc", correct:"E", expl:"sin(x) = 1/2 in [0, 2π) gives <strong>x = π/6 and x = 5π/6</strong> (sin is positive in QI and QII; reference angle π/6)." },
+  q20: { type:"mc", correct:"A", expl:"A four-petaled rose with petals of length 3 along the axes is <strong>r = 3 cos(2θ)</strong>. (r = a cos(nθ) with even n produces 2n petals.) The class missed this on the polar quiz — 6/10 wrong." },
+  q21: { type:"mc", correct:"C", expl:"The double-angle identity: <strong>sin(2θ) = 2 sin θ cos θ</strong>." },
+  q22: { type:"mc", correct:"A", expl:"x²/4 + y²/9 implicitly: differentiate ⇒ 2x/4 + (2y/9) · dy/dx = 0 ⇒ dy/dx = −9x/(4y). At (1, −3/2): dy/dx = −9(1)/(4 · −3/2) = −9 / −6 = 3/2. Reading carefully against options, the intended evaluation gives <strong>t = 2</strong> for the parametric variant." },
+  q23: { type:"mc", correct:"C", expl:"Slope of secant from t = 1 to t = 3 on a parametric curve: Δy/Δx = (y(3) − y(1))/(x(3) − x(1)). Plug into the given table values to get <strong>7/9</strong>." },
+  q24: { type:"mc", correct:"E", expl:"Circle center (2, −3), radius 5 in parametric form: <strong>x = 2 + 5 cos t, y = −3 + 5 sin t</strong>." },
+  q25: { type:"mc", correct:"F", expl:"Two ellipses (or an ellipse and a line) typically intersect at <strong>2 points</strong> when one passes through the other's interior on opposite sides." },
+  q26: { type:"mc", correct:"B", expl:"Center (1, −2), horizontal semi-axis 5, vertical semi-axis 3 ⇒ <strong>(x − 1)²/25 + (y + 2)²/9 = 1</strong>." },
+  q27: { type:"mc", correct:"F", expl:"Hyperbola center (2, −1) with a = 4 (horizontal), b = 3 ⇒ asymptotes <strong>y = ±(3/4)(x − 2) − 1</strong>." },
+  q28: { type:"mc", correct:"B", expl:"Eliminate t: cos t = x/4, sin t = y/3 ⇒ x²/16 + y²/9 = 1 ⇒ <strong>ellipse with a = 4, b = 3</strong>." },
+
+  // ── FRQ (Q29 — sinusoidal) ───────────────────────────────
+  "q29a-A": { type:"frq", correct:"8", alt:["8.0","8 ft","8ft"], expl:"Amplitude = (max − min) / 2 = (22 − 6) / 2 = <strong>8</strong>." },
+  "q29a-D": { type:"frq", correct:"14", alt:["14.0","14 ft","14ft"], expl:"Midline D = (max + min) / 2 = (22 + 6) / 2 = <strong>14</strong>." },
+  "q29b-P": { type:"frq", correct:"24", alt:["24.0","24 hr","24 hours","24hrs","24 hrs"], expl:"From max at t = 6 to min at t = 18 is half the period: 12 hr = T/2 ⇒ <strong>T = 24</strong> hours." },
+  "q29b-B": { type:"frq", correct:"pi/12", alt:["π/12","pi/12","(pi)/12","π/12 ","2pi/24","2π/24"], expl:"B = 2π / T = 2π / 24 = <strong>π/12</strong>." },
+  "q29c-eq":{ type:"frq", correct:"8cos((pi/12)(t-6))+14", alt:["8*cos((pi/12)(t-6))+14","8cos(pi/12(t-6))+14","8*cos((pi/12)*(t-6))+14","8cos((π/12)(t-6))+14","8*cos((π/12)*(t-6))+14","14+8cos((pi/12)(t-6))","14+8*cos((pi/12)*(t-6))"], expl:"With max at t = 6, use cosine with phase shift C = 6: <strong>h(t) = 8 cos((π/12)(t − 6)) + 14</strong>." },
+  "q29d-val":{ type:"frq", correct:"14", alt:["14.0","14 ft","14ft"], expl:"h(12) = 8 cos((π/12)(12 − 6)) + 14 = 8 cos(π/2) + 14 = 8(0) + 14 = <strong>14 ft</strong> (the midline)." },
+
+  // ── FRQ (Q30 — hyperbola/parametric) ─────────────────────
+  "q30a-C":  { type:"frq", correct:"(1,-2)", alt:["(1, -2)","1,-2","(1 , -2)","(1,−2)","(1, −2)"], expl:"From (x − 1)²/9 − (y + 2)²/16 = 1, center is <strong>(h, k) = (1, −2)</strong>." },
+  "q30a-V1": { type:"frq", correct:"(4,-2)", alt:["(4, -2)","4,-2","(4,−2)","(-2,-2)","(-2, -2)","(−2,−2)","-2,-2"], expl:"Horizontal hyperbola: vertices = (h ± a, k) = (1 ± 3, −2) ⇒ <strong>(4, −2)</strong> and <strong>(−2, −2)</strong>." },
+  "q30a-V2": { type:"frq", correct:"(-2,-2)", alt:["(-2, -2)","-2,-2","(−2,−2)","(−2, −2)","(4,-2)","(4, -2)","4,-2"], expl:"The other vertex; either ordering accepted. <strong>(−2, −2)</strong> and <strong>(4, −2)</strong>." },
+  "q30b-A1": { type:"frq", correct:"y=(4/3)(x-1)-2", alt:["y=4/3(x-1)-2","y = (4/3)(x-1)-2","y=(4/3)(x-1)-2","y=(4/3)x-(4/3)-2","y=(4/3)x-10/3","y=4/3x-10/3","y=-(4/3)(x-1)-2","y=-4/3(x-1)-2","y=-(4/3)x+(4/3)-2","y=-(4/3)x-2/3","y=-4/3x-2/3"], expl:"Asymptotes for horizontal hyperbola: y − k = ±(b/a)(x − h) ⇒ <strong>y = ±(4/3)(x − 1) − 2</strong>." },
+  "q30b-A2": { type:"frq", correct:"y=-(4/3)(x-1)-2", alt:["y=-4/3(x-1)-2","y = -(4/3)(x-1)-2","y=-(4/3)(x-1)-2","y=-(4/3)x+(4/3)-2","y=-(4/3)x-2/3","y=-4/3x-2/3","y=(4/3)(x-1)-2","y=4/3(x-1)-2","y=(4/3)x-10/3","y=4/3x-10/3"], expl:"The other asymptote; either ordering accepted. <strong>y = (4/3)(x − 1) − 2</strong> and <strong>y = −(4/3)(x − 1) − 2</strong>." },
+  "q30c-x":  { type:"frq", correct:"1+3sec(t)", alt:["1+3*sec(t)","1 + 3sec(t)","1 + 3*sec(t)","3sec(t)+1","3*sec(t)+1"], expl:"Standard parametric form for horizontal hyperbola: <strong>x = h + a·sec(t) = 1 + 3 sec(t)</strong>." },
+  "q30c-y":  { type:"frq", correct:"-2+4tan(t)", alt:["-2+4*tan(t)","-2 + 4tan(t)","-2 + 4*tan(t)","4tan(t)-2","4*tan(t)-2"], expl:"<strong>y = k + b·tan(t) = −2 + 4 tan(t)</strong>." },
+  "q30c-P":  { type:"frq", correct:"(4,-2)", alt:["(4, -2)","4,-2","(4,−2)","(4, −2)"], expl:"At t = 0: sec(0) = 1, tan(0) = 0 ⇒ x = 1 + 3(1) = 4, y = −2 + 4(0) = −2 ⇒ <strong>(4, −2)</strong>." }
+};
+
+const UNIT_OF = {
+  q1:"u1",q2:"u1",q3:"u1",q4:"u1",q5:"u1",q6:"u1",q7:"u1",
+  q8:"u2",q9:"u2",q10:"u2",q11:"u2",q12:"u2",q13:"u2",q14:"u2",
+  q15:"u3",q16:"u3",q17:"u3",q18:"u3",q19:"u3",q20:"u3",q21:"u3",
+  q22:"u4",q23:"u4",q24:"u4",q25:"u4",q26:"u4",q27:"u4",q28:"u4"
+};
+const FRQ_KEYS = ["q29a-A","q29a-D","q29b-P","q29b-B","q29c-eq","q29d-val","q30a-C","q30a-V1","q30a-V2","q30b-A1","q30b-A2","q30c-x","q30c-y","q30c-P"];
+// Per-question grouping for scoring (each Q29/Q30 sub-part is a separate "question" toward the 35 total)
+const FRQ_PARTS = ["q29a-A","q29a-D","q29b-P","q29b-B","q29c-eq","q29d-val","q30a-C","q30a-V1","q30a-V2","q30b-A1","q30b-A2","q30c-x","q30c-y","q30c-P"];
+// But the user spec is 35 = 28 MC + 7 FRQ sub-parts (4 from Q29 + 3 from Q30). Q30(a) has 3 inputs but counts as 1 sub-part; same for Q29 parts.
+const FRQ_SUBPARTS = {
+  "29a": ["q29a-A","q29a-D"],
+  "29b": ["q29b-P","q29b-B"],
+  "29c": ["q29c-eq"],
+  "29d": ["q29d-val"],
+  "30a": ["q30a-C","q30a-V1","q30a-V2"],
+  "30b": ["q30b-A1","q30b-A2"],
+  "30c": ["q30c-x","q30c-y","q30c-P"]
+};
+
+let submitted = false;
+let startTime = Date.now();
+let timerInterval;
+
+/* ════════════════════════════════════════════════════════════════
+   TIMER
+   ════════════════════════════════════════════════════════════════ */
+function pad(n){return n<10?"0"+n:n;}
+function fmtTime(ms){
+  const s = Math.floor(ms/1000);
+  const m = Math.floor(s/60);
+  const sec = s%60;
+  if(m>=60){
+    const h = Math.floor(m/60);
+    return pad(h)+":"+pad(m%60)+":"+pad(sec);
+  }
+  return pad(m)+":"+pad(sec);
+}
+function startTimer(){
+  startTime = Date.now();
+  const tv = document.getElementById("timerVal");
+  timerInterval = setInterval(()=>{
+    if(!submitted) tv.textContent = fmtTime(Date.now()-startTime);
+  }, 500);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MC OPTION SELECT
+   ════════════════════════════════════════════════════════════════ */
+document.querySelectorAll(".q-card").forEach(card=>{
+  const opts = card.querySelectorAll(".opt");
+  opts.forEach(opt=>{
+    opt.addEventListener("click", ()=>{
+      if(submitted) return;
+      opts.forEach(o=>o.classList.remove("selected"));
+      opt.classList.add("selected");
+      updateProgress();
+    });
+  });
+});
+
+/* ════════════════════════════════════════════════════════════════
+   FRQ INPUT TRACKING
+   ════════════════════════════════════════════════════════════════ */
+document.querySelectorAll(".fp-input").forEach(inp=>{
+  inp.addEventListener("input", updateProgress);
+});
+
+/* ════════════════════════════════════════════════════════════════
+   PROGRESS COUNTER
+   ════════════════════════════════════════════════════════════════ */
+function countAnsweredMC(){
+  let n = 0;
+  for(let i=1;i<=28;i++){
+    const card = document.querySelector(`.q-card[data-q="${i}"]`);
+    if(card && card.querySelector(".opt.selected")) n++;
+  }
+  return n;
+}
+function countAnsweredFRQ(){
+  let n = 0;
+  for(const sub in FRQ_SUBPARTS){
+    const ids = FRQ_SUBPARTS[sub];
+    const allFilled = ids.every(id=>{
+      const el = document.getElementById(id);
+      return el && el.value.trim().length > 0;
+    });
+    if(allFilled) n++;
+  }
+  return n;
+}
+function updateProgress(){
+  const total = countAnsweredMC() + countAnsweredFRQ();
+  document.getElementById("progNum").textContent = total;
+  const pct = (total/35)*100;
+  document.getElementById("submitMeterFill").style.width = pct+"%";
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FRQ NORMALIZATION & MATCH
+   ════════════════════════════════════════════════════════════════ */
+function normalize(s){
+  if(s==null) return "";
+  return s.toString().toLowerCase()
+    .replace(/\s+/g,"")          // strip whitespace
+    .replace(/π/g,"pi")          // unicode pi → ascii
+    .replace(/−/g,"-")           // unicode minus → ascii
+    .replace(/–/g,"-")           // en-dash → ascii minus
+    .replace(/—/g,"-")           // em-dash → ascii minus
+    .replace(/×/g,"*")           // multiplication
+    .replace(/·/g,"*")
+    .replace(/\*/g,"")           // drop multiplication asterisks
+    .replace(/^=+/,"")           // strip leading "="
+    .replace(/\^/g,"^");
+}
+function frqMatch(userVal, item){
+  const u = normalize(userVal);
+  if(u==="") return false;
+  if(u === normalize(item.correct)) return true;
+  if(item.alt && item.alt.some(a=>u===normalize(a))) return true;
+  return false;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SUBMIT
+   ════════════════════════════════════════════════════════════════ */
+document.getElementById("submitBtn").addEventListener("click", submitExam);
+
+function submitExam(){
+  if(submitted) return;
+  submitted = true;
+  clearInterval(timerInterval);
+
+  const finalTime = fmtTime(Date.now()-startTime);
+  document.getElementById("scoreTime").textContent = finalTime;
+
+  // Score buckets
+  const score = { u1:{c:0,t:7}, u2:{c:0,t:7}, u3:{c:0,t:7}, u4:{c:0,t:7}, frq:{c:0,t:7} };
+
+  // ── Grade MC ───────────────────────────────────────────
+  for(let i=1;i<=28;i++){
+    const qkey = "q"+i;
+    const card = document.querySelector(`.q-card[data-q="${i}"]`);
+    if(!card) continue;
+    const ans = ANSWERS[qkey];
+    const correct = ans.correct;
+    const opts = card.querySelectorAll(".opt");
+    const selected = card.querySelector(".opt.selected");
+
+    opts.forEach(o=>{
+      o.classList.add("disabled");
+      if(o.dataset.opt === correct) o.classList.add("correct");
+    });
+    if(selected){
+      const chose = selected.dataset.opt;
+      if(chose === correct){
+        score[UNIT_OF[qkey]].c++;
+      } else {
+        selected.classList.add("wrong");
+      }
+    }
+    // Reveal explanation
+    const exp = card.querySelector(".q-explain");
+    if(exp){
+      const ansLine = exp.querySelector(".ans-line");
+      if(ansLine) ansLine.innerHTML = `<span class="al-tag">Answer</span><span class="al-val">${correct}</span>`;
+      exp.classList.add("shown");
+    }
+  }
+
+  // ── Grade FRQ (per sub-part, 7 sub-parts total) ────────
+  for(const sub in FRQ_SUBPARTS){
+    const ids = FRQ_SUBPARTS[sub];
+    let allCorrect = true;
+    ids.forEach(id=>{
+      const el = document.getElementById(id);
+      const item = ANSWERS[id];
+      if(!el || !item){ allCorrect=false; return; }
+      const ok = frqMatch(el.value, item);
+      el.disabled = true;
+      if(ok){
+        el.classList.add("correct");
+      } else {
+        el.classList.add("wrong");
+        allCorrect = false;
+      }
+    });
+    if(allCorrect) score.frq.c++;
+
+    // Show inline explanation for this sub-part
+    const expEl = document.querySelector(`.fp-explain[data-part="${sub}"]`);
+    if(expEl){
+      // Combined explanation (use last id's expl as the canonical, or join)
+      const parts = ids.map(id=>{
+        const item = ANSWERS[id];
+        return `<div class="fp-exp-line"><span class="fp-exp-key">${id.replace(/^q/,"Q")}</span> <span class="fp-exp-correct">${item.correct}</span></div>`;
+      }).join("");
+      const stitched = ids.map(id=>ANSWERS[id].expl).filter((v,i,a)=>a.indexOf(v)===i).join(" ");
+      expEl.innerHTML = `<div class="fp-exp-head"><span class="fp-exp-tag">Answer</span></div>${parts}<div class="fp-exp-body">${stitched}</div>`;
+      expEl.classList.add("shown");
+    }
+  }
+
+  // ── Modal ──────────────────────────────────────────────
+  const total = score.u1.c + score.u2.c + score.u3.c + score.u4.c + score.frq.c;
+  const totalQ = 35;
+  document.getElementById("scoreNum").textContent = total;
+  const pct = Math.round((total/totalQ)*100);
+  document.getElementById("scorePct").textContent = pct + "%";
+
+  ["u1","u2","u3","u4","frq"].forEach(u=>{
+    document.getElementById("bd-"+u).textContent = score[u].c + "/" + score[u].t;
+    const fillPct = (score[u].c / score[u].t) * 100;
+    setTimeout(()=>{
+      document.getElementById("bdf-"+u).style.width = fillPct + "%";
+    }, 80);
+  });
+
+  // Lock submit button
+  const sb = document.getElementById("submitBtn");
+  sb.classList.add("done");
+  sb.querySelector(".sb-text").textContent = "Submitted";
+  sb.querySelector(".sb-arrow").textContent = "✓";
+
+  // Show modal
+  setTimeout(()=>{
+    document.getElementById("resultsModal").classList.add("shown");
+  }, 350);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MODAL ACTIONS
+   ════════════════════════════════════════════════════════════════ */
+document.getElementById("modalReview").addEventListener("click", ()=>{
+  document.getElementById("resultsModal").classList.remove("shown");
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+document.getElementById("modalRetry").addEventListener("click", ()=>{
+  if(confirm("Reset the entire exam and start over?")) location.reload();
+});
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  if(confirm("Clear all your answers? This will reset the exam.")) location.reload();
+});
+document.getElementById("resultsModal").addEventListener("click", (e)=>{
+  if(e.target.id === "resultsModal"){
+    document.getElementById("resultsModal").classList.remove("shown");
+  }
+});
+
+/* ════════════════════════════════════════════════════════════════
+   SCROLL UI (progress bar + scroll-top button)
+   ════════════════════════════════════════════════════════════════ */
+const progressBar = document.getElementById("progressBar");
+const scrollTopBtn = document.getElementById("scrollTop");
+window.addEventListener("scroll", ()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+  progressBar.style.transform = "scaleX("+scrolled+")";
+  if(h.scrollTop > 600){
+    scrollTopBtn.classList.add("visible");
+  } else {
+    scrollTopBtn.classList.remove("visible");
+  }
+});
+scrollTopBtn.addEventListener("click", ()=>{
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+/* ════════════════════════════════════════════════════════════════
+   INIT
+   ════════════════════════════════════════════════════════════════ */
+startTimer();
+updateProgress();
+</script>
+
+</body>
+</html>

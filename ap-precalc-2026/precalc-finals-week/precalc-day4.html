@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calc · Day 4 · Parametric, Implicit &amp; Conics</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="precalc-week.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Day 4 · Thu May 14</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-title">Unit 4 · Parametric &amp; Conics</span>
+  </div>
+  <div class="timer-pill" style="display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:100px;background:var(--glass);border:1px solid var(--b);font-size:12px;color:var(--tx2);letter-spacing:0.08em;">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>
+    <span id="timerVal" style="font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;">00:00</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="day-header">
+    <div class="header-eyebrow"><span class="dot" style="background:var(--purple)"></span>Day 4 of 5 · Thu May 14 · ~40 min</div>
+    <h1 class="day-title">
+      <span class="l1">Parametric, Implicit</span>
+      <span class="l2">&amp; Conics.</span>
+    </h1>
+    <p class="day-sub">Rebuild Unit 4: parameter elimination, AROC for parametric curves, parametric circles/ellipses, ellipse and hyperbola standard form, hyperbola asymptotes, sec/tan parametric forms. <strong>13 randomized questions.</strong> Big rebuild: <em>always verify both x AND y when solving for t</em>, and the <em>hyperbola asymptote slope b/a (not a/b)</em>.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>Unit 4 · 4A · 4B · 4C</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>7 MC · 4 FIB · 2 Dropdown</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>🔥 Verify both x AND y for t-solutions</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>🔥 Hyperbola asymptote slope</div>
+    </div>
+
+    <div class="instructions">
+      <div class="ih">📘 How to use this practice</div>
+      <strong>1.</strong> <strong>↻ New Numbers</strong> regenerates each question. <strong>2.</strong> Read the misconception text on wrong answers — it points to the exact step you skipped. <strong>3.</strong> Submit via Canvas at the bottom.
+    </div>
+  </div>
+
+  <!-- ──────── 4A · PARAMETRIC FUNCTIONS ──────── -->
+  <div class="section-header" data-color="purple">
+    <div class="sh-row"><span class="sh-tag">4A</span><span class="sh-title">Parametric Functions</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="1" data-color="purple">
+    <div class="q-top"><div class="q-num">01</div><span class="q-tag priority">4A · Topic 4.1</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">Find Parameter Value</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="2" data-color="purple">
+    <div class="q-top"><div class="q-num">02</div><span class="q-tag">4A · Topic 4.3</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">AROC for Parametric Curve</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="3" data-color="purple">
+    <div class="q-top"><div class="q-num">03</div><span class="q-tag">4A · Topic 4.2</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Evaluate (x(t), y(t)) at given t</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 4B · PARAMETRIC & IMPLICIT ──────── -->
+  <div class="section-header" data-color="purple">
+    <div class="sh-row"><span class="sh-tag">4B</span><span class="sh-title">Parametric Circles &amp; Implicit Curves</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="4" data-color="purple">
+    <div class="q-top"><div class="q-num">04</div><span class="q-tag priority">4B · Topic 4.4</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">Parametric Circle</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="5" data-color="purple">
+    <div class="q-top"><div class="q-num">05</div><span class="q-tag">4B · Topic 4.5</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Implicit · Intersections</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="6" data-color="purple">
+    <div class="q-top"><div class="q-num">06</div><span class="q-tag">4B · Topic 4.4</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Eliminate Parameter · Curve type</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 4C · CONICS ──────── -->
+  <div class="section-header" data-color="purple">
+    <div class="sh-row"><span class="sh-tag">4C</span><span class="sh-title">Conic Sections</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="7" data-color="purple">
+    <div class="q-top"><div class="q-num">07</div><span class="q-tag priority">4C · Topic 4.6</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Ellipse Standard Form</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="8" data-color="purple">
+    <div class="q-top"><div class="q-num">08</div><span class="q-tag priority">4C · Topic 4.6</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Hyperbola Asymptotes</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="9" data-color="purple">
+    <div class="q-top"><div class="q-num">09</div><span class="q-tag">4C · Topic 4.6</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Ellipse Vertices · Type a vertex</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="10" data-color="purple">
+    <div class="q-top"><div class="q-num">10</div><span class="q-tag priority">4C · Topic 4.7</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Parametric → Conic Type</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="11" data-color="purple">
+    <div class="q-top"><div class="q-num">11</div><span class="q-tag">4C · Topic 4.6</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Circle from Equation · Type center</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="12" data-color="purple">
+    <div class="q-top"><div class="q-num">12</div><span class="q-tag">4C · Topic 4.7</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Hyperbola: Horizontal or Vertical?</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="13" data-color="purple">
+    <div class="q-top"><div class="q-num">13</div><span class="q-tag">4A · Topic 4.1</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Solve for t · Type integer</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── SUBMIT AREA ──────── -->
+  <div class="submit-area">
+    <div class="submit-eyebrow"><span class="dot"></span>End of Day 4 · Submit via Canvas</div>
+    <div class="name-row">
+      <label class="name-label" for="studentName">Your full name</label>
+      <input type="text" id="studentName" class="name-input" placeholder="First Last" autocomplete="name">
+    </div>
+    <div class="submit-progress"><span class="prog-num" id="progNum">0</span><span class="prog-sep">/</span><span class="prog-total">13</span><span class="prog-label">answered</span></div>
+    <div class="submit-meter"><div class="submit-meter-fill" id="submitMeterFill"></div></div>
+    <div class="score-strip">
+      <div class="score-pill correct">✓ Correct <span class="num" id="scoreCorrect">0</span></div>
+      <div class="score-pill wrong">✗ Wrong <span class="num" id="scoreWrong">0</span></div>
+      <div class="score-pill unanswered">— Unanswered <span class="num" id="scoreUnanswered">13</span></div>
+    </div>
+    <div class="submit-row">
+      <button class="submit-btn" id="copyBtn"><span class="sb-icon">⎘</span><span class="sb-text">Copy for Canvas</span></button>
+      <button class="email-btn" id="emailBtn"><span class="sb-icon">✉</span><span class="sb-text">Email to Teacher</span></button>
+      <button class="reset-btn" id="resetBtn">Reset All</button>
+    </div>
+    <div class="submit-foot"><strong>Submission flow:</strong> 1. Type your name. 2. Click <strong>Copy for Canvas</strong>. 3. Paste into the Day 4 classwork assignment on Canvas and submit there. If Canvas is down, use <strong>Email to Teacher</strong>.</div>
+  </div>
+
+</div><!-- /.page -->
+
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-eyebrow ok"><span class="dot"></span>Copied to Clipboard</div>
+      <div class="submit-success"><div class="ss-check">✓</div><div class="ss-title">Submission Ready</div><div class="ss-sub">Your Day 4 results are on your clipboard. Open the Canvas assignment, paste, and submit there.</div></div>
+    </div>
+    <div class="canvas-steps">
+      <div class="cs-row"><span class="cs-num">1</span><span class="cs-text">Open the Canvas assignment for <strong>Day 4 Classwork</strong>.</span></div>
+      <div class="cs-row"><span class="cs-num">2</span><span class="cs-text">Click into the text-entry box, then paste with <strong>Ctrl+V</strong> (Windows) or <strong>Cmd+V</strong> (Mac).</span></div>
+      <div class="cs-row"><span class="cs-num">3</span><span class="cs-text">Click <strong>Submit</strong> on Canvas. Done.</span></div>
+    </div>
+    <div class="preview-head"><div class="ph-label">Preview · what was copied</div><button class="ph-recopy" id="recopyBtn">Copy Again</button></div>
+    <pre class="preview-text" id="previewText"></pre>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalEmail">Email to Teacher Instead</button>
+      <button class="modal-btn primary" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg></button>
+
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Day 4 · Unit 4 · Parametric &amp; Conics</span>
+</footer>
+
+<script src="precalc-week.js"></script>
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   DAY 4 QUESTION DEFINITIONS · Unit 4 — Parametric & Conics
+   ────────────────────────────────────────────────────────────────── */
+
+const DAY4_QUESTIONS = [
+
+  /* ─── Q1 · MC · Find parameter value (BIGGEST MISS) ──────────── */
+  {
+    id: 1, type: "mc", tag: "4A · Topic 4.1", color: "purple",
+    generate(){
+      // x(t) = t^2 - c, y(t) = at + b. Target (X, Y) where X = t0^2 - c, Y = a*t0 + b.
+      const c = R.int(0, 3);
+      const a = R.pick([2, 3]);
+      const b = R.int(1, 5);
+      const t0 = R.intExcl(2, 5, [0]);
+      const X = t0 * t0 - c;
+      const Y = a * t0 + b;
+      const tNeg = -t0;
+      // y(-t0) = a*(-t0) + b. If that ≠ Y, then "both t = t0 and t = -t0" is wrong → the trap.
+      const yNeg = a * tNeg + b;
+
+      return {
+        stem: `A parametric curve is defined by <span class="mono">x(t) = t² ${c === 0 ? "" : "− " + c}</span> and <span class="mono">y(t) = ${a}t + ${b}</span>. For which value of t is the point on the curve equal to <span class="mono">(${X}, ${Y})</span>?`,
+        options: R.shuffle([
+          { html: `t = ${t0}`, correct: true },
+          { html: `t = ${tNeg}`, correct: false, misconception: `Solving x(t) = ${X} gives t² = ${t0 * t0}, so t = ±${t0}. <strong>But you must check y too!</strong> y(${tNeg}) = ${yNeg}, not ${Y}. Only t = ${t0} works.` },
+          { html: `Both t = ${t0} and t = ${tNeg}`, correct: false, misconception: `Classic trap. You solved x(t) = ${X} and got both roots, but didn't verify y. <strong>y(${t0}) = ${Y}</strong> ✓, but <strong>y(${tNeg}) = ${yNeg} ≠ ${Y}</strong> ✗. Only t = ${t0} satisfies both.` },
+          { html: `t = ${X}`, correct: false, misconception: `You typed the x-coordinate as t. t is the PARAMETER — the input to both x(t) and y(t). Solve x(t) = ${X} for t, then verify y(t).` },
+          { html: `t = ${Y}`, correct: false, misconception: `You typed the y-coordinate as t. t isn't y — t is the parameter. Set up x(t) = ${X} and y(t) = ${Y}, find a common t.` },
+          { html: `t = ${t0 + 1}`, correct: false, misconception: `Plug in: x(${t0 + 1}) = ${(t0 + 1) * (t0 + 1) - c}, not ${X}. The correct t satisfies BOTH x(t) = ${X} AND y(t) = ${Y}.` }
+        ]),
+        correctDisplay: `t = ${t0}`,
+        workedSolution: `Solve x(t) = ${X}: t² ${c === 0 ? "" : "− " + c} = ${X} → t² = ${t0 * t0} → t = ±${t0}. <strong>Now check y for each candidate.</strong> y(${t0}) = ${a}·${t0} + ${b} = ${Y} ✓. &nbsp; y(${tNeg}) = ${a}·${tNeg} + ${b} = ${yNeg} ${yNeg === Y ? "✓" : "✗"}. Only <strong>t = ${t0}</strong> works.`
+      };
+    }
+  },
+
+  /* ─── Q2 · FIB · Parametric AROC ─────────────────────────────── */
+  {
+    id: 2, type: "fib", tag: "4A · Topic 4.3", color: "purple",
+    generate(){
+      // x(t) = a*t^2, y(t) = b*t^3. AROC on [t1, t2] = (y(t2) - y(t1)) / (x(t2) - x(t1))
+      const a = R.int(2, 4);
+      const b = R.int(1, 3);
+      const t1 = R.int(1, 2);
+      const t2 = t1 + R.int(1, 2);
+      const xt1 = a * t1 * t1;
+      const xt2 = a * t2 * t2;
+      const yt1 = b * t1 * t1 * t1;
+      const yt2 = b * t2 * t2 * t2;
+      const dy = yt2 - yt1;
+      const dx = xt2 - xt1;
+      const reducedNum = dy;
+      const reducedDen = dx;
+
+      return {
+        stem: `A parametric curve has <span class="mono">x(t) = ${a}t²</span> and <span class="mono">y(t) = ${b === 1 ? "" : b}t³</span>. Compute the average rate of change of y with respect to x on <span class="mono">t ∈ [${t1}, ${t2}]</span>. (Type as a fraction <span class="mono">a/b</span> or decimal.)`,
+        prefix: "AROC =",
+        placeholder: "e.g. 7/9",
+        accepted: [
+          `${reducedNum}/${reducedDen}`,
+          (reducedNum / reducedDen).toFixed(3),
+          (reducedNum / reducedDen).toFixed(2),
+          (Number.isInteger(reducedNum / reducedDen)) ? (reducedNum / reducedDen).toString() : "__nope__"
+        ],
+        misconceptions: [
+          { match: [`${reducedDen}/${reducedNum}`, (reducedDen / reducedNum).toFixed(2)],
+            why: `Flipped fraction. AROC = Δy / Δx, with <strong>y on top</strong>. Δy = ${dy}, Δx = ${dx}, so AROC = ${dy}/${dx}, not ${dx}/${dy}.` },
+          { match: [dy.toString()],
+            why: `That's just Δy = y(${t2}) − y(${t1}) = ${yt2} − ${yt1} = ${dy}. You forgot to divide by Δx = ${dx}.` },
+          { match: [dx.toString()],
+            why: `That's just Δx = x(${t2}) − x(${t1}) = ${xt2} − ${xt1} = ${dx}. AROC has Δy on top: ${dy}/${dx}.` },
+          { match: [(t2 - t1).toString()],
+            why: `You computed Δt = ${t2 - t1}, but AROC of y w.r.t. x is Δy/Δx, not Δt. Compute the parametric endpoint values and use their differences.` }
+        ],
+        correctDisplay: `AROC = ${dy}/${dx}${Number.isInteger(dy/dx) ? " = " + (dy/dx) : ""}`,
+        workedSolution: `Average rate of change of y w.r.t. x on a parametric curve = <strong>Δy / Δx</strong> using endpoint values. Compute: y(${t1}) = ${yt1}, y(${t2}) = ${yt2} → Δy = ${dy}. x(${t1}) = ${xt1}, x(${t2}) = ${xt2} → Δx = ${dx}. So AROC = <strong>${dy}/${dx}${Number.isInteger(dy/dx) ? " = " + (dy/dx) : ""}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q3 · FIB · Evaluate parametric curve at given t ────────── */
+  {
+    id: 3, type: "fib", tag: "4A · Topic 4.2", color: "purple",
+    generate(){
+      const a = R.int(1, 3);
+      const b = R.intExcl(-5, 5, [0]);
+      const c = R.int(1, 4);
+      const d = R.intExcl(-6, 6, [0]);
+      const t0 = R.int(1, 4);
+      // x(t) = a*t + b, y(t) = c*t^2 + d
+      const X = a * t0 + b;
+      const Y = c * t0 * t0 + d;
+      return {
+        stem: `Given <span class="mono">x(t) = ${a === 1 ? "" : a}t ${b > 0 ? "+ " + b : "− " + (-b)}</span> and <span class="mono">y(t) = ${c === 1 ? "" : c}t² ${d > 0 ? "+ " + d : "− " + (-d)}</span>, find the point on the curve at <span class="mono">t = ${t0}</span>. Type as <span class="mono">(x, y)</span>.`,
+        prefix: "Point:",
+        placeholder: "(x, y)",
+        accepted: [
+          `(${X},${Y})`,
+          `(${X}, ${Y})`,
+          (input, n) => n === normalize(`(${X},${Y})`)
+        ],
+        misconceptions: [
+          { match: [`(${Y},${X})`, `(${Y}, ${X})`],
+            why: `You swapped x and y. The format is <strong>(x, y)</strong>: x-value first. x(${t0}) = ${X}, y(${t0}) = ${Y} → point is (${X}, ${Y}).` },
+          { match: [`(${a * t0},${c * t0 * t0})`],
+            why: `You computed x = a·t and y = c·t² but forgot to add the constants. x(t) = ${a === 1 ? "" : a}t ${b > 0 ? "+ " + b : "− " + (-b)} adds ${b} after.` },
+          { match: [t0.toString()],
+            why: `You typed t = ${t0}. The question asks for the POINT (x, y) at that t-value.` }
+        ],
+        correctDisplay: `(${X}, ${Y})`,
+        workedSolution: `Substitute t = ${t0} into both equations: x(${t0}) = ${a === 1 ? "" : a}·${t0} ${b > 0 ? "+ " + b : "− " + (-b)} = ${X}, &nbsp; y(${t0}) = ${c === 1 ? "" : c}·${t0}² ${d > 0 ? "+ " + d : "− " + (-d)} = ${c * t0 * t0} ${d > 0 ? "+ " + d : "− " + (-d)} = ${Y}. Point: <strong>(${X}, ${Y})</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q4 · MC · Parametric circle equations ──────────────────── */
+  {
+    id: 4, type: "mc", tag: "4B · Topic 4.4", color: "purple",
+    generate(){
+      const h = R.intExcl(-5, 5, [0]);
+      const k = R.intExcl(-5, 5, [0, h]);
+      const r = R.int(2, 7);
+      const hSign = h >= 0 ? "+ " + h : "− " + (-h);
+      const kSign = k >= 0 ? "+ " + k : "− " + (-k);
+      const correct = `x = ${h} ${h >= 0 ? "+" : "+"} ${r} cos(t), &nbsp; y = ${k} + ${r} sin(t)`;
+
+      return {
+        stem: `Which set of parametric equations describes a complete <strong>circle of radius ${r}</strong> centered at <span class="mono">(${h}, ${k})</span> on the interval <span class="mono">0 ≤ t < 2π</span>?`,
+        options: R.shuffle([
+          { html: `x = ${h} + ${r}·cos(t), &nbsp; y = ${k} + ${r}·sin(t)`, correct: true },
+          { html: `x = ${r} + ${h}·cos(t), &nbsp; y = ${r} + ${k}·sin(t)`, correct: false, misconception: `You swapped radius and center coordinates. The standard form is <strong>x = h + r·cos(t)</strong>, &nbsp; y = k + r·sin(t) — center FIRST, then radius times trig.` },
+          { html: `x = ${h}·cos(t), &nbsp; y = ${k}·sin(t)`, correct: false, misconception: `Missing the radius! Each parametric equation is <strong>center + radius · trig(t)</strong>. Your version traces an ellipse-like shape with the center coordinates as "amplitudes", which is wrong.` },
+          { html: `x = ${h} + ${r}·sin(t), &nbsp; y = ${k} + ${r}·cos(t)`, correct: false, misconception: `Sin and cos are SWAPPED. The standard parameterization uses cos for x and sin for y (counterclockwise from the right). Switching them traces clockwise from the top — still a circle but with reversed orientation.` },
+          { html: `x = ${h} + ${r}·t, &nbsp; y = ${k} + ${r}·t`, correct: false, misconception: `You used t directly, not cos(t) and sin(t). Linear t-functions trace a LINE, not a circle. You need trig functions to wrap around.` },
+          { html: `x = ${r}·cos(t) ${hSign}, &nbsp; y = ${r}·sin(t) ${kSign}`, correct: false, misconception: `Sign error on the center. x = (h) + r·cos(t), so the constant should be +${h} (or its computed sign), not − ${h}. Same for k.` }
+        ]),
+        correctDisplay: `x = ${h} + ${r} cos(t), &nbsp; y = ${k} + ${r} sin(t)`,
+        workedSolution: `Standard parametric form for a circle of radius r centered at (h, k): &nbsp; <strong>x = h + r·cos(t), &nbsp; y = k + r·sin(t)</strong>, &nbsp; 0 ≤ t < 2π. Plug in h = ${h}, k = ${k}, r = ${r}: <strong>x = ${h} + ${r}·cos(t), &nbsp; y = ${k} + ${r}·sin(t)</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q5 · MC · Implicit intersection count ──────────────────── */
+  {
+    id: 5, type: "mc", tag: "4B · Topic 4.5", color: "purple",
+    generate(){
+      // Circle x² + y² = r², line y = mx + b. Count intersections by substitution.
+      const r = R.pick([3, 4, 5]);
+      const m = R.pick([1, -1, 2, -2]);
+      // Pick b so we usually get 2 intersections; sometimes 0 or 1
+      const scenario = R.pick(["two", "two", "two", "zero", "one"]);
+      let b;
+      if (scenario === "two") b = R.int(-r + 1, r - 1);
+      else if (scenario === "zero") b = R.pick([r * 2 + 3, -(r * 2 + 3)]);
+      else b = r;  // tangent-ish (we'll just claim 2 for simplicity if discriminant non-zero)
+
+      // Substitute: x² + (mx + b)² = r²
+      // (1 + m²)x² + 2mb·x + (b² − r²) = 0
+      const A = 1 + m * m;
+      const B = 2 * m * b;
+      const C = b * b - r * r;
+      const disc = B * B - 4 * A * C;
+      const count = disc > 0 ? 2 : disc === 0 ? 1 : 0;
+
+      return {
+        stem: `How many points of intersection does the circle <span class="mono">x² + y² = ${r * r}</span> have with the line <span class="mono">y = ${m === 1 ? "" : m === -1 ? "−" : m}x ${b >= 0 ? "+ " + b : "− " + (-b)}</span>?`,
+        options: R.shuffle([
+          { html: count.toString(), correct: true },
+          { html: "0", correct: count === 0, misconception: count !== 0 ? `0 intersections would mean the line misses the circle entirely (discriminant < 0). Check by substitution: discriminant = B² − 4AC = ${disc}, which is ${disc > 0 ? "POSITIVE" : disc === 0 ? "ZERO" : "negative"} → ${count} intersections.` : "" },
+          { html: "1", correct: count === 1, misconception: count !== 1 ? `1 intersection means the line is tangent (discriminant = 0). Here discriminant = ${disc}, ${disc === 0 ? "zero ✓" : "not zero"}.` : "" },
+          { html: "2", correct: count === 2, misconception: count !== 2 ? `2 intersections requires the discriminant to be positive after substituting line into circle. Here disc = ${disc}, which is ${disc > 0 ? "positive ✓" : "non-positive"} → ${count} intersections.` : "" },
+          { html: "3", correct: false, misconception: `A line can intersect a circle in at most <strong>2 points</strong>. Three is geometrically impossible.` },
+          { html: "Infinitely many", correct: false, misconception: `That would require the line to BE the circle — impossible since circles are curved and lines are straight.` }
+        ].filter((opt, i, arr) => arr.findIndex(o => o.html === opt.html) === i)),
+        correctDisplay: `${count} intersection${count === 1 ? "" : "s"}`,
+        workedSolution: `Substitute the line into the circle: x² + (${m === 1 ? "" : m === -1 ? "−" : m}x ${b >= 0 ? "+ " + b : "− " + (-b)})² = ${r * r}. Expand to get a quadratic in x: <span class="mono">${A}x² ${B >= 0 ? "+ " + B : "− " + (-B)}x ${C >= 0 ? "+ " + C : "− " + (-C)} = 0</span>. Discriminant = B² − 4AC = ${disc}. ${disc > 0 ? "Positive → 2 intersections" : disc === 0 ? "Zero → 1 (tangent)" : "Negative → 0 (line misses)"} = <strong>${count}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q6 · DD · Eliminate parameter → curve type ─────────────── */
+  {
+    id: 6, type: "dd", tag: "4B · Topic 4.4", color: "purple",
+    generate(){
+      const type = R.pick(["circle", "ellipse", "line", "parabola"]);
+      let equation, correctText;
+      if (type === "circle"){
+        const a = R.int(2, 6);
+        equation = `x = ${a}·cos(t), &nbsp; y = ${a}·sin(t)`;
+        correctText = `Circle of radius ${a}`;
+      } else if (type === "ellipse"){
+        const a = R.int(2, 6);
+        const b = R.intExcl(2, 8, [a]);
+        equation = `x = ${a}·cos(t), &nbsp; y = ${b}·sin(t)`;
+        correctText = `Ellipse with semi-axes ${a} and ${b}`;
+      } else if (type === "line"){
+        const m = R.int(1, 3);
+        const yInt = R.int(1, 5);
+        equation = `x = t, &nbsp; y = ${m}·t + ${yInt}`;
+        correctText = `Line (slope ${m})`;
+      } else {
+        equation = `x = t, &nbsp; y = t²`;
+        correctText = `Parabola (y = x²)`;
+      }
+
+      return {
+        stem: `Eliminate the parameter and identify the curve: <span class="mono">${equation}</span>.`,
+        prefix: "Curve:",
+        options: R.shuffle([
+          { text: "Circle", correct: type === "circle", misconception: type !== "circle" ? `Circles have <strong>equal</strong> coefficients on cos(t) and sin(t) (e.g. x = r cos t, y = r sin t). This curve doesn't have that form.` : "" },
+          { text: "Ellipse", correct: type === "ellipse", misconception: type !== "ellipse" ? `Ellipses have x = a cos(t), y = b sin(t) with a ≠ b. This curve doesn't have that form.` : "" },
+          { text: "Line", correct: type === "line", misconception: type !== "line" ? `Lines come from linear functions of t (no trig, no squares). This curve has ${type === "parabola" ? "a square" : "trig functions"}, so it's not a line.` : "" },
+          { text: "Parabola", correct: type === "parabola", misconception: type !== "parabola" ? `Parabolas come from one linear and one quadratic dependence on t (or vice versa). This curve has ${type === "line" ? "two linear" : "two trig"} pieces.` : "" }
+        ]),
+        correctDisplay: correctText,
+        workedSolution: `${type === "circle" ? `cos²t + sin²t = 1, so (x/${equation.match(/x = (\d+)/)[1]})² + (y/${equation.match(/y = (\d+)/)[1]})² = 1 — that's a circle since both axes match.` : type === "ellipse" ? `cos²t + sin²t = 1 → (x/${equation.match(/x = (\d+)/)[1]})² + (y/${equation.match(/y = (\d+)/)[1]})² = 1 — an ellipse (different semi-axes).` : type === "line" ? `Replace t = x in y = m·t + b: y = m·x + b — a line.` : `Replace t = x in y = t²: y = x² — a parabola.`} Curve: <strong>${correctText}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q7 · MC · Ellipse standard form ────────────────────────── */
+  {
+    id: 7, type: "mc", tag: "4C · Topic 4.6", color: "purple",
+    generate(){
+      const h = R.intExcl(-4, 4, [0]);
+      const k = R.intExcl(-4, 4, [0]);
+      const majorIsH = R.pick([true, false]);
+      const majorLen = R.pick([8, 10, 12, 14]);  // full major axis
+      const minorLen = R.pick([4, 6]);  // full minor axis (less than major)
+      const a = majorLen / 2;
+      const b = minorLen / 2;
+      const a2 = a * a;
+      const b2 = b * b;
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSign = k > 0 ? "− " + k : "+ " + (-k);
+      // Standard ellipse form
+      const xTerm = majorIsH ? `(x ${hSign})²/${a2}` : `(x ${hSign})²/${b2}`;
+      const yTerm = majorIsH ? `(y ${kSign})²/${b2}` : `(y ${kSign})²/${a2}`;
+      const correct = `${xTerm} + ${yTerm} = 1`;
+      const wrongSignH = `(x ${h > 0 ? "+ " + h : "− " + (-h)})²/${majorIsH ? a2 : b2}`;
+      const wrongSignK = `(y ${k > 0 ? "+ " + k : "− " + (-k)})²/${majorIsH ? b2 : a2}`;
+
+      return {
+        stem: `An ellipse is centered at <span class="mono">(${h}, ${k})</span>. Its major axis is <strong>${majorIsH ? "horizontal" : "vertical"}</strong> with total length <strong>${majorLen}</strong>, and its minor axis is <strong>${majorIsH ? "vertical" : "horizontal"}</strong> with total length <strong>${minorLen}</strong>. Which equation represents this ellipse in standard form?`,
+        options: R.shuffle([
+          { html: correct, correct: true },
+          { html: `${wrongSignH} + ${wrongSignK} = 1`, correct: false, misconception: `Sign error on the center. The standard form is <strong>(x − h)²/... + (y − k)²/... = 1</strong>. Center is (h, k) = (${h}, ${k}), so the terms are (x ${hSign})² and (y ${kSign})² — opposite signs in the formula from the center coordinates.` },
+          { html: `${xTerm.replace(`/${majorIsH ? a2 : b2}`, "/" + majorLen)} + ${yTerm.replace(`/${majorIsH ? b2 : a2}`, "/" + minorLen)} = 1`, correct: false, misconception: `You used the full axis lengths (${majorLen} and ${minorLen}) as denominators. The standard form uses <strong>a²</strong> and <strong>b²</strong>, where a = ${a} (semi-major) and b = ${b} (semi-minor). So denominators are ${a2} and ${b2}.` },
+          { html: `${xTerm.replace(`/${majorIsH ? a2 : b2}`, "/" + a)} + ${yTerm.replace(`/${majorIsH ? b2 : a2}`, "/" + b)} = 1`, correct: false, misconception: `You used the semi-axes (a and b) themselves, not their squares. Denominators must be SQUARED: ${a}² = ${a2} and ${b}² = ${b2}.` },
+          { html: `(x ${hSign})²/${majorIsH ? b2 : a2} + (y ${kSign})²/${majorIsH ? a2 : b2} = 1`, correct: false, misconception: `You swapped which term gets a² vs b². The <strong>larger</strong> denominator (a² = ${a2}) goes under the term aligned with the <strong>major axis direction</strong> (${majorIsH ? "horizontal → under (x − h)²" : "vertical → under (y − k)²"}).` }
+        ]),
+        correctDisplay: correct,
+        workedSolution: `Standard ellipse form: <strong>(x − h)²/a² + (y − k)²/b² = 1</strong>, with a (semi-major) > b (semi-minor). Here center (h, k) = (${h}, ${k}); semi-major a = ${a} (from total ${majorLen} ÷ 2); semi-minor b = ${b} (from total ${minorLen} ÷ 2). Major is ${majorIsH ? "horizontal" : "vertical"}, so a² goes under <strong>(${majorIsH ? "x − h" : "y − k"})²</strong>. Final: <strong>${correct}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q8 · MC · Hyperbola asymptotes ─────────────────────────── */
+  {
+    id: 8, type: "mc", tag: "4C · Topic 4.6", color: "purple",
+    generate(){
+      const h = R.intExcl(-4, 4, [0]);
+      const k = R.intExcl(-4, 4, [0]);
+      const a = R.pick([3, 4, 5]);  // semi-axis under (x-h)²
+      const b = R.intExcl(2, 6, [a]);
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSignMinus = k > 0 ? "− " + k : "+ " + (-k);
+      const kSignPlus  = k > 0 ? "+ " + k : "− " + (-k);
+      // (x-h)²/a² - (y-k)²/b² = 1 (horizontal opening). Asymptotes: y - k = ±(b/a)(x-h)
+      // Equivalently: y = ±(b/a)(x-h) + k
+
+      return {
+        stem: `For the hyperbola <span class="mono">(x ${hSign})²/${a * a} − (y ${kSignMinus})²/${b * b} = 1</span>, what are the equations of the two asymptotes?`,
+        options: R.shuffle([
+          { html: `y = ±(${b}/${a})(x ${hSign}) ${kSignPlus.replace("− ", "− ").replace("+ ", "+ ")}`, correct: true },
+          { html: `y = ±(${a}/${b})(x ${hSign}) ${kSignPlus}`, correct: false, misconception: `Slopes flipped. For a horizontal hyperbola (x-term first), the asymptote slope is <strong>b/a</strong> (NOT a/b). Here that's ${b}/${a}.` },
+          { html: `y = ±${a * a / b / b}(x ${hSign}) ${kSignPlus}`, correct: false, misconception: `You used a²/b² as the slope. The slope is <strong>b/a</strong> (from the un-squared semi-axes), not a²/b².` },
+          { html: `y = ±(${b}/${a})(x ${h > 0 ? "+ " + h : "− " + (-h)}) ${kSignPlus}`, correct: false, misconception: `Sign error on the (x − h) term. The center is (${h}, ${k}), so the asymptotes pass through (${h}, ${k}) with slope ±b/a: <strong>y − k = ±(b/a)(x − h)</strong>.` },
+          { html: `y = (${b}/${a})·x &nbsp;and&nbsp; y = −(${b}/${a})·x`, correct: false, misconception: `You ignored the center shift. Asymptotes don't go through the origin unless the center is at the origin. With center (${h}, ${k}), they're shifted: <strong>y = ±(b/a)(x − h) + k</strong>.` },
+          { html: `y = ±${b}·(x ${hSign}) ${kSignPlus}`, correct: false, misconception: `Slope should be a RATIO of semi-axes (b/a = ${b}/${a}), not just b = ${b}.` }
+        ]),
+        correctDisplay: `y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}`,
+        workedSolution: `For a horizontal-opening hyperbola <strong>(x − h)²/a² − (y − k)²/b² = 1</strong>, the asymptotes are: <strong>y − k = ±(b/a)(x − h)</strong>. Here h = ${h}, k = ${k}, a = ${a}, b = ${b}, slope = b/a = ${b}/${a}. Equations: <strong>y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q9 · FIB · Ellipse vertex ──────────────────────────────── */
+  {
+    id: 9, type: "fib", tag: "4C · Topic 4.6", color: "purple",
+    generate(){
+      const h = R.intExcl(-3, 5, [0]);
+      const k = R.intExcl(-3, 5, [0]);
+      const a = R.pick([3, 4, 5, 6]);  // semi-major
+      const b = R.pick([2, 3]);  // semi-minor (< a)
+      // Major horizontal → vertices at (h±a, k)
+      // Equation: (x-h)²/a² + (y-k)²/b² = 1
+      // Right vertex: (h+a, k)
+      const eqHTML = `(x ${h > 0 ? "− " + h : "+ " + (-h)})²/${a * a} + (y ${k > 0 ? "− " + k : "+ " + (-k)})²/${b * b} = 1`;
+      const rightVertex = `(${h + a}, ${k})`;
+      const leftVertex = `(${h - a}, ${k})`;
+
+      return {
+        stem: `For the ellipse <span class="mono">${eqHTML}</span>, give the <strong>right</strong> vertex (the one with the larger x-value). Type as <span class="mono">(x, y)</span>.`,
+        prefix: "Right vertex:",
+        placeholder: "(x, y)",
+        accepted: [
+          rightVertex,
+          rightVertex.replace(" ", ""),
+          `(${h + a},${k})`
+        ],
+        misconceptions: [
+          { match: [leftVertex, leftVertex.replace(" ", ""), `(${h - a},${k})`],
+            why: `That's the LEFT vertex, (h − a, k) = (${h - a}, ${k}). The question asks for the right vertex (h + a, k) = (${h + a}, ${k}).` },
+          { match: [`(${h}, ${k + b})`, `(${h},${k + b})`],
+            why: `That's the top co-vertex (not a major vertex). Major vertices are along the major axis (horizontal here), so they're (h ± a, k), not (h, k ± b).` },
+          { match: [`(${h}, ${k - b})`, `(${h},${k - b})`],
+            why: `That's the bottom co-vertex. For a horizontal-major ellipse, the major vertices are (h ± a, k) = (${h + a}, ${k}) and (${h - a}, ${k}).` },
+          { match: [`(${h}, ${k})`, `(${h},${k})`],
+            why: `That's the CENTER, not a vertex. Vertices are a units away from center along the major axis: (h + a, k) = (${h + a}, ${k}).` },
+          { match: [`(${a}, ${b})`, `(${a},${b})`],
+            why: `You typed (a, b) — the semi-axis lengths, not a coordinate. Vertices are at (h + a, k) and (h − a, k) for a horizontal-major ellipse.` }
+        ],
+        correctDisplay: `Right vertex: (${h + a}, ${k})`,
+        workedSolution: `Center: (${h}, ${k}). Since a² = ${a * a} > b² = ${b * b}, the major axis is horizontal and a = ${a}. Major vertices are (h ± a, k). Right vertex: (h + a, k) = (${h} + ${a}, ${k}) = <strong>(${h + a}, ${k})</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q10 · MC · Parametric → conic type ─────────────────────── */
+  {
+    id: 10, type: "mc", tag: "4C · Topic 4.7", color: "purple",
+    generate(){
+      const a = R.int(2, 7);
+      const b = R.intExcl(2, 8, [a]);
+      const type = R.pick(["ellipse", "circle"]);
+      const equationA = type === "circle" ? a : a;
+      const equationB = type === "circle" ? a : b;
+      return {
+        stem: `The parametric curve <span class="mono">x = ${equationA}·cos(t), &nbsp; y = ${equationB}·sin(t), &nbsp; 0 ≤ t < 2π</span> traces:`,
+        options: R.shuffle([
+          { html: type === "circle" ? `A circle of radius ${a}` : `An ellipse with horizontal semi-axis ${a} and vertical semi-axis ${b}`, correct: true },
+          { html: `A circle of radius ${type === "circle" ? b : a}`, correct: false, misconception: type === "circle" ? `Close — but careful: when both coefficients are ${a}, the radius is ${a}, not something else.` : `A circle requires EQUAL coefficients on cos and sin. Here cos has ${a} and sin has ${b} (different), so it's an ellipse, not a circle.` },
+          { html: type === "ellipse" ? `An ellipse with semi-axes ${b} (horizontal) and ${a} (vertical)` : `A circle of radius ${a/2}`, correct: false, misconception: type === "ellipse" ? `You swapped which axis gets ${a} and which gets ${b}. The coefficient on <strong>cos(t)</strong> is the <strong>horizontal</strong> semi-axis (x = ${a} cos t → horizontal semi-axis ${a}).` : `Coefficient is the radius for a circle, not half of it.` },
+          { html: "A line through the origin", correct: false, misconception: `Lines come from linear functions of t. cos(t) and sin(t) trace ovals (circles or ellipses), not lines.` },
+          { html: "A hyperbola", correct: false, misconception: `Hyperbolas use sec(t) and tan(t) (via the identity sec² − tan² = 1). cos(t) and sin(t) give CIRCLES or ELLIPSES (via cos² + sin² = 1).` },
+          { html: "A parabola", correct: false, misconception: `Parabolas have one linear and one quadratic parametric piece. Here both are trig functions, which traces a closed oval (circle/ellipse).` }
+        ]),
+        correctDisplay: type === "circle" ? `Circle of radius ${a}` : `Ellipse: semi-axes ${a} (horizontal) and ${b} (vertical)`,
+        workedSolution: `Eliminate the parameter using <strong>cos²t + sin²t = 1</strong>: (x/${a})² + (y/${equationB})² = 1, i.e. <strong>x²/${a * a} + y²/${equationB * equationB} = 1</strong>. ${type === "circle" ? `Since both denominators are equal (${a * a}), it's a CIRCLE of radius ${a}.` : `Different denominators (${a * a} vs ${b * b}) → ELLIPSE with horizontal semi-axis ${a}, vertical semi-axis ${b}.`}<br><strong>Telltale:</strong> equal coefficients on cos and sin → circle; different coefficients → ellipse.`
+      };
+    }
+  },
+
+  /* ─── Q11 · FIB · Circle equation → center ───────────────────── */
+  {
+    id: 11, type: "fib", tag: "4C · Topic 4.6", color: "purple",
+    generate(){
+      const h = R.intExcl(-5, 5, [0]);
+      const k = R.intExcl(-5, 5, [0]);
+      const r = R.int(2, 8);
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSign = k > 0 ? "− " + k : "+ " + (-k);
+      return {
+        stem: `Find the center of the circle <span class="mono">(x ${hSign})² + (y ${kSign})² = ${r * r}</span>. Type as <span class="mono">(x, y)</span>.`,
+        prefix: "Center:",
+        placeholder: "(h, k)",
+        accepted: [
+          `(${h}, ${k})`,
+          `(${h},${k})`
+        ],
+        misconceptions: [
+          { match: [`(${-h}, ${-k})`, `(${-h},${-k})`],
+            why: `Sign flip. The standard form is (x − h)² + (y − k)² = r². So if you see (x − ${h})² the center coordinate is <strong>+${h}</strong> (not −${h}). The signs in the equation are OPPOSITE the center coordinates.` },
+          { match: [`(${k}, ${h})`, `(${k},${h})`],
+            why: `You swapped x and y. Standard form: (x − h)² goes with h (the x-coordinate). Center is (h, k) = (${h}, ${k}).` },
+          { match: [`(${r}, ${r})`, `(${r},${r})`],
+            why: `You typed the radius. Center is (h, k); radius is √${r * r} = ${r}, but it's a separate concept.` },
+          { match: [r.toString()],
+            why: `You typed the radius (r = ${r}), not the center coordinates. Center is the (h, k) pair: (${h}, ${k}).` },
+          { match: [(r * r).toString()],
+            why: `You typed r² (${r * r}). The center is the (h, k) coordinates, not r or r².` }
+        ],
+        correctDisplay: `Center: (${h}, ${k}), radius ${r}`,
+        workedSolution: `Standard circle equation: <strong>(x − h)² + (y − k)² = r²</strong>. Match: (x ${hSign}) means h = ${h}; (y ${kSign}) means k = ${k}. Center: <strong>(${h}, ${k})</strong>. (Radius: √${r * r} = ${r}.)`
+      };
+    }
+  },
+
+  /* ─── Q12 · DD · Hyperbola orientation ───────────────────────── */
+  {
+    id: 12, type: "dd", tag: "4C · Topic 4.7", color: "purple",
+    generate(){
+      const horizontal = R.pick([true, false]);
+      const a2 = R.pick([9, 16, 25, 36]);
+      const b2 = R.pick([4, 9, 16]);
+      const h = R.intExcl(-3, 4, [0]);
+      const k = R.intExcl(-3, 4, [0]);
+      const eq = horizontal
+        ? `(x ${h > 0 ? "− " + h : "+ " + (-h)})²/${a2} − (y ${k > 0 ? "− " + k : "+ " + (-k)})²/${b2} = 1`
+        : `(y ${k > 0 ? "− " + k : "+ " + (-k)})²/${a2} − (x ${h > 0 ? "− " + h : "+ " + (-h)})²/${b2} = 1`;
+
+      return {
+        stem: `Does the hyperbola <span class="mono">${eq}</span> open horizontally (left/right) or vertically (up/down)?`,
+        prefix: "Opens:",
+        options: R.shuffle([
+          { text: "Horizontally (opens left and right)", correct: horizontal, misconception: !horizontal ? `Horizontal opening means the <strong>x-term is positive</strong> in standard form: (x − h)²/a² − (y − k)²/b² = 1. This equation has the y-term positive first, so it opens vertically.` : "" },
+          { text: "Vertically (opens up and down)", correct: !horizontal, misconception: horizontal ? `Vertical opening means the <strong>y-term is positive</strong>: (y − k)²/a² − (x − h)²/b² = 1. This equation has the x-term positive first, so it opens horizontally.` : "" },
+          { text: "Diagonally (opens along a slanted axis)", correct: false, misconception: `Standard-form hyperbolas (with x − h and y − k, no xy term) open only horizontally or vertically. Diagonal openings require rotated forms.` },
+          { text: "It's a circle, not a hyperbola", correct: false, misconception: `Hyperbolas have a <strong>minus sign</strong> between the two squared terms. Circles have a plus sign and equal denominators. This is a hyperbola.` }
+        ]),
+        correctDisplay: horizontal ? "Opens horizontally" : "Opens vertically",
+        workedSolution: `<strong>Rule:</strong> the term with the POSITIVE sign tells you the orientation. (x − h)² positive → opens horizontally. (y − k)² positive → opens vertically. Here the ${horizontal ? "(x − h)²" : "(y − k)²"} term is positive, so the hyperbola opens <strong>${horizontal ? "horizontally" : "vertically"}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q13 · FIB · Solve for t (check both equations) ─────────── */
+  {
+    id: 13, type: "fib", tag: "4A · Topic 4.1", color: "purple",
+    generate(){
+      // x(t) = at + b, y(t) = ct + d. Target (X, Y). Find t.
+      const a = R.int(2, 4);
+      const b = R.intExcl(-5, 5, [0]);
+      const c = R.int(2, 4);
+      const d = R.intExcl(-5, 5, [0]);
+      const t0 = R.int(1, 5);
+      const X = a * t0 + b;
+      const Y = c * t0 + d;
+      return {
+        stem: `Find t such that the parametric point on <span class="mono">x(t) = ${a}t ${b > 0 ? "+ " + b : "− " + (-b)}</span>, <span class="mono">y(t) = ${c}t ${d > 0 ? "+ " + d : "− " + (-d)}</span> equals <span class="mono">(${X}, ${Y})</span>. (Type an integer.)`,
+        prefix: "t =",
+        placeholder: "integer",
+        accepted: [t0.toString()],
+        misconceptions: [
+          { match: [X.toString()],
+            why: `You typed the x-coordinate ${X}. t is the PARAMETER, not the coordinate. Solve ${a}t + ${b} = ${X} for t.` },
+          { match: [Y.toString()],
+            why: `You typed the y-coordinate ${Y}. t is the parameter. Solve ${a}t ${b > 0 ? "+ " + b : "− " + (-b)} = ${X} → t = ${t0}.` },
+          { match: [((X - b) * a).toString()],
+            why: `Order of operations: t = (${X} − ${b}) / ${a} = ${t0}, not (${X} − ${b}) × ${a}. Subtract first, then DIVIDE by ${a}.` },
+          { match: [((X + b) / a).toString()],
+            why: `Sign error. (${a}t + ${b}) = ${X} → ${a}t = ${X} − ${b} = ${X - b} → t = ${t0}. SUBTRACT ${b}, don't add.` }
+        ],
+        correctDisplay: `t = ${t0}`,
+        workedSolution: `Solve x(t) = ${X}: ${a}t ${b > 0 ? "+ " + b : "− " + (-b)} = ${X} → ${a}t = ${X - b} → t = ${t0}. <strong>Verify with y</strong>: y(${t0}) = ${c}·${t0} ${d > 0 ? "+ " + d : "− " + (-d)} = ${c * t0 + d} = ${Y} ✓. Both check out, so <strong>t = ${t0}</strong>.`
+      };
+    }
+  }
+
+];
+
+window.PrecalcDay.init({
+  dayTitle: "Day 4",
+  dayLabel: "Parametric, Implicit & Conics",
+  questions: DAY4_QUESTIONS
+});
+</script>
+
+</body>
+</html>

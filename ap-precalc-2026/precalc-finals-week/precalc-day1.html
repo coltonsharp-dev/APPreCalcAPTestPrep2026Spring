@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calc · Day 1 · Polynomial &amp; Rational Functions</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="precalc-week.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Day 1 · Mon May 11</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-title">Unit 1 · Polynomial &amp; Rational</span>
+  </div>
+  <div class="timer-pill" style="display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:100px;background:var(--glass);border:1px solid var(--b);font-size:12px;color:var(--tx2);letter-spacing:0.08em;">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>
+    <span id="timerVal" style="font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;">00:00</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="day-header">
+    <div class="header-eyebrow"><span class="dot" style="background:var(--blue)"></span>Day 1 of 5 · Mon May 11 · ~40 min</div>
+    <h1 class="day-title">
+      <span class="l1">Polynomial &amp;</span>
+      <span class="l2">Rational Functions.</span>
+    </h1>
+    <p class="day-sub">Rebuild Unit 1: average rate of change, concavity, end behavior, multiplicity, holes vs. vertical asymptotes, and horizontal/slant asymptote rules. <strong>14 randomized questions.</strong> Click <strong>↻ New Numbers</strong> on any card to regenerate with fresh values — practice as many times as you need.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--blue)"></span>Unit 1 · 1A · 1B · 1C</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>7 MC · 4 FIB · 3 Dropdown</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>🔥 Inflection-vs-Extrema (biggest miss)</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--green)"></span>Submit via Canvas at the end</div>
+    </div>
+
+    <div class="instructions">
+      <div class="ih">📘 How to use this practice</div>
+      <strong>1.</strong> Answer each question — instant feedback shows whether you got it AND <strong>why</strong> any wrong answer is tempting (the misconception). <strong>2.</strong> Click <strong>↻ New Numbers</strong> on any card to rebuild it with different values and try again. Each attempt counts toward your practice — don't be afraid to redo. <strong>3.</strong> When you've worked through everything, type your name at the bottom and click <strong>Copy for Canvas</strong> to submit.
+    </div>
+  </div>
+
+  <!-- ──────── 1A · CHANGE & CONCAVITY ──────── -->
+  <div class="section-header" data-color="blue">
+    <div class="sh-row">
+      <span class="sh-tag">1A</span>
+      <span class="sh-title">Change &amp; Concavity</span>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+
+  <div class="q-card" data-q="1" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">01</div>
+      <span class="q-tag">1A · Topic 1.2</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag priority">AROC</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="2" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">02</div>
+      <span class="q-tag">1A · Topic 1.3</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag">Concavity</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="3" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">03</div>
+      <span class="q-tag priority">1B · Topic 1.4</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag hot">🔥 Biggest Miss</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="4" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">04</div>
+      <span class="q-tag">1A · Topic 1.2</span>
+      <span class="q-type-tag" data-type="fib">Fill-In</span>
+      <span class="q-tag">AROC · Type the number</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 1B · POLYNOMIAL FEATURES ──────── -->
+  <div class="section-header" data-color="blue">
+    <div class="sh-row">
+      <span class="sh-tag">1B</span>
+      <span class="sh-title">Polynomial Features</span>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+
+  <div class="q-card" data-q="5" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">05</div>
+      <span class="q-tag priority">1B · Topic 1.6</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag">End Behavior</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="6" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">06</div>
+      <span class="q-tag">1B · Topic 1.5</span>
+      <span class="q-type-tag" data-type="dd">Dropdown</span>
+      <span class="q-tag">Multiplicity</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="7" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">07</div>
+      <span class="q-tag">1B · Topic 1.5</span>
+      <span class="q-type-tag" data-type="fib">Fill-In</span>
+      <span class="q-tag">y-Intercept · Type the value</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 1C · RATIONAL FUNCTIONS ──────── -->
+  <div class="section-header" data-color="blue">
+    <div class="sh-row">
+      <span class="sh-tag">1C</span>
+      <span class="sh-title">Rational Functions · Holes &amp; Asymptotes</span>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+
+  <div class="q-card" data-q="8" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">08</div>
+      <span class="q-tag priority">1C · Topic 1.7</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag hot">Holes vs Asymptotes</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="9" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">09</div>
+      <span class="q-tag">1C · Topic 1.7</span>
+      <span class="q-type-tag" data-type="fib">Fill-In</span>
+      <span class="q-tag">Vertical Asymptote · Type x =</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="10" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">10</div>
+      <span class="q-tag priority">1C · Topic 1.8</span>
+      <span class="q-type-tag" data-type="dd">Dropdown</span>
+      <span class="q-tag">Horizontal Asymptote</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="11" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">11</div>
+      <span class="q-tag">1C · Topic 1.7</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag">Domain of a Rational</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="12" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">12</div>
+      <span class="q-tag">1C · Topic 1.8</span>
+      <span class="q-type-tag" data-type="fib">Fill-In</span>
+      <span class="q-tag">Horizontal Asymptote · Type y =</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="13" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">13</div>
+      <span class="q-tag">1A · Topic 1.3</span>
+      <span class="q-type-tag" data-type="mc">Multiple Choice</span>
+      <span class="q-tag">Concavity from Data Table</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="14" data-color="blue">
+    <div class="q-top">
+      <div class="q-num">14</div>
+      <span class="q-tag">1B · Topic 1.5</span>
+      <span class="q-type-tag" data-type="dd">Dropdown</span>
+      <span class="q-tag">Polynomial Symmetry</span>
+      <div class="q-spacer"></div>
+      <span class="q-attempts">Attempt 1</span>
+      <button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div>
+    <div class="q-input-area"></div>
+    <div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── SUBMIT AREA ──────── -->
+  <div class="submit-area">
+    <div class="submit-eyebrow"><span class="dot"></span>End of Day 1 · Submit via Canvas</div>
+
+    <div class="name-row">
+      <label class="name-label" for="studentName">Your full name</label>
+      <input type="text" id="studentName" class="name-input" placeholder="First Last" autocomplete="name">
+    </div>
+
+    <div class="submit-progress">
+      <span class="prog-num" id="progNum">0</span>
+      <span class="prog-sep">/</span>
+      <span class="prog-total">14</span>
+      <span class="prog-label">answered</span>
+    </div>
+    <div class="submit-meter"><div class="submit-meter-fill" id="submitMeterFill"></div></div>
+
+    <div class="score-strip">
+      <div class="score-pill correct">✓ Correct <span class="num" id="scoreCorrect">0</span></div>
+      <div class="score-pill wrong">✗ Wrong <span class="num" id="scoreWrong">0</span></div>
+      <div class="score-pill unanswered">— Unanswered <span class="num" id="scoreUnanswered">14</span></div>
+    </div>
+
+    <div class="submit-row">
+      <button class="submit-btn" id="copyBtn">
+        <span class="sb-icon">⎘</span>
+        <span class="sb-text">Copy for Canvas</span>
+      </button>
+      <button class="email-btn" id="emailBtn">
+        <span class="sb-icon">✉</span>
+        <span class="sb-text">Email to Teacher</span>
+      </button>
+      <button class="reset-btn" id="resetBtn">Reset All</button>
+    </div>
+
+    <div class="submit-foot">
+      <strong>Submission flow:</strong> 1. Type your name. 2. Click <strong>Copy for Canvas</strong>. 3. Paste into the Day 1 classwork assignment on Canvas and submit there. If Canvas is down, use <strong>Email to Teacher</strong>.
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<!-- ──────── SUBMISSION PREVIEW MODAL ──────── -->
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-eyebrow ok"><span class="dot"></span>Copied to Clipboard</div>
+      <div class="submit-success">
+        <div class="ss-check">✓</div>
+        <div class="ss-title">Submission Ready</div>
+        <div class="ss-sub">Your Day 1 results are on your clipboard. Open the Canvas assignment, paste, and submit there.</div>
+      </div>
+    </div>
+    <div class="canvas-steps">
+      <div class="cs-row"><span class="cs-num">1</span><span class="cs-text">Open the Canvas assignment for <strong>Day 1 Classwork</strong>.</span></div>
+      <div class="cs-row"><span class="cs-num">2</span><span class="cs-text">Click into the text-entry box, then paste with <strong>Ctrl+V</strong> (Windows) or <strong>Cmd+V</strong> (Mac).</span></div>
+      <div class="cs-row"><span class="cs-num">3</span><span class="cs-text">Click <strong>Submit</strong> on Canvas. Done.</span></div>
+    </div>
+    <div class="preview-head">
+      <div class="ph-label">Preview · what was copied</div>
+      <button class="ph-recopy" id="recopyBtn">Copy Again</button>
+    </div>
+    <pre class="preview-text" id="previewText"></pre>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalEmail">Email to Teacher Instead</button>
+      <button class="modal-btn primary" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Day 1 · Unit 1 · Polynomial &amp; Rational Functions</span>
+</footer>
+
+<script src="precalc-week.js"></script>
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   DAY 1 QUESTION DEFINITIONS · Unit 1 — Polynomial & Rational
+   Each generate() runs every time the card renders or "New Numbers"
+   is clicked, producing fresh values + misconception-targeted traps.
+   ────────────────────────────────────────────────────────────────── */
+
+const DAY1_QUESTIONS = [
+
+  /* ─── Q1 · MC · AROC ─────────────────────────────────────────── */
+  {
+    id: 1, type: "mc", tag: "1A · Topic 1.2", color: "blue",
+    generate(){
+      const a = R.int(1, 6);
+      const interval = R.pick([2, 3, 4, 5]);
+      const b = a + interval;
+      const fa = R.int(2, 20);
+      const slope = R.pick([-3, -2, 2, 3, 4, 5]);
+      const fb = fa + slope * interval;
+      const dx = b - a;
+      const dy = fb - fa;
+      return {
+        stem: `A function f satisfies <span class="mono">f(${a}) = ${fa}</span> and <span class="mono">f(${b}) = ${fb}</span>. What is the average rate of change of f on the interval [${a}, ${b}]?`,
+        options: R.shuffle([
+          { html: slope.toString(), correct: true },
+          { html: dy.toString(), correct: false, misconception: `You found Δy = ${fb} − ${fa} = ${dy} but forgot to divide by Δx = ${dx}. AROC is rise <em>over</em> run.` },
+          { html: dx.toString(), correct: false, misconception: `That's Δx = ${dx} — the interval width, not the rate of change. AROC always has a y-difference on top.` },
+          { html: (-slope).toString(), correct: false, misconception: `You got the sign wrong. AROC = (f(b) − f(a)) / (b − a), with f(b) first on top — not f(a).` },
+          { html: ((fa + fb) / 2).toString(), correct: false, misconception: `That's the <em>average value</em> (mean of f(a) and f(b)), not the rate of change. AROC measures slope between them.` },
+          { html: (fa + fb).toString(), correct: false, misconception: `You added the f-values instead of subtracting. AROC = f(b) <strong>−</strong> f(a), not f(b) + f(a).` }
+        ]),
+        correctDisplay: `AROC = ${slope}`,
+        workedSolution: `AROC on [${a}, ${b}] = (f(${b}) − f(${a})) / (${b} − ${a}) = (${fb} − ${fa}) / ${dx} = <strong>${dy} / ${dx} = ${slope}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q2 · MC · Concavity → feature ──────────────────────────── */
+  {
+    id: 2, type: "mc", tag: "1A · Topic 1.3", color: "blue",
+    generate(){
+      const left = R.pick(["increasing", "decreasing"]);
+      const right = left;  // same direction (so it's not an extremum)
+      const startCC = R.pick(["concave down", "concave up"]);
+      const endCC   = startCC === "concave down" ? "concave up" : "concave down";
+      const a = R.int(0, 4);
+      const c = a + R.int(4, 8);
+      const m = a + Math.floor((c - a) / 2);
+      return {
+        stem: `A continuous function f is <strong>${left}</strong> on the entire interval [${a}, ${c}]. On (${a}, ${m}) it is <strong>${startCC}</strong>; on (${m}, ${c}) it is <strong>${endCC}</strong>. What feature does the graph have at x = ${m}?`,
+        options: R.shuffle([
+          { html: "Point of inflection", correct: true },
+          { html: "Local maximum", correct: false, misconception: `f is ${left} the entire interval — it never turns around — so there can't be a max. Concavity changed alone, not direction.` },
+          { html: "Local minimum", correct: false, misconception: `Same issue: f is ${left} throughout, so it never has a valley. Only concavity changed, which means inflection, not minimum.` },
+          { html: "Vertical asymptote", correct: false, misconception: `f is <em>continuous</em> on [${a}, ${c}] — vertical asymptotes mean the function blows up to infinity, which contradicts continuity.` },
+          { html: "Horizontal asymptote", correct: false, misconception: `Horizontal asymptotes describe long-run behavior at x → ±∞, not a feature at a finite x-value like x = ${m}.` },
+          { html: "Removable discontinuity", correct: false, misconception: `Removable discontinuity means a hole. The function is stated to be continuous on [${a}, ${c}], so no holes can exist there.` }
+        ]),
+        correctDisplay: `Point of inflection at x = ${m}`,
+        workedSolution: `<strong>Concavity changed, direction did not.</strong> When a continuous, ${left} function switches concavity (${startCC} → ${endCC}) without changing direction, that switch is a <strong>point of inflection</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q3 · MC · BIGGEST MISS · Inflection vs Extrema ─────────── */
+  {
+    id: 3, type: "mc", tag: "1B · Topic 1.4", color: "blue",
+    generate(){
+      const a = R.int(0, 3);
+      const b = a + R.int(5, 9);
+      const m = a + Math.floor((b - a) / 2);
+      const cc1 = R.pick(["concave up", "concave down"]);
+      const cc2 = cc1 === "concave up" ? "concave down" : "concave up";
+      return {
+        stem: `The graph of a polynomial f is <strong>increasing on the entire interval (${a}, ${b})</strong>. The curve has an obvious S-bend where the concavity switches from <strong>${cc1}</strong> to <strong>${cc2}</strong> at <span class="mono">x = ${m}</span>. The point at x = ${m} is best classified as:`,
+        options: R.shuffle([
+          { html: "Point of inflection (concavity changes; direction does not)", correct: true },
+          { html: "Local maximum (the curve reaches a peak there)", correct: false, misconception: `This is THE classic trap. The function is <em>increasing on the whole interval</em>, so the curve never peaks — extrema are impossible. An S-bend mid-climb is an inflection point, not a maximum.` },
+          { html: "Local minimum (the curve reaches a valley there)", correct: false, misconception: `Same trap in reverse: f is increasing everywhere on (${a}, ${b}), so it never reaches a valley. The S-bend changes only concavity.` },
+          { html: "Both a local max and a point of inflection", correct: false, misconception: `Impossible — a function can't be increasing throughout AND have a local max anywhere inside. The S-bend is purely a concavity switch.` },
+          { html: "Global maximum on the interval", correct: false, misconception: `If f is increasing on (${a}, ${b}), the global max is at the right endpoint (x = ${b}), not at the inflection point in the middle.` },
+          { html: "A vertical asymptote", correct: false, misconception: `Polynomials are continuous and smooth — they never have vertical asymptotes. Only rational functions (with zero denominators) do.` }
+        ]),
+        correctDisplay: `Point of inflection at x = ${m}`,
+        workedSolution: `<em>This is the exact misconception your class missed most on Practice Exam 1.</em> f is increasing throughout (${a}, ${b}), so it never peaks or valleys — extrema are impossible. The concavity flip alone (${cc1} → ${cc2}) means <strong>point of inflection</strong>, not a max.`
+      };
+    }
+  },
+
+  /* ─── Q4 · FIB · AROC numeric ────────────────────────────────── */
+  {
+    id: 4, type: "fib", tag: "1A · Topic 1.2", color: "blue",
+    generate(){
+      const a = R.int(0, 5);
+      const interval = R.pick([2, 4, 5]);
+      const b = a + interval;
+      const fa = R.int(3, 18);
+      const slope = R.pick([-4, -3, -2, 2, 3, 4]);
+      const fb = fa + slope * interval;
+      return {
+        stem: `Given <span class="mono">f(${a}) = ${fa}</span> and <span class="mono">f(${b}) = ${fb}</span>, compute the average rate of change on [${a}, ${b}]. Type a single integer.`,
+        prefix: "AROC =",
+        placeholder: "integer",
+        accepted: [slope.toString(), slope.toFixed(1), slope.toFixed(2)],
+        misconceptions: [
+          { match: [(fb - fa).toString()], why: `You typed Δy = ${fb} − ${fa} = ${fb - fa}. That's the change in y — but AROC is Δy ÷ Δx. Divide by ${b - a}.` },
+          { match: [(b - a).toString()], why: `That's Δx = ${b - a}, the interval width, not the rate of change. AROC has Δy on top.` },
+          { match: [(-slope).toString()], why: `Sign flipped. AROC = (f(b) − f(a)) / (b − a). Put f(${b}) = ${fb} on top, not f(${a}) = ${fa}.` },
+          { match: [((fa + fb) / 2).toString()], why: `You averaged f(a) and f(b). That's the mean y-value, not the slope between them.` }
+        ],
+        correctDisplay: `AROC = ${slope}`,
+        workedSolution: `AROC = (f(${b}) − f(${a})) / (${b} − ${a}) = (${fb} − ${fa}) / ${b - a} = <strong>${fb - fa} / ${b - a} = ${slope}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q5 · MC · End behavior ─────────────────────────────────── */
+  {
+    id: 5, type: "mc", tag: "1B · Topic 1.6", color: "blue",
+    generate(){
+      const degParity = R.pick(["even", "odd"]);
+      const deg = degParity === "even" ? R.pick([2, 4, 6]) : R.pick([3, 5, 7]);
+      const leadingSign = R.pick([1, -1]);
+      const leadingCoef = leadingSign * R.int(2, 5);
+      const middleCoef = R.int(1, 6);
+      const middleDeg = deg - 1;
+      const constTerm = R.int(1, 12);
+      const polyHTML = `${leadingCoef === 1 ? "" : leadingCoef === -1 ? "−" : leadingCoef}x${deg === 1 ? "" : "^" + deg} ${middleCoef >= 0 ? "+" : "−"} ${Math.abs(middleCoef)}x${middleDeg === 1 ? "" : middleDeg === 0 ? "" : "^" + middleDeg} + ${constTerm}`;
+
+      // 4 possible behaviors: ++ / -- / +- / -+
+      const behaviors = {
+        bothUp:   "As x → ±∞, &nbsp;f(x) → +∞",
+        bothDown: "As x → ±∞, &nbsp;f(x) → −∞",
+        downUp:   "As x → −∞, f(x) → −∞ &nbsp; and &nbsp; as x → +∞, f(x) → +∞",
+        upDown:   "As x → −∞, f(x) → +∞ &nbsp; and &nbsp; as x → +∞, f(x) → −∞"
+      };
+      let correctKey;
+      if (degParity === "even" && leadingSign > 0) correctKey = "bothUp";
+      else if (degParity === "even" && leadingSign < 0) correctKey = "bothDown";
+      else if (degParity === "odd"  && leadingSign > 0) correctKey = "downUp";
+      else correctKey = "upDown";
+
+      return {
+        stem: `For the polynomial <span class="mono">f(x) = ${polyHTML}</span>, which statement correctly describes the end behavior?`,
+        options: R.shuffle([
+          { html: behaviors[correctKey], correct: true },
+          { html: behaviors["bothUp"],   correct: correctKey === "bothUp",   misconception: correctKey !== "bothUp" ? `Both ends up requires <strong>even degree with positive leading coefficient</strong>. Here the leading term is <span class="mono">${leadingCoef}x^${deg}</span> — ${degParity} degree, ${leadingSign > 0 ? "positive" : "negative"} coefficient.` : "" },
+          { html: behaviors["bothDown"], correct: correctKey === "bothDown", misconception: correctKey !== "bothDown" ? `Both ends down requires <strong>even degree with negative leading coefficient</strong>. Here the leading term is <span class="mono">${leadingCoef}x^${deg}</span> — that's ${degParity}, ${leadingSign > 0 ? "positive" : "negative"}.` : "" },
+          { html: behaviors["downUp"],   correct: correctKey === "downUp",   misconception: correctKey !== "downUp" ? `Left-down/right-up requires <strong>odd degree with positive leading coefficient</strong> (like x^3, x^5). Here degree is ${degParity} and leading coef is ${leadingSign > 0 ? "positive" : "negative"}.` : "" },
+          { html: behaviors["upDown"],   correct: correctKey === "upDown",   misconception: correctKey !== "upDown" ? `Left-up/right-down requires <strong>odd degree with negative leading coefficient</strong> (like −x^3, −x^5). Here degree is ${degParity} and leading coef is ${leadingSign > 0 ? "positive" : "negative"}.` : "" },
+          { html: "End behavior cannot be determined without graphing", correct: false, misconception: `End behavior is <strong>always</strong> determined by the leading term alone. Lower-order terms become negligible as x → ±∞.` }
+        ].filter(o => o.html)),
+        correctDisplay: behaviors[correctKey].replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " "),
+        workedSolution: `End behavior is determined by the leading term: <span class="mono">${leadingCoef}x^${deg}</span>. The degree (${deg}) is <strong>${degParity}</strong> and the leading coefficient (${leadingCoef}) is <strong>${leadingSign > 0 ? "positive" : "negative"}</strong>. ${degParity === "even" ? "Even degree means both ends go the same direction" : "Odd degree means opposite ends"}; ${leadingSign > 0 ? "positive leading coefficient means the right end goes up" : "negative leading coefficient means the right end goes down"}.`
+      };
+    }
+  },
+
+  /* ─── Q6 · DD · Multiplicity behavior ────────────────────────── */
+  {
+    id: 6, type: "dd", tag: "1B · Topic 1.5", color: "blue",
+    generate(){
+      const zero = R.intExcl(-5, 5, [0]);
+      const mult = R.pick([1, 2, 3]);
+      const otherZero = R.intExcl(-6, 6, [0, zero]);
+      const otherMult = R.pick([1, 2]);
+      const leadingCoef = R.pick([1, 2, 3]);
+      const term1 = `(x ${zero >= 0 ? "− " + zero : "+ " + (-zero)})${mult > 1 ? "^" + mult : ""}`;
+      const term2 = `(x ${otherZero >= 0 ? "− " + otherZero : "+ " + (-otherZero)})${otherMult > 1 ? "^" + otherMult : ""}`;
+      const polyHTML = `${leadingCoef === 1 ? "" : leadingCoef}${term1}${term2}`;
+
+      const behavior = mult === 1
+        ? "crosses the x-axis cleanly (like a straight line through)"
+        : mult === 2
+        ? "bounces off the x-axis (touches and turns back)"
+        : "S-curves through the x-axis (crosses with a flat tangent moment)";
+
+      const opts = R.shuffle([
+        { text: "Crosses the x-axis cleanly (like a straight line through)", correct: mult === 1, misconception: mult !== 1 ? `Clean crossing requires <strong>multiplicity 1</strong>. This zero has multiplicity ${mult}.` : "" },
+        { text: "Bounces off the x-axis (touches and turns back)", correct: mult === 2, misconception: mult !== 2 ? `Bouncing requires <strong>even multiplicity</strong> (2, 4, ...). This zero has multiplicity ${mult} — that's ${mult % 2 === 0 ? "even but not 2" : "odd"}.` : "" },
+        { text: "S-curves through the x-axis (flat tangent moment)", correct: mult === 3, misconception: mult !== 3 ? `S-curve crossing requires <strong>odd multiplicity ≥ 3</strong>. This zero has multiplicity ${mult}.` : "" },
+        { text: "Skips over the x-axis (not actually a zero)", correct: false, misconception: `(x − ${zero})${mult > 1 ? "^" + mult : ""} guarantees x = ${zero} <strong>is</strong> a zero — the only question is the shape of the crossing.` }
+      ]);
+
+      return {
+        stem: `For the polynomial <span class="mono">f(x) = ${polyHTML}</span>, what does the graph look like at the zero <span class="mono">x = ${zero}</span>?`,
+        prefix: `Behavior at x = ${zero}:`,
+        options: opts,
+        correctDisplay: `Multiplicity ${mult} ⇒ ${behavior}`,
+        workedSolution: `At <span class="mono">x = ${zero}</span> the factor (x − ${zero})${mult > 1 ? "<sup>" + mult + "</sup>" : ""} appears with multiplicity <strong>${mult}</strong>. <strong>Rule:</strong> mult = 1 → clean cross; mult = 2 (or any even) → bounce; mult = 3 (or any odd ≥ 3) → S-curve cross. Here multiplicity = ${mult}, so the graph <strong>${behavior}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q7 · FIB · y-intercept of polynomial ───────────────────── */
+  {
+    id: 7, type: "fib", tag: "1B · Topic 1.5", color: "blue",
+    generate(){
+      const z1 = R.intExcl(-4, 4, [0]);
+      const z2 = R.intExcl(-5, 5, [0, z1]);
+      const lead = R.pick([1, 2, 3]);
+      const m1 = R.pick([1, 2]);
+      const m2 = R.pick([1, 2]);
+      // f(x) = lead * (x - z1)^m1 * (x - z2)^m2
+      // f(0) = lead * (-z1)^m1 * (-z2)^m2
+      const f0 = lead * Math.pow(-z1, m1) * Math.pow(-z2, m2);
+      const t1 = `(x ${z1 >= 0 ? "− " + z1 : "+ " + (-z1)})${m1 > 1 ? "^" + m1 : ""}`;
+      const t2 = `(x ${z2 >= 0 ? "− " + z2 : "+ " + (-z2)})${m2 > 1 ? "^" + m2 : ""}`;
+      const polyHTML = `${lead === 1 ? "" : lead}${t1}${t2}`;
+
+      return {
+        stem: `Find the y-intercept of the polynomial <span class="mono">f(x) = ${polyHTML}</span>. (Type a single integer.)`,
+        prefix: "f(0) =",
+        placeholder: "integer",
+        accepted: [f0.toString(), f0.toFixed(1)],
+        misconceptions: [
+          { match: ["0"], why: `0 would be the y-intercept only if x = 0 is a zero of f. Here the zeros are x = ${z1} and x = ${z2}, neither is 0, so f(0) ≠ 0.` },
+          { match: [(-f0).toString()], why: `Sign error. When you plug x = 0, the factor (x − ${z1}) becomes (0 − ${z1}) = ${-z1}. Watch the signs on each substitution.` },
+          { match: [(Math.abs(f0)).toString()], why: f0 < 0 ? `Sign error — the result should be negative. (0 − ${z1})${m1 > 1 ? "^" + m1 : ""} = ${Math.pow(-z1, m1)}, (0 − ${z2})${m2 > 1 ? "^" + m2 : ""} = ${Math.pow(-z2, m2)}. Multiply with sign: ${lead} · ${Math.pow(-z1, m1)} · ${Math.pow(-z2, m2)} = ${f0}.` : `` },
+          { match: [(z1 * z2).toString()], why: `You multiplied the zeros directly. To get f(0) you have to plug x = 0 into the FACTORED form, including signs and exponents: f(0) = ${lead} · (−${z1})${m1 > 1 ? "^" + m1 : ""} · (−${z2})${m2 > 1 ? "^" + m2 : ""}.` }
+        ],
+        correctDisplay: `f(0) = ${f0}`,
+        workedSolution: `The y-intercept is just f(0). Plug x = 0 into each factor: <span class="mono">f(0) = ${lead} · (0 − ${z1})${m1 > 1 ? "<sup>" + m1 + "</sup>" : ""} · (0 − ${z2})${m2 > 1 ? "<sup>" + m2 + "</sup>" : ""} = ${lead} · (${-z1})${m1 > 1 ? "<sup>" + m1 + "</sup>" : ""} · (${-z2})${m2 > 1 ? "<sup>" + m2 + "</sup>" : ""} = ${lead} · ${Math.pow(-z1, m1)} · ${Math.pow(-z2, m2)} = <strong>${f0}</strong></span>.`
+      };
+    }
+  },
+
+  /* ─── Q8 · MC · Holes vs Vertical Asymptotes ─────────────────── */
+  {
+    id: 8, type: "mc", tag: "1C · Topic 1.7", color: "blue",
+    generate(){
+      const shared = R.intExcl(-4, 4, [0]);  // factor in both num and denom → hole
+      const numOnly = R.intExcl(-5, 5, [0, shared]);  // only in numerator → zero of f
+      const denomOnly = R.intExcl(-6, 6, [0, shared, numOnly]);  // only in denom → VA
+      const numHTML = `(x ${shared >= 0 ? "− " + shared : "+ " + (-shared)})(x ${numOnly >= 0 ? "− " + numOnly : "+ " + (-numOnly)})`;
+      const denomHTML = `(x ${shared >= 0 ? "− " + shared : "+ " + (-shared)})(x ${denomOnly >= 0 ? "− " + denomOnly : "+ " + (-denomOnly)})`;
+
+      return {
+        stem: `For the rational function <span class="mono">r(x) = ${numHTML} / [${denomHTML}]</span>, identify all holes and vertical asymptotes.`,
+        options: R.shuffle([
+          { html: `Vertical asymptote at x = ${denomOnly}; hole at x = ${shared}`, correct: true },
+          { html: `Vertical asymptotes at x = ${shared} and x = ${denomOnly}; hole at x = ${numOnly}`, correct: false, misconception: `You treated every denominator-zero as a VA without checking cancellation. Since (x − ${shared}) appears in BOTH numerator and denominator, x = ${shared} is a <strong>hole</strong>, not a VA.` },
+          { html: `Holes at x = ${shared} and at x = ${denomOnly}`, correct: false, misconception: `x = ${denomOnly} appears only in the denominator — it's NOT canceled by anything in the numerator, so it's a vertical asymptote, not a hole.` },
+          { html: `Vertical asymptotes at x = ${shared} and x = ${denomOnly} (no holes)`, correct: false, misconception: `You ignored the shared factor (x − ${shared}) in numerator and denominator. Shared factors create <strong>holes</strong> (removable discontinuities), not VAs.` },
+          { html: `Vertical asymptote at x = ${shared}; hole at x = ${denomOnly}`, correct: false, misconception: `You have it backwards. The shared factor (x − ${shared}) cancels → hole. The unshared factor (x − ${denomOnly}) doesn't cancel → vertical asymptote.` },
+          { html: `No holes; vertical asymptote at x = ${numOnly} only`, correct: false, misconception: `x = ${numOnly} is in the numerator only — it's a zero of r, not a VA. VAs come from <strong>denominator</strong> zeros.` }
+        ]),
+        correctDisplay: `Hole at x = ${shared}, VA at x = ${denomOnly}`,
+        workedSolution: `Factor the numerator and denominator and look for matches. <strong>Shared factor</strong> (x − ${shared}) appears in both → <strong>hole at x = ${shared}</strong>. <strong>Denominator-only factor</strong> (x − ${denomOnly}) doesn't cancel → <strong>vertical asymptote at x = ${denomOnly}</strong>. The numerator-only factor (x − ${numOnly}) gives a zero of r, not a discontinuity.`
+      };
+    }
+  },
+
+  /* ─── Q9 · FIB · Vertical asymptote location ─────────────────── */
+  {
+    id: 9, type: "fib", tag: "1C · Topic 1.7", color: "blue",
+    generate(){
+      const va = R.intExcl(-7, 7, [0]);
+      const otherZero = R.intExcl(-6, 6, [0, va]);
+      const sign = va > 0 ? "− " + va : "+ " + (-va);
+      const otherSign = otherZero > 0 ? "− " + otherZero : "+ " + (-otherZero);
+      const rHTML = `(x ${otherSign}) / (x ${sign})`;
+
+      return {
+        stem: `Find the vertical asymptote of <span class="mono">r(x) = ${rHTML}</span>. (Type just the x-value as an integer.)`,
+        prefix: "VA at x =",
+        placeholder: "integer",
+        accepted: [va.toString(), va.toFixed(1)],
+        misconceptions: [
+          { match: [otherZero.toString()], why: `x = ${otherZero} is a zero of the <em>numerator</em> — that makes r(${otherZero}) = 0 (a zero of r), not a VA. VAs come from zeros of the <strong>denominator</strong>.` },
+          { match: [(-va).toString()], why: `Sign flip. To find where (x ${sign}) = 0, you solve x ${sign} = 0, which gives x = ${va} — not x = ${-va}.` },
+          { match: ["0"], why: `x = 0 isn't special here. The denominator (x ${sign}) = 0 when x = ${va}, so the VA is at x = ${va}.` }
+        ],
+        correctDisplay: `Vertical asymptote at x = ${va}`,
+        workedSolution: `Vertical asymptotes occur where the denominator is zero (and the numerator is not). Set (x ${sign}) = 0 → <strong>x = ${va}</strong>. (The numerator (x ${otherSign}) is not zero at x = ${va} since ${va} ≠ ${otherZero}, so no cancellation happens.)`
+      };
+    }
+  },
+
+  /* ─── Q10 · DD · Horizontal asymptote classification ─────────── */
+  {
+    id: 10, type: "dd", tag: "1C · Topic 1.8", color: "blue",
+    generate(){
+      const scenario = R.pick(["smaller", "equal", "larger"]);
+      const numCoef = R.int(2, 7);
+      const denomCoef = R.int(2, 7);
+      let numDeg, denomDeg;
+      if (scenario === "smaller") { numDeg = R.pick([1, 2]); denomDeg = numDeg + R.pick([1, 2]); }
+      else if (scenario === "equal") { numDeg = denomDeg = R.pick([2, 3]); }
+      else { numDeg = R.pick([3, 4]); denomDeg = numDeg - R.pick([1, 2]); }
+
+      const numHTML = `${numCoef}x${numDeg === 1 ? "" : "^" + numDeg} + ${R.int(1, 9)}`;
+      const denomHTML = `x${denomDeg === 1 ? "" : "^" + denomDeg} + ${R.int(1, 9)}`;
+      const rHTML = `(${numHTML}) / (${denomHTML})`;
+
+      let correctText, correctDisplay, workedHTML;
+      if (scenario === "smaller") {
+        correctText = "Horizontal asymptote at y = 0";
+        correctDisplay = "HA at y = 0";
+        workedHTML = `Numerator degree (${numDeg}) < denominator degree (${denomDeg}). When the bottom grows faster, the function approaches <strong>y = 0</strong> as x → ±∞.`;
+      } else if (scenario === "equal") {
+        const ratio = `${numCoef}/1 = ${numCoef}`;
+        correctText = `Horizontal asymptote at y = ${numCoef} (ratio of leading coefficients)`;
+        correctDisplay = `HA at y = ${numCoef}`;
+        workedHTML = `Numerator and denominator both have degree ${numDeg}. HA is the ratio of leading coefficients: <strong>y = ${numCoef} / 1 = ${numCoef}</strong>.`;
+      } else {
+        correctText = "No horizontal asymptote — the function has a slant or non-linear long-run behavior";
+        correctDisplay = "No HA (slant asymptote instead)";
+        workedHTML = `Numerator degree (${numDeg}) > denominator degree (${denomDeg}). The function grows without bound — no HA. ${denomDeg === numDeg - 1 ? "Specifically, there's a <strong>slant (oblique) asymptote</strong>." : "It approaches a higher-power polynomial behavior."}`;
+      }
+
+      const allOpts = [
+        { text: "Horizontal asymptote at y = 0", correct: scenario === "smaller", misconception: scenario !== "smaller" ? `y = 0 requires the numerator degree to be <strong>less than</strong> the denominator degree. Here num degree is ${numDeg}, denom degree is ${denomDeg}.` : "" },
+        { text: `Horizontal asymptote at y = ${numCoef} (ratio of leading coefficients)`, correct: scenario === "equal", misconception: scenario !== "equal" ? `The leading-coefficient ratio rule applies only when num and denom have <strong>equal degrees</strong>. Here num degree is ${numDeg}, denom degree is ${denomDeg} — not equal.` : "" },
+        { text: "No horizontal asymptote — slant or non-linear long-run behavior", correct: scenario === "larger", misconception: scenario !== "larger" ? `No HA requires num degree > denom degree. Here num degree is ${numDeg}, denom degree is ${denomDeg} — that's not the case.` : "" },
+        { text: `Horizontal asymptote at y = ${numCoef}/${denomCoef}`, correct: false, misconception: `You took the ratio of coefficients without checking degrees. The ratio rule only applies if the <strong>degrees match</strong>.` }
+      ];
+
+      return {
+        stem: `Identify the long-run (horizontal-asymptote) behavior of <span class="mono">r(x) = ${rHTML}</span>.`,
+        prefix: "HA behavior:",
+        options: R.shuffle(allOpts),
+        correctDisplay,
+        workedSolution: workedHTML
+      };
+    }
+  },
+
+  /* ─── Q11 · MC · Domain of a Rational ────────────────────────── */
+  {
+    id: 11, type: "mc", tag: "1C · Topic 1.7", color: "blue",
+    generate(){
+      const r1 = R.intExcl(-5, 5, [0]);
+      const r2 = R.intExcl(-6, 6, [0, r1]);
+      const denomHTML = `(x ${r1 >= 0 ? "− " + r1 : "+ " + (-r1)})(x ${r2 >= 0 ? "− " + r2 : "+ " + (-r2)})`;
+      const numHTML = `x + ${R.int(1, 9)}`;
+      const rHTML = `(${numHTML}) / [${denomHTML}]`;
+
+      const correctText = `All real numbers except x = ${r1} and x = ${r2}`;
+      return {
+        stem: `What is the domain of <span class="mono">r(x) = ${rHTML}</span>?`,
+        options: R.shuffle([
+          { html: correctText, correct: true },
+          { html: `All real numbers`, correct: false, misconception: `The denominator (x ${r1 >= 0 ? "− " + r1 : "+ " + (-r1)})(x ${r2 >= 0 ? "− " + r2 : "+ " + (-r2)}) becomes 0 at x = ${r1} and x = ${r2}. Division by zero is undefined, so those x-values are excluded from the domain.` },
+          { html: `All real numbers except x = ${r1}`, correct: false, misconception: `You found one excluded value but missed the other. The denominator has TWO factors that can be zero: at x = ${r1} AND x = ${r2}.` },
+          { html: `All real numbers except x = ${r2}`, correct: false, misconception: `You missed one of the excluded values. Both factors of the denominator give x-values where r is undefined.` },
+          { html: `All real numbers except x = 0`, correct: false, misconception: `x = 0 is fine here — the denominator at x = 0 is (0 ${r1 >= 0 ? "− " + r1 : "+ " + (-r1)})(0 ${r2 >= 0 ? "− " + r2 : "+ " + (-r2)}) = ${(-r1) * (-r2)}, which is nonzero.` },
+          { html: `All real numbers except x = ${-r1} and x = ${-r2}`, correct: false, misconception: `Sign error. (x − ${r1}) = 0 means x = ${r1}, NOT x = −${r1}. Don't flip signs when solving for the zero of a factor.` }
+        ]),
+        correctDisplay: correctText,
+        workedSolution: `The domain excludes any x where the denominator is zero. Set (x ${r1 >= 0 ? "− " + r1 : "+ " + (-r1)})(x ${r2 >= 0 ? "− " + r2 : "+ " + (-r2)}) = 0 → x = ${r1} or x = ${r2}. Domain: <strong>all reals except x = ${r1} and x = ${r2}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q12 · FIB · Horizontal asymptote (equal degrees) ───────── */
+  {
+    id: 12, type: "fib", tag: "1C · Topic 1.8", color: "blue",
+    generate(){
+      const deg = R.pick([2, 3]);
+      const numCoef = R.int(2, 9);
+      const denomCoef = R.pick([1, 2, 3]);  // keep small for clean ratios
+      const numHTML = `${numCoef}x${deg === 1 ? "" : "^" + deg} + ${R.int(1, 8)}x + ${R.int(1, 12)}`;
+      const denomHTML = `${denomCoef === 1 ? "" : denomCoef}x${deg === 1 ? "" : "^" + deg} − ${R.int(1, 8)}`;
+      const haY = numCoef / denomCoef;
+      const haStr = (Number.isInteger(haY)) ? haY.toString() : `${numCoef}/${denomCoef}`;
+
+      return {
+        stem: `Find the horizontal asymptote of <span class="mono">f(x) = (${numHTML}) / (${denomHTML})</span>. (Type a number or fraction — e.g. <span class="mono">${numCoef}/${denomCoef}</span> or its decimal.)`,
+        prefix: "HA: y =",
+        placeholder: `e.g. ${haStr}`,
+        accepted: Number.isInteger(haY)
+          ? [haY.toString(), haY.toFixed(1), `${numCoef}/${denomCoef}`]
+          : [`${numCoef}/${denomCoef}`, haY.toFixed(3), haY.toFixed(2)],
+        misconceptions: [
+          { match: ["0"], why: `y = 0 only applies when num degree < denom degree. Here both have degree ${deg} (equal), so the HA is the ratio of leading coefficients.` },
+          { match: [numCoef.toString()], why: `You took just the numerator's leading coefficient. The HA is the <strong>ratio</strong>: leading coef of numerator ÷ leading coef of denominator = ${numCoef}/${denomCoef}.` },
+          { match: [denomCoef.toString()], why: `You picked the denominator's leading coefficient by itself. HA = num leading coef ÷ denom leading coef = ${numCoef}/${denomCoef}.` },
+          { match: [(denomCoef / numCoef).toString(), `${denomCoef}/${numCoef}`], why: `You flipped the ratio. HA = (numerator leading) / (denominator leading) = ${numCoef}/${denomCoef}, not ${denomCoef}/${numCoef}.` }
+        ],
+        correctDisplay: `y = ${haStr}`,
+        workedSolution: `Numerator degree = denominator degree = ${deg}. When the degrees are equal, the HA is the <strong>ratio of leading coefficients</strong>: y = ${numCoef} / ${denomCoef} = <strong>${haStr}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q13 · MC · Concavity from table of values ──────────────── */
+  {
+    id: 13, type: "mc", tag: "1A · Topic 1.3", color: "blue",
+    generate(){
+      const scenario = R.pick(["concaveUp", "concaveDown"]);
+      const x0 = R.int(0, 3);
+      const xs = [x0, x0 + 1, x0 + 2, x0 + 3];
+      const base = R.int(2, 8);
+      // For concave up: differences (rates of change) are INCREASING
+      // For concave down: differences are DECREASING
+      const diffs = scenario === "concaveUp"
+        ? [R.int(1, 3), R.int(4, 6), R.int(7, 10)]
+        : [R.int(8, 12), R.int(4, 6), R.int(1, 3)];
+      const ys = [base];
+      for (let i = 0; i < 3; i++) ys.push(ys[ys.length - 1] + diffs[i]);
+
+      const tableHTML = `<span class="mono">x: &nbsp; ${xs.join(", &nbsp;")}</span><br><span class="mono">f(x): ${ys.join(", &nbsp;")}</span>`;
+
+      return {
+        stem: `A function f is described by this table of values:<br><br>${tableHTML}<br><br>What does this tell you about the concavity of f on the interval [${x0}, ${x0 + 3}]?`,
+        options: R.shuffle([
+          { html: "Concave up — the rate of change is increasing", correct: scenario === "concaveUp", misconception: scenario !== "concaveUp" ? `Concave up requires AROCs to <strong>increase</strong>. Here the consecutive AROCs are ${diffs.join(", ")}, which are <em>decreasing</em>, so the function is concave down.` : "" },
+          { html: "Concave down — the rate of change is decreasing", correct: scenario === "concaveDown", misconception: scenario !== "concaveDown" ? `Concave down requires AROCs to <strong>decrease</strong>. Here the consecutive AROCs are ${diffs.join(", ")}, which are <em>increasing</em>, so the function is concave up.` : "" },
+          { html: "Linear — constant rate of change", correct: false, misconception: `Linear requires the AROCs to be <strong>equal</strong>. Here they are ${diffs.join(", ")} — not equal.` },
+          { html: "Cannot determine concavity from a table alone", correct: false, misconception: `You absolutely can. Concavity is the <strong>rate of change of the rate of change</strong>. Compute consecutive AROCs and see whether they grow (concave up) or shrink (concave down).` }
+        ]),
+        correctDisplay: scenario === "concaveUp" ? "Concave up" : "Concave down",
+        workedSolution: `Compute successive AROCs between consecutive points: ${diffs.map((d, i) => `(${xs[i]}, ${xs[i + 1]}): ${d}`).join(", ")}. These AROCs are <strong>${scenario === "concaveUp" ? "increasing" : "decreasing"}</strong> (${diffs.join(" → ")}), so f is <strong>${scenario === "concaveUp" ? "concave up" : "concave down"}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q14 · DD · Symmetry of polynomial ──────────────────────── */
+  {
+    id: 14, type: "dd", tag: "1B · Topic 1.5", color: "blue",
+    generate(){
+      const symType = R.pick(["even", "odd", "neither"]);
+      let polyHTML, description;
+      if (symType === "even") {
+        // Only even powers + constant
+        const a = R.int(2, 5);
+        const b = R.int(1, 6);
+        const c = R.int(1, 9);
+        polyHTML = `${a}x^4 ${b > 0 ? "− " + b : "+ " + (-b)}x^2 + ${c}`;
+        description = "all terms have even powers";
+      } else if (symType === "odd") {
+        // Only odd powers, no constant
+        const a = R.int(2, 5);
+        const b = R.int(1, 6);
+        polyHTML = `${a}x^3 ${b > 0 ? "− " + b : "+ " + (-b)}x`;
+        description = "all terms have odd powers (no constant term)";
+      } else {
+        // Mix
+        const a = R.int(2, 5);
+        const b = R.int(1, 6);
+        const c = R.int(1, 9);
+        polyHTML = `${a}x^3 ${b > 0 ? "+ " + b : "− " + (-b)}x^2 + ${c}`;
+        description = "mixes even and odd powers";
+      }
+
+      return {
+        stem: `Classify the symmetry of <span class="mono">f(x) = ${polyHTML}</span>.`,
+        prefix: "Symmetry:",
+        options: R.shuffle([
+          { text: "Even — symmetric about the y-axis (f(−x) = f(x))", correct: symType === "even", misconception: symType !== "even" ? `Even symmetry requires <strong>only even powers of x</strong>. This polynomial ${description}, so it can't be even.` : "" },
+          { text: "Odd — rotational symmetry about the origin (f(−x) = −f(x))", correct: symType === "odd", misconception: symType !== "odd" ? `Odd symmetry requires <strong>only odd powers and no constant term</strong>. This polynomial ${description}, so it can't be odd.` : "" },
+          { text: "Neither even nor odd", correct: symType === "neither", misconception: symType !== "neither" ? `If a polynomial uses <strong>only even powers</strong> it's even; <strong>only odd powers and no constant</strong> it's odd. This one is the ${symType === "even" ? "even" : "odd"} case.` : "" },
+          { text: "Both even and odd", correct: false, misconception: `The only function that's both even AND odd is the zero function f(x) = 0. Any nonzero polynomial is at most one of those — never both.` }
+        ]),
+        correctDisplay: symType === "even" ? "Even (y-axis symmetry)" : symType === "odd" ? "Odd (origin symmetry)" : "Neither",
+        workedSolution: `Look at the powers of x. This polynomial <strong>${description}</strong>. <strong>Even</strong> functions have only even-power terms (so f(−x) = f(x)). <strong>Odd</strong> functions have only odd-power terms and no constant (so f(−x) = −f(x)). Mixed-power polynomials are <strong>neither</strong>. Conclusion: <strong>${symType === "even" ? "Even" : symType === "odd" ? "Odd" : "Neither"}</strong>.`
+      };
+    }
+  }
+
+];
+
+window.PrecalcDay.init({
+  dayTitle: "Day 1",
+  dayLabel: "Polynomial & Rational Functions",
+  questions: DAY1_QUESTIONS
+});
+</script>
+
+</body>
+</html>

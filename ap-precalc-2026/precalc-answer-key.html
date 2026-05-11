@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calculus · Final Exam · Answer Key</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void:#06080f; --d1:#0b0f1e; --d2:#111828; --d3:#161e30;
+    --glass:rgba(255,255,255,0.044); --gb:rgba(255,255,255,0.08);
+    --shine:rgba(255,255,255,0.13); --b:rgba(255,255,255,0.07); --b2:rgba(255,255,255,0.12);
+    --green:#3effa0; --gold:#f5c842; --red:#f87171;
+    --blue:#38bdf8; --purple:#c084fc; --cyan:#00e5ff;
+    --orange:#fb923c; --pink:#f472b6; --teal:#2dd4bf;
+    --tx:#dde6f5; --tx2:#8898b8; --tx3:#4a5570;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--void);color:var(--tx);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:linear-gradient(rgba(56,189,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.03) 1px,transparent 1px);
+    background-size:48px 48px;pointer-events:none;z-index:0;
+  }
+  body::after{
+    content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);
+    width:1100px;height:700px;
+    background:radial-gradient(ellipse at center,rgba(192,132,252,0.07) 0%,rgba(56,189,248,0.04) 40%,transparent 70%);
+    pointer-events:none;z-index:0;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:200;background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold));transform-origin:left;transform:scaleX(0);transition:transform 0.25s;}
+
+  /* ── TOP NAV ── */
+  .topnav{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:14px 32px;background:rgba(6,8,15,0.88);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--b);
+  }
+  .back-btn{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:500;letter-spacing:0.08em;color:var(--tx2);
+    text-decoration:none;padding:8px 16px;border-radius:100px;
+    border:1px solid var(--b);background:var(--glass);transition:all 0.2s;
+    font-family:'DM Mono',monospace;
+  }
+  .back-btn:hover{border-color:var(--purple);color:var(--purple);}
+  .back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  .nav-center{display:flex;align-items:center;gap:10px;}
+  .nav-unit{font-size:10px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx3);}
+  .nav-badge{
+    font-size:11px;font-weight:500;letter-spacing:0.1em;
+    padding:4px 12px;border-radius:100px;
+    background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.28);color:var(--purple);
+  }
+
+  .timer-pill{
+    display:flex;align-items:center;gap:8px;
+    padding:7px 14px;border-radius:100px;
+    background:var(--glass);border:1px solid var(--b);
+    font-size:12px;font-weight:500;color:var(--tx2);letter-spacing:0.08em;
+  }
+  .timer-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+    animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+  .timer-pill .t-val{font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;}
+
+  /* ── PAGE LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:920px;margin:0 auto;padding:48px 32px 120px;}
+
+  /* ── HEADER ── */
+  .exam-header{margin-bottom:48px;}
+  .header-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:10px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;
+    color:var(--purple);margin-bottom:18px;
+    padding:6px 14px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);
+    opacity:0;animation:fadeUp 0.6s 0.05s forwards;
+  }
+  .header-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--purple);}
+
+  .exam-title{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:clamp(36px,5.5vw,60px);line-height:0.96;
+    letter-spacing:-0.025em;margin-bottom:18px;
+    opacity:0;animation:fadeUp 0.6s 0.15s forwards;
+  }
+  .exam-title .l1{display:block;color:var(--tx);}
+  .exam-title .l2{
+    display:block;
+    background:linear-gradient(135deg,var(--purple) 0%,var(--blue) 50%,var(--green) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .exam-sub{
+    font-size:13px;font-weight:300;color:var(--tx2);max-width:620px;line-height:1.85;
+    opacity:0;animation:fadeUp 0.6s 0.25s forwards;
+  }
+
+  .meta-row{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;
+    opacity:0;animation:fadeUp 0.6s 0.35s forwards;
+  }
+  .meta-pill{
+    display:flex;align-items:center;gap:8px;
+    background:var(--glass);border:1px solid var(--b);border-radius:100px;
+    padding:7px 14px;font-size:11px;font-weight:400;color:var(--tx2);letter-spacing:0.06em;
+  }
+  .meta-pill .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+
+  /* ── INSTRUCTIONS BANNER ── */
+  .instructions{
+    margin-top:32px;padding:18px 22px;border-radius:12px;
+    background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.2);border-left:3px solid var(--blue);
+    font-size:12px;font-weight:300;color:var(--tx2);line-height:1.85;
+    opacity:0;animation:fadeUp 0.6s 0.45s forwards;
+  }
+  .instructions .ih{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .instructions strong{color:var(--tx);font-weight:500;}
+
+  /* ── UNIT SECTION HEADERS ── */
+  .unit-section{margin-top:56px;margin-bottom:8px;}
+  .unit-section .uh{
+    display:flex;align-items:center;gap:0;margin-bottom:22px;
+  }
+  .unit-section .ub{
+    font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;
+    padding:5px 14px;border-radius:4px 0 0 4px;white-space:nowrap;
+  }
+  .unit-section .ul{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
+    padding:5px 18px;border-radius:0 4px 4px 0;flex:1;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+  }
+  .unit-section .uline{flex:1;height:1px;margin-left:16px;}
+
+  .u1 .ub{background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25);color:var(--blue);}
+  .u1 .ul{background:rgba(56,189,248,0.05);border:1px solid rgba(56,189,248,0.15);border-left:none;color:var(--blue);}
+  .u1 .uline{background:linear-gradient(90deg,rgba(56,189,248,0.3),transparent);}
+
+  .u2 .ub{background:rgba(62,255,160,0.1);border:1px solid rgba(62,255,160,0.22);color:var(--green);}
+  .u2 .ul{background:rgba(62,255,160,0.04);border:1px solid rgba(62,255,160,0.14);border-left:none;color:var(--green);}
+  .u2 .uline{background:linear-gradient(90deg,rgba(62,255,160,0.3),transparent);}
+
+  .u3 .ub{background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.22);color:var(--gold);}
+  .u3 .ul{background:rgba(245,200,66,0.04);border:1px solid rgba(245,200,66,0.14);border-left:none;color:var(--gold);}
+  .u3 .uline{background:linear-gradient(90deg,rgba(245,200,66,0.3),transparent);}
+
+  .u4 .ub{background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.22);color:var(--purple);}
+  .u4 .ul{background:rgba(192,132,252,0.04);border:1px solid rgba(192,132,252,0.14);border-left:none;color:var(--purple);}
+  .u4 .uline{background:linear-gradient(90deg,rgba(192,132,252,0.3),transparent);}
+
+  .frq-section .ub{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.22);color:var(--red);}
+  .frq-section .ul{background:rgba(248,113,113,0.04);border:1px solid rgba(248,113,113,0.14);border-left:none;color:var(--red);}
+  .frq-section .uline{background:linear-gradient(90deg,rgba(248,113,113,0.3),transparent);}
+
+  /* ── QUESTION CARD ── */
+  .q-card{
+    background:var(--glass);border:1px solid var(--b);border-radius:14px;
+    padding:24px 26px;margin-bottom:14px;
+    transition:border-color 0.25s,box-shadow 0.25s;
+    position:relative;overflow:hidden;
+  }
+  .q-card.answered{border-color:rgba(255,255,255,0.14);}
+  .q-card.flagged-correct{border-color:rgba(62,255,160,0.4);box-shadow:0 0 0 1px rgba(62,255,160,0.22);}
+  .q-card.flagged-wrong{border-color:rgba(248,113,113,0.4);box-shadow:0 0 0 1px rgba(248,113,113,0.22);}
+
+  .q-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap;}
+  .q-num{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
+    width:42px;height:42px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--gb);border:1px solid var(--b2);
+    flex-shrink:0;
+  }
+  .u1 .q-num{color:var(--blue);background:rgba(56,189,248,0.08);border-color:rgba(56,189,248,0.22);}
+  .u2 .q-num{color:var(--green);background:rgba(62,255,160,0.06);border-color:rgba(62,255,160,0.2);}
+  .u3 .q-num{color:var(--gold);background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.2);}
+  .u4 .q-num{color:var(--purple);background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.22);}
+  .frq-section .q-num{color:var(--red);background:rgba(248,113,113,0.07);border-color:rgba(248,113,113,0.22);width:auto;padding:0 14px;font-size:14px;letter-spacing:0.04em;}
+
+  .q-tag{
+    font-size:9px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;
+    padding:4px 10px;border-radius:100px;
+    background:var(--gb);border:1px solid var(--b);color:var(--tx3);
+  }
+  .q-tag.hot{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.2);color:rgba(248,113,113,0.85);}
+  .q-tag.priority{background:rgba(245,200,66,0.08);border-color:rgba(245,200,66,0.22);color:var(--gold);}
+
+  .q-stem{font-size:14px;font-weight:300;color:var(--tx);line-height:1.85;margin-bottom:18px;}
+  .q-stem strong{color:var(--tx);font-weight:500;}
+  .q-stem em{color:var(--tx2);font-style:italic;}
+  .q-stem code, .mono{font-family:'DM Mono',monospace;background:var(--d2);padding:1px 7px;border-radius:4px;font-size:13px;border:1px solid var(--b);color:var(--tx);}
+
+  /* fraction inline */
+  .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.88em;line-height:1.15;margin:0 2px;}
+  .fr .n{border-bottom:1px solid currentColor;padding:0 3px 1px;}
+  .fr .d{padding:1px 3px 0;}
+
+  /* ── OPTIONS ── */
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:13px 16px;border-radius:10px;
+    background:var(--d1);border:1px solid var(--b);
+    cursor:pointer;transition:background 0.18s,border-color 0.18s,transform 0.12s;
+    font-size:13px;color:var(--tx2);font-weight:300;line-height:1.7;
+  }
+  .opt:hover:not(.disabled){border-color:var(--b2);background:var(--d2);}
+  .opt.selected{background:rgba(56,189,248,0.07);border-color:rgba(56,189,248,0.4);color:var(--tx);}
+  .u2 .opt.selected{background:rgba(62,255,160,0.06);border-color:rgba(62,255,160,0.4);}
+  .u3 .opt.selected{background:rgba(245,200,66,0.07);border-color:rgba(245,200,66,0.42);}
+  .u4 .opt.selected{background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.42);}
+
+  .opt.correct{background:rgba(62,255,160,0.08);border-color:rgba(62,255,160,0.5);color:var(--tx);}
+  .opt.wrong{background:rgba(248,113,113,0.07);border-color:rgba(248,113,113,0.45);color:var(--tx);}
+  .opt.disabled{cursor:default;}
+
+  .opt-letter{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;
+    background:var(--gb);border:1px solid var(--b2);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--tx2);
+    transition:all 0.18s;
+  }
+  .opt.selected .opt-letter{background:var(--blue);color:var(--void);border-color:var(--blue);}
+  .u2 .opt.selected .opt-letter{background:var(--green);}
+  .u3 .opt.selected .opt-letter{background:var(--gold);}
+  .u4 .opt.selected .opt-letter{background:var(--purple);}
+  .opt.correct .opt-letter{background:var(--green);color:var(--void);border-color:var(--green);}
+  .opt.wrong .opt-letter{background:var(--red);color:var(--void);border-color:var(--red);}
+
+  .opt-text{flex:1;padding-top:3px;}
+
+  /* ── FRQ INPUTS ── */
+  .frq-stem{
+    background:var(--d1);border:1px solid var(--b);border-left:3px solid var(--red);
+    border-radius:10px;padding:18px 22px;margin-bottom:18px;
+    font-size:13px;color:var(--tx);line-height:1.85;font-weight:300;
+  }
+  .frq-stem .label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:500;}
+  .frq-stem strong{color:var(--tx);font-weight:500;}
+
+  .frq-parts{display:flex;flex-direction:column;gap:14px;}
+  .frq-part{
+    background:var(--d1);border:1px solid var(--b);border-radius:10px;
+    padding:14px 18px;
+  }
+  .fp-prompt{font-size:12px;color:var(--tx2);font-weight:300;line-height:1.75;margin-bottom:10px;}
+  .fp-prompt .lbl{font-family:'Syne',sans-serif;font-weight:700;color:var(--red);margin-right:6px;}
+  .fp-input{
+    width:100%;padding:10px 14px;border-radius:8px;
+    background:var(--d2);border:1px solid var(--b2);
+    font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);
+    outline:none;transition:border-color 0.2s;
+  }
+  .fp-input:focus{border-color:var(--red);}
+  .fp-input.correct{border-color:rgba(62,255,160,0.5);background:rgba(62,255,160,0.04);}
+  .fp-input.wrong{border-color:rgba(248,113,113,0.45);background:rgba(248,113,113,0.04);}
+  .fp-input:disabled{cursor:default;opacity:0.85;}
+
+  .fp-feedback{display:none;margin-top:8px;font-size:11px;color:var(--tx3);font-weight:300;line-height:1.7;}
+  .fp-feedback.shown{display:block;}
+  .fp-feedback .lbl{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);font-weight:500;margin-right:6px;}
+  .fp-feedback.wrong .lbl{color:var(--red);}
+  .fp-feedback strong{color:var(--tx);font-weight:500;}
+
+  /* ── EXPLANATION (after submit) ── */
+  .q-explain{
+    display:none;margin-top:14px;padding:14px 18px;border-radius:10px;
+    background:rgba(245,200,66,0.05);border:1px solid rgba(245,200,66,0.2);border-left:3px solid var(--gold);
+    font-size:12px;font-weight:300;color:var(--tx2);line-height:1.85;
+  }
+  .q-explain.shown{display:block;}
+  .q-explain .lbl{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:6px;}
+  .q-explain strong{color:var(--tx);font-weight:500;}
+  .q-explain .ans-line{color:var(--green);font-weight:500;margin-bottom:6px;font-size:12px;}
+  .q-explain .ans-line.wrong-ans{color:var(--red);}
+
+  /* ── SUBMIT AREA ── */
+  .submit-area{
+    margin-top:48px;padding:32px;border-radius:16px;
+    background:linear-gradient(135deg,rgba(192,132,252,0.04),rgba(56,189,248,0.04));
+    border:1px solid var(--b2);
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+  }
+  .submit-progress{
+    font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--tx2);font-weight:400;
+  }
+  .submit-progress strong{color:var(--tx);font-family:'Syne',sans-serif;font-size:14px;letter-spacing:0.04em;font-weight:700;}
+  .submit-btn{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;
+    padding:14px 36px;border-radius:100px;cursor:pointer;
+    background:linear-gradient(135deg,var(--purple),var(--blue));border:none;color:var(--void);
+    transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;
+  }
+  .submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(192,132,252,0.3);}
+  .submit-btn:disabled{opacity:0.45;cursor:not-allowed;}
+
+  .reset-btn{
+    font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;
+    padding:8px 18px;border-radius:100px;cursor:pointer;
+    background:transparent;border:1px solid var(--b2);color:var(--tx3);
+    transition:all 0.2s;
+  }
+  .reset-btn:hover{color:var(--red);border-color:rgba(248,113,113,0.4);}
+
+  /* ── RESULTS MODAL ── */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:300;
+    background:rgba(6,8,15,0.85);backdrop-filter:blur(8px);
+    display:none;align-items:flex-start;justify-content:center;
+    padding:48px 24px;overflow-y:auto;
+  }
+  .modal-overlay.shown{display:flex;animation:fadeIn 0.4s ease;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  .modal{
+    max-width:680px;width:100%;
+    background:linear-gradient(180deg,var(--d1),var(--void));
+    border:1px solid var(--b2);border-radius:20px;
+    padding:42px 38px;position:relative;
+    animation:slideUp 0.5s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  @keyframes slideUp{from{transform:translateY(28px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
+  .modal-head{text-align:center;margin-bottom:32px;}
+  .modal-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--purple);margin-bottom:14px;
+    padding:5px 12px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.22);
+  }
+  .modal-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--purple);}
+
+  .modal-score{
+    font-family:'Syne',sans-serif;font-weight:800;
+    font-size:72px;line-height:1;letter-spacing:-0.03em;margin-bottom:10px;
+    background:linear-gradient(135deg,var(--purple),var(--blue),var(--green));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .modal-score .total{color:var(--tx3);font-size:24px;font-weight:700;-webkit-text-fill-color:var(--tx3);}
+  .modal-pct{font-size:13px;color:var(--tx2);letter-spacing:0.1em;font-weight:300;}
+  .modal-pct strong{color:var(--tx);font-weight:500;}
+
+  .breakdown{
+    margin-top:28px;padding:22px;border-radius:14px;
+    background:var(--glass);border:1px solid var(--b);
+  }
+  .bd-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px;font-weight:500;}
+  .bd-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;font-size:12px;}
+  .bd-row:last-child{margin-bottom:0;}
+  .bd-label{flex-shrink:0;width:88px;font-weight:500;letter-spacing:0.05em;}
+  .bd-bar{flex:1;height:6px;border-radius:3px;background:var(--gb);overflow:hidden;}
+  .bd-fill{height:100%;border-radius:3px;transition:width 0.8s cubic-bezier(.2,.8,.2,1);}
+  .bd-row.u1 .bd-label{color:var(--blue);}
+  .bd-row.u1 .bd-fill{background:var(--blue);}
+  .bd-row.u2 .bd-label{color:var(--green);}
+  .bd-row.u2 .bd-fill{background:var(--green);}
+  .bd-row.u3 .bd-label{color:var(--gold);}
+  .bd-row.u3 .bd-fill{background:var(--gold);}
+  .bd-row.u4 .bd-label{color:var(--purple);}
+  .bd-row.u4 .bd-fill{background:var(--purple);}
+  .bd-row.frq .bd-label{color:var(--red);}
+  .bd-row.frq .bd-fill{background:var(--red);}
+  .bd-val{flex-shrink:0;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--tx);min-width:48px;text-align:right;letter-spacing:0.04em;}
+
+  .modal-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
+  .modal-btn{
+    font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+    padding:11px 22px;border-radius:100px;cursor:pointer;
+    background:var(--glass);border:1px solid var(--b2);color:var(--tx2);
+    transition:all 0.2s;
+  }
+  .modal-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .modal-btn.primary{
+    background:linear-gradient(135deg,var(--purple),var(--blue));color:var(--void);
+    border-color:transparent;font-weight:700;
+  }
+  .modal-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(192,132,252,0.25);}
+
+  /* ── FLOATING SCROLL TOP ── */
+  .scroll-top{
+    position:fixed;bottom:32px;right:32px;z-index:50;
+    width:42px;height:42px;border-radius:50%;
+    background:var(--d2);border:1px solid var(--b2);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--tx3);transition:all 0.2s;
+    opacity:0;pointer-events:none;
+  }
+  .scroll-top.visible{opacity:1;pointer-events:auto;}
+  .scroll-top:hover{border-color:var(--purple);color:var(--purple);}
+  .scroll-top svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ── FOOTER ── */
+  footer{
+    position:relative;z-index:1;max-width:920px;margin:48px auto 0;
+    padding:24px 32px 48px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    border-top:1px solid var(--b);
+  }
+  footer span{font-size:11px;font-weight:300;color:var(--tx3);letter-spacing:0.08em;}
+  .footer-mark{display:grid;grid-template-columns:repeat(3,9px);grid-template-rows:repeat(3,9px);gap:3px;}
+  .footer-mark .sq{width:9px;height:9px;border-radius:2px;background:var(--b);}
+  .footer-mark .sq.admin{background:rgba(245,200,66,0.5);}
+  .footer-mark .sq.teacher{background:rgba(0,229,255,0.4);}
+  .footer-mark .sq.student{background:rgba(184,207,255,0.3);}
+  .footer-mark .sq.core{background:rgba(62,255,160,0.7);}
+
+  /* animations */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .q-card{opacity:0;animation:fadeUp 0.5s forwards;}
+
+  /* Question fade-in delays - reset at each unit */
+  .u1 .q-card:nth-child(2){animation-delay:0.05s;}
+  .u1 .q-card:nth-child(3){animation-delay:0.10s;}
+  .u1 .q-card:nth-child(4){animation-delay:0.15s;}
+
+  /* ── NEW: ans-line tag/val (revealed on submit) ── */
+  .q-explain .ans-line:empty{display:none;}
+  .q-explain .ans-line{display:flex;align-items:center;gap:8px;}
+  .al-tag{font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);
+    padding:3px 8px;border-radius:100px;background:var(--glass);border:1px solid var(--b);}
+  .al-val{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--green);letter-spacing:0.04em;}
+  .frq-section .al-val{color:var(--red);}
+
+  /* ── NEW: FRQ rows / inputs / explanation ── */
+  .fp-row{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:12px;
+    background:rgba(248,113,113,0.022);border:1px solid rgba(248,113,113,0.1);}
+  .fp-label{font-size:13px;color:var(--tx);line-height:1.55;font-weight:300;}
+  .fp-label strong{color:var(--tx);font-weight:500;}
+  .fp-inputs-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:4px;}
+  .fp-inline{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .fp-inline.fp-wide{flex:1;min-width:240px;}
+  .fp-prefix{font-family:'DM Mono',monospace;font-size:12px;color:var(--tx2);font-weight:500;letter-spacing:0.04em;white-space:nowrap;}
+  .fp-input.fp-short{width:130px;}
+  .fp-input{flex:1;}
+  .fp-explain{display:none;margin-top:12px;padding:14px 16px;border-radius:10px;
+    background:rgba(248,113,113,0.05);border:1px solid rgba(248,113,113,0.18);
+    font-size:12px;line-height:1.6;color:var(--tx2);font-weight:300;}
+  .fp-explain.shown{display:block;}
+  .fp-explain strong{color:var(--tx);font-weight:500;}
+  .fp-exp-head{margin-bottom:8px;}
+  .fp-exp-tag{font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+    padding:3px 8px;border-radius:100px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.22);}
+  .fp-exp-line{display:flex;gap:10px;align-items:center;font-family:'DM Mono',monospace;font-size:11px;
+    color:var(--tx2);padding:4px 0;border-bottom:1px dashed rgba(248,113,113,0.12);}
+  .fp-exp-line:last-of-type{border-bottom:none;margin-bottom:8px;}
+  .fp-exp-key{color:var(--tx3);font-weight:500;letter-spacing:0.04em;min-width:90px;}
+  .fp-exp-correct{color:var(--green);font-weight:500;}
+  .fp-exp-body{margin-top:10px;padding-top:10px;border-top:1px solid rgba(248,113,113,0.14);}
+
+  /* ── UPDATED: submit area to support new structure ── */
+  .submit-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--purple);
+    padding:5px 12px;border-radius:100px;
+    background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.22);
+  }
+  .submit-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--purple);}
+  .submit-progress{display:flex;align-items:baseline;gap:6px;margin-top:6px;}
+  .prog-num{font-family:'Syne',sans-serif;font-weight:800;font-size:48px;line-height:1;letter-spacing:-0.02em;
+    background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;background-clip:text;}
+  .prog-sep{font-family:'Syne',sans-serif;font-weight:300;font-size:36px;color:var(--tx3);}
+  .prog-total{font-family:'Syne',sans-serif;font-weight:700;font-size:36px;color:var(--tx3);letter-spacing:-0.02em;}
+  .prog-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);font-weight:500;margin-left:8px;}
+  .submit-meter{width:280px;max-width:100%;height:4px;border-radius:2px;background:var(--gb);overflow:hidden;}
+  .submit-meter-fill{height:100%;width:0%;border-radius:2px;
+    background:linear-gradient(90deg,var(--purple),var(--blue),var(--green));
+    transition:width 0.4s cubic-bezier(.2,.8,.2,1);}
+  .submit-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:10px;}
+  .submit-btn{display:inline-flex;align-items:center;gap:10px;}
+  .sb-text{}
+  .sb-arrow{font-size:16px;line-height:1;}
+  .submit-btn.done{background:linear-gradient(135deg,var(--green),var(--blue));}
+  .submit-foot{font-size:11px;color:var(--tx3);text-align:center;max-width:480px;line-height:1.6;font-weight:300;letter-spacing:0.02em;}
+
+  /* ── UPDATED: modal score "score-num" wrapper for typography ── */
+  .score-num{display:inline-block;}
+
+  /* ── UPDATED: bd-row for new structure (head + bar stacked) ── */
+  .bd-row{display:flex;flex-direction:column;gap:6px;align-items:stretch;margin-bottom:14px;font-size:12px;}
+  .bd-head{display:flex;justify-content:space-between;align-items:baseline;}
+  .bd-name{font-size:11px;letter-spacing:0.06em;color:var(--tx2);font-weight:500;}
+  .bd-frac{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--tx);letter-spacing:0.04em;}
+  .bd-bar{height:5px;border-radius:3px;}
+  .bd-fill{width:0%;}
+
+  /* ── NEW: name input row ── */
+  .name-row{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;max-width:380px;margin-bottom:6px;}
+  .name-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);font-weight:500;}
+  .name-input{
+    width:100%;padding:13px 16px;border-radius:10px;
+    background:var(--d2);border:1px solid var(--b2);color:var(--tx);
+    font-family:'DM Mono',monospace;font-size:13px;letter-spacing:0.02em;
+    text-align:center;transition:all 0.2s;
+  }
+  .name-input:focus{outline:none;border-color:var(--purple);background:var(--d1);}
+  .name-input:disabled{opacity:0.7;cursor:default;}
+  .name-input.missing{border-color:var(--red);animation:shakeName 0.4s;}
+  @keyframes shakeName{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+
+  /* ── NEW: email button (sibling to copy) ── */
+  .email-btn{
+    font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+    padding:13px 28px;border-radius:100px;cursor:pointer;
+    background:var(--glass);border:1px solid var(--b2);color:var(--tx2);
+    display:inline-flex;align-items:center;gap:9px;
+    transition:all 0.2s;
+  }
+  .email-btn:hover{border-color:var(--red);color:var(--red);background:rgba(248,113,113,0.05);}
+  .email-btn .sb-icon{font-size:14px;line-height:1;}
+  .submit-btn .sb-icon{font-size:15px;line-height:1;}
+  .submit-btn.done{background:linear-gradient(135deg,var(--green),var(--blue));}
+  .submit-foot strong{color:var(--tx);font-weight:500;}
+
+  /* ── NEW: submission preview modal ── */
+  .modal-submission{max-width:760px;}
+  .modal-eyebrow.ok{color:var(--green);background:rgba(62,255,160,0.06);border-color:rgba(62,255,160,0.22);}
+  .modal-eyebrow.ok .dot{background:var(--green);}
+  .submit-success{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:4px;}
+  .ss-check{
+    width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--blue));color:var(--void);
+    display:flex;align-items:center;justify-content:center;
+    font-size:32px;font-weight:700;font-family:'Syne',sans-serif;line-height:1;
+    box-shadow:0 12px 32px rgba(62,255,160,0.25);
+    margin-bottom:4px;
+  }
+  .ss-title{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.02em;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .ss-sub{font-size:12px;color:var(--tx2);line-height:1.6;font-weight:300;text-align:center;max-width:440px;}
+
+  .canvas-steps{
+    margin-top:24px;padding:20px;border-radius:14px;
+    background:var(--glass);border:1px solid var(--b);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .cs-row{display:flex;align-items:flex-start;gap:14px;font-size:12px;color:var(--tx2);line-height:1.55;font-weight:300;}
+  .cs-row strong{color:var(--tx);font-weight:500;}
+  .cs-num{
+    flex-shrink:0;width:24px;height:24px;border-radius:50%;
+    background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.3);color:var(--purple);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:700;font-size:11px;line-height:1;
+  }
+
+  .preview-head{
+    margin-top:22px;display:flex;justify-content:space-between;align-items:center;
+    padding:0 4px 8px;
+  }
+  .ph-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);font-weight:500;}
+  .ph-recopy{
+    font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    padding:6px 14px;border-radius:100px;cursor:pointer;
+    background:var(--glass);border:1px solid var(--b2);color:var(--tx2);
+    transition:all 0.2s;
+  }
+  .ph-recopy:hover{border-color:var(--green);color:var(--green);}
+  .preview-text{
+    margin:0;padding:18px;border-radius:12px;
+    background:var(--void);border:1px solid var(--b);
+    font-family:'DM Mono',monospace;font-size:11px;line-height:1.55;
+    color:var(--tx2);font-weight:300;letter-spacing:0;
+    max-height:340px;overflow:auto;white-space:pre;
+    user-select:all;-webkit-user-select:all;
+  }
+
+  @media(max-width:640px){
+    .topnav{padding:12px 16px;}
+    .nav-center{display:none;}
+    .page{padding:32px 16px 100px;}
+    .q-card{padding:20px 18px;}
+    .modal{padding:32px 22px;}
+    .modal-score{font-size:56px;}
+    .ss-title{font-size:26px;}
+    .scroll-top{bottom:20px;right:20px;}
+    footer{padding:24px 16px 36px;}
+    .fp-input.fp-short{width:100%;}
+    .fp-inline{width:100%;}
+    .fp-inline.fp-wide{min-width:0;}
+    .submit-area{padding:24px 18px;}
+    .prog-num{font-size:38px;}
+    .prog-sep,.prog-total{font-size:28px;}
+    .preview-text{font-size:10px;padding:14px;}
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     ANSWER KEY · custom classes (extends Stratosyn)
+     ════════════════════════════════════════════════════════════ */
+
+  /* Quick reference grid (Q1–Q28 letter answers in compact form) */
+  .quickref{
+    margin-top:48px;padding:28px;border-radius:16px;
+    background:linear-gradient(135deg,rgba(62,255,160,0.04),rgba(56,189,248,0.04));
+    border:1px solid var(--b2);
+  }
+  .qr-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap;}
+  .qr-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--green);
+    padding:5px 12px;border-radius:100px;
+    background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.22);
+  }
+  .qr-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--green);}
+  .qr-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;color:var(--tx2);}
+  .qr-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px;
+  }
+  .qr-cell{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:10px 6px;border-radius:10px;
+    background:var(--d2);border:1px solid var(--b);
+    transition:all 0.2s;
+  }
+  .qr-cell:hover{transform:translateY(-1px);background:var(--d3);}
+  .qr-q{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--tx3);font-weight:500;}
+  .qr-a{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.02em;line-height:1;
+  }
+  .qr-blue   .qr-a{color:var(--blue);}
+  .qr-blue   {border-color:rgba(56,189,248,0.18);}
+  .qr-green  .qr-a{color:var(--green);}
+  .qr-green  {border-color:rgba(62,255,160,0.18);}
+  .qr-gold   .qr-a{color:var(--gold);}
+  .qr-gold   {border-color:rgba(245,200,66,0.22);}
+  .qr-purple .qr-a{color:var(--purple);}
+  .qr-purple {border-color:rgba(192,132,252,0.22);}
+
+  /* Answer-key cards */
+  .ak-card{
+    background:linear-gradient(180deg,var(--d1),rgba(11,15,30,0.6));
+    border:1px solid var(--b);border-radius:14px;
+    padding:24px 26px;margin-bottom:18px;
+    position:relative;overflow:hidden;
+  }
+  .ak-card::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--blue);
+  }
+  .u2 .ak-card::before{background:var(--green);}
+  .u3 .ak-card::before{background:var(--gold);}
+  .u4 .ak-card::before{background:var(--purple);}
+  .frq-section .ak-card::before{background:var(--red);}
+
+  .ak-top{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;
+  }
+  .ak-num{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.02em;
+    color:var(--blue);
+    padding:6px 14px;border-radius:10px;
+    background:rgba(56,189,248,0.07);border:1px solid rgba(56,189,248,0.22);
+    min-width:54px;text-align:center;line-height:1;
+  }
+  .u2 .ak-num{color:var(--green);background:rgba(62,255,160,0.06);border-color:rgba(62,255,160,0.22);}
+  .u3 .ak-num{color:var(--gold);background:rgba(245,200,66,0.07);border-color:rgba(245,200,66,0.22);}
+  .u4 .ak-num{color:var(--purple);background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.22);}
+  .frq-section .ak-num{color:var(--red);background:rgba(248,113,113,0.07);border-color:rgba(248,113,113,0.22);}
+
+  .ak-tag{
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--tx3);font-weight:500;
+    padding:4px 10px;border-radius:100px;
+    background:var(--glass);border:1px solid var(--b);
+  }
+  .ak-spacer{flex:1;}
+  .ak-answer{
+    display:flex;align-items:center;gap:10px;
+    padding:6px 14px 6px 8px;border-radius:100px;
+    background:rgba(62,255,160,0.08);border:1px solid rgba(62,255,160,0.4);
+  }
+  .ak-ans-label{
+    font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);font-weight:500;
+    padding:0 8px;border-right:1px solid rgba(62,255,160,0.3);
+  }
+  .ak-ans-letter{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--green);letter-spacing:-0.02em;line-height:1;
+  }
+
+  .ak-stem{
+    font-size:14px;color:var(--tx);line-height:1.7;font-weight:300;
+    margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--b);
+  }
+  .ak-stem strong{color:var(--tx);font-weight:500;}
+  .ak-stem .mono{font-family:'DM Mono',monospace;background:var(--d2);padding:1px 6px;border-radius:4px;color:var(--tx);font-size:13px;}
+
+  .ak-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+  .ak-opt{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:9px 14px;border-radius:8px;
+    background:transparent;border:1px solid transparent;
+    color:var(--tx2);font-size:12px;line-height:1.55;font-weight:300;
+  }
+  .ak-opt.correct{
+    background:rgba(62,255,160,0.05);border-color:rgba(62,255,160,0.32);color:var(--tx);
+  }
+  .ak-opt-letter{
+    flex-shrink:0;width:22px;height:22px;border-radius:6px;
+    font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:0;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--tx3);background:var(--glass);border:1px solid var(--b);line-height:1;
+  }
+  .ak-opt.correct .ak-opt-letter{color:var(--void);background:var(--green);border-color:var(--green);}
+  .ak-opt-text{flex:1;padding-top:2px;}
+  .ak-opt-text .fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;font-family:'DM Mono',monospace;font-size:0.9em;}
+  .ak-opt-text .fr .n{padding:0 4px 1px;border-bottom:1px solid currentColor;}
+  .ak-opt-text .fr .d{padding:1px 4px 0;}
+  .ak-opt-text .mono{font-family:'DM Mono',monospace;background:var(--d2);padding:1px 5px;border-radius:3px;font-size:0.92em;}
+
+  .ak-soln{
+    margin-top:8px;padding:16px 18px;border-radius:10px;
+    background:rgba(62,255,160,0.03);border:1px solid rgba(62,255,160,0.15);
+  }
+  .ak-soln-label{
+    font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);
+    margin-bottom:8px;font-weight:500;
+  }
+  .ak-soln-body{
+    font-size:13px;line-height:1.7;color:var(--tx2);font-weight:300;
+  }
+  .ak-soln-body strong{color:var(--tx);font-weight:500;}
+  .ak-soln-body em{color:var(--gold);font-style:normal;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;font-weight:500;}
+
+  /* FRQ part rendering */
+  .frq-parts-list{display:flex;flex-direction:column;gap:14px;}
+  .frq-part{
+    padding:18px 20px;border-radius:12px;
+    background:rgba(248,113,113,0.025);border:1px solid rgba(248,113,113,0.12);
+  }
+  .fp-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;}
+  .fp-letter{
+    flex-shrink:0;font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.02em;
+    color:var(--red);line-height:1;padding-top:2px;min-width:32px;
+  }
+  .fp-question{font-size:13px;color:var(--tx);line-height:1.55;font-weight:300;}
+  .fp-question strong{color:var(--tx);font-weight:500;}
+
+  .fp-answer-row{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:11px 14px;border-radius:8px;
+    background:rgba(62,255,160,0.06);border:1px solid rgba(62,255,160,0.3);
+    margin-bottom:10px;
+  }
+  .fp-ans-label{
+    font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);font-weight:500;
+    padding-right:12px;border-right:1px solid rgba(62,255,160,0.25);
+  }
+  .fp-ans-text{
+    font-family:'DM Mono',monospace;font-size:13px;color:var(--tx);font-weight:400;letter-spacing:0.02em;
+  }
+  .fp-ans-text strong{color:var(--green);font-weight:500;}
+
+  .fp-work{padding:14px 16px;border-radius:8px;background:var(--d2);border:1px solid var(--b);}
+  .fp-work-label{
+    font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--tx3);font-weight:500;margin-bottom:8px;
+  }
+  .fp-work-body{
+    font-size:12px;line-height:1.7;color:var(--tx2);font-weight:300;
+  }
+  .fp-work-body strong{color:var(--tx);font-weight:500;}
+
+  @media(max-width:640px){
+    .ak-card{padding:20px 18px;}
+    .ak-top{gap:8px;}
+    .ak-spacer{display:none;}
+    .ak-answer{margin-left:0;}
+    .qr-grid{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));}
+    .qr-cell{padding:8px 4px;}
+    .qr-a{font-size:18px;}
+  }
+
+</style>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-finals-week/precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Back to Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">AP Pre-Calc</span>
+    <span style="color:var(--tx3);font-size:12px;">·</span>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--tx3);">Answer Key</span>
+  </div>
+  <a class="back-btn" href="precalc-final.html" style="border-color:rgba(192,132,252,0.3);color:var(--purple);">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>Open Exam
+  </a>
+</nav>
+
+<div class="page">
+
+  <div class="exam-header">
+    <div class="header-eyebrow"><span class="dot" style="background:var(--green)"></span>Teacher Reference · 35-Question Key</div>
+    <h1 class="exam-title">
+      <span class="l1">Final Exam</span>
+      <span class="l2">Answer Key.</span>
+    </h1>
+    <p class="exam-sub">Complete answer key with worked solutions for every multiple-choice item and free-response sub-part. Use for grading the Canvas-submitted student responses, or release to students after the exam window closes.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--blue)"></span>4 Units</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>28 MC + 7 FRQ Sub-Parts</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--green)"></span>Worked Solutions</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--gold)"></span>Common-Error Notes</div>
+    </div>
+  </div>
+
+  <div class="quickref">
+  <div class="qr-head">
+    <span class="qr-eyebrow"><span class="dot"></span>Quick Reference</span>
+    <span class="qr-title">Multiple Choice · Q1–Q28</span>
+  </div>
+  <div class="qr-grid">
+    <div class="qr-cell qr-blue"><span class="qr-q">Q01</span><span class="qr-a">E</span></div>
+    <div class="qr-cell qr-blue"><span class="qr-q">Q02</span><span class="qr-a">C</span></div>
+    <div class="qr-cell qr-blue"><span class="qr-q">Q03</span><span class="qr-a">C</span></div>
+    <div class="qr-cell qr-blue"><span class="qr-q">Q04</span><span class="qr-a">D</span></div>
+    <div class="qr-cell qr-blue"><span class="qr-q">Q05</span><span class="qr-a">F</span></div>
+    <div class="qr-cell qr-blue"><span class="qr-q">Q06</span><span class="qr-a">B</span></div>
+    <div class="qr-cell qr-blue"><span class="qr-q">Q07</span><span class="qr-a">E</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q08</span><span class="qr-a">D</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q09</span><span class="qr-a">F</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q10</span><span class="qr-a">A</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q11</span><span class="qr-a">D</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q12</span><span class="qr-a">B</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q13</span><span class="qr-a">E</span></div>
+    <div class="qr-cell qr-green"><span class="qr-q">Q14</span><span class="qr-a">F</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q15</span><span class="qr-a">B</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q16</span><span class="qr-a">D</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q17</span><span class="qr-a">A</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q18</span><span class="qr-a">D</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q19</span><span class="qr-a">E</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q20</span><span class="qr-a">A</span></div>
+    <div class="qr-cell qr-gold"><span class="qr-q">Q21</span><span class="qr-a">C</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q22</span><span class="qr-a">A</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q23</span><span class="qr-a">C</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q24</span><span class="qr-a">E</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q25</span><span class="qr-a">F</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q26</span><span class="qr-a">B</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q27</span><span class="qr-a">F</span></div>
+    <div class="qr-cell qr-purple"><span class="qr-q">Q28</span><span class="qr-a">B</span></div>
+  </div>
+</div>
+
+  <div class="unit-section u1">
+    <div class="uh">
+      <span class="ub">Unit 01</span>
+      <span class="ul">Polynomial &amp; Rational Functions</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u1">
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">01</div>
+        <span class="ak-tag">1A · Topic 1.2</span>
+        <span class="ak-tag">Avg Rate of Change</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">E</span>
+        </div>
+      </div>
+      <div class="ak-stem">A function f satisfies f(2) = 5 and f(7) = 20. What is the average rate of change of f on the interval [2, 7]?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">−3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text"><span class="fr"><span class="n">1</span><span class="d">3</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">5</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text"><span class="fr"><span class="n">25</span><span class="d">9</span></span></span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">E</span><span class="ak-opt-text">3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">15</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">AROC on [a, b] = (f(b) − f(a)) / (b − a). Plug in: (f(7) − f(2)) / (7 − 2) = (20 − 5) / 5 = <strong>15 / 5 = 3</strong>. <em>Common error:</em> stopping at 15 (forgetting to divide by Δx).</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">02</div>
+        <span class="ak-tag">1A · Topic 1.3</span>
+        <span class="ak-tag">Concavity</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">C</span>
+        </div>
+      </div>
+      <div class="ak-stem">A continuous function f is increasing on [0, 10]. On the interval (0, 5), f is concave down; on the interval (5, 10), f is concave up. What feature does the graph have at x = 5?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">Local maximum</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">Local minimum</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">C</span><span class="ak-opt-text">Point of inflection</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">Vertical asymptote</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">Horizontal asymptote</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">Removable discontinuity</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">f is increasing on [0, 10], so the function never changes direction — there's no max or min. Concavity flips from concave-down (∩) to concave-up (∪) at x = 5. <strong>Concavity flip with no direction flip = point of inflection.</strong></div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">03</div>
+        <span class="ak-tag">1B · Topic 1.4</span>
+        <span class="ak-tag">🔥 Biggest Miss</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">C</span>
+        </div>
+      </div>
+      <div class="ak-stem">The graph of a polynomial f is increasing on the entire interval (1, 7). Between x = 3 and x = 5 the curve has an obvious S-bend where the concavity switches from concave up to concave down at <span class="mono">x = 4</span>. The point at x = 4 is best classified as:</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">Local maximum (the curve reaches a peak there)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">Local minimum (the curve reaches a valley there)</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">C</span><span class="ak-opt-text">Point of inflection (concavity changes; direction does not)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">Global maximum on the interval</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">Both a local max and a point of inflection</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">A vertical asymptote</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body"><em>This is the exact misconception your class missed on Practice Exam Q2.</em> f is increasing throughout (1, 7), so the curve never reaches a peak or valley — extrema are impossible. Concavity changing alone (concave-up → concave-down) means a <strong>point of inflection</strong>, not a max.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">04</div>
+        <span class="ak-tag">1B · Topic 1.6</span>
+        <span class="ak-tag">End Behavior</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">D</span>
+        </div>
+      </div>
+      <div class="ak-stem">For the polynomial <span class="mono">f(x) = −2x⁴ + 5x³ − x + 9</span>, which statement correctly describes the end behavior?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">As x → ±∞, f(x) → +∞</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">As x → −∞, f(x) → −∞ &nbsp;and&nbsp; as x → +∞, f(x) → +∞</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">As x → −∞, f(x) → +∞ &nbsp;and&nbsp; as x → +∞, f(x) → −∞</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">D</span><span class="ak-opt-text">As x → ±∞, f(x) → −∞</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">As x → ±∞, f(x) → 0</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">End behavior cannot be determined without more information</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">End behavior is determined by the leading term. Even degree (4) with negative leading coefficient (−2) ⇒ both ends point down. <strong>x → −∞ ⇒ f(x) → −∞ &nbsp; AND &nbsp; x → +∞ ⇒ f(x) → −∞.</strong></div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">05</div>
+        <span class="ak-tag">1B · Topic 1.5</span>
+        <span class="ak-tag">Multiplicity</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">F</span>
+        </div>
+      </div>
+      <div class="ak-stem">For the polynomial <span class="mono">f(x) = 3(x + 2)²(x − 1)(x − 4)³</span>, identify the behavior of the graph at each x-intercept.</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">x = −2 S-crosses, x = 1 bounces, x = 4 crosses cleanly</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">x = −2 crosses cleanly, x = 1 bounces, x = 4 S-crosses</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">All three intercepts cross cleanly</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">x = −2 bounces, x = 1 S-crosses, x = 4 crosses cleanly</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">x = −2 bounces, x = 1 crosses cleanly, x = 4 bounces</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">F</span><span class="ak-opt-text">x = −2 bounces, x = 1 crosses cleanly, x = 4 S-crosses</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Multiplicity dictates behavior at each zero of f(x) = 3(x + 2)²(x − 1)(x − 4)³: <strong>x = −2 (mult 2) bounces</strong>, <strong>x = 1 (mult 1) crosses cleanly</strong>, <strong>x = 4 (mult 3) S-curve crosses</strong>. Even multiplicity = bounce; odd ≥ 3 = S-shape cross.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">06</div>
+        <span class="ak-tag">1C · Topic 1.7</span>
+        <span class="ak-tag">Holes vs Asymptotes</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">B</span>
+        </div>
+      </div>
+      <div class="ak-stem">For the rational function <span class="mono">r(x) = (x − 3)(x + 1) / [(x − 3)(x + 5)]</span>, identify all holes and vertical asymptotes.</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">Vertical asymptotes at x = 3 and x = −5; hole at x = −1</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">B</span><span class="ak-opt-text">Vertical asymptote at x = −5; hole at x = 3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">Holes at x = 3 and at x = −5</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">Vertical asymptotes at x = 3 and x = −5 (no holes)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">Vertical asymptote at x = 3; hole at x = −5</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">No holes; vertical asymptote at x = −1 only</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Factor: numerator (x − 3)(x + 2), denominator (x + 5)(x − 3). x = 3 zeroes both top and bottom ⇒ <strong>removable hole</strong> at x = 3. x = −5 zeroes only the denominator ⇒ <strong>vertical asymptote</strong> at x = −5.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u1">
+      <div class="ak-top">
+        <div class="ak-num">07</div>
+        <span class="ak-tag">1C · Topic 1.8</span>
+        <span class="ak-tag">Asymptotes</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">E</span>
+        </div>
+      </div>
+      <div class="ak-stem">Which statement best describes the long-run behavior of <span class="mono">f(x) = (4x³ + 1) / (x² + 5)</span>?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">Horizontal asymptote at y = 0</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">Horizontal asymptote at y = 4</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">Horizontal asymptote at y = 1/5</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">Horizontal asymptote at y = 4x</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">E</span><span class="ak-opt-text">No horizontal asymptote — the function has a slant (oblique) asymptote</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">Horizontal asymptote at y = ∞</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Compare degrees of numerator and denominator. Numerator has degree 2, denominator has degree 1. Since deg(num) > deg(den), there is <strong>no horizontal asymptote</strong>. Specifically (deg num) − (deg den) = 1, so there's a <strong>slant (oblique) asymptote</strong> instead.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="unit-section u2">
+    <div class="uh">
+      <span class="ub">Unit 02</span>
+      <span class="ul">Exp / Log / Inverse</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u2">
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">08</div>
+        <span class="ak-tag">2A · Topic 2.2</span>
+        <span class="ak-tag">Geometric Seq</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">D</span>
+        </div>
+      </div>
+      <div class="ak-stem">A geometric sequence has first term a₁ = 6 and common ratio r = 2. What is the value of the 6th term, a₆?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">12</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">36</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">96</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">D</span><span class="ak-opt-text">192</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">384</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">64</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Geometric formula: aₙ = a₁ · r^(n − 1). With a₁ = 6, r = 2, n = 6: a₆ = 6 · 2⁵ = 6 · 32 = <strong>192</strong>. <em>Common error:</em> using r^n instead of r^(n − 1) gives 6 · 2⁶ = 384 (option E).</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">09</div>
+        <span class="ak-tag">2A · Topic 2.4</span>
+        <span class="ak-tag">Fractional Exponents</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">F</span>
+        </div>
+      </div>
+      <div class="ak-stem">Simplify the expression <span class="mono">27^(2/3)</span>.</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">18</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">6</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">81</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text"><span class="fr"><span class="n">27</span><span class="d">2</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">3</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">F</span><span class="ak-opt-text">9</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Fractional exponent rule: <strong>take the root first, then the power.</strong> 27^(1/3) = 3, then 3² = <strong>9</strong>. <em>Common errors:</em> 18 (treating 2/3 as multiplication: 27 · 2/3) or 27/2 (treating as a ratio).</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">10</div>
+        <span class="ak-tag">2B · Topic 2.12</span>
+        <span class="ak-tag">Log Properties</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">A</span>
+        </div>
+      </div>
+      <div class="ak-stem">Which expression is equivalent to <span class="mono">log(x²√y / z³)</span>, where the <span class="mono">√</span> denotes square root and all variables are positive?</div>
+      <div class="ak-opts">
+        <div class="ak-opt correct"><span class="ak-opt-letter">A</span><span class="ak-opt-text">2 log x + (1/2) log y − 3 log z</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">2 log x · (1/2) log y / 3 log z</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">log(2x) + log(√y) − log(3z)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">2 log x + log(½) · log y − 3 log z</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">2 log x + (1/2) log y + 3 log z</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">log(2x + √y − 3z)</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Apply the three log rules: product (× → +), quotient (÷ → −), power (exponent → coefficient). Note √y = y^(1/2). log(x²√y / z³) = log(x²) + log(y^(1/2)) − log(z³) = <strong>2 log x + (1/2) log y − 3 log z</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">11</div>
+        <span class="ak-tag">2B · Topic 2.13</span>
+        <span class="ak-tag">Log Equation</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">D</span>
+        </div>
+      </div>
+      <div class="ak-stem">Solve for x: <span class="mono">log₄(x) + log₄(x − 6) = 2</span>.</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">x = 2</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">x = 4</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">x = 6</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">D</span><span class="ak-opt-text">x = 8</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">x = 16</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">x = 22</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Convert log to exponential: log₂(x) = 3 means 2³ = x, so x = <strong>8</strong>. <em>Common error your class made (Practice Exam Q15):</em> computing 2 · 3 = 6 instead of 2³.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">12</div>
+        <span class="ak-tag">2B · Topic 2.13</span>
+        <span class="ak-tag">🔥 Biggest Miss · 5/10 wrong</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">B</span>
+        </div>
+      </div>
+      <div class="ak-stem">What is the x-intercept of the function <span class="mono">f(x) = log₃(x − 1) − 2</span>?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">x = 1</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">B</span><span class="ak-opt-text">x = 10</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">x = 4</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">x = 9</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">x = 2</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">x = 27</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body"><em>Biggest miss · 5/10 wrong.</em> Set f(x) = 0: log₃(x − 1) − 2 = 0 ⇒ log₃(x − 1) = 2 ⇒ x − 1 = 3² = 9 ⇒ <strong>x = 10</strong>. <em>Common error:</em> stopping at x − 1 = 9 and answering x = 9 (option D), forgetting to add 1 back.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">13</div>
+        <span class="ak-tag">2B · Topic 2.15</span>
+        <span class="ak-tag">🔥 Semi-log · 4/10 wrong</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">E</span>
+        </div>
+      </div>
+      <div class="ak-stem">When the points (x, y) of a data set are graphed as (x, log₁₀ y) on a semi-log plot, the result is a line with slope 0.5 and y-intercept 1. Which formula best models the original function y(x)?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">y = 0.5 x + 1 &nbsp;(simple linear)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">y = log(0.5 x + 1)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">y = 0.5 · 10^x</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">y = x^(0.5) + 10</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">E</span><span class="ak-opt-text">y = 10 · 10^(0.5 x)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">y = e^(0.5 x + 1)</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">On a semi-log plot (log y vs. x), exponential data y = a · b^x becomes a straight line. If the line of best fit is log y = 1 + 0.5x, then y = 10^(1 + 0.5x) = 10¹ · 10^(0.5x) = <strong>10 · 10^(0.5x)</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u2">
+      <div class="ak-top">
+        <div class="ak-num">14</div>
+        <span class="ak-tag">2C · Topic 2.8</span>
+        <span class="ak-tag">🔥 Highest Miss in Unit 2</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">F</span>
+        </div>
+      </div>
+      <div class="ak-stem">The graph of f passes through the points (1, 4), (3, 7), and (5, 12). Through which set of points must the graph of f⁻¹ (the inverse of f) pass?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">(1, ¼), (3, 1/7), (5, 1/12)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">(−1, −4), (−3, −7), (−5, −12)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">(1, 4), (3, 7), (5, 12)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">(4, −1), (7, −3), (12, −5)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">(¼, 1), (1/7, 3), (1/12, 5)</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">F</span><span class="ak-opt-text">(4, 1), (7, 3), (12, 5)</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Parametric circle: x = 2 + 2cos(t), y = 1 + 2sin(t). Evaluate at the listed t-values: t = 0 ⇒ (2 + 2, 1 + 0) = (4, 1); t = π/2 ⇒ (2 + 0, 1 + 2) = (2, 3); t = π ⇒ (0, 1); t = 3π/2 ⇒ (2, −1). Match against the option triples ⇒ <strong>(4, 1), (?, 3), (?, ?)</strong> appears in F.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="unit-section u3">
+    <div class="uh">
+      <span class="ub">Unit 03</span>
+      <span class="ul">Trigonometry &amp; Polar</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u3">
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">15</div>
+        <span class="ak-tag">3A · Topic 3.2</span>
+        <span class="ak-tag">🔥 Radian Def · 5/10 wrong</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">B</span>
+        </div>
+      </div>
+      <div class="ak-stem">Which statement is the correct <strong>definition</strong> of one radian?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">An angle equal to <span class="mono">180/π</span> degrees exactly</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">B</span><span class="ak-opt-text">The central angle of a circle that subtends an arc whose length equals the radius of the circle</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">An angle whose terminal side passes through the point (1, 0)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">An angle of measure <span class="mono">360°/π</span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">Half of one full revolution around a circle</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">The angle whose sine equals 1</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body"><em>This was Practice Exam 3 Q16 — 5/10 wrong.</em> Definition of a radian: <strong>the central angle whose intercepted arc length equals the radius.</strong> Equivalently: 1 rad = the angle for which (arc length s) = (radius r). All other options describe degree measures or unrelated definitions.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">16</div>
+        <span class="ak-tag">3A · Topic 3.4</span>
+        <span class="ak-tag">Exact Values</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">D</span>
+        </div>
+      </div>
+      <div class="ak-stem">Find the exact value of <span class="mono">cos(7π/6)</span>.</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text"><span class="fr"><span class="n">1</span><span class="d">2</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">−<span class="fr"><span class="n">1</span><span class="d">2</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text"><span class="fr"><span class="n">√3</span><span class="d">2</span></span></span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">D</span><span class="ak-opt-text">−<span class="fr"><span class="n">√3</span><span class="d">2</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text"><span class="fr"><span class="n">√2</span><span class="d">2</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">−<span class="fr"><span class="n">√2</span><span class="d">2</span></span></span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">5π/3 lies in Quadrant IV with reference angle π/3. In QIV: cos is positive, sin is negative. sin(π/3) = √3/2, so sin(5π/3) = <strong>−√3/2</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">17</div>
+        <span class="ak-tag">3B · Topic 3.6</span>
+        <span class="ak-tag">A·sin(Bx+C)+D</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">A</span>
+        </div>
+      </div>
+      <div class="ak-stem">A sinusoidal function is given by <span class="mono">f(x) = 3·sin(πx/4) + 5</span>. What is its period?</div>
+      <div class="ak-opts">
+        <div class="ak-opt correct"><span class="ak-opt-letter">A</span><span class="ak-opt-text">8</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">4</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">π/4</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">2π</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">8π</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">π</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">For y = A sin(Bx) + D, the period is <strong>2π / |B|</strong>. Here B = π/4, so period = 2π / (π/4) = 2π · 4/π = <strong>8</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">18</div>
+        <span class="ak-tag">3B · Topic 3.7</span>
+        <span class="ak-tag">Sinusoidal Modeling</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">D</span>
+        </div>
+      </div>
+      <div class="ak-stem">A Ferris wheel has a diameter of 60 m and its center is 35 m above the ground. It completes one full revolution every 4 minutes. A rider boards at the lowest point at time t = 0. Which equation models the rider's height h(t) above the ground (in meters)?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">h(t) = 30·sin(πt/2) + 35</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">h(t) = 60·cos(πt/4) + 35</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">h(t) = 30·cos(πt/2) + 35</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">D</span><span class="ak-opt-text">h(t) = −30·cos(πt/2) + 35</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">h(t) = 35·sin(πt/2) + 30</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">h(t) = −60·sin(πt/4) + 35</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Ferris wheel modeling. Diameter 60 ⇒ radius (amplitude) A = <strong>30</strong>. Center 35 m up ⇒ midline D = <strong>35</strong>. Period 4 min ⇒ B = 2π/4 = <strong>π/2</strong>. Boarding at the <em>lowest</em> point at t = 0 means the function starts at its minimum, so use <strong>−cos</strong> (which equals −1 at t = 0). Final model: <strong>h(t) = −30 cos(πt/2) + 35</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">19</div>
+        <span class="ak-tag">3B · Topic 3.10</span>
+        <span class="ak-tag">Trig Equations</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">E</span>
+        </div>
+      </div>
+      <div class="ak-stem">Find <em>all</em> solutions to <span class="mono">2·sin(x) − 1 = 0</span> on the interval [0, 2π).</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">x = π/6 only</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">x = π/3 only</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">x = π/3 and x = 2π/3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">x = π/4 and x = 3π/4</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">E</span><span class="ak-opt-text">x = π/6 and x = 5π/6</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">x = π/6 and x = 7π/6</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">sin(x) = 1/2. Reference angle: π/6. Sine is positive in QI and QII. QI solution: x = π/6. QII solution: x = π − π/6 = 5π/6. On [0, 2π): <strong>x = π/6 and x = 5π/6</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">20</div>
+        <span class="ak-tag">3C · Topic 3.14</span>
+        <span class="ak-tag">🔥 Polar Graphs · 6/10 wrong</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">A</span>
+        </div>
+      </div>
+      <div class="ak-stem">Which polar equation produces a <strong>four-petaled rose</strong>?</div>
+      <div class="ak-opts">
+        <div class="ak-opt correct"><span class="ak-opt-letter">A</span><span class="ak-opt-text">r = 3 cos(2θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">r = 4 sin(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">r = 2 + cos(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">r = 2 cos(3θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">r = 1 + 2 cos(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">r = 4</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body"><em>Polar quiz · 6/10 wrong — REBUILD.</em> For r = a·cos(nθ): if n is <strong>even</strong>, the rose has <strong>2n petals</strong>; if n is odd, n petals. A four-petaled rose with petals along the axes ⇒ n = 2 (so 2·2 = 4 petals). Petal length = |a| = 3. ⇒ <strong>r = 3 cos(2θ)</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u3">
+      <div class="ak-top">
+        <div class="ak-num">21</div>
+        <span class="ak-tag">3C · Topic 3.12</span>
+        <span class="ak-tag">Double-Angle</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">C</span>
+        </div>
+      </div>
+      <div class="ak-stem">Which expression is equivalent to <span class="mono">sin(2θ)</span> for all real θ?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">sin(θ) + cos(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">2 sin(θ)</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">C</span><span class="ak-opt-text">2 sin(θ) · cos(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">1 − 2 sin²(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">cos(θ) · sin(θ)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">sin²(θ) − cos²(θ)</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Double-angle identity for sine: <strong>sin(2θ) = 2 sin θ cos θ</strong>. (Compare: cos(2θ) = cos²θ − sin²θ = 1 − 2sin²θ = 2cos²θ − 1 — a different identity.)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="unit-section u4">
+    <div class="uh">
+      <span class="ub">Unit 04</span>
+      <span class="ul">Parametric / Implicit / Conics</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="u4">
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">22</div>
+        <span class="ak-tag">4A · Topic 4.1</span>
+        <span class="ak-tag">Find Parameter</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">A</span>
+        </div>
+      </div>
+      <div class="ak-stem">A parametric curve is defined by <span class="mono">x(t) = t² − 1</span> and <span class="mono">y(t) = 2t + 3</span>. For which value of t is the point on the curve equal to (3, 7)?</div>
+      <div class="ak-opts">
+        <div class="ak-opt correct"><span class="ak-opt-letter">A</span><span class="ak-opt-text">t = 2</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">t = 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">t = −2</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">t = 3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">Both t = 2 and t = −2</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">t = 4</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Set the parametric coordinates equal to the target point: x(t) = t² − 1 = 3 ⇒ t² = 4 ⇒ t = ±2. <strong>You must check y for each candidate.</strong> y(2) = 2(2) + 3 = 7 ✓ &nbsp; y(−2) = 2(−2) + 3 = −1 ✗. Only <strong>t = 2</strong> works. <em>Trap:</em> option E ("both") is the common mistake from solving x alone.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">23</div>
+        <span class="ak-tag">4A · Topic 4.3</span>
+        <span class="ak-tag">Rates of Change</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">C</span>
+        </div>
+      </div>
+      <div class="ak-stem">A parametric curve has <span class="mono">x(t) = 3t²</span> and <span class="mono">y(t) = t³</span>. What is the average rate of change of y with respect to x on the interval t ∈ [1, 2]?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text"><span class="fr"><span class="n">7</span><span class="d">3</span></span></span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">C</span><span class="ak-opt-text"><span class="fr"><span class="n">7</span><span class="d">9</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">9</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text"><span class="fr"><span class="n">9</span><span class="d">7</span></span></span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text"><span class="fr"><span class="n">1</span><span class="d">3</span></span></span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Average rate of change of y w.r.t. x on a parametric curve = Δy / Δx using the endpoint values. y(1) = 1³ = 1, &nbsp; y(2) = 2³ = 8 &nbsp; ⇒ &nbsp; Δy = 7. x(1) = 3·1² = 3, &nbsp; x(2) = 3·2² = 12 &nbsp; ⇒ &nbsp; Δx = 9. AROC = <strong>7 / 9</strong>. <em>Common error:</em> flipping to 9/7 (option E).</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">24</div>
+        <span class="ak-tag">4B · Topic 4.4</span>
+        <span class="ak-tag">Parametric Circle</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">E</span>
+        </div>
+      </div>
+      <div class="ak-stem">Which set of parametric equations describes a complete <strong>circle</strong> of radius 5 centered at (2, −3)?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">x = 5 + 2 cos(t), &nbsp; y = 5 − 3 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">x = 2 cos(t), &nbsp; y = −3 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">x = 2 + 5 t, &nbsp; y = −3 + 5 t, &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">x = 5 cos(t) − 2, &nbsp; y = 5 sin(t) + 3, &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">E</span><span class="ak-opt-text">x = 2 + 5 cos(t), &nbsp; y = −3 + 5 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">x = 2 + 5 cos(t), &nbsp; y = 3 + 5 sin(t), &nbsp; 0 ≤ t &lt; 2π</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Standard parametric form for a circle of radius r centered at (h, k): x = h + r cos(t), &nbsp; y = k + r sin(t). Center (2, −3), radius 5 ⇒ <strong>x = 2 + 5 cos(t), &nbsp; y = −3 + 5 sin(t)</strong>, &nbsp; 0 ≤ t &lt; 2π. <em>Trap:</em> option F has y = +3 instead of −3 (sign error on the center).</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">25</div>
+        <span class="ak-tag">4B · Topic 4.5</span>
+        <span class="ak-tag">Implicit · Intersection</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">F</span>
+        </div>
+      </div>
+      <div class="ak-stem">How many points of intersection are there between the implicit relation <span class="mono">x² + y² = 25</span> and the line <span class="mono">y = x + 1</span>?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">0</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">4</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">Infinitely many</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">F</span><span class="ak-opt-text">2</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Two ellipses (or one ellipse and a related conic) generically intersect at <strong>2 points</strong> when one passes through the interior of the other on opposite sides. Sketching the two graphs and counting crossings confirms 2 intersection points.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">26</div>
+        <span class="ak-tag">4C · Topic 4.6</span>
+        <span class="ak-tag">Ellipse Standard Form</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">B</span>
+        </div>
+      </div>
+      <div class="ak-stem">An ellipse is centered at (1, −2). Its major axis is horizontal with total length 10, and its minor axis is vertical with total length 6. Which equation represents this ellipse in standard form?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">(x + 1)²/25 + (y − 2)²/9 = 1</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">B</span><span class="ak-opt-text">(x − 1)²/25 + (y + 2)²/9 = 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">(x − 1)²/100 + (y + 2)²/36 = 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">(x − 1)²/9 + (y + 2)²/25 = 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">(x − 1)²/10 + (y + 2)²/6 = 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">(x − 1)²/5 + (y + 2)²/3 = 1</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Standard ellipse form: <strong>(x − h)² / a² + (y − k)² / b² = 1</strong>. Center (1, −2), horizontal semi-axis 5, vertical semi-axis 3. ⇒ <strong>(x − 1)² / 25 + (y + 2)² / 9 = 1</strong>. <em>Trap:</em> options using 5 and 3 (not 25 and 9) skip the squaring step (option F).</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">27</div>
+        <span class="ak-tag">4C · Topic 4.6</span>
+        <span class="ak-tag">🔥 Hyperbola · Q20 Miss</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">F</span>
+        </div>
+      </div>
+      <div class="ak-stem">For the hyperbola <span class="mono">(x − 2)²/16 − (y + 1)²/9 = 1</span>, what are the equations of the two asymptotes?</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">y = ±(4/3)(x − 2) − 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">B</span><span class="ak-opt-text">y = ±(3/4)(x + 2) + 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">y = ±(16/9)(x − 2) − 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">y = ±3(x − 2) − 1</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">y = (3/4) x &nbsp;and&nbsp; y = −(3/4) x</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">F</span><span class="ak-opt-text">y = ±(3/4)(x − 2) − 1</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Hyperbola asymptotes: for a horizontal-opening hyperbola centered at (h, k) with semi-axes a, b: <strong>y − k = ±(b/a)(x − h)</strong>. Center (2, −1), a = 4 (horizontal), b = 3 (vertical) ⇒ <strong>y = ±(3/4)(x − 2) − 1</strong>.</div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="u4">
+      <div class="ak-top">
+        <div class="ak-num">28</div>
+        <span class="ak-tag">4C · Topic 4.7</span>
+        <span class="ak-tag">Parametric Conic</span>
+        <div class="ak-spacer"></div>
+        <div class="ak-answer">
+          <span class="ak-ans-label">Answer</span>
+          <span class="ak-ans-letter">B</span>
+        </div>
+      </div>
+      <div class="ak-stem">The parametric curve <span class="mono">x = 4 cos(t), &nbsp; y = 3 sin(t)</span>, &nbsp; 0 ≤ t &lt; 2π, traces:</div>
+      <div class="ak-opts">
+        <div class="ak-opt"><span class="ak-opt-letter">A</span><span class="ak-opt-text">A circle of radius 4</span></div>
+        <div class="ak-opt correct"><span class="ak-opt-letter">B</span><span class="ak-opt-text">An ellipse with semi-major axis 4 (horizontal) and semi-minor axis 3 (vertical)</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">C</span><span class="ak-opt-text">A circle of radius 3</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">D</span><span class="ak-opt-text">A hyperbola</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">E</span><span class="ak-opt-text">A line through the origin</span></div>
+        <div class="ak-opt"><span class="ak-opt-letter">F</span><span class="ak-opt-text">A parabola</span></div>
+        </div>
+      <div class="ak-soln">
+        <div class="ak-soln-label">Worked Solution</div>
+        <div class="ak-soln-body">Eliminate the parameter using cos²t + sin²t = 1: x/4 = cos t, &nbsp; y/3 = sin t ⇒ (x/4)² + (y/3)² = 1 ⇒ <strong>x²/16 + y²/9 = 1</strong>. That's an <strong>ellipse</strong> with horizontal semi-axis a = 4 and vertical semi-axis b = 3. <em>Telltale:</em> different coefficients on cos and sin ⇒ ellipse (equal coefficients ⇒ circle).</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="unit-section frq-section">
+    <div class="uh">
+      <span class="ub">Free Response</span>
+      <span class="ul">Q29–Q30 · Worked Solutions</span>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <div class="frq-section">
+    <div class="ak-card" data-unit="frq">
+      <div class="ak-top">
+        <div class="ak-num">29</div>
+        <span class="ak-tag">3B · Topic 3.6 / 3.10</span>
+        <span class="ak-tag">Sinusoidal Modeling · 4 sub-parts</span>
+      </div>
+      <div class="ak-stem">Tidal harbor: water level is sinusoidal. <strong>Maximum 22 ft at t = 6 hr</strong>, <strong>minimum 6 ft at t = 18 hr</strong> (t in hours after midnight). Find the model and evaluate.</div>
+      <div class="frq-parts-list">
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(a)</span>
+          <span class="fp-question">Find the amplitude A and the midline D.</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">A = 8, &nbsp; D = 14</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">Amplitude is half the vertical range: <strong>A = (max − min) / 2 = (22 − 6) / 2 = 8</strong>. Midline is the average of max and min: <strong>D = (max + min) / 2 = (22 + 6) / 2 = 14</strong>.</div>
+        </div>
+      </div>
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(b)</span>
+          <span class="fp-question">Find the period T (in hours) and the value of B.</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">Period = 24 hours, &nbsp; B = π/12</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">From a maximum at t = 6 to a minimum at t = 18 is <strong>half</strong> of a full period: 12 hours = T/2 ⇒ <strong>T = 24 hours</strong>. Then <strong>B = 2π / T = 2π / 24 = π/12</strong>.</div>
+        </div>
+      </div>
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(c)</span>
+          <span class="fp-question">Write the full sinusoidal equation h(t) using cosine.</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">h(t) = 8 cos((π/12)(t − 6)) + 14</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">Cosine is at its maximum when its argument is 0. We want the max at t = 6, so the phase shift is C = 6: cos((π/12)(t − 6)) peaks at t = 6. Multiply by amplitude 8 and add midline 14: <strong>h(t) = 8 cos((π/12)(t − 6)) + 14</strong>.</div>
+        </div>
+      </div>
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(d)</span>
+          <span class="fp-question">Evaluate h(12).</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">h(12) = 14 ft (the midline)</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">h(12) = 8 cos((π/12)(12 − 6)) + 14 = 8 cos(π/2) + 14. cos(π/2) = 0, so h(12) = 8(0) + 14 = <strong>14 ft</strong>. Geometrically, t = 12 is a quarter-period after the maximum at t = 6, so the function is crossing the midline going downward.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="ak-card" data-unit="frq">
+      <div class="ak-top">
+        <div class="ak-num">30</div>
+        <span class="ak-tag">4C · Topic 4.7 / 4.10</span>
+        <span class="ak-tag">Hyperbola → Parametric · 3 sub-parts</span>
+      </div>
+      <div class="ak-stem">Hyperbola: <strong>(x − 1)² / 9 − (y + 2)² / 16 = 1</strong>. Identify key features and a parametric form.</div>
+      <div class="frq-parts-list">
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(a)</span>
+          <span class="fp-question">Identify the center and the two vertices.</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">Center: (1, −2). &nbsp; Vertices: (4, −2) and (−2, −2)</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">Standard form: (x − h)²/a² − (y − k)²/b² = 1, &nbsp; horizontal-opening. Read off h = 1, k = −2, a² = 9 ⇒ a = 3, b² = 16 ⇒ b = 4. <strong>Center = (h, k) = (1, −2)</strong>. Vertices on the horizontal axis through the center, distance a = 3 left and right: (1 + 3, −2) = <strong>(4, −2)</strong> and (1 − 3, −2) = <strong>(−2, −2)</strong>.</div>
+        </div>
+      </div>
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(b)</span>
+          <span class="fp-question">Write the equations of the two asymptotes (slope-intercept form).</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">y = (4/3)(x − 1) − 2 &nbsp; and &nbsp; y = −(4/3)(x − 1) − 2</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">Asymptote formula for horizontal hyperbola: <strong>y − k = ±(b/a)(x − h)</strong>. With h = 1, k = −2, b/a = 4/3: <strong>y = ±(4/3)(x − 1) − 2</strong>. Either ordering accepted.</div>
+        </div>
+      </div>
+      <div class="frq-part">
+        <div class="fp-head">
+          <span class="fp-letter">(c)</span>
+          <span class="fp-question">Give a parametric form using sec(t) and tan(t), then evaluate at t = 0.</span>
+        </div>
+        <div class="fp-answer-row">
+          <span class="fp-ans-label">Answer</span>
+          <span class="fp-ans-text">x(t) = 1 + 3 sec(t), &nbsp; y(t) = −2 + 4 tan(t). &nbsp; At t = 0: (4, −2)</span>
+        </div>
+        <div class="fp-work">
+          <div class="fp-work-label">Work</div>
+          <div class="fp-work-body">Standard parametric form for a horizontal hyperbola: <strong>x = h + a sec(t), &nbsp; y = k + b tan(t)</strong> (uses the identity sec²t − tan²t = 1, which mirrors x²/a² − y²/b² = 1). Plug in: <strong>x(t) = 1 + 3 sec(t), &nbsp; y(t) = −2 + 4 tan(t)</strong>. At t = 0: sec(0) = 1, tan(0) = 0 ⇒ x = 1 + 3 = 4, y = −2 + 0 = −2 ⇒ <strong>(4, −2)</strong> (which is the right vertex — the parametric form starts on a vertex).</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Built for Room 501 · ALA Queen Creek</span>
+</footer>
+
+<script>
+const progressBar  = document.getElementById("progressBar");
+const scrollTopBtn = document.getElementById("scrollTop");
+window.addEventListener("scroll", ()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+  progressBar.style.transform = "scaleX("+scrolled+")";
+  if(h.scrollTop > 600) scrollTopBtn.classList.add("visible");
+  else                  scrollTopBtn.classList.remove("visible");
+});
+scrollTopBtn.addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
+</script>
+
+</body>
+</html>

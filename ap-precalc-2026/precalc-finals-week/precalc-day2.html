@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calc · Day 2 · Exponential, Log &amp; Inverse</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="precalc-week.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Day 2 · Tue May 12</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-title">Unit 2 · Exponential, Log &amp; Inverse</span>
+  </div>
+  <div class="timer-pill" style="display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:100px;background:var(--glass);border:1px solid var(--b);font-size:12px;color:var(--tx2);letter-spacing:0.08em;">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>
+    <span id="timerVal" style="font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;">00:00</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="day-header">
+    <div class="header-eyebrow"><span class="dot" style="background:var(--green)"></span>Day 2 of 5 · Tue May 12 · ~40 min</div>
+    <h1 class="day-title">
+      <span class="l1">Exponential, Log</span>
+      <span class="l2">&amp; Inverse.</span>
+    </h1>
+    <p class="day-sub">Rebuild Unit 2: geometric sequences, fractional exponents, log properties, log equations, semi-log models, and inverse-function point-swaps. <strong>13 randomized questions.</strong> Heavy on the misconceptions your class missed most — especially the <em>log<sub>3</sub>(x−1)=2 → x=10 (not 9)</em> trap and the inverse point-swap rule.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--green)"></span>Unit 2 · 2A · 2B · 2C</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>7 MC · 4 FIB · 2 Dropdown</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>🔥 Log graph x-intercept (5/10 missed)</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--gold)"></span>🔥 Inverse point-swap</div>
+    </div>
+
+    <div class="instructions">
+      <div class="ih">📘 How to use this practice</div>
+      <strong>1.</strong> Each question regenerates with new numbers via <strong>↻ New Numbers</strong> — practice as many variants as you need. <strong>2.</strong> When you miss, the feedback panel tells you <em>which</em> misconception you fell into and how to fix it. <strong>3.</strong> Type your name at the bottom and click <strong>Copy for Canvas</strong> when done.
+    </div>
+  </div>
+
+  <!-- ──────── 2A · SEQUENCES & EXPONENTS ──────── -->
+  <div class="section-header" data-color="green">
+    <div class="sh-row">
+      <span class="sh-tag">2A</span>
+      <span class="sh-title">Sequences &amp; Exponents</span>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+
+  <div class="q-card" data-q="1" data-color="green">
+    <div class="q-top">
+      <div class="q-num">01</div><span class="q-tag">2A · Topic 2.2</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Geometric Sequence</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="2" data-color="green">
+    <div class="q-top">
+      <div class="q-num">02</div><span class="q-tag priority">2A · Topic 2.4</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag hot">Fractional Exponents</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="3" data-color="green">
+    <div class="q-top">
+      <div class="q-num">03</div><span class="q-tag">2A · Topic 2.3</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Exponential Growth/Decay</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 2B · LOGS ──────── -->
+  <div class="section-header" data-color="green">
+    <div class="sh-row">
+      <span class="sh-tag">2B</span>
+      <span class="sh-title">Logarithmic Functions &amp; Equations</span>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+
+  <div class="q-card" data-q="4" data-color="green">
+    <div class="q-top">
+      <div class="q-num">04</div><span class="q-tag priority">2B · Topic 2.12</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">Log Properties</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="5" data-color="green">
+    <div class="q-top">
+      <div class="q-num">05</div><span class="q-tag">2B · Topic 2.13</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Solve log_b(x) = k · Type x</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="6" data-color="green">
+    <div class="q-top">
+      <div class="q-num">06</div><span class="q-tag priority">2B · Topic 2.13</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Log x-Intercept · 5/10 wrong</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="7" data-color="green">
+    <div class="q-top">
+      <div class="q-num">07</div><span class="q-tag">2B · Topic 2.12</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Evaluate log_b(N)</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="8" data-color="green">
+    <div class="q-top">
+      <div class="q-num">08</div><span class="q-tag priority">2B · Topic 2.15</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Semi-Log Plot · 4/10 wrong</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="9" data-color="green">
+    <div class="q-top">
+      <div class="q-num">09</div><span class="q-tag">2B · Topic 2.10</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Domain of log_b(x − c)</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── 2C · INVERSE FUNCTIONS ──────── -->
+  <div class="section-header" data-color="green">
+    <div class="sh-row">
+      <span class="sh-tag">2C</span>
+      <span class="sh-title">Inverse Functions</span>
+      <div class="sh-line"></div>
+    </div>
+  </div>
+
+  <div class="q-card" data-q="10" data-color="green">
+    <div class="q-top">
+      <div class="q-num">10</div><span class="q-tag priority">2C · Topic 2.8</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Inverse Point-Swap</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="11" data-color="green">
+    <div class="q-top">
+      <div class="q-num">11</div><span class="q-tag">2C · Topic 2.8</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Inverse Formula · Type f⁻¹(x)</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="12" data-color="green">
+    <div class="q-top">
+      <div class="q-num">12</div><span class="q-tag">2C · Topic 2.8</span><span class="q-type-tag" data-type="dd">Dropdown</span><span class="q-tag">Exp / Log Inverses</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="13" data-color="green">
+    <div class="q-top">
+      <div class="q-num">13</div><span class="q-tag">2A · Topic 2.5</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Doubling Time / Half-Life</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div>
+    <div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── SUBMIT AREA ──────── -->
+  <div class="submit-area">
+    <div class="submit-eyebrow"><span class="dot"></span>End of Day 2 · Submit via Canvas</div>
+    <div class="name-row">
+      <label class="name-label" for="studentName">Your full name</label>
+      <input type="text" id="studentName" class="name-input" placeholder="First Last" autocomplete="name">
+    </div>
+    <div class="submit-progress">
+      <span class="prog-num" id="progNum">0</span><span class="prog-sep">/</span><span class="prog-total">13</span><span class="prog-label">answered</span>
+    </div>
+    <div class="submit-meter"><div class="submit-meter-fill" id="submitMeterFill"></div></div>
+    <div class="score-strip">
+      <div class="score-pill correct">✓ Correct <span class="num" id="scoreCorrect">0</span></div>
+      <div class="score-pill wrong">✗ Wrong <span class="num" id="scoreWrong">0</span></div>
+      <div class="score-pill unanswered">— Unanswered <span class="num" id="scoreUnanswered">13</span></div>
+    </div>
+    <div class="submit-row">
+      <button class="submit-btn" id="copyBtn"><span class="sb-icon">⎘</span><span class="sb-text">Copy for Canvas</span></button>
+      <button class="email-btn" id="emailBtn"><span class="sb-icon">✉</span><span class="sb-text">Email to Teacher</span></button>
+      <button class="reset-btn" id="resetBtn">Reset All</button>
+    </div>
+    <div class="submit-foot"><strong>Submission flow:</strong> 1. Type your name. 2. Click <strong>Copy for Canvas</strong>. 3. Paste into the Day 2 classwork assignment on Canvas and submit there. If Canvas is down, use <strong>Email to Teacher</strong>.</div>
+  </div>
+
+</div><!-- /.page -->
+
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-eyebrow ok"><span class="dot"></span>Copied to Clipboard</div>
+      <div class="submit-success">
+        <div class="ss-check">✓</div><div class="ss-title">Submission Ready</div>
+        <div class="ss-sub">Your Day 2 results are on your clipboard. Open the Canvas assignment, paste, and submit there.</div>
+      </div>
+    </div>
+    <div class="canvas-steps">
+      <div class="cs-row"><span class="cs-num">1</span><span class="cs-text">Open the Canvas assignment for <strong>Day 2 Classwork</strong>.</span></div>
+      <div class="cs-row"><span class="cs-num">2</span><span class="cs-text">Click into the text-entry box, then paste with <strong>Ctrl+V</strong> (Windows) or <strong>Cmd+V</strong> (Mac).</span></div>
+      <div class="cs-row"><span class="cs-num">3</span><span class="cs-text">Click <strong>Submit</strong> on Canvas. Done.</span></div>
+    </div>
+    <div class="preview-head"><div class="ph-label">Preview · what was copied</div><button class="ph-recopy" id="recopyBtn">Copy Again</button></div>
+    <pre class="preview-text" id="previewText"></pre>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalEmail">Email to Teacher Instead</button>
+      <button class="modal-btn primary" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg>
+</button>
+
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Day 2 · Unit 2 · Exponential, Log &amp; Inverse</span>
+</footer>
+
+<script src="precalc-week.js"></script>
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   DAY 2 QUESTION DEFINITIONS · Unit 2 — Exp / Log / Inverse
+   ────────────────────────────────────────────────────────────────── */
+
+const DAY2_QUESTIONS = [
+
+  /* ─── Q1 · MC · Geometric sequence nth term ──────────────────── */
+  {
+    id: 1, type: "mc", tag: "2A · Topic 2.2", color: "green",
+    generate(){
+      const a1 = R.int(2, 8);
+      const r = R.pick([2, 3]);
+      const n = R.int(4, 6);
+      const correct = a1 * Math.pow(r, n - 1);
+      const trapNoMinus1 = a1 * Math.pow(r, n);              // forgot the n−1
+      const trapAdd = a1 + r * (n - 1);                       // treated as arithmetic
+      const trapMultiply = a1 * r * (n - 1);                  // multiplied instead of exponent
+      return {
+        stem: `A geometric sequence has first term <span class="mono">a₁ = ${a1}</span> and common ratio <span class="mono">r = ${r}</span>. What is the value of the ${n}th term, <span class="mono">a${"₁₂₃₄₅₆₇₈₉".charAt(n - 1)}</span>?`,
+        options: R.shuffle([
+          { html: correct.toString(), correct: true },
+          { html: trapNoMinus1.toString(), correct: false, misconception: `You computed a₁ · r<sup>n</sup> = ${a1} · ${r}<sup>${n}</sup> = ${trapNoMinus1}. The formula is <strong>a₁ · r<sup>n−1</sup></strong> — the exponent is one less than n because a₁ already counts as the first term.` },
+          { html: trapAdd.toString(), correct: false, misconception: `You used the <em>arithmetic</em> formula a₁ + (n−1)d. Geometric sequences MULTIPLY by r each step — the formula is a₁ · r<sup>n−1</sup>.` },
+          { html: trapMultiply.toString(), correct: false, misconception: `You computed a₁ · r · (n−1) = ${a1} · ${r} · ${n - 1} = ${trapMultiply}. Geometric growth uses an <strong>exponent</strong>, not multiplication: a₁ · r<sup>n−1</sup>.` },
+          { html: (a1 * (n - 1)).toString(), correct: false, misconception: `You ignored r entirely and multiplied a₁ by (n−1). Geometric sequences depend on r raised to a power, not on multiplication by n.` },
+          { html: Math.pow(r, n - 1).toString(), correct: false, misconception: `You computed r<sup>n−1</sup> = ${Math.pow(r, n - 1)} but forgot to multiply by a₁. Don't drop the first term out of the formula.` }
+        ]),
+        correctDisplay: `a${"₁₂₃₄₅₆₇₈₉".charAt(n - 1)} = ${correct}`,
+        workedSolution: `Geometric formula: <strong>a<sub>n</sub> = a₁ · r<sup>n−1</sup></strong>. Plug in: a${"₁₂₃₄₅₆₇₈₉".charAt(n - 1)} = ${a1} · ${r}<sup>${n - 1}</sup> = ${a1} · ${Math.pow(r, n - 1)} = <strong>${correct}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q2 · FIB · Fractional exponent ─────────────────────────── */
+  {
+    id: 2, type: "fib", tag: "2A · Topic 2.4", color: "green",
+    generate(){
+      const base = R.pick([8, 16, 27, 32, 64, 81, 125]);
+      const rootMap = { 8:[3,2], 16:[2,4], 27:[3,3], 32:[5,2], 64:[6,2], 81:[4,3], 125:[3,5] };
+      const [root, baseRoot] = rootMap[base];
+      const num = R.pick([2, 3]);
+      const den = root;
+      const correct = Math.round(Math.pow(baseRoot, num));
+      const trapMultiply = Math.round(base * num / den);
+      const trapDivide = Math.round(base / num);
+      return {
+        stem: `Simplify <span class="mono">${base}^(${num}/${den})</span>. (Type a single integer.)`,
+        prefix: "Answer:",
+        placeholder: "integer",
+        accepted: [correct.toString(), correct.toFixed(1)],
+        misconceptions: [
+          { match: [trapMultiply.toString()], why: `You computed ${base} × ${num}/${den} = ${trapMultiply}. That treats the exponent as multiplication. A fractional exponent means <strong>root then power</strong>: ${base}^(${num}/${den}) = (${base}^(1/${den}))^${num} = ${baseRoot}^${num} = ${correct}.` },
+          { match: [base.toString()], why: `Leaving the base alone happens when you forget the exponent does anything. ${base}^(${num}/${den}) is NOT ${base} — apply the fractional exponent rule.` },
+          { match: [(base * num).toString()], why: `You multiplied ${base} by the numerator ${num}. Fractional exponents aren't multiplication — they're roots & powers combined.` },
+          { match: [trapDivide.toString()], why: `You divided ${base} by ${num}. That's not how exponents work. Use: <strong>${base}^(${num}/${den}) = (${den}√${base})^${num}</strong>.` },
+          { match: [baseRoot.toString()], why: `You took the ${den}th root (${baseRoot}) but forgot to raise it to the ${num}th power. Final answer: ${baseRoot}^${num} = ${correct}.` }
+        ],
+        correctDisplay: `${base}^(${num}/${den}) = ${correct}`,
+        workedSolution: `Fractional exponent rule: <strong>take the root first, then the power</strong>. ${base}^(1/${den}) = ${baseRoot}, then ${baseRoot}^${num} = <strong>${correct}</strong>. (You can also do it in the other order: ${base}^${num} first, then take the ${den}th root — but root-first usually keeps numbers small.)`
+      };
+    }
+  },
+
+  /* ─── Q3 · MC · Exponential growth/decay direction ───────────── */
+  {
+    id: 3, type: "mc", tag: "2A · Topic 2.3", color: "green",
+    generate(){
+      const a = R.int(2, 12);
+      const bChoice = R.pick(["growth", "decay"]);
+      const b = bChoice === "growth" ? R.pick([1.05, 1.10, 1.25, 1.5, 2, 3]) : R.pick([0.5, 0.75, 0.8, 0.95]);
+      const bStr = b.toString();
+      return {
+        stem: `Classify the function <span class="mono">f(x) = ${a} · ${bStr}^x</span>.`,
+        options: R.shuffle([
+          { html: `Exponential growth (function increases as x increases)`, correct: bChoice === "growth", misconception: bChoice !== "growth" ? `Growth needs base <strong>b > 1</strong>. Here b = ${bStr}, which is less than 1, so the function decays.` : "" },
+          { html: `Exponential decay (function decreases as x increases)`, correct: bChoice === "decay", misconception: bChoice !== "decay" ? `Decay needs base <strong>0 < b < 1</strong>. Here b = ${bStr}, which is greater than 1, so the function grows.` : "" },
+          { html: `Linear — constant rate of change`, correct: false, misconception: `f(x) = a · b<sup>x</sup> is exponential, not linear. Linear functions look like f(x) = mx + b (with x as a base, not an exponent).` },
+          { html: `Quadratic`, correct: false, misconception: `Quadratic functions have x² (variable as base, fixed exponent). Here x is the EXPONENT, which makes it exponential.` },
+          { html: `Constant (no growth or decay)`, correct: false, misconception: `Constant would require b = 1 (then ${a} · 1<sup>x</sup> = ${a} for all x). Here b = ${bStr} ≠ 1.` }
+        ]),
+        correctDisplay: bChoice === "growth" ? "Exponential growth (b > 1)" : "Exponential decay (0 < b < 1)",
+        workedSolution: `For f(x) = a · b<sup>x</sup> with a > 0: <strong>b > 1 → growth</strong>, <strong>0 < b < 1 → decay</strong>. Here b = ${bStr}, which is ${bChoice === "growth" ? "greater than 1, so the function GROWS" : "between 0 and 1, so the function DECAYS"}.`
+      };
+    }
+  },
+
+  /* ─── Q4 · MC · Log properties expansion ─────────────────────── */
+  {
+    id: 4, type: "mc", tag: "2B · Topic 2.12", color: "green",
+    generate(){
+      const a = R.int(2, 4);
+      const b = R.int(2, 4);
+      const exprHTML = `log(x<sup>${a}</sup>√y / z<sup>${b}</sup>)`;
+      return {
+        stem: `Which expression is equivalent to <span class="mono">${exprHTML}</span>, where √ denotes a square root and all variables are positive?`,
+        options: R.shuffle([
+          { html: `${a} log x + (1/2) log y − ${b} log z`, correct: true },
+          { html: `${a} log x + (1/2) log y + ${b} log z`, correct: false, misconception: `Sign error on the quotient. Division becomes <strong>subtraction</strong> of logs, not addition. The ${b} log z term must be NEGATIVE.` },
+          { html: `${a} log x · (1/2) log y / ${b} log z`, correct: false, misconception: `You kept the original operations (·, /) instead of converting them to log rules. Multiplication inside the log → ADDITION outside. Division inside → SUBTRACTION outside.` },
+          { html: `${a} log x · log(√y) − ${b} log z`, correct: false, misconception: `You forgot to apply the power rule to √y. √y = y<sup>1/2</sup>, so log(√y) = (1/2) log y.` },
+          { html: `log(${a}x) + log(√y) − log(${b}z)`, correct: false, misconception: `Power rule misapplied. log(x<sup>${a}</sup>) means <strong>${a} · log x</strong>, NOT log(${a}x). The exponent comes out as a coefficient.` },
+          { html: `log(${a}x + √y − ${b}z)`, correct: false, misconception: `You can't combine logs of different things into one log of a sum. Products/quotients become +/− OUTSIDE the log; sums inside the log can't be simplified.` }
+        ]),
+        correctDisplay: `${a} log x + (1/2) log y − ${b} log z`,
+        workedSolution: `Apply the three log rules: <strong>product</strong> (× → +), <strong>quotient</strong> (÷ → −), <strong>power</strong> (exponent → coefficient). Note √y = y<sup>1/2</sup>. So log(x<sup>${a}</sup>√y / z<sup>${b}</sup>) = log(x<sup>${a}</sup>) + log(y<sup>1/2</sup>) − log(z<sup>${b}</sup>) = <strong>${a} log x + (1/2) log y − ${b} log z</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q5 · FIB · Solve log_b(x) = k ──────────────────────────── */
+  {
+    id: 5, type: "fib", tag: "2B · Topic 2.13", color: "green",
+    generate(){
+      const base = R.pick([2, 3, 4, 5]);
+      const k = R.int(2, 4);
+      const x = Math.pow(base, k);
+      return {
+        stem: `Solve for x: <span class="mono">log<sub>${base}</sub>(x) = ${k}</span>. (Type the integer value of x.)`,
+        prefix: "x =",
+        placeholder: "integer",
+        accepted: [x.toString()],
+        misconceptions: [
+          { match: [(base * k).toString()], why: `You computed ${base} × ${k} = ${base * k}. That treats the log as multiplication. Logs convert to exponents: log<sub>${base}</sub>(x) = ${k} means x = ${base}<sup>${k}</sup>, not ${base} × ${k}.` },
+          { match: [(base + k).toString()], why: `You added base and exponent. Convert to exponential form: log<sub>${base}</sub>(x) = ${k} ⇔ x = ${base}<sup>${k}</sup> = ${x}.` },
+          { match: [k.toString()], why: `You answered the exponent (${k}) instead of x. The equation says log<sub>${base}</sub>(x) = ${k}, so x = ${base}<sup>${k}</sup> = ${x}.` },
+          { match: [base.toString()], why: `You answered the base (${base}) instead of x. Convert: log<sub>${base}</sub>(x) = ${k} ⇔ x = ${base}<sup>${k}</sup> = ${x}.` }
+        ],
+        correctDisplay: `x = ${x}`,
+        workedSolution: `Convert log form to exponential form: <strong>log<sub>${base}</sub>(x) = ${k} ⇔ x = ${base}<sup>${k}</sup></strong>. Compute: ${base}<sup>${k}</sup> = <strong>${x}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q6 · MC · BIGGEST MISS · Log graph x-intercept ─────────── */
+  {
+    id: 6, type: "mc", tag: "2B · Topic 2.13", color: "green",
+    generate(){
+      const base = R.pick([2, 3, 4, 5]);
+      const c = R.int(1, 4);
+      const k = R.int(1, 3);
+      const baseToK = Math.pow(base, k);
+      const correct = baseToK + c;
+      return {
+        stem: `What is the x-intercept of <span class="mono">f(x) = log<sub>${base}</sub>(x − ${c}) − ${k}</span>?`,
+        options: R.shuffle([
+          { html: `x = ${correct}`, correct: true },
+          { html: `x = ${baseToK}`, correct: false, misconception: `<strong>The class's biggest Unit 2 miss.</strong> You stopped after solving x − ${c} = ${baseToK}, giving x = ${baseToK}. You forgot to <strong>add ${c} back</strong>. Final: x = ${baseToK} + ${c} = ${correct}.` },
+          { html: `x = ${base * k + c}`, correct: false, misconception: `You computed ${base} × ${k} + ${c} = ${base * k + c}. The log/exponent step is ${base}<sup>${k}</sup>, NOT ${base} × ${k}. Use ${base}<sup>${k}</sup> = ${baseToK}, then add ${c}.` },
+          { html: `x = ${c}`, correct: false, misconception: `x = ${c} is where the function is undefined (the vertical asymptote of log<sub>${base}</sub>(x − ${c})), not the x-intercept. Set f(x) = 0 and solve.` },
+          { html: `x = ${k + c}`, correct: false, misconception: `You added the exponent ${k} and shift ${c} directly. Step missing: the exponent ${k} actually means ${base}<sup>${k}</sup> = ${baseToK} after converting from log form.` },
+          { html: `x = ${base + k + c}`, correct: false, misconception: `You added all three numbers (${base}, ${k}, ${c}). The conversion log<sub>${base}</sub>(stuff) = ${k} ⇔ stuff = ${base}<sup>${k}</sup>, then solve for x.` }
+        ]),
+        correctDisplay: `x-intercept: x = ${correct}`,
+        workedSolution: `Set f(x) = 0: log<sub>${base}</sub>(x − ${c}) − ${k} = 0 → log<sub>${base}</sub>(x − ${c}) = ${k}. Convert to exponential: x − ${c} = ${base}<sup>${k}</sup> = ${baseToK}. Solve for x: <strong>x = ${baseToK} + ${c} = ${correct}</strong>. <em>The trap your class fell into: stopping at x = ${baseToK} and forgetting to add ${c} back.</em>`
+      };
+    }
+  },
+
+  /* ─── Q7 · FIB · Evaluate log_b(N) ───────────────────────────── */
+  {
+    id: 7, type: "fib", tag: "2B · Topic 2.12", color: "green",
+    generate(){
+      const base = R.pick([2, 3, 4, 5]);
+      const exp = R.int(2, 5);
+      const N = Math.pow(base, exp);
+      return {
+        stem: `Evaluate <span class="mono">log<sub>${base}</sub>(${N})</span>. (Type an integer.)`,
+        prefix: "Answer:",
+        placeholder: "integer",
+        accepted: [exp.toString()],
+        misconceptions: [
+          { match: [N.toString()], why: `You typed ${N} (the argument of the log). The log answers <em>"to what power must I raise ${base} to get ${N}?"</em> — that power is ${exp}, not ${N}.` },
+          { match: [base.toString()], why: `You typed the base ${base}. log asks for the EXPONENT, not the base.` },
+          { match: [(N / base).toString()], why: `You divided ${N} ÷ ${base} = ${N / base}. Log doesn't mean division — it means "what exponent?" The answer is the exponent ${exp} since ${base}<sup>${exp}</sup> = ${N}.` },
+          { match: [(N - base).toString()], why: `You subtracted ${base} from ${N}. Log isn't subtraction. Find the exponent: ${base}<sup>?</sup> = ${N} → ? = ${exp}.` }
+        ],
+        correctDisplay: `log<sub>${base}</sub>(${N}) = ${exp}`,
+        workedSolution: `Logs answer the question <em>"what exponent on the base produces the argument?"</em> Here: <strong>${base}<sup>?</sup> = ${N}</strong>. Since ${base}<sup>${exp}</sup> = ${N}, the answer is <strong>${exp}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q8 · MC · Semi-log plot → exponential model ────────────── */
+  {
+    id: 8, type: "mc", tag: "2B · Topic 2.15", color: "green",
+    generate(){
+      const slope = R.pick([0.3, 0.5, 0.7, 1, 1.5, 2]);
+      const intercept = R.int(0, 2);
+      const a = Math.pow(10, intercept);
+      // Model: y = 10^intercept · 10^(slope · x)
+      return {
+        stem: `When the points (x, y) of a data set are graphed as (x, log₁₀ y) on a semi-log plot, the result is a straight line with slope <strong>${slope}</strong> and y-intercept <strong>${intercept}</strong>. Which formula models the original function y(x)?`,
+        options: R.shuffle([
+          { html: `y = ${a === 1 ? "" : a + " · "}10<sup>(${slope}x)</sup>`, correct: true },
+          { html: `y = ${slope}x + ${intercept}`, correct: false, misconception: `That's the equation of the line on the semi-log plot — but that's log y vs. x, not y vs. x. You need to undo the log: y = 10<sup>(${slope}x + ${intercept})</sup>.` },
+          { html: `y = log(${slope}x + ${intercept})`, correct: false, misconception: `You wrapped the line equation in a log. You should be <em>undoing</em> the log (the y-axis was already log y). Apply 10<sup>(...)</sup>, not log(...).` },
+          { html: `y = ${slope} · 10<sup>x</sup>`, correct: false, misconception: `You moved the slope outside as a coefficient. The slope is the <strong>exponent multiplier</strong> on 10: y = 10<sup>(${slope}x + ${intercept})</sup>, which factors as ${a} · 10<sup>${slope}x</sup>.` },
+          { html: `y = x<sup>${slope}</sup> + ${a}`, correct: false, misconception: `Power function (x raised to a constant) ≠ exponential function (constant raised to x). Semi-log straightens exponentials, not power functions.` },
+          { html: `y = e<sup>(${slope}x + ${intercept})</sup>`, correct: false, misconception: `The semi-log axis used was log<sub>10</sub>, so the base is <strong>10</strong>, not e. Use 10<sup>(...)</sup>, not e<sup>(...)</sup>.` }
+        ]),
+        correctDisplay: `y = ${a} · 10^(${slope}x)`,
+        workedSolution: `On a semi-log plot of log y vs. x, exponential data y = a · b<sup>x</sup> becomes a straight line. The line equation is <strong>log y = ${slope}x + ${intercept}</strong>. Undo the log: <strong>y = 10<sup>(${slope}x + ${intercept})</sup> = 10<sup>${intercept}</sup> · 10<sup>${slope}x</sup> = ${a} · 10<sup>${slope}x</sup></strong>.`
+      };
+    }
+  },
+
+  /* ─── Q9 · DD · Domain of log_b(x − c) ───────────────────────── */
+  {
+    id: 9, type: "dd", tag: "2B · Topic 2.10", color: "green",
+    generate(){
+      const c = R.int(2, 7);
+      return {
+        stem: `What is the domain of <span class="mono">f(x) = log<sub>2</sub>(x − ${c})</span>?`,
+        prefix: "Domain:",
+        options: R.shuffle([
+          { text: `x > ${c} (the argument must be strictly positive)`, correct: true },
+          { text: `x ≥ ${c}`, correct: false, misconception: `Not quite — log(0) is undefined (it goes to −∞). The argument must be <strong>strictly positive</strong>, so x − ${c} > 0, meaning x > ${c} (strict inequality, not ≥).` },
+          { text: `x < ${c}`, correct: false, misconception: `Sign flipped. Logs are defined for POSITIVE arguments. x − ${c} > 0 means x > ${c}, not x < ${c}.` },
+          { text: `All real numbers`, correct: false, misconception: `Logs are NOT defined for non-positive arguments. When x ≤ ${c}, the argument x − ${c} ≤ 0 and log is undefined. So the domain excludes those x-values.` },
+          { text: `x > 0`, correct: false, misconception: `You used the domain for log<sub>2</sub>(x), forgetting the shift. The shift c = ${c} moves the domain restriction: now you need x − ${c} > 0, so x > ${c}.` }
+        ]),
+        correctDisplay: `Domain: x > ${c}`,
+        workedSolution: `log<sub>b</sub>(stuff) is defined only when <strong>stuff > 0</strong> (strictly positive). So x − ${c} > 0, which gives <strong>x > ${c}</strong>. Note the strict inequality — log(0) is undefined.`
+      };
+    }
+  },
+
+  /* ─── Q10 · MC · Inverse point-swap ──────────────────────────── */
+  {
+    id: 10, type: "mc", tag: "2C · Topic 2.8", color: "green",
+    generate(){
+      const p1 = [R.int(1, 4), R.int(5, 12)];
+      const p2 = [p1[0] + R.int(2, 4), p1[1] + R.int(3, 8)];
+      const p3 = [p2[0] + R.int(2, 4), p2[1] + R.int(3, 8)];
+      const fmt = p => `(${p[0]}, ${p[1]})`;
+      const swap = p => `(${p[1]}, ${p[0]})`;
+      const reciprocal = p => `(${p[0]}, 1/${p[1]})`;
+      const negate = p => `(${-p[0]}, ${-p[1]})`;
+      return {
+        stem: `The graph of f passes through the points <span class="mono">${fmt(p1)}, ${fmt(p2)}, ${fmt(p3)}</span>. Through which set of points must the graph of <span class="mono">f⁻¹</span> (the inverse of f) pass?`,
+        options: R.shuffle([
+          { html: `${swap(p1)}, ${swap(p2)}, ${swap(p3)}`, correct: true },
+          { html: `${fmt(p1)}, ${fmt(p2)}, ${fmt(p3)}`, correct: false, misconception: `Those are the original points of f, not its inverse. The inverse <strong>swaps</strong> each (x, y) to (y, x).` },
+          { html: `${negate(p1)}, ${negate(p2)}, ${negate(p3)}`, correct: false, misconception: `You negated the coordinates — that's reflection over the origin, not the inverse. Inverse means swap x and y (reflection over the line y = x).` },
+          { html: `${reciprocal(p1)}, ${reciprocal(p2)}, ${reciprocal(p3)}`, correct: false, misconception: `You took reciprocals of the y-values. f⁻¹ is the <strong>inverse function</strong> (swap x and y), not 1/f (the reciprocal).` },
+          { html: `(${p1[1]}, ${-p1[0]}), (${p2[1]}, ${-p2[0]}), (${p3[1]}, ${-p3[0]})`, correct: false, misconception: `Swap is correct but the sign change is not. f⁻¹ just swaps x and y. No negation.` },
+          { html: `(0, 0), (1, 1), (2, 2)`, correct: false, misconception: `Those are points on the line y = x (the axis of reflection), not on f⁻¹. The inverse passes through the SWAPPED versions of f's points.` }
+        ]),
+        correctDisplay: `${swap(p1)}, ${swap(p2)}, ${swap(p3)}`,
+        workedSolution: `<strong>The inverse function swaps x and y</strong>: every (a, b) on f becomes (b, a) on f⁻¹. Applied here: ${fmt(p1)} → ${swap(p1)}, ${fmt(p2)} → ${swap(p2)}, ${fmt(p3)} → ${swap(p3)}. (Geometrically, f⁻¹ is the reflection of f across y = x.)`
+      };
+    }
+  },
+
+  /* ─── Q11 · FIB · Inverse of a linear function ───────────────── */
+  {
+    id: 11, type: "fib", tag: "2C · Topic 2.8", color: "green",
+    generate(){
+      const m = R.pick([2, 3, 4, 5]);
+      const b = R.intExcl(-9, 9, [0]);
+      // f(x) = m·x + b  →  f⁻¹(x) = (x − b) / m
+      const bSign = b > 0 ? "+ " + b : "− " + (-b);
+      const correctVariants = [
+        `(x ${b > 0 ? "− " + b : "+ " + (-b)}) / ${m}`,
+        `(x ${b > 0 ? "−" + b : "+" + (-b)})/${m}`,
+        `(x-${b})/${m}`,
+        `(x+${-b})/${m}`,
+        `1/${m}x ${b > 0 ? "− " + (b / m) : "+ " + (-b / m)}`
+      ];
+      return {
+        stem: `Find the inverse function for <span class="mono">f(x) = ${m}x ${bSign}</span>. Type your answer as a formula in x (e.g. <span class="mono">(x − 3)/2</span>).`,
+        prefix: "f⁻¹(x) =",
+        placeholder: "formula in x",
+        accepted: [
+          (input, norm) => {
+            // Acceptable: (x − b)/m or x/m − b/m or equivalents
+            // We normalize and check several forms
+            const n = norm;
+            const target1 = normalize(`(x${b > 0 ? "-" + b : "+" + (-b)})/${m}`);
+            const target2 = normalize(`x/${m}${b > 0 ? "-" + (b / m) : "+" + (-b / m)}`);
+            return n === target1 || n === target2 || n === normalize(`(x${b > 0 ? "-" + b : "+" + (-b)})/${m}`);
+          }
+        ],
+        misconceptions: [
+          { match: (v, n) => n === normalize(`${m}x${bSign}`), why: `You typed the original function f(x), not the inverse. The inverse undoes f. Swap x and y in y = ${m}x ${bSign}, then solve.` },
+          { match: (v, n) => n === normalize(`${m}x-${b}`), why: `Sign error. Solving x = ${m}y ${bSign} for y: subtract ${b > 0 ? b : "the constant"} → y = (x ${b > 0 ? "− " + b : "+ " + (-b)})/${m}. Don't forget to divide by ${m}.` },
+          { match: (v, n) => n === normalize(`1/(${m}x${bSign})`), why: `That's <strong>1/f(x)</strong> (the reciprocal), not f⁻¹(x) (the inverse). Inverse = swap x and y and solve for y.` },
+          { match: (v, n) => n === normalize(`x${bSign}/${m}`), why: `Order of operations: you need parentheses. (x ${b > 0 ? "− " + b : "+ " + (-b)})/${m} is different from x ${bSign}/${m} (which divides only ${b > 0 ? "−" + b : "+" + (-b)} by ${m}).` }
+        ],
+        correctDisplay: `f⁻¹(x) = (x ${b > 0 ? "− " + b : "+ " + (-b)}) / ${m}`,
+        workedSolution: `To find the inverse: <strong>(1)</strong> Write y = ${m}x ${bSign}. <strong>(2)</strong> Swap x and y: x = ${m}y ${bSign}. <strong>(3)</strong> Solve for y: x ${b > 0 ? "− " + b : "+ " + (-b)} = ${m}y, so y = (x ${b > 0 ? "− " + b : "+ " + (-b)}) / ${m}. Therefore <strong>f⁻¹(x) = (x ${b > 0 ? "− " + b : "+ " + (-b)}) / ${m}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q12 · DD · Exp/Log inverse identification ──────────────── */
+  {
+    id: 12, type: "dd", tag: "2C · Topic 2.8", color: "green",
+    generate(){
+      const b = R.pick([2, 3, 5, 10, "e"]);
+      const bStr = b.toString();
+      return {
+        stem: `If <span class="mono">f(x) = ${bStr}<sup>x</sup></span>, what is its inverse function <span class="mono">f⁻¹(x)</span>?`,
+        prefix: "f⁻¹(x) =",
+        options: R.shuffle([
+          { text: `log${b === "e" ? "" : "<sub>" + b + "</sub>"}(x)${b === "e" ? " (i.e. ln(x))" : ""}`, correct: true },
+          { text: `${bStr}<sup>−x</sup>`, correct: false, misconception: `${bStr}<sup>−x</sup> = 1/${bStr}<sup>x</sup> is the <strong>reflection over the y-axis</strong>, not the inverse. The inverse of an exponential is a logarithm.` },
+          { text: `−${bStr}<sup>x</sup>`, correct: false, misconception: `Negating the function reflects it over the x-axis — that's not an inverse. f⁻¹ undoes f; for exponentials, the un-doer is a log with the same base.` },
+          { text: `x<sup>${bStr === "e" ? "1/e" : "1/" + b}</sup>`, correct: false, misconception: `That's a power-function inverse. Exponential and power functions are different — ${bStr}<sup>x</sup> has the variable in the EXPONENT, not the base. Its inverse is log<sub>${bStr}</sub>(x).` },
+          { text: `${b === 10 ? "log(x)" : "log<sub>10</sub>(x)"}`, correct: b === 10, misconception: b !== 10 ? `log<sub>10</sub>(x) is the inverse of <strong>10<sup>x</sup></strong>, not ${bStr}<sup>x</sup>. Match the bases: the inverse of ${bStr}<sup>x</sup> is log<sub>${bStr}</sub>(x).` : "" }
+        ]),
+        correctDisplay: `f⁻¹(x) = log${b === "e" ? "" : "_" + b}(x)${b === "e" ? " = ln(x)" : ""}`,
+        workedSolution: `Exponential and logarithm with the same base are inverses: <strong>if f(x) = ${bStr}<sup>x</sup>, then f⁻¹(x) = log<sub>${bStr}</sub>(x)</strong>${b === "e" ? " (which we also write as ln(x))" : ""}. Check: f⁻¹(f(x)) = log<sub>${bStr}</sub>(${bStr}<sup>x</sup>) = x. ✓`
+      };
+    }
+  },
+
+  /* ─── Q13 · MC · Doubling time / half-life ───────────────────── */
+  {
+    id: 13, type: "mc", tag: "2A · Topic 2.5", color: "green",
+    generate(){
+      const isDoubling = R.pick([true, false]);
+      const initial = R.pick([100, 200, 500, 1000]);
+      const periods = R.pick([2, 3, 4]);
+      const periodTime = R.pick([3, 5, 6, 10]);
+      const totalTime = periods * periodTime;
+      const finalVal = isDoubling ? initial * Math.pow(2, periods) : initial / Math.pow(2, periods);
+      const wrongHalf = isDoubling ? initial / Math.pow(2, periods) : initial * Math.pow(2, periods);
+      const wrongLinear = isDoubling ? initial + periods * initial : initial - periods * initial / 2;
+
+      return {
+        stem: `A population ${isDoubling ? "doubles" : "halves"} every <strong>${periodTime} years</strong>. Starting with ${initial} organisms at t = 0, what is the population after <strong>${totalTime} years</strong>?`,
+        options: R.shuffle([
+          { html: finalVal.toString(), correct: true },
+          { html: wrongHalf.toString(), correct: false, misconception: `You ${isDoubling ? "halved" : "doubled"} instead of ${isDoubling ? "doubled" : "halved"}. ${isDoubling ? "Doubling" : "Halving"} means multiplying by ${isDoubling ? "2" : "1/2"} each period.` },
+          { html: wrongLinear.toString(), correct: false, misconception: `That's linear thinking — you ${isDoubling ? "added" : "subtracted"} a fixed amount each period. ${isDoubling ? "Doubling" : "Halving"} is EXPONENTIAL: multiply by ${isDoubling ? "2" : "1/2"} every period, not add/subtract.` },
+          { html: (initial * periods).toString(), correct: false, misconception: `You multiplied by the number of periods (${periods}). ${isDoubling ? "Doubling" : "Halving"} means multiplying by ${isDoubling ? "2" : "1/2"} <strong>each</strong> period — ${periods} times — giving an exponent of ${periods}, not multiplication by ${periods}.` },
+          { html: (initial * Math.pow(2, totalTime)).toString(), correct: false, misconception: `You used the TOTAL time as the exponent. Each period is ${periodTime} years, so the number of doublings is total time / period = ${totalTime}/${periodTime} = ${periods}, not ${totalTime}.` },
+          { html: (initial * 2).toString(), correct: false, misconception: `You ${isDoubling ? "doubled" : "halved"} once. But ${totalTime} years contains ${periods} ${periodTime}-year periods, so you ${isDoubling ? "double" : "halve"} ${periods} times: ${initial} × ${isDoubling ? "2" : "(1/2)"}<sup>${periods}</sup>.` }
+        ]),
+        correctDisplay: `${finalVal} organisms`,
+        workedSolution: `${totalTime} years ÷ ${periodTime} years per ${isDoubling ? "doubling" : "halving"} = <strong>${periods} ${isDoubling ? "doublings" : "halvings"}</strong>. So the population is ${initial} × ${isDoubling ? "2" : "(1/2)"}<sup>${periods}</sup> = ${initial} × ${isDoubling ? Math.pow(2, periods) : (1 / Math.pow(2, periods))} = <strong>${finalVal}</strong>.`
+      };
+    }
+  }
+
+];
+
+window.PrecalcDay.init({
+  dayTitle: "Day 2",
+  dayLabel: "Exponential, Log & Inverse",
+  questions: DAY2_QUESTIONS
+});
+</script>
+
+</body>
+</html>

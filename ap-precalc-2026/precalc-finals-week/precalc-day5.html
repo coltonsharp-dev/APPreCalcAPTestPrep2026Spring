@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Pre-Calc · Day 5 · Mixed Cumulative + FRQ Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="precalc-week.css">
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="topnav">
+  <a class="back-btn" href="precalc-landing.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Review Week
+  </a>
+  <div class="nav-center">
+    <span class="nav-unit">Day 5 · Fri May 15</span>
+    <span class="nav-sep">·</span>
+    <span class="nav-title">Cumulative · Mock-Final Shape</span>
+  </div>
+  <div class="timer-pill" style="display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:100px;background:var(--glass);border:1px solid var(--b);font-size:12px;color:var(--tx2);letter-spacing:0.08em;">
+    <span style="width:6px;height:6px;border-radius:50%;background:var(--green);"></span>
+    <span id="timerVal" style="font-family:'Syne',sans-serif;font-weight:700;color:var(--tx);font-size:13px;letter-spacing:0.04em;">00:00</span>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="day-header">
+    <div class="header-eyebrow"><span class="dot" style="background:var(--red)"></span>Day 5 of 5 · Fri May 15 · ~50 min · Mock-Final Shape</div>
+    <h1 class="day-title">
+      <span class="l1">Cumulative Practice</span>
+      <span class="l2">+ FRQ Drill.</span>
+    </h1>
+    <p class="day-sub">Last warm-up before Monday's final. <strong>10 mixed multiple-choice</strong> drawn from the biggest misses across all four units, plus <strong>2 free-response problems</strong> (7 sub-parts total) modeled exactly on Q29 (sinusoidal modeling) and Q30 (hyperbola → parametric) from the final. Every question randomizes — drill until each one feels automatic.</p>
+
+    <div class="meta-row">
+      <div class="meta-pill"><span class="dot" style="background:var(--blue)"></span>Unit 1</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--green)"></span>Unit 2</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--gold)"></span>Unit 3</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--purple)"></span>Unit 4</div>
+      <div class="meta-pill"><span class="dot" style="background:var(--red)"></span>FRQ × 2 (7 sub-parts)</div>
+    </div>
+
+    <div class="instructions">
+      <div class="ih">📘 How to use this practice</div>
+      <strong>1.</strong> Treat this like a real exam first — try each question without regenerating. <strong>2.</strong> When you finish, go back to misses and use <strong>↻ New Numbers</strong> to drill the same skill with fresh values. <strong>3.</strong> Submit to Canvas at the bottom when you're done.
+    </div>
+  </div>
+
+  <!-- ──────── MIXED MC · CUMULATIVE ──────── -->
+  <div class="section-header" data-color="red">
+    <div class="sh-row"><span class="sh-tag">Mixed</span><span class="sh-title">Cumulative Multiple Choice · 10 Questions</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="1" data-color="blue">
+    <div class="q-top"><div class="q-num">01</div><span class="q-tag priority">1B · Topic 1.4</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Inflection vs Extrema</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="2" data-color="blue">
+    <div class="q-top"><div class="q-num">02</div><span class="q-tag">1C · Topic 1.7</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Holes vs Vertical Asymptotes</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="3" data-color="green">
+    <div class="q-top"><div class="q-num">03</div><span class="q-tag priority">2B · Topic 2.13</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Log x-Intercept</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="4" data-color="green">
+    <div class="q-top"><div class="q-num">04</div><span class="q-tag priority">2C · Topic 2.8</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Inverse Point-Swap</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="5" data-color="gold">
+    <div class="q-top"><div class="q-num">05</div><span class="q-tag priority">3A · Topic 3.2</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Radian Definition</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="6" data-color="gold">
+    <div class="q-top"><div class="q-num">06</div><span class="q-tag priority">3C · Topic 3.14</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Polar Rose Petals</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="7" data-color="purple">
+    <div class="q-top"><div class="q-num">07</div><span class="q-tag priority">4C · Topic 4.6</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">🔥 Hyperbola Asymptotes</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="8" data-color="purple">
+    <div class="q-top"><div class="q-num">08</div><span class="q-tag priority">4A · Topic 4.1</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag hot">Verify x AND y for t</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="9" data-color="gold">
+    <div class="q-top"><div class="q-num">09</div><span class="q-tag">3B · Topic 3.6</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Period of A·sin(Bx)+D</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="10" data-color="blue">
+    <div class="q-top"><div class="q-num">10</div><span class="q-tag">1B · Topic 1.6</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">End Behavior of Polynomial</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── FRQ 1 · SINUSOIDAL MODELING ──────── -->
+  <div class="section-header" data-color="red">
+    <div class="sh-row"><span class="sh-tag">FRQ-1</span><span class="sh-title">Sinusoidal Modeling · 4 Sub-Parts · Matches Q29 on the Final</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="11" data-color="red">
+    <div class="q-top"><div class="q-num">11</div><span class="q-tag">FRQ-1 (a)</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Amplitude A</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="12" data-color="red">
+    <div class="q-top"><div class="q-num">12</div><span class="q-tag">FRQ-1 (b)</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Midline D</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="13" data-color="red">
+    <div class="q-top"><div class="q-num">13</div><span class="q-tag">FRQ-1 (c)</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Period T (in hours)</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="14" data-color="red">
+    <div class="q-top"><div class="q-num">14</div><span class="q-tag">FRQ-1 (d)</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Full Sinusoidal Equation</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── FRQ 2 · HYPERBOLA → PARAMETRIC ──────── -->
+  <div class="section-header" data-color="red">
+    <div class="sh-row"><span class="sh-tag">FRQ-2</span><span class="sh-title">Hyperbola → Parametric · 3 Sub-Parts · Matches Q30 on the Final</span><div class="sh-line"></div></div>
+  </div>
+
+  <div class="q-card" data-q="15" data-color="red">
+    <div class="q-top"><div class="q-num">15</div><span class="q-tag">FRQ-2 (a)</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Center of Hyperbola</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="16" data-color="red">
+    <div class="q-top"><div class="q-num">16</div><span class="q-tag">FRQ-2 (b)</span><span class="q-type-tag" data-type="fib">Fill-In</span><span class="q-tag">Right Vertex of Hyperbola</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <div class="q-card" data-q="17" data-color="red">
+    <div class="q-top"><div class="q-num">17</div><span class="q-tag">FRQ-2 (c)</span><span class="q-type-tag" data-type="mc">Multiple Choice</span><span class="q-tag">Asymptote Slope ±b/a</span>
+      <div class="q-spacer"></div><span class="q-attempts">Attempt 1</span><button class="q-regen"><span class="icon">↻</span> New Numbers</button>
+    </div><div class="q-stem"></div><div class="q-input-area"></div><div class="q-feedback"></div>
+  </div>
+
+  <!-- ──────── SUBMIT AREA ──────── -->
+  <div class="submit-area">
+    <div class="submit-eyebrow"><span class="dot"></span>End of Day 5 · Final Mock-Practice · Submit via Canvas</div>
+    <div class="name-row">
+      <label class="name-label" for="studentName">Your full name</label>
+      <input type="text" id="studentName" class="name-input" placeholder="First Last" autocomplete="name">
+    </div>
+    <div class="submit-progress"><span class="prog-num" id="progNum">0</span><span class="prog-sep">/</span><span class="prog-total">17</span><span class="prog-label">answered</span></div>
+    <div class="submit-meter"><div class="submit-meter-fill" id="submitMeterFill"></div></div>
+    <div class="score-strip">
+      <div class="score-pill correct">✓ Correct <span class="num" id="scoreCorrect">0</span></div>
+      <div class="score-pill wrong">✗ Wrong <span class="num" id="scoreWrong">0</span></div>
+      <div class="score-pill unanswered">— Unanswered <span class="num" id="scoreUnanswered">17</span></div>
+    </div>
+    <div class="submit-row">
+      <button class="submit-btn" id="copyBtn"><span class="sb-icon">⎘</span><span class="sb-text">Copy for Canvas</span></button>
+      <button class="email-btn" id="emailBtn"><span class="sb-icon">✉</span><span class="sb-text">Email to Teacher</span></button>
+      <button class="reset-btn" id="resetBtn">Reset All</button>
+    </div>
+    <div class="submit-foot"><strong>Final mock submission:</strong> 1. Type your name. 2. Click <strong>Copy for Canvas</strong>. 3. Paste into the Day 5 classwork on Canvas. Good luck on the real exam Monday!</div>
+  </div>
+
+</div><!-- /.page -->
+
+<div class="modal-overlay" id="resultsModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-eyebrow ok"><span class="dot"></span>Copied to Clipboard</div>
+      <div class="submit-success"><div class="ss-check">✓</div><div class="ss-title">Submission Ready</div><div class="ss-sub">Your Day 5 mock-final results are on your clipboard. Open the Canvas assignment, paste, and submit there.</div></div>
+    </div>
+    <div class="canvas-steps">
+      <div class="cs-row"><span class="cs-num">1</span><span class="cs-text">Open the Canvas assignment for <strong>Day 5 Classwork</strong>.</span></div>
+      <div class="cs-row"><span class="cs-num">2</span><span class="cs-text">Click into the text-entry box, then paste with <strong>Ctrl+V</strong> (Windows) or <strong>Cmd+V</strong> (Mac).</span></div>
+      <div class="cs-row"><span class="cs-num">3</span><span class="cs-text">Click <strong>Submit</strong> on Canvas. Done.</span></div>
+    </div>
+    <div class="preview-head"><div class="ph-label">Preview · what was copied</div><button class="ph-recopy" id="recopyBtn">Copy Again</button></div>
+    <pre class="preview-text" id="previewText"></pre>
+    <div class="modal-actions">
+      <button class="modal-btn" id="modalEmail">Email to Teacher Instead</button>
+      <button class="modal-btn primary" id="modalClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Back to top"><svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg></button>
+
+<footer>
+  <span>Stratosyn · 2026</span>
+  <div class="footer-mark">
+    <div class="sq admin"></div><div class="sq core"></div><div class="sq teacher"></div>
+    <div class="sq student"></div><div class="sq admin"></div><div class="sq core"></div>
+    <div class="sq teacher"></div><div class="sq student"></div><div class="sq admin"></div>
+  </div>
+  <span>Day 5 · Cumulative + FRQ · Mock-Final Shape</span>
+</footer>
+
+<script src="precalc-week.js"></script>
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   DAY 5 QUESTION DEFINITIONS · Cumulative + FRQ Mock-Final
+   ────────────────────────────────────────────────────────────────── */
+
+const DAY5_QUESTIONS = [
+
+  /* ─── Q1 · Inflection vs Extrema (Unit 1 biggest miss) ───────── */
+  {
+    id: 1, type: "mc", tag: "1B · Topic 1.4", color: "blue",
+    generate(){
+      const a = R.int(0, 3);
+      const b = a + R.int(5, 9);
+      const m = a + Math.floor((b - a) / 2);
+      const cc1 = R.pick(["concave up", "concave down"]);
+      const cc2 = cc1 === "concave up" ? "concave down" : "concave up";
+      return {
+        stem: `The graph of a polynomial f is <strong>increasing on (${a}, ${b})</strong> and shows an S-bend where concavity switches from <strong>${cc1}</strong> to <strong>${cc2}</strong> at <span class="mono">x = ${m}</span>. What feature is at x = ${m}?`,
+        options: R.shuffle([
+          { html: "Point of inflection", correct: true },
+          { html: "Local maximum", correct: false, misconception: `f is increasing everywhere on (${a}, ${b}) — the curve never turns around. Concavity flip without direction flip = inflection point, not extremum.` },
+          { html: "Local minimum", correct: false, misconception: `Same trap: f is increasing throughout, so no valley exists. The S-bend is only concavity-related.` },
+          { html: "Vertical asymptote", correct: false, misconception: `Polynomials are continuous everywhere — no vertical asymptotes possible.` },
+          { html: "Both inflection and local extremum", correct: false, misconception: `Impossible: if f is increasing everywhere on the interval, no extremum exists inside it.` },
+          { html: "Removable discontinuity", correct: false, misconception: `f is continuous (polynomial), so no holes.` }
+        ]),
+        correctDisplay: "Point of inflection",
+        workedSolution: `f is increasing throughout (${a}, ${b}), so the curve never peaks or valleys. The concavity flip alone (${cc1} → ${cc2}) is the signature of a <strong>point of inflection</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q2 · Holes vs VAs (Unit 1) ─────────────────────────────── */
+  {
+    id: 2, type: "mc", tag: "1C · Topic 1.7", color: "blue",
+    generate(){
+      const shared = R.intExcl(-4, 4, [0]);
+      const denomOnly = R.intExcl(-5, 5, [0, shared]);
+      const numOnly = R.intExcl(-6, 6, [0, shared, denomOnly]);
+      const num = `(x ${shared >= 0 ? "− " + shared : "+ " + (-shared)})(x ${numOnly >= 0 ? "− " + numOnly : "+ " + (-numOnly)})`;
+      const den = `(x ${shared >= 0 ? "− " + shared : "+ " + (-shared)})(x ${denomOnly >= 0 ? "− " + denomOnly : "+ " + (-denomOnly)})`;
+      return {
+        stem: `For <span class="mono">r(x) = ${num} / [${den}]</span>, identify the holes and vertical asymptotes.`,
+        options: R.shuffle([
+          { html: `Hole at x = ${shared}; VA at x = ${denomOnly}`, correct: true },
+          { html: `VAs at x = ${shared} and x = ${denomOnly}`, correct: false, misconception: `The factor (x − ${shared}) cancels (appears in BOTH num and denom). Shared factors → <strong>hole</strong>, not VA.` },
+          { html: `Holes at x = ${shared} and x = ${denomOnly}`, correct: false, misconception: `(x − ${denomOnly}) appears only in the denominator (unshared). Unshared denom factors give <strong>VAs</strong>, not holes.` },
+          { html: `VA at x = ${shared}; hole at x = ${denomOnly}`, correct: false, misconception: `Backwards. Shared → hole; unshared denom factor → VA.` },
+          { html: `Only a VA at x = ${numOnly}`, correct: false, misconception: `x = ${numOnly} is in the numerator only — that's a zero of r, not a discontinuity.` }
+        ]),
+        correctDisplay: `Hole at x = ${shared}, VA at x = ${denomOnly}`,
+        workedSolution: `Shared factor (x − ${shared}) cancels → <strong>hole at x = ${shared}</strong>. Unshared denominator factor (x − ${denomOnly}) → <strong>VA at x = ${denomOnly}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q3 · Log graph x-intercept (Unit 2 biggest miss) ───────── */
+  {
+    id: 3, type: "mc", tag: "2B · Topic 2.13", color: "green",
+    generate(){
+      const base = R.pick([2, 3, 4, 5]);
+      const c = R.int(1, 4);
+      const k = R.int(1, 3);
+      const baseK = Math.pow(base, k);
+      const correct = baseK + c;
+      return {
+        stem: `Find the x-intercept of <span class="mono">f(x) = log<sub>${base}</sub>(x − ${c}) − ${k}</span>.`,
+        options: R.shuffle([
+          { html: `x = ${correct}`, correct: true },
+          { html: `x = ${baseK}`, correct: false, misconception: `You stopped at x − ${c} = ${baseK}. <strong>Add ${c} back</strong>: x = ${baseK} + ${c} = ${correct}.` },
+          { html: `x = ${c}`, correct: false, misconception: `That's the vertical asymptote, not the x-intercept. Set f(x) = 0 first.` },
+          { html: `x = ${k + c}`, correct: false, misconception: `You added k and c. The k must first become ${base}<sup>${k}</sup> = ${baseK} via the exponential conversion.` },
+          { html: `x = ${base * k + c}`, correct: false, misconception: `You multiplied ${base} × ${k}. Logs convert to EXPONENTIALS: ${base}<sup>${k}</sup> = ${baseK}, not ${base} × ${k}.` }
+        ]),
+        correctDisplay: `x = ${correct}`,
+        workedSolution: `Set f(x) = 0: log<sub>${base}</sub>(x − ${c}) = ${k} → x − ${c} = ${base}<sup>${k}</sup> = ${baseK} → x = <strong>${correct}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q4 · Inverse point-swap (Unit 2) ───────────────────────── */
+  {
+    id: 4, type: "mc", tag: "2C · Topic 2.8", color: "green",
+    generate(){
+      const p1 = [R.int(1, 4), R.int(5, 12)];
+      const p2 = [p1[0] + R.int(2, 4), p1[1] + R.int(3, 8)];
+      const p3 = [p2[0] + R.int(2, 4), p2[1] + R.int(3, 8)];
+      const fmt = p => `(${p[0]}, ${p[1]})`;
+      const swap = p => `(${p[1]}, ${p[0]})`;
+      return {
+        stem: `f passes through <span class="mono">${fmt(p1)}, ${fmt(p2)}, ${fmt(p3)}</span>. Through which points must f⁻¹ pass?`,
+        options: R.shuffle([
+          { html: `${swap(p1)}, ${swap(p2)}, ${swap(p3)}`, correct: true },
+          { html: `${fmt(p1)}, ${fmt(p2)}, ${fmt(p3)}`, correct: false, misconception: `Those are f's original points. Inverse SWAPS (x, y) → (y, x).` },
+          { html: `(${p1[0]}, 1/${p1[1]}), (${p2[0]}, 1/${p2[1]}), (${p3[0]}, 1/${p3[1]})`, correct: false, misconception: `f⁻¹ is the INVERSE function, not 1/f (reciprocal). Swap coordinates instead of reciprocating.` },
+          { html: `(−${p1[0]}, −${p1[1]}), (−${p2[0]}, −${p2[1]}), (−${p3[0]}, −${p3[1]})`, correct: false, misconception: `That's reflection over the origin. Inverse is reflection over y = x, which swaps coordinates.` }
+        ]),
+        correctDisplay: `${swap(p1)}, ${swap(p2)}, ${swap(p3)}`,
+        workedSolution: `Swap each (x, y) to (y, x): ${fmt(p1)} → ${swap(p1)}, etc.`
+      };
+    }
+  },
+
+  /* ─── Q5 · Radian definition (Unit 3 biggest miss) ───────────── */
+  {
+    id: 5, type: "mc", tag: "3A · Topic 3.2", color: "gold",
+    generate(){
+      return {
+        stem: `Which statement is the correct <strong>definition</strong> of one radian?`,
+        options: R.shuffle([
+          { html: `The central angle whose intercepted arc length equals the radius`, correct: true },
+          { html: `An angle of 180/π degrees`, correct: false, misconception: `That's the numeric value (~57.3°), not the geometric definition. Definition is about arc length = radius.` },
+          { html: `Half a revolution around a circle`, correct: false, misconception: `Half a revolution = π radians, not 1 radian. 1 radian ≈ 57.3°, much less than 180°.` },
+          { html: `An angle whose sine equals 1`, correct: false, misconception: `That's π/2 radians (= 90°). Confusing trig output with angle measure.` },
+          { html: `One degree of arc`, correct: false, misconception: `Radians and degrees are different units. 1 radian ≈ 57.3°.` }
+        ]),
+        correctDisplay: "1 radian = central angle with arc length equal to radius",
+        workedSolution: `<strong>Definition:</strong> θ (in radians) = arc length / radius. So 1 radian is the angle where s = r.`
+      };
+    }
+  },
+
+  /* ─── Q6 · Polar rose petals (Unit 3 biggest miss) ───────────── */
+  {
+    id: 6, type: "mc", tag: "3C · Topic 3.14", color: "gold",
+    generate(){
+      const a = R.int(2, 5);
+      const n = R.pick([2, 3, 4, 5, 6]);
+      const fn = R.pick(["cos", "sin"]);
+      const petals = (n % 2 === 0) ? 2 * n : n;
+      return {
+        stem: `How many petals does <span class="mono">r = ${a}·${fn}(${n}θ)</span> have?`,
+        options: R.shuffle([
+          { html: `${petals}`, correct: true },
+          { html: `${n}`, correct: false, misconception: `n petals only for ODD n. Here n = ${n} is ${n % 2 === 0 ? "even, so it's 2n = " + (2 * n) : "odd, so " + n}.` },
+          { html: `${2 * n}`, correct: false, misconception: `2n petals only for EVEN n. Here n = ${n} is ${n % 2 === 0 ? "even, so 2n = " + (2 * n) : "odd, so just " + n}.` },
+          { html: `${a}`, correct: false, misconception: `${a} is the petal LENGTH (coefficient), not count.` },
+          { html: `${a + n}`, correct: false, misconception: `No rule combines a and n by adding. Use: odd n → n petals; even n → 2n petals.` }
+        ]),
+        correctDisplay: `${petals} petals`,
+        workedSolution: `n = ${n} is <strong>${n % 2 === 0 ? "even, so 2n = " + (2 * n) : "odd, so n = " + n}</strong> petals.`
+      };
+    }
+  },
+
+  /* ─── Q7 · Hyperbola asymptotes (Unit 4) ─────────────────────── */
+  {
+    id: 7, type: "mc", tag: "4C · Topic 4.6", color: "purple",
+    generate(){
+      const h = R.intExcl(-4, 4, [0]);
+      const k = R.intExcl(-4, 4, [0]);
+      const a = R.pick([3, 4, 5]);
+      const b = R.intExcl(2, 6, [a]);
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSignMinus = k > 0 ? "− " + k : "+ " + (-k);
+      const kSignPlus = k > 0 ? "+ " + k : "− " + (-k);
+      return {
+        stem: `Asymptotes of <span class="mono">(x ${hSign})²/${a*a} − (y ${kSignMinus})²/${b*b} = 1</span>?`,
+        options: R.shuffle([
+          { html: `y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}`, correct: true },
+          { html: `y = ±(${a}/${b})(x ${hSign}) ${kSignPlus}`, correct: false, misconception: `Slope FLIPPED. For horizontal hyperbola, slope is <strong>b/a</strong>, not a/b. Here that's ${b}/${a}.` },
+          { html: `y = ±(${b}/${a})·x`, correct: false, misconception: `You forgot the center shift. Asymptotes pass through (${h}, ${k}), not origin.` },
+          { html: `y = ±(${a*a}/${b*b})(x ${hSign}) ${kSignPlus}`, correct: false, misconception: `Slope is b/a (un-squared), not a²/b².` }
+        ]),
+        correctDisplay: `y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}`,
+        workedSolution: `Horizontal hyperbola: <strong>y − k = ±(b/a)(x − h)</strong>. Here b/a = ${b}/${a}, center (${h}, ${k}).`
+      };
+    }
+  },
+
+  /* ─── Q8 · Verify x AND y for t (Unit 4) ─────────────────────── */
+  {
+    id: 8, type: "mc", tag: "4A · Topic 4.1", color: "purple",
+    generate(){
+      const a = R.pick([2, 3]);
+      const b = R.int(1, 5);
+      const c = R.int(0, 3);
+      const t0 = R.intExcl(2, 5, [0]);
+      const X = t0 * t0 - c;
+      const Y = a * t0 + b;
+      const tNeg = -t0;
+      const yNeg = a * tNeg + b;
+      return {
+        stem: `For <span class="mono">x(t) = t² ${c === 0 ? "" : "− " + c}</span>, <span class="mono">y(t) = ${a}t + ${b}</span>, find t at point <span class="mono">(${X}, ${Y})</span>.`,
+        options: R.shuffle([
+          { html: `t = ${t0}`, correct: true },
+          { html: `Both t = ${t0} and t = ${tNeg}`, correct: false, misconception: `x(t) = ${X} gives t = ±${t0}, but check y: y(${tNeg}) = ${yNeg} ≠ ${Y}. Only t = ${t0} works.` },
+          { html: `t = ${tNeg}`, correct: false, misconception: `y(${tNeg}) = ${yNeg}, not ${Y}. Always verify BOTH equations.` },
+          { html: `t = ${X}`, correct: false, misconception: `That's the x-coordinate. t is the parameter.` }
+        ]),
+        correctDisplay: `t = ${t0}`,
+        workedSolution: `x = ${X} → t² = ${t0 * t0} → t = ±${t0}. Check y: y(${t0}) = ${Y} ✓, y(${tNeg}) = ${yNeg} ✗. Only <strong>t = ${t0}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q9 · Period of sinusoid (Unit 3) ───────────────────────── */
+  {
+    id: 9, type: "mc", tag: "3B · Topic 3.6", color: "gold",
+    generate(){
+      const Bnum = R.pick([1, 2, 3]);
+      const Bden = R.pick([2, 3, 4, 6]);
+      const period = (2 * Bden) / Bnum;
+      const periodStr = Number.isInteger(period) ? period.toString() : `${2 * Bden}/${Bnum}`;
+      const Bstr = `${Bnum === 1 ? "" : Bnum}π/${Bden}`;
+      const A = R.int(2, 6);
+      const D = R.int(2, 8);
+      return {
+        stem: `Period of <span class="mono">f(x) = ${A}·sin(${Bstr}·x) + ${D}</span>?`,
+        options: R.shuffle([
+          { html: periodStr, correct: true },
+          { html: `π/${Bnum * Bden / 2}`, correct: false, misconception: `That's HALF the period. Use 2π/B, not π/B.` },
+          { html: Bstr, correct: false, misconception: `That's B itself. Period = 2π/|B|.` },
+          { html: A.toString(), correct: false, misconception: `That's the amplitude (A = ${A}), not the period.` },
+          { html: `2π/${Bnum}`, correct: false, misconception: `Forgot to include the denominator from B. B = ${Bstr}, so period = 2π/(${Bnum}π/${Bden}) = ${periodStr}.` }
+        ]),
+        correctDisplay: `Period = ${periodStr}`,
+        workedSolution: `Period = 2π/|B| = 2π/(${Bstr}) = 2π · ${Bden}/(${Bnum}π) = <strong>${periodStr}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q10 · End behavior (Unit 1) ────────────────────────────── */
+  {
+    id: 10, type: "mc", tag: "1B · Topic 1.6", color: "blue",
+    generate(){
+      const degParity = R.pick(["even", "odd"]);
+      const deg = degParity === "even" ? R.pick([2, 4]) : R.pick([3, 5]);
+      const leadSign = R.pick([1, -1]);
+      const leadCoef = leadSign * R.int(2, 5);
+      const polyHTML = `${leadCoef === 1 ? "" : leadCoef === -1 ? "−" : leadCoef}x<sup>${deg}</sup> + ${R.int(1, 9)}x ${R.pick(["+", "−"])} ${R.int(1, 9)}`;
+      let correctKey;
+      if (degParity === "even" && leadSign > 0) correctKey = "bothUp";
+      else if (degParity === "even" && leadSign < 0) correctKey = "bothDown";
+      else if (degParity === "odd" && leadSign > 0) correctKey = "downUp";
+      else correctKey = "upDown";
+      const all = {
+        bothUp: "As x → ±∞, f(x) → +∞",
+        bothDown: "As x → ±∞, f(x) → −∞",
+        downUp: "As x → −∞, f(x) → −∞; as x → +∞, f(x) → +∞",
+        upDown: "As x → −∞, f(x) → +∞; as x → +∞, f(x) → −∞"
+      };
+      return {
+        stem: `End behavior of <span class="mono">f(x) = ${polyHTML}</span>?`,
+        options: R.shuffle(Object.entries(all).map(([k, v]) => ({
+          html: v,
+          correct: k === correctKey,
+          misconception: k === correctKey ? "" : `Doesn't match. Leading term ${leadCoef}x<sup>${deg}</sup>: ${degParity} degree (${degParity === "even" ? "ends match" : "ends opposite"}), ${leadSign > 0 ? "positive (right end up)" : "negative (right end down)"}.`
+        }))),
+        correctDisplay: all[correctKey],
+        workedSolution: `Leading term: ${leadCoef}x<sup>${deg}</sup>. Degree ${deg} is ${degParity}, coefficient is ${leadSign > 0 ? "positive" : "negative"}. ${degParity === "even" ? "Even → ends match" : "Odd → ends opposite"}; ${leadSign > 0 ? "positive → right end up" : "negative → right end down"}.`
+      };
+    }
+  },
+
+  /* ─── Q11 · FRQ-1(a) · Amplitude from tidal max/min ──────────── */
+  {
+    id: 11, type: "fib", tag: "FRQ-1 (a)", color: "red",
+    generate(){
+      const A = R.int(4, 12);
+      const D = R.int(8, 18);
+      const max = D + A;
+      const min = D - A;
+      return {
+        stem: `<strong>Free Response 1 · Tidal Harbor.</strong> A tidal harbor has water level modeled by a sinusoidal function. Maximum height <strong>${max} ft</strong> occurs at t = 6 hours; minimum height <strong>${min} ft</strong> at t = 18 hours. <strong>(a)</strong> Find the amplitude A.`,
+        prefix: "A =",
+        placeholder: "integer",
+        accepted: [A.toString()],
+        misconceptions: [
+          { match: [D.toString()], why: `That's the midline D = (max + min)/2 = ${D}, not the amplitude. Amplitude = (max − min)/2 = ${A}.` },
+          { match: [(max - min).toString()], why: `That's the FULL range. Amplitude is half: (${max} − ${min})/2 = ${A}.` },
+          { match: [max.toString()], why: `That's the max value, not the amplitude. A = (max − min)/2 = ${A}.` }
+        ],
+        correctDisplay: `A = ${A}`,
+        workedSolution: `Amplitude = (max − min) / 2 = (${max} − ${min}) / 2 = <strong>${A}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q12 · FRQ-1(b) · Midline ───────────────────────────────── */
+  {
+    id: 12, type: "fib", tag: "FRQ-1 (b)", color: "red",
+    generate(){
+      const A = R.int(4, 12);
+      const D = R.int(8, 18);
+      const max = D + A;
+      const min = D - A;
+      return {
+        stem: `<strong>Free Response 1 · continued.</strong> Tidal harbor: maximum ${max} ft at t = 6, minimum ${min} ft at t = 18. <strong>(b)</strong> Find the midline D (vertical shift).`,
+        prefix: "D =",
+        placeholder: "integer",
+        accepted: [D.toString()],
+        misconceptions: [
+          { match: [A.toString()], why: `That's the amplitude A = (max − min)/2 = ${A}, not the midline. Midline = (max + min)/2 = ${D}.` },
+          { match: [(max + min).toString()], why: `That's max + min, not the average. Midline is HALF that: (${max} + ${min})/2 = ${D}.` },
+          { match: [max.toString()], why: `Max is ${max}, but the midline is the AVERAGE of max and min: ${D}.` }
+        ],
+        correctDisplay: `D = ${D}`,
+        workedSolution: `Midline = (max + min) / 2 = (${max} + ${min}) / 2 = <strong>${D}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q13 · FRQ-1(c) · Period ────────────────────────────────── */
+  {
+    id: 13, type: "fib", tag: "FRQ-1 (c)", color: "red",
+    generate(){
+      const maxT = R.int(4, 8);
+      const halfP = R.pick([10, 12, 14]);
+      const minT = maxT + halfP;
+      const period = halfP * 2;
+      return {
+        stem: `<strong>Free Response 1 · continued.</strong> A sinusoidal function has its maximum at <strong>t = ${maxT} hours</strong> and its next minimum at <strong>t = ${minT} hours</strong>. <strong>(c)</strong> Find the period T (in hours).`,
+        prefix: "T =",
+        placeholder: "integer (hours)",
+        accepted: [period.toString()],
+        misconceptions: [
+          { match: [halfP.toString()], why: `From max to next min is HALF a period (${halfP} hours). The full period is double: T = 2 × ${halfP} = ${period}.` },
+          { match: [(minT - maxT).toString()], why: `${minT} − ${maxT} = ${halfP} is from max to next min — half a period. Double it: T = ${period}.` },
+          { match: [minT.toString()], why: `That's the time of the minimum, not the period. Period = time between repeats, which is twice the max-to-min distance.` }
+        ],
+        correctDisplay: `T = ${period} hours`,
+        workedSolution: `From a max to the next min is <strong>half</strong> a period. Half-period = ${minT} − ${maxT} = ${halfP} hours, so <strong>T = ${period} hours</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q14 · FRQ-1(d) · Full sinusoidal equation ──────────────── */
+  {
+    id: 14, type: "mc", tag: "FRQ-1 (d)", color: "red",
+    generate(){
+      const A = R.int(5, 10);
+      const D = R.int(10, 18);
+      const max = D + A;
+      const min = D - A;
+      const period = R.pick([12, 24]);
+      const maxT = R.pick([3, 6]);
+      const Bden = period / 2;
+      const Bstr = `π/${Bden}`;
+      return {
+        stem: `<strong>Free Response 1 · continued.</strong> A sinusoidal function has amplitude <strong>${A}</strong>, midline <strong>${D}</strong>, period <strong>${period} hours</strong>, and maximum at <strong>t = ${maxT}</strong>. <strong>(d)</strong> Write h(t) using cosine.`,
+        options: R.shuffle([
+          { html: `h(t) = ${A}·cos((${Bstr})(t − ${maxT})) + ${D}`, correct: true },
+          { html: `h(t) = ${A}·sin((${Bstr})(t − ${maxT})) + ${D}`, correct: false, misconception: `Sine starts at the midline, not the max. Since the max is at t = ${maxT}, you want <strong>cos</strong> (which peaks when its argument is 0).` },
+          { html: `h(t) = ${A}·cos((${Bstr})·t) + ${D}`, correct: false, misconception: `You forgot the horizontal shift. The max is at t = ${maxT}, not t = 0. You need cos((${Bstr})(t − ${maxT})).` },
+          { html: `h(t) = ${D}·cos((${Bstr})(t − ${maxT})) + ${A}`, correct: false, misconception: `You swapped A and D. Amplitude (${A}) is the COEFFICIENT on cos; midline (${D}) is ADDED on the outside.` },
+          { html: `h(t) = ${A}·cos((${2 * period}π)(t − ${maxT})) + ${D}`, correct: false, misconception: `B = 2π / period = 2π/${period} = ${Bstr}, not 2π·period.` },
+          { html: `h(t) = −${A}·cos((${Bstr})(t − ${maxT})) + ${D}`, correct: false, misconception: `Negative cos would put the MIN at t = ${maxT}, not the max. Use positive cos for a maximum.` }
+        ]),
+        correctDisplay: `h(t) = ${A}·cos((${Bstr})(t − ${maxT})) + ${D}`,
+        workedSolution: `Cosine peaks when its argument is 0. Set argument = (${Bstr})(t − ${maxT}) so that h peaks at t = ${maxT}. Use amplitude ${A}, midline ${D}, B = 2π/${period} = ${Bstr}. Final: <strong>h(t) = ${A}·cos((${Bstr})(t − ${maxT})) + ${D}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q15 · FRQ-2(a) · Hyperbola center ──────────────────────── */
+  {
+    id: 15, type: "fib", tag: "FRQ-2 (a)", color: "red",
+    generate(){
+      const h = R.intExcl(-5, 5, [0]);
+      const k = R.intExcl(-5, 5, [0]);
+      const a2 = R.pick([9, 16, 25]);
+      const b2 = R.pick([4, 9, 16]);
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSign = k > 0 ? "− " + k : "+ " + (-k);
+      return {
+        stem: `<strong>Free Response 2 · Hyperbola.</strong> Consider <span class="mono">(x ${hSign})² / ${a2} − (y ${kSign})² / ${b2} = 1</span>. <strong>(a)</strong> Identify the center as an ordered pair. Type as <span class="mono">(h, k)</span>.`,
+        prefix: "Center:",
+        placeholder: "(h, k)",
+        accepted: [`(${h}, ${k})`, `(${h},${k})`],
+        misconceptions: [
+          { match: [`(${-h}, ${-k})`, `(${-h},${-k})`], why: `Sign flip. The formula is (x − h)² and (y − k)². So (x ${hSign})² → h = ${h} (not −${h}).` },
+          { match: [`(${k}, ${h})`, `(${k},${h})`], why: `You swapped order. Center is (h, k) = (x-coord, y-coord) = (${h}, ${k}).` },
+          { match: [`(${Math.sqrt(a2)}, ${Math.sqrt(b2)})`, `(${Math.sqrt(a2)},${Math.sqrt(b2)})`], why: `Those are the semi-axes (a = √${a2} = ${Math.sqrt(a2)}, b = √${b2} = ${Math.sqrt(b2)}), not the center. Center is (h, k).` }
+        ],
+        correctDisplay: `Center: (${h}, ${k})`,
+        workedSolution: `Match standard form (x − h)²/a² − (y − k)²/b² = 1: h = ${h}, k = ${k}. Center: <strong>(${h}, ${k})</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q16 · FRQ-2(b) · Right vertex ──────────────────────────── */
+  {
+    id: 16, type: "fib", tag: "FRQ-2 (b)", color: "red",
+    generate(){
+      const h = R.intExcl(-3, 4, [0]);
+      const k = R.intExcl(-3, 4, [0]);
+      const a = R.pick([3, 4, 5]);
+      const b = R.intExcl(2, 5, [a]);
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSign = k > 0 ? "− " + k : "+ " + (-k);
+      const rightVertex = `(${h + a}, ${k})`;
+      const leftVertex = `(${h - a}, ${k})`;
+      return {
+        stem: `<strong>Free Response 2 · continued.</strong> For <span class="mono">(x ${hSign})²/${a*a} − (y ${kSign})²/${b*b} = 1</span>: <strong>(b)</strong> Give the <strong>right vertex</strong> (larger x). Type as <span class="mono">(x, y)</span>.`,
+        prefix: "Right vertex:",
+        placeholder: "(x, y)",
+        accepted: [rightVertex, `(${h + a},${k})`],
+        misconceptions: [
+          { match: [leftVertex, `(${h - a},${k})`], why: `Left vertex (h − a, k) = ${leftVertex}. The question asked for the RIGHT vertex: (h + a, k) = ${rightVertex}.` },
+          { match: [`(${h}, ${k + b})`, `(${h},${k + b})`], why: `For a horizontal-opening hyperbola, there are no real vertices on the y-axis. Vertices are along the transverse (x) axis: (h ± a, k).` },
+          { match: [`(${h}, ${k})`, `(${h},${k})`], why: `That's the center. Vertices are a = ${a} units away from center: (h ± a, k).` }
+        ],
+        correctDisplay: `Right vertex: ${rightVertex}`,
+        workedSolution: `Hyperbola opens horizontally (x-term positive). a² = ${a*a}, so a = ${a}. Right vertex: (h + a, k) = (${h} + ${a}, ${k}) = <strong>${rightVertex}</strong>.`
+      };
+    }
+  },
+
+  /* ─── Q17 · FRQ-2(c) · Asymptotes ────────────────────────────── */
+  {
+    id: 17, type: "mc", tag: "FRQ-2 (c)", color: "red",
+    generate(){
+      const h = R.intExcl(-3, 4, [0]);
+      const k = R.intExcl(-3, 4, [0]);
+      const a = R.pick([3, 4, 5]);
+      const b = R.intExcl(2, 6, [a]);
+      const hSign = h > 0 ? "− " + h : "+ " + (-h);
+      const kSignMinus = k > 0 ? "− " + k : "+ " + (-k);
+      const kSignPlus = k > 0 ? "+ " + k : "− " + (-k);
+      return {
+        stem: `<strong>Free Response 2 · continued.</strong> For <span class="mono">(x ${hSign})²/${a*a} − (y ${kSignMinus})²/${b*b} = 1</span>: <strong>(c)</strong> What are the two asymptote equations?`,
+        options: R.shuffle([
+          { html: `y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}`, correct: true },
+          { html: `y = ±(${a}/${b})(x ${hSign}) ${kSignPlus}`, correct: false, misconception: `Slope is <strong>b/a</strong> for horizontal hyperbolas, not a/b. Here b/a = ${b}/${a}.` },
+          { html: `y = ±(${b}/${a})·x`, correct: false, misconception: `Forgot the center shift. Asymptotes pass through (${h}, ${k}), not the origin.` },
+          { html: `y = ${b}/${a} (constant)`, correct: false, misconception: `Asymptotes are LINES (with slope), not constants. Use y − k = ±(b/a)(x − h).` }
+        ]),
+        correctDisplay: `y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}`,
+        workedSolution: `Horizontal hyperbola asymptotes: <strong>y − k = ±(b/a)(x − h)</strong>. With h = ${h}, k = ${k}, a = ${a}, b = ${b}: <strong>y = ±(${b}/${a})(x ${hSign}) ${kSignPlus}</strong>.`
+      };
+    }
+  }
+
+];
+
+window.PrecalcDay.init({
+  dayTitle: "Day 5",
+  dayLabel: "Cumulative Mock-Final + FRQ Practice",
+  questions: DAY5_QUESTIONS
+});
+</script>
+
+</body>
+</html>
